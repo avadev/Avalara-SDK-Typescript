@@ -98,7 +98,7 @@ export class MandatesApi extends runtime.ApiClient {
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
         const { response, logObject } = await this.request({
-            path: `/mandates`,
+            path: `/einvoicing/mandates`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

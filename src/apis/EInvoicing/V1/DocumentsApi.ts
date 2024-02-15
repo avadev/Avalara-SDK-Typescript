@@ -131,7 +131,7 @@ export class DocumentsApi extends runtime.ApiClient {
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
         const { response, logObject } = await this.request({
-            path: `/documents/{documentId}/$download`.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters.documentId))),
+            path: `/einvoicing/documents/{documentId}/$download`.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters.documentId))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -210,7 +210,7 @@ export class DocumentsApi extends runtime.ApiClient {
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
         const { response, logObject } = await this.request({
-            path: `/documents`,
+            path: `/einvoicing/documents`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -261,7 +261,7 @@ export class DocumentsApi extends runtime.ApiClient {
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
         const { response, logObject } = await this.request({
-            path: `/document/{documentId}/status`.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters.documentId))),
+            path: `/einvoicing/document/{documentId}/status`.replace(`{${"documentId"}}`, encodeURIComponent(String(requestParameters.documentId))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -338,7 +338,7 @@ export class DocumentsApi extends runtime.ApiClient {
         }
 
         const { response, logObject } = await this.request({
-            path: `/documents`,
+            path: `/einvoicing/documents`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,

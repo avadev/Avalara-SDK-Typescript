@@ -95,7 +95,7 @@ export class DataInputFieldsApi extends runtime.ApiClient {
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
         const { response, logObject } = await this.request({
-            path: `/data-input-fields`,
+            path: `/einvoicing/data-input-fields`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
