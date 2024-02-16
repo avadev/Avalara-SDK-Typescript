@@ -1,0 +1,5 @@
+include:
+  - project: sre/gitlab-templates
+    ref: v3
+    file:
+      - pipelines/common/security/sast.yml
