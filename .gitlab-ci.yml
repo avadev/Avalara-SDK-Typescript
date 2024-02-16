@@ -1,5 +1,6 @@
+stages:
+  - test
+sast:
+  stage: test
 include:
-  - project: sre/gitlab-templates
-    ref: v3
-    file:
-      - pipelines/common/security/sast.yml
+  - template: Security/SAST.gitlab-ci.yml
