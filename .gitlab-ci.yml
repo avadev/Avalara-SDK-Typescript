@@ -4,3 +4,6 @@ sast:
   stage: test
 include:
   - template: Security/SAST.gitlab-ci.yml
+default:
+  tags:
+    - prd
