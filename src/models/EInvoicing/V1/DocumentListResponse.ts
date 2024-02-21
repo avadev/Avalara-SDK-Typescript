@@ -43,7 +43,7 @@ export interface DocumentListResponse {
      * @type {Array<DocumentSummary>}
      * @memberof DocumentListResponse
      */
-    value: Array<DocumentSummary>;
+    value: Array<DocumentSummary> | null;
 }
 
 
@@ -70,7 +70,7 @@ export function DocumentListResponseFromJSONTyped(json: any, ignoreDiscriminator
         
         'recordSetCount': !exists(json, '@recordSetCount') ? undefined : json['@recordSetCount'],
         'nextLink': !exists(json, '@nextLink') ? undefined : json['@nextLink'],
-        'value': ((json['value'] as Array<any>).map(DocumentSummaryFromJSON)),
+        'value': (json['value'] === null ? null : (json['value'] as Array<any>).map(DocumentSummaryFromJSON)),
     };
 }
 
@@ -85,6 +85,6 @@ export function DocumentListResponseToJSON(value?: DocumentListResponse | null):
         
         '@recordSetCount': value.recordSetCount,
         '@nextLink': value.nextLink,
-        'value': ((value.value as Array<any>).map(DocumentSummaryToJSON)),
+        'value': (value.value === null ? null : (value.value as Array<any>).map(DocumentSummaryToJSON)),
     };
 }
