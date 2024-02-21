@@ -1,24 +1,31 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-      
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [main]
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test-package:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: npm ci
-      - run: npm run test --username=${{ secrets.API_USERNAME }} --password=${{ secrets.API_PASSWORD }}
-      
+
+      # Step to retrieve the bearer token
+      - name: Retrieve bearer token
+        id: get_bearer_token
+        run: |
+          response=$(curl -X POST ${{secrets.OKTA_ACCESS_TOKEN_URL}}/connect/token \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            -d "grant_type=client_credentials&client_id=${{secrets.OKTA_CLIENT_ID}}&client_secret=${{secrets.OKTA_CLIENT_SECRET}}")
+          token=$(echo $response | jq -r '.access_token')
+          echo "BEARER_TOKEN=${token}" >> $GITHUB_ENV
+
+      # Use the bearer token as an environment variable in the npm test command
+      - name: Run npm test with bearer token
+        run: npm run test
+        env:
+          BEARER_TOKEN: ${{ env.BEARER_TOKEN }}
