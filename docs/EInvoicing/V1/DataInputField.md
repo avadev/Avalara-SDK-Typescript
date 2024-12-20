@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **fieldId** | **string** | Field ID | [optional] [default to undefined]
 **applicableDocumentRoots** | **Array&lt;object&gt;** |  | [optional] [default to undefined]
 **path** | **string** | Path to this field | [optional] [default to undefined]
-**nameSpace** | **string** | Namespace of this field | [optional] [default to undefined]
+**namespace** | **string** | Namespace of this field | [optional] [default to undefined]
 **fieldName** | **string** | Field name | [optional] [default to undefined]
 **exampleOrFixedValue** | **string** | An example of the content for this field | [optional] [default to undefined]
 **acceptedValues** | **object** | An object representing the acceptable values for this field | [optional] [default to undefined]

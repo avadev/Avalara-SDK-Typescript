@@ -4,14 +4,14 @@ All URIs are relative to *https://api.sbx.avalara.com/einvoicing*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDataInputFields**](DataInputFieldsApi.md#getdatainputfields) | **GET** /data-input-fields | Returns the mandatory and conditional invoice or creditnote input fields for different country mandates
+[**getDataInputFields**](DataInputFieldsApi.md#getdatainputfields) | **GET** /data-input-fields | Returns the optionality of document fields for different country mandates
 
 
 <a name="getdatainputfields"></a>
 # **getDataInputFields**
-> DataInputFieldsResponse getDataInputFields (string avalaraVersion, string xAvalaraClient, string $filter, number $top, number $skip, boolean $count, boolean $countOnly)
+> DataInputFieldsResponse getDataInputFields (string avalaraVersion, string xAvalaraClient, string $filter, Decimal $top, Decimal $skip, boolean $count, boolean $countOnly)
 
-Returns the mandatory and conditional invoice or creditnote input fields for different country mandates
+Returns the optionality of document fields for different country mandates
 
 This endpoint provides a list of required, conditional, and optional fields for each country mandate. You can use the <code>mandates</code> endpoint to retrieve all available country mandates. You can use the $filter query parameter to retrieve fields for a particular mandate
 
@@ -39,10 +39,10 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
- **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
  **$filter** | **string**| Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. | [optional] [default to undefined]
- **$top** | **number**| If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records. | [optional] [default to undefined]
- **$skip** | **number**| If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] [default to undefined]
+ **$top** | **Decimal**| If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records. | [optional] [default to undefined]
+ **$skip** | **Decimal**| If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] [default to undefined]
  **$count** | **boolean**| When set to true, the count of the collection is also returned in the response body | [optional] [default to undefined]
  **$countOnly** | **boolean**| When set to true, only the count of the collection is returned | [optional] [default to undefined]
 
