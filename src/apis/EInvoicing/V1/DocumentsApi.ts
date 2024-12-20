@@ -24,9 +24,6 @@ import {
     BadRequest,
     BadRequestFromJSON,
     BadRequestToJSON,
-    Decimal,
-    DecimalFromJSON,
-    DecimalToJSON,
     DocumentFetch,
     DocumentFetchFromJSON,
     DocumentFetchToJSON,
@@ -81,7 +78,7 @@ export interface GetDocumentListRequest {
     $count?: string;
     $countOnly?: string;
     $filter?: string;
-    $top?: Decimal;
+    $top?: number;
     $skip?: string;
 }
 
@@ -94,7 +91,7 @@ export interface GetDocumentStatusRequest {
 export interface SubmitDocumentRequest {
     avalaraVersion: string;
     metadata: SubmitDocumentMetadata;
-    data: object;
+    data: string;
     xAvalaraClient?: string;
 }
 
@@ -403,7 +400,7 @@ export class DocumentsApi extends runtime.ApiClient {
         }
 
         if (requestParameters.data !== undefined) {
-            formParams.append('data', new Blob([JSON.stringify(objectToJSON(requestParameters.data))], { type: "application/json", }));
+            formParams.append('data', requestParameters.data as any);
         }
 
         const { response, logObject } = await this.request({

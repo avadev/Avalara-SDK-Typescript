@@ -21,9 +21,6 @@ import {
     DataInputFieldsResponse,
     DataInputFieldsResponseFromJSON,
     DataInputFieldsResponseToJSON,
-    Decimal,
-    DecimalFromJSON,
-    DecimalToJSON,
     ForbiddenError,
     ForbiddenErrorFromJSON,
     ForbiddenErrorToJSON,
@@ -36,8 +33,8 @@ export interface GetDataInputFieldsRequest {
     avalaraVersion: string;
     xAvalaraClient?: string;
     $filter?: string;
-    $top?: Decimal;
-    $skip?: Decimal;
+    $top?: number;
+    $skip?: number;
     $count?: boolean;
     $countOnly?: boolean;
 }
