@@ -5,7 +5,7 @@ All URIs are relative to *https://api.sbx.avalara.com/einvoicing*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**downloadDocument**](DocumentsApi.md#downloaddocument) | **GET** /documents/{documentId}/$download | Returns a copy of the document
-[**fetchDocuments**](DocumentsApi.md#fetchdocumentsoperation) | **POST** /documents/$fetch | Fetch the inbound document from a tax authority
+[**fetchDocuments**](DocumentsApi.md#fetchdocuments) | **POST** /documents/$fetch | Fetch the inbound document from a tax authority
 [**getDocumentList**](DocumentsApi.md#getdocumentlist) | **GET** /documents | Returns a summary of documents for a date range
 [**getDocumentStatus**](DocumentsApi.md#getdocumentstatus) | **GET** /documents/{documentId}/status | Checks the status of a document
 [**submitDocument**](DocumentsApi.md#submitdocument) | **POST** /documents | Submits a document to Avalara E-Invoicing API
@@ -72,9 +72,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
-<a name="fetchdocumentsoperation"></a>
+<a name="fetchdocuments"></a>
 # **fetchDocuments**
-> DocumentFetch fetchDocuments (string avalaraVersion, FetchDocumentsRequest fetchDocumentsRequest, string xAvalaraClient)
+> DocumentFetch fetchDocuments (string avalaraVersion, DocumentFetchRequest documentFetchRequest, string xAvalaraClient)
 
 Fetch the inbound document from a tax authority
 
@@ -104,7 +104,7 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
- **fetchDocumentsRequest** | [**FetchDocumentsRequest**](FetchDocumentsRequest.md)|  | 
+ **documentFetchRequest** | [**DocumentFetchRequest**](DocumentFetchRequest.md)|  | 
  **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
 
 ### Return type

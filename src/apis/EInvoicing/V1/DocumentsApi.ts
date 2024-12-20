@@ -27,6 +27,9 @@ import {
     DocumentFetch,
     DocumentFetchFromJSON,
     DocumentFetchToJSON,
+    DocumentFetchRequest,
+    DocumentFetchRequestFromJSON,
+    DocumentFetchRequestToJSON,
     DocumentListResponse,
     DocumentListResponseFromJSON,
     DocumentListResponseToJSON,
@@ -39,9 +42,6 @@ import {
     DocumentSubmitResponse,
     DocumentSubmitResponseFromJSON,
     DocumentSubmitResponseToJSON,
-    FetchDocumentsRequest,
-    FetchDocumentsRequestFromJSON,
-    FetchDocumentsRequestToJSON,
     ForbiddenError,
     ForbiddenErrorFromJSON,
     ForbiddenErrorToJSON,
@@ -63,9 +63,9 @@ export interface DownloadDocumentRequest {
     xAvalaraClient?: string;
 }
 
-export interface FetchDocumentsOperationRequest {
+export interface FetchDocumentsRequest {
     avalaraVersion: string;
-    fetchDocumentsRequest: FetchDocumentsRequest;
+    documentFetchRequest: DocumentFetchRequest;
     xAvalaraClient?: string;
 }
 
@@ -168,13 +168,13 @@ export class DocumentsApi extends runtime.ApiClient {
      * This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
      * Fetch the inbound document from a tax authority
      */
-    async fetchDocumentsRaw(requestParameters: FetchDocumentsOperationRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentFetch>, logObject: LogObject }> {
+    async fetchDocumentsRaw(requestParameters: FetchDocumentsRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentFetch>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling fetchDocuments.');
         }
 
-        if (requestParameters.fetchDocumentsRequest === null || requestParameters.fetchDocumentsRequest === undefined) {
-            throw new runtime.RequiredError('fetchDocumentsRequest','Required parameter requestParameters.fetchDocumentsRequest was null or undefined when calling fetchDocuments.');
+        if (requestParameters.documentFetchRequest === null || requestParameters.documentFetchRequest === undefined) {
+            throw new runtime.RequiredError('documentFetchRequest','Required parameter requestParameters.documentFetchRequest was null or undefined when calling fetchDocuments.');
         }
 
         const queryParameters: any = {};
@@ -200,7 +200,7 @@ export class DocumentsApi extends runtime.ApiClient {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: FetchDocumentsRequestToJSON(requestParameters.fetchDocumentsRequest),
+            body: DocumentFetchRequestToJSON(requestParameters.documentFetchRequest),
         }, initOverrides, requiredScopes);
         logObject.populateResponseInfo(response);
         return { response: new runtime.JSONApiResponse(response, (jsonValue) => DocumentFetchFromJSON(jsonValue)), logObject };
@@ -210,7 +210,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
      * Fetch the inbound document from a tax authority
      */
-    async fetchDocuments(requestParameters: FetchDocumentsOperationRequest, initOverrides?: RequestInit): Promise<DocumentFetch> {
+    async fetchDocuments(requestParameters: FetchDocumentsRequest, initOverrides?: RequestInit): Promise<DocumentFetch> {
         const { response, logObject } = await this.fetchDocumentsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

@@ -142,35 +142,9 @@ const result = await api.ping();
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DataInputFieldsApi* | [**getDataInputFields**](docs/EInvoicing/V1/DataInputFieldsApi.md#getdatainputfields) | **GET** /data-input-fields | Returns the mandatory and conditional invoice or creditnote input fields for different country mandates
-*DocumentsApi* | [**downloadDocument**](docs/EInvoicing/V1/DocumentsApi.md#downloaddocument) | **GET** /documents/{documentId}/$download | Returns a copy of the document
-*DocumentsApi* | [**getDocumentList**](docs/EInvoicing/V1/DocumentsApi.md#getdocumentlist) | **GET** /documents | Returns a summary of documents for a date range
-*DocumentsApi* | [**getDocumentStatus**](docs/EInvoicing/V1/DocumentsApi.md#getdocumentstatus) | **GET** /documents/{documentId}/status | Checks the status of a document
-*DocumentsApi* | [**submitDocument**](docs/EInvoicing/V1/DocumentsApi.md#submitdocument) | **POST** /documents | Submits a document to Avalara E-Invoicing API
-*MandatesApi* | [**getMandates**](docs/EInvoicing/V1/MandatesApi.md#getmandates) | **GET** /mandates | List country mandates that are supported by the Avalara E-Invoicing platform
-
-<a name="documentation-for-EInvoicing-V1-api-endpoints"></a>
-### EInvoicing V1 API Documentation
-
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
 *DataInputFieldsApi* | [**getDataInputFields**](docs/EInvoicing/V1/DataInputFieldsApi.md#getdatainputfields) | **GET** /data-input-fields | Returns the optionality of document fields for different country mandates
 *DocumentsApi* | [**downloadDocument**](docs/EInvoicing/V1/DocumentsApi.md#downloaddocument) | **GET** /documents/{documentId}/$download | Returns a copy of the document
-*DocumentsApi* | [**fetchDocuments**](docs/EInvoicing/V1/DocumentsApi.md#fetchdocumentsoperation) | **POST** /documents/$fetch | Fetch the inbound document from a tax authority
-*DocumentsApi* | [**getDocumentList**](docs/EInvoicing/V1/DocumentsApi.md#getdocumentlist) | **GET** /documents | Returns a summary of documents for a date range
-*DocumentsApi* | [**getDocumentStatus**](docs/EInvoicing/V1/DocumentsApi.md#getdocumentstatus) | **GET** /documents/{documentId}/status | Checks the status of a document
-*DocumentsApi* | [**submitDocument**](docs/EInvoicing/V1/DocumentsApi.md#submitdocument) | **POST** /documents | Submits a document to Avalara E-Invoicing API
-*MandatesApi* | [**getMandateDataInputFields**](docs/EInvoicing/V1/MandatesApi.md#getmandatedatainputfields) | **GET** /mandates/{mandateId}/data-input-fields | Returns document field information for a country mandate, a selected document type, and its version
-*MandatesApi* | [**getMandates**](docs/EInvoicing/V1/MandatesApi.md#getmandates) | **GET** /mandates | List country mandates that are supported by the Avalara E-Invoicing platform
-
-<a name="documentation-for-EInvoicing-V1-api-endpoints"></a>
-### EInvoicing V1 API Documentation
-
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*DataInputFieldsApi* | [**getDataInputFields**](docs/EInvoicing/V1/DataInputFieldsApi.md#getdatainputfields) | **GET** /data-input-fields | Returns the optionality of document fields for different country mandates
-*DocumentsApi* | [**downloadDocument**](docs/EInvoicing/V1/DocumentsApi.md#downloaddocument) | **GET** /documents/{documentId}/$download | Returns a copy of the document
-*DocumentsApi* | [**fetchDocuments**](docs/EInvoicing/V1/DocumentsApi.md#fetchdocumentsoperation) | **POST** /documents/$fetch | Fetch the inbound document from a tax authority
+*DocumentsApi* | [**fetchDocuments**](docs/EInvoicing/V1/DocumentsApi.md#fetchdocuments) | **POST** /documents/$fetch | Fetch the inbound document from a tax authority
 *DocumentsApi* | [**getDocumentList**](docs/EInvoicing/V1/DocumentsApi.md#getdocumentlist) | **GET** /documents | Returns a summary of documents for a date range
 *DocumentsApi* | [**getDocumentStatus**](docs/EInvoicing/V1/DocumentsApi.md#getdocumentstatus) | **GET** /documents/{documentId}/status | Checks the status of a document
 *DocumentsApi* | [**submitDocument**](docs/EInvoicing/V1/DocumentsApi.md#submitdocument) | **POST** /documents | Submits a document to Avalara E-Invoicing API
@@ -191,70 +165,6 @@ Class | Method | HTTP request | Description
 
  - [EInvoicing.V1.BadDownloadRequest](docs/EInvoicing/V1/BadDownloadRequest.md)
  - [EInvoicing.V1.BadRequest](docs/EInvoicing/V1/BadRequest.md)
- - [EInvoicing.V1.ConditionalForField](docs/EInvoicing/V1/ConditionalForField.md)
- - [EInvoicing.V1.DataInputField](docs/EInvoicing/V1/DataInputField.md)
- - [EInvoicing.V1.DataInputFieldNotUsedFor](docs/EInvoicing/V1/DataInputFieldNotUsedFor.md)
- - [EInvoicing.V1.DataInputFieldOptionalFor](docs/EInvoicing/V1/DataInputFieldOptionalFor.md)
- - [EInvoicing.V1.DataInputFieldRequiredFor](docs/EInvoicing/V1/DataInputFieldRequiredFor.md)
- - [EInvoicing.V1.DataInputFieldsResponse](docs/EInvoicing/V1/DataInputFieldsResponse.md)
- - [EInvoicing.V1.DocumentListResponse](docs/EInvoicing/V1/DocumentListResponse.md)
- - [EInvoicing.V1.DocumentStatusResponse](docs/EInvoicing/V1/DocumentStatusResponse.md)
- - [EInvoicing.V1.DocumentSubmissionError](docs/EInvoicing/V1/DocumentSubmissionError.md)
- - [EInvoicing.V1.DocumentSubmitResponse](docs/EInvoicing/V1/DocumentSubmitResponse.md)
- - [EInvoicing.V1.DocumentSummary](docs/EInvoicing/V1/DocumentSummary.md)
- - [EInvoicing.V1.ForbiddenError](docs/EInvoicing/V1/ForbiddenError.md)
- - [EInvoicing.V1.InputDataFormats](docs/EInvoicing/V1/InputDataFormats.md)
- - [EInvoicing.V1.InternalServerError](docs/EInvoicing/V1/InternalServerError.md)
- - [EInvoicing.V1.Mandate](docs/EInvoicing/V1/Mandate.md)
- - [EInvoicing.V1.MandatesResponse](docs/EInvoicing/V1/MandatesResponse.md)
- - [EInvoicing.V1.NotFoundError](docs/EInvoicing/V1/NotFoundError.md)
- - [EInvoicing.V1.NotUsedForField](docs/EInvoicing/V1/NotUsedForField.md)
- - [EInvoicing.V1.RequiredWhenField](docs/EInvoicing/V1/RequiredWhenField.md)
- - [EInvoicing.V1.StatusEvent](docs/EInvoicing/V1/StatusEvent.md)
- - [EInvoicing.V1.SubmitDocumentMetadata](docs/EInvoicing/V1/SubmitDocumentMetadata.md)
- - [EInvoicing.V1.WorkflowIds](docs/EInvoicing/V1/WorkflowIds.md)
-
-
-<a name="documentation-for-EInvoicing-V1-models"></a>
-### EInvoicing V1 Model Documentation
-
- - [EInvoicing.V1.BadDownloadRequest](docs/EInvoicing/V1/BadDownloadRequest.md)
- - [EInvoicing.V1.BadRequest](docs/EInvoicing/V1/BadRequest.md)
- - [EInvoicing.V1.ConditionalForField](docs/EInvoicing/V1/ConditionalForField.md)
- - [EInvoicing.V1.DataInputField](docs/EInvoicing/V1/DataInputField.md)
- - [EInvoicing.V1.DataInputFieldNotUsedFor](docs/EInvoicing/V1/DataInputFieldNotUsedFor.md)
- - [EInvoicing.V1.DataInputFieldOptionalFor](docs/EInvoicing/V1/DataInputFieldOptionalFor.md)
- - [EInvoicing.V1.DataInputFieldRequiredFor](docs/EInvoicing/V1/DataInputFieldRequiredFor.md)
- - [EInvoicing.V1.DataInputFieldsResponse](docs/EInvoicing/V1/DataInputFieldsResponse.md)
- - [EInvoicing.V1.DocumentFetch](docs/EInvoicing/V1/DocumentFetch.md)
- - [EInvoicing.V1.DocumentListResponse](docs/EInvoicing/V1/DocumentListResponse.md)
- - [EInvoicing.V1.DocumentStatusResponse](docs/EInvoicing/V1/DocumentStatusResponse.md)
- - [EInvoicing.V1.DocumentSubmissionError](docs/EInvoicing/V1/DocumentSubmissionError.md)
- - [EInvoicing.V1.DocumentSubmitResponse](docs/EInvoicing/V1/DocumentSubmitResponse.md)
- - [EInvoicing.V1.DocumentSummary](docs/EInvoicing/V1/DocumentSummary.md)
- - [EInvoicing.V1.FetchDocumentsRequest](docs/EInvoicing/V1/FetchDocumentsRequest.md)
- - [EInvoicing.V1.FetchDocumentsRequestDataInner](docs/EInvoicing/V1/FetchDocumentsRequestDataInner.md)
- - [EInvoicing.V1.FetchDocumentsRequestMetadata](docs/EInvoicing/V1/FetchDocumentsRequestMetadata.md)
- - [EInvoicing.V1.ForbiddenError](docs/EInvoicing/V1/ForbiddenError.md)
- - [EInvoicing.V1.InputDataFormats](docs/EInvoicing/V1/InputDataFormats.md)
- - [EInvoicing.V1.InternalServerError](docs/EInvoicing/V1/InternalServerError.md)
- - [EInvoicing.V1.Mandate](docs/EInvoicing/V1/Mandate.md)
- - [EInvoicing.V1.MandateDataInputField](docs/EInvoicing/V1/MandateDataInputField.md)
- - [EInvoicing.V1.MandateDataInputFieldNamespace](docs/EInvoicing/V1/MandateDataInputFieldNamespace.md)
- - [EInvoicing.V1.MandatesResponse](docs/EInvoicing/V1/MandatesResponse.md)
- - [EInvoicing.V1.NotFoundError](docs/EInvoicing/V1/NotFoundError.md)
- - [EInvoicing.V1.NotUsedForField](docs/EInvoicing/V1/NotUsedForField.md)
- - [EInvoicing.V1.RequiredWhenField](docs/EInvoicing/V1/RequiredWhenField.md)
- - [EInvoicing.V1.StatusEvent](docs/EInvoicing/V1/StatusEvent.md)
- - [EInvoicing.V1.SubmitDocumentMetadata](docs/EInvoicing/V1/SubmitDocumentMetadata.md)
- - [EInvoicing.V1.WorkflowIds](docs/EInvoicing/V1/WorkflowIds.md)
-
-
-<a name="documentation-for-EInvoicing-V1-models"></a>
-### EInvoicing V1 Model Documentation
-
- - [EInvoicing.V1.BadDownloadRequest](docs/EInvoicing/V1/BadDownloadRequest.md)
- - [EInvoicing.V1.BadRequest](docs/EInvoicing/V1/BadRequest.md)
  - [EInvoicing.V1.BatchSearch](docs/EInvoicing/V1/BatchSearch.md)
  - [EInvoicing.V1.BatchSearchListResponse](docs/EInvoicing/V1/BatchSearchListResponse.md)
  - [EInvoicing.V1.ConditionalForField](docs/EInvoicing/V1/ConditionalForField.md)
@@ -269,15 +179,15 @@ Class | Method | HTTP request | Description
  - [EInvoicing.V1.DirectorySearchResponseValueInnerIdentifiersInner](docs/EInvoicing/V1/DirectorySearchResponseValueInnerIdentifiersInner.md)
  - [EInvoicing.V1.DirectorySearchResponseValueInnerSupportedDocumentTypesInner](docs/EInvoicing/V1/DirectorySearchResponseValueInnerSupportedDocumentTypesInner.md)
  - [EInvoicing.V1.DocumentFetch](docs/EInvoicing/V1/DocumentFetch.md)
+ - [EInvoicing.V1.DocumentFetchRequest](docs/EInvoicing/V1/DocumentFetchRequest.md)
+ - [EInvoicing.V1.DocumentFetchRequestDataInner](docs/EInvoicing/V1/DocumentFetchRequestDataInner.md)
+ - [EInvoicing.V1.DocumentFetchRequestMetadata](docs/EInvoicing/V1/DocumentFetchRequestMetadata.md)
  - [EInvoicing.V1.DocumentListResponse](docs/EInvoicing/V1/DocumentListResponse.md)
  - [EInvoicing.V1.DocumentStatusResponse](docs/EInvoicing/V1/DocumentStatusResponse.md)
  - [EInvoicing.V1.DocumentSubmissionError](docs/EInvoicing/V1/DocumentSubmissionError.md)
  - [EInvoicing.V1.DocumentSubmitResponse](docs/EInvoicing/V1/DocumentSubmitResponse.md)
  - [EInvoicing.V1.DocumentSummary](docs/EInvoicing/V1/DocumentSummary.md)
  - [EInvoicing.V1.ErrorResponse](docs/EInvoicing/V1/ErrorResponse.md)
- - [EInvoicing.V1.FetchDocumentsRequest](docs/EInvoicing/V1/FetchDocumentsRequest.md)
- - [EInvoicing.V1.FetchDocumentsRequestDataInner](docs/EInvoicing/V1/FetchDocumentsRequestDataInner.md)
- - [EInvoicing.V1.FetchDocumentsRequestMetadata](docs/EInvoicing/V1/FetchDocumentsRequestMetadata.md)
  - [EInvoicing.V1.ForbiddenError](docs/EInvoicing/V1/ForbiddenError.md)
  - [EInvoicing.V1.InputDataFormats](docs/EInvoicing/V1/InputDataFormats.md)
  - [EInvoicing.V1.InternalServerError](docs/EInvoicing/V1/InternalServerError.md)

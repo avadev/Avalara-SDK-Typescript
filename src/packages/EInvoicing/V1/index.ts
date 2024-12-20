@@ -20,6 +20,9 @@ export * from '../../../models/EInvoicing/V1/DirectorySearchResponseValueInnerAd
 export * from '../../../models/EInvoicing/V1/DirectorySearchResponseValueInnerIdentifiersInner';
 export * from '../../../models/EInvoicing/V1/DirectorySearchResponseValueInnerSupportedDocumentTypesInner';
 export * from '../../../models/EInvoicing/V1/DocumentFetch';
+export * from '../../../models/EInvoicing/V1/DocumentFetchRequest';
+export * from '../../../models/EInvoicing/V1/DocumentFetchRequestDataInner';
+export * from '../../../models/EInvoicing/V1/DocumentFetchRequestMetadata';
 export * from '../../../models/EInvoicing/V1/DocumentListResponse';
 export * from '../../../models/EInvoicing/V1/DocumentStatusResponse';
 export * from '../../../models/EInvoicing/V1/DocumentSubmissionError';
