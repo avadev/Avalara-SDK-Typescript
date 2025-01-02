@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci
+      - run: npm ci --include=dev
 
       # Step to retrieve the bearer token
       - name: Retrieve bearer token
@@ -23,6 +23,9 @@ jobs:
             -d "grant_type=client_credentials&client_id=${{secrets.OKTA_CLIENT_ID}}&client_secret=${{secrets.OKTA_CLIENT_SECRET}}")
           token=$(echo $response | jq -r '.access_token')
           echo "BEARER_TOKEN=${token}" >> $GITHUB_ENV
+
+      - name: Check Packages
+        run: ls node_modules/.bin
 
       # Use the bearer token as an environment variable in the npm test command
       - name: Run npm test with bearer token
