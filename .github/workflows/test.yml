@@ -29,6 +29,6 @@ jobs:
 
       # Use the bearer token as an environment variable in the npm test command
       - name: Run npm test with bearer token
-        run: npm run test
+        run: npx jest
         env:
           BEARER_TOKEN: ${{ env.BEARER_TOKEN }}
