@@ -20,7 +20,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --loglevel=silly
 
       # Step to retrieve the bearer token
       - name: Retrieve bearer token
@@ -31,9 +31,6 @@ jobs:
             -d "grant_type=client_credentials&client_id=${{secrets.OKTA_CLIENT_ID}}&client_secret=${{secrets.OKTA_CLIENT_SECRET}}")
           token=$(echo $response | jq -r '.access_token')
           echo "BEARER_TOKEN=${token}" >> $GITHUB_ENV
-
-      - name: Check Packages
-        run: ls node_modules
 
       - name: Build
         run: npm run build
