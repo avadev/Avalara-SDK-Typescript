@@ -70,7 +70,7 @@ export function DocumentListResponseFromJSONTyped(json: any, ignoreDiscriminator
         
         'recordsetCount': !exists(json, '@recordsetCount') ? undefined : json['@recordsetCount'],
         'nextLink': !exists(json, '@nextLink') ? undefined : json['@nextLink'],
-        'value': ((json['value'] as Array<any>).map(DocumentSummaryFromJSON)),
+        'value': ((json['value'] as Array<any>)?.map(DocumentSummaryFromJSON)),
     };
 }
 
@@ -85,6 +85,6 @@ export function DocumentListResponseToJSON(value?: DocumentListResponse | null):
         
         '@recordsetCount': value.recordsetCount,
         '@nextLink': value.nextLink,
-        'value': ((value.value as Array<any>).map(DocumentSummaryToJSON)),
+        'value': ((value.value as Array<any>)?.map(DocumentSummaryToJSON)),
     };
 }

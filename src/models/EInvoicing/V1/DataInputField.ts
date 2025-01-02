@@ -169,7 +169,7 @@ export function DataInputFieldFromJSONTyped(json: any, ignoreDiscriminator: bool
         'description': !exists(json, 'description') ? undefined : json['description'],
         'isSegment': !exists(json, 'isSegment') ? undefined : json['isSegment'],
         'requiredFor': !exists(json, 'requiredFor') ? undefined : DataInputFieldRequiredForFromJSON(json['requiredFor']),
-        'conditionalFor': !exists(json, 'conditionalFor') ? undefined : ((json['conditionalFor'] as Array<any>).map(ConditionalForFieldFromJSON)),
+        'conditionalFor': !exists(json, 'conditionalFor') ? undefined : ((json['conditionalFor'] as Array<any>)?.map(ConditionalForFieldFromJSON)),
         'notUsedFor': !exists(json, 'notUsedFor') ? undefined : DataInputFieldNotUsedForFromJSON(json['notUsedFor']),
         'optionalFor': !exists(json, 'optionalFor') ? undefined : DataInputFieldOptionalForFromJSON(json['optionalFor']),
     };
@@ -196,7 +196,7 @@ export function DataInputFieldToJSON(value?: DataInputField | null): any {
         'description': value.description,
         'isSegment': value.isSegment,
         'requiredFor': DataInputFieldRequiredForToJSON(value.requiredFor),
-        'conditionalFor': value.conditionalFor === undefined ? undefined : ((value.conditionalFor as Array<any>).map(ConditionalForFieldToJSON)),
+        'conditionalFor': value.conditionalFor === undefined ? undefined : ((value.conditionalFor as Array<any>)?.map(ConditionalForFieldToJSON)),
         'notUsedFor': DataInputFieldNotUsedForToJSON(value.notUsedFor),
         'optionalFor': DataInputFieldOptionalForToJSON(value.optionalFor),
     };

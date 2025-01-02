@@ -62,7 +62,7 @@ export function ConditionalForFieldFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'countryMandate': !exists(json, 'countryMandate') ? undefined : json['countryMandate'],
-        'requiredWhen': !exists(json, 'requiredWhen') ? undefined : ((json['requiredWhen'] as Array<any>).map(RequiredWhenFieldFromJSON)),
+        'requiredWhen': !exists(json, 'requiredWhen') ? undefined : ((json['requiredWhen'] as Array<any>)?.map(RequiredWhenFieldFromJSON)),
     };
 }
 
@@ -76,6 +76,6 @@ export function ConditionalForFieldToJSON(value?: ConditionalForField | null): a
     return {
         
         'countryMandate': value.countryMandate,
-        'requiredWhen': value.requiredWhen === undefined ? undefined : ((value.requiredWhen as Array<any>).map(RequiredWhenFieldToJSON)),
+        'requiredWhen': value.requiredWhen === undefined ? undefined : ((value.requiredWhen as Array<any>)?.map(RequiredWhenFieldToJSON)),
     };
 }

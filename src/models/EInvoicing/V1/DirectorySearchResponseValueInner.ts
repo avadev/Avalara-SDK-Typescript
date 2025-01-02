@@ -107,9 +107,9 @@ export function DirectorySearchResponseValueInnerFromJSONTyped(json: any, ignore
         'name': !exists(json, 'name') ? undefined : json['name'],
         'network': !exists(json, 'network') ? undefined : json['network'],
         'registrationDate': !exists(json, 'registrationDate') ? undefined : (new Date(json['registrationDate'])),
-        'identifiers': !exists(json, 'identifiers') ? undefined : ((json['identifiers'] as Array<any>).map(DirectorySearchResponseValueInnerIdentifiersInnerFromJSON)),
-        'addresses': !exists(json, 'addresses') ? undefined : ((json['addresses'] as Array<any>).map(DirectorySearchResponseValueInnerAddressesInnerFromJSON)),
-        'supportedDocumentTypes': !exists(json, 'supportedDocumentTypes') ? undefined : ((json['supportedDocumentTypes'] as Array<any>).map(DirectorySearchResponseValueInnerSupportedDocumentTypesInnerFromJSON)),
+        'identifiers': !exists(json, 'identifiers') ? undefined : ((json['identifiers'] as Array<any>)?.map(DirectorySearchResponseValueInnerIdentifiersInnerFromJSON)),
+        'addresses': !exists(json, 'addresses') ? undefined : ((json['addresses'] as Array<any>)?.map(DirectorySearchResponseValueInnerAddressesInnerFromJSON)),
+        'supportedDocumentTypes': !exists(json, 'supportedDocumentTypes') ? undefined : ((json['supportedDocumentTypes'] as Array<any>)?.map(DirectorySearchResponseValueInnerSupportedDocumentTypesInnerFromJSON)),
     };
 }
 
@@ -126,8 +126,8 @@ export function DirectorySearchResponseValueInnerToJSON(value?: DirectorySearchR
         'name': value.name,
         'network': value.network,
         'registrationDate': value.registrationDate === undefined ? undefined : (value.registrationDate.toISOString().substr(0,10)),
-        'identifiers': value.identifiers === undefined ? undefined : ((value.identifiers as Array<any>).map(DirectorySearchResponseValueInnerIdentifiersInnerToJSON)),
-        'addresses': value.addresses === undefined ? undefined : ((value.addresses as Array<any>).map(DirectorySearchResponseValueInnerAddressesInnerToJSON)),
-        'supportedDocumentTypes': value.supportedDocumentTypes === undefined ? undefined : ((value.supportedDocumentTypes as Array<any>).map(DirectorySearchResponseValueInnerSupportedDocumentTypesInnerToJSON)),
+        'identifiers': value.identifiers === undefined ? undefined : ((value.identifiers as Array<any>)?.map(DirectorySearchResponseValueInnerIdentifiersInnerToJSON)),
+        'addresses': value.addresses === undefined ? undefined : ((value.addresses as Array<any>)?.map(DirectorySearchResponseValueInnerAddressesInnerToJSON)),
+        'supportedDocumentTypes': value.supportedDocumentTypes === undefined ? undefined : ((value.supportedDocumentTypes as Array<any>)?.map(DirectorySearchResponseValueInnerSupportedDocumentTypesInnerToJSON)),
     };
 }

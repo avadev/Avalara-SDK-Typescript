@@ -113,8 +113,8 @@ export function MandateFromJSONTyped(json: any, ignoreDiscriminator: boolean): M
         'description': !exists(json, 'description') ? undefined : json['description'],
         'supportedByPartnerAPI': !exists(json, 'supportedByPartnerAPI') ? undefined : json['supportedByPartnerAPI'],
         'mandateFormat': !exists(json, 'mandateFormat') ? undefined : json['mandateFormat'],
-        'inputDataFormats': !exists(json, 'inputDataFormats') ? undefined : ((json['inputDataFormats'] as Array<any>).map(InputDataFormatsFromJSON)),
-        'workflowIds': !exists(json, 'workflowIds') ? undefined : ((json['workflowIds'] as Array<any>).map(WorkflowIdsFromJSON)),
+        'inputDataFormats': !exists(json, 'inputDataFormats') ? undefined : ((json['inputDataFormats'] as Array<any>)?.map(InputDataFormatsFromJSON)),
+        'workflowIds': !exists(json, 'workflowIds') ? undefined : ((json['workflowIds'] as Array<any>)?.map(WorkflowIdsFromJSON)),
     };
 }
 
@@ -133,7 +133,7 @@ export function MandateToJSON(value?: Mandate | null): any {
         'description': value.description,
         'supportedByPartnerAPI': value.supportedByPartnerAPI,
         'mandateFormat': value.mandateFormat,
-        'inputDataFormats': value.inputDataFormats === undefined ? undefined : ((value.inputDataFormats as Array<any>).map(InputDataFormatsToJSON)),
-        'workflowIds': value.workflowIds === undefined ? undefined : ((value.workflowIds as Array<any>).map(WorkflowIdsToJSON)),
+        'inputDataFormats': value.inputDataFormats === undefined ? undefined : ((value.inputDataFormats as Array<any>)?.map(InputDataFormatsToJSON)),
+        'workflowIds': value.workflowIds === undefined ? undefined : ((value.workflowIds as Array<any>)?.map(WorkflowIdsToJSON)),
     };
 }

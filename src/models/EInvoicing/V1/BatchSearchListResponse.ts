@@ -69,7 +69,7 @@ export function BatchSearchListResponseFromJSONTyped(json: any, ignoreDiscrimina
         
         'recordSetCount': !exists(json, '@recordSetCount') ? undefined : json['@recordSetCount'],
         'nextLink': !exists(json, '@nextLink') ? undefined : json['@nextLink'],
-        'value': !exists(json, 'value') ? undefined : ((json['value'] as Array<any>).map(BatchSearchFromJSON)),
+        'value': !exists(json, 'value') ? undefined : ((json['value'] as Array<any>)?.map(BatchSearchFromJSON)),
     };
 }
 
@@ -84,6 +84,6 @@ export function BatchSearchListResponseToJSON(value?: BatchSearchListResponse | 
         
         '@recordSetCount': value.recordSetCount,
         '@nextLink': value.nextLink,
-        'value': value.value === undefined ? undefined : ((value.value as Array<any>).map(BatchSearchToJSON)),
+        'value': value.value === undefined ? undefined : ((value.value as Array<any>)?.map(BatchSearchToJSON)),
     };
 }

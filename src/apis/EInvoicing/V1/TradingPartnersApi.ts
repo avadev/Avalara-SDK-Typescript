@@ -32,7 +32,7 @@ import {
     ErrorResponseToJSON,
 } from '../../../packages/EInvoicing/V1';
 
-export interface BatchSearchParticipantsRequest {
+export interface BatchSearchParticipantsInterface {
     avalaraVersion: string;
     name: string;
     notificationEmail: string;
@@ -41,21 +41,21 @@ export interface BatchSearchParticipantsRequest {
     xCorrelationID?: string;
 }
 
-export interface DownloadBatchSearchReportRequest {
+export interface DownloadBatchSearchReportInterface {
     avalaraVersion: string;
     id: string;
     xAvalaraClient?: string;
     xCorrelationID?: string;
 }
 
-export interface GetBatchSearchDetailRequest {
+export interface GetBatchSearchDetailInterface {
     avalaraVersion: string;
     id: string;
     xAvalaraClient?: string;
     xCorrelationID?: string;
 }
 
-export interface ListBatchSearchesRequest {
+export interface ListBatchSearchesInterface {
     avalaraVersion: string;
     xAvalaraClient?: string;
     $filter?: string;
@@ -66,7 +66,7 @@ export interface ListBatchSearchesRequest {
     xCorrelationID?: string;
 }
 
-export interface SearchParticipantsRequest {
+export interface SearchParticipantsInterface {
     avalaraVersion: string;
     $search: string;
     xAvalaraClient?: string;
@@ -92,7 +92,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Handles batch search requests by uploading a file containing search parameters.
      * Creates a batch search and performs a batch search in the directory for participants in the background.
      */
-    async batchSearchParticipantsRaw(requestParameters: BatchSearchParticipantsRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
+    async batchSearchParticipantsRaw(requestParameters: BatchSearchParticipantsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling batchSearchParticipants.');
         }
@@ -172,7 +172,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Handles batch search requests by uploading a file containing search parameters.
      * Creates a batch search and performs a batch search in the directory for participants in the background.
      */
-    async batchSearchParticipants(requestParameters: BatchSearchParticipantsRequest, initOverrides?: RequestInit): Promise<void> {
+    async batchSearchParticipants(requestParameters: BatchSearchParticipantsInterface, initOverrides?: RequestInit): Promise<void> {
         const { logObject } = await this.batchSearchParticipantsRaw(requestParameters, initOverrides);
         logObject.populateResponseBody(null);
         this.createLogEntry(logObject);
@@ -182,7 +182,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Downloads the report for a specific batch search using the batch search ID.
      * Download batch search results in a csv file.
      */
-    async downloadBatchSearchReportRaw(requestParameters: DownloadBatchSearchReportRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Blob>, logObject: LogObject }> {
+    async downloadBatchSearchReportRaw(requestParameters: DownloadBatchSearchReportInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Blob>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling downloadBatchSearchReport.');
         }
@@ -225,7 +225,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Downloads the report for a specific batch search using the batch search ID.
      * Download batch search results in a csv file.
      */
-    async downloadBatchSearchReport(requestParameters: DownloadBatchSearchReportRequest, initOverrides?: RequestInit): Promise<Blob> {
+    async downloadBatchSearchReport(requestParameters: DownloadBatchSearchReportInterface, initOverrides?: RequestInit): Promise<Blob> {
         const { response, logObject } = await this.downloadBatchSearchReportRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -237,7 +237,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Get the batch search details for a given id.
      * Get the batch search details for a given id.
      */
-    async getBatchSearchDetailRaw(requestParameters: GetBatchSearchDetailRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<BatchSearch>, logObject: LogObject }> {
+    async getBatchSearchDetailRaw(requestParameters: GetBatchSearchDetailInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<BatchSearch>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getBatchSearchDetail.');
         }
@@ -280,7 +280,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Get the batch search details for a given id.
      * Get the batch search details for a given id.
      */
-    async getBatchSearchDetail(requestParameters: GetBatchSearchDetailRequest, initOverrides?: RequestInit): Promise<BatchSearch> {
+    async getBatchSearchDetail(requestParameters: GetBatchSearchDetailInterface, initOverrides?: RequestInit): Promise<BatchSearch> {
         const { response, logObject } = await this.getBatchSearchDetailRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -292,7 +292,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Retrieves all batch searches performed by the user.
      * List all batch searches that were previously submitted.
      */
-    async listBatchSearchesRaw(requestParameters: ListBatchSearchesRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<BatchSearchListResponse>, logObject: LogObject }> {
+    async listBatchSearchesRaw(requestParameters: ListBatchSearchesInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<BatchSearchListResponse>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling listBatchSearches.');
         }
@@ -351,7 +351,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Retrieves all batch searches performed by the user.
      * List all batch searches that were previously submitted.
      */
-    async listBatchSearches(requestParameters: ListBatchSearchesRequest, initOverrides?: RequestInit): Promise<BatchSearchListResponse> {
+    async listBatchSearches(requestParameters: ListBatchSearchesInterface, initOverrides?: RequestInit): Promise<BatchSearchListResponse> {
         const { response, logObject } = await this.listBatchSearchesRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -363,7 +363,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Returns a list of participants matching the input query.
      * Returns a list of participants matching the input query.
      */
-    async searchParticipantsRaw(requestParameters: SearchParticipantsRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DirectorySearchResponse>, logObject: LogObject }> {
+    async searchParticipantsRaw(requestParameters: SearchParticipantsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DirectorySearchResponse>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling searchParticipants.');
         }
@@ -430,7 +430,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Returns a list of participants matching the input query.
      * Returns a list of participants matching the input query.
      */
-    async searchParticipants(requestParameters: SearchParticipantsRequest, initOverrides?: RequestInit): Promise<DirectorySearchResponse> {
+    async searchParticipants(requestParameters: SearchParticipantsInterface, initOverrides?: RequestInit): Promise<DirectorySearchResponse> {
         const { response, logObject } = await this.searchParticipantsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

@@ -56,20 +56,20 @@ import {
     SubmitDocumentMetadataToJSON,
 } from '../../../packages/EInvoicing/V1';
 
-export interface DownloadDocumentRequest {
+export interface DownloadDocumentInterface {
     avalaraVersion: string;
     accept: string;
     documentId: string;
     xAvalaraClient?: string;
 }
 
-export interface FetchDocumentsRequest {
+export interface FetchDocumentsInterface {
     avalaraVersion: string;
     documentFetchRequest: DocumentFetchRequest;
     xAvalaraClient?: string;
 }
 
-export interface GetDocumentListRequest {
+export interface GetDocumentListInterface {
     avalaraVersion: string;
     xAvalaraClient?: string;
     startDate?: Date;
@@ -82,13 +82,13 @@ export interface GetDocumentListRequest {
     $skip?: string;
 }
 
-export interface GetDocumentStatusRequest {
+export interface GetDocumentStatusInterface {
     avalaraVersion: string;
     documentId: string;
     xAvalaraClient?: string;
 }
 
-export interface SubmitDocumentRequest {
+export interface SubmitDocumentInterface {
     avalaraVersion: string;
     metadata: SubmitDocumentMetadata;
     data: string;
@@ -109,7 +109,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * When the document is available, use this endpoint to download it as text, XML, or PDF. The output format needs to be specified in the Accept header, and it will vary depending on the mandate. If the file has not yet been created, then status code 404 (not found) is returned.
      * Returns a copy of the document
      */
-    async downloadDocumentRaw(requestParameters: DownloadDocumentRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Blob>, logObject: LogObject }> {
+    async downloadDocumentRaw(requestParameters: DownloadDocumentInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Blob>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling downloadDocument.');
         }
@@ -156,7 +156,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * When the document is available, use this endpoint to download it as text, XML, or PDF. The output format needs to be specified in the Accept header, and it will vary depending on the mandate. If the file has not yet been created, then status code 404 (not found) is returned.
      * Returns a copy of the document
      */
-    async downloadDocument(requestParameters: DownloadDocumentRequest, initOverrides?: RequestInit): Promise<Blob> {
+    async downloadDocument(requestParameters: DownloadDocumentInterface, initOverrides?: RequestInit): Promise<Blob> {
         const { response, logObject } = await this.downloadDocumentRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -168,7 +168,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
      * Fetch the inbound document from a tax authority
      */
-    async fetchDocumentsRaw(requestParameters: FetchDocumentsRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentFetch>, logObject: LogObject }> {
+    async fetchDocumentsRaw(requestParameters: FetchDocumentsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentFetch>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling fetchDocuments.');
         }
@@ -210,7 +210,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
      * Fetch the inbound document from a tax authority
      */
-    async fetchDocuments(requestParameters: FetchDocumentsRequest, initOverrides?: RequestInit): Promise<DocumentFetch> {
+    async fetchDocuments(requestParameters: FetchDocumentsInterface, initOverrides?: RequestInit): Promise<DocumentFetch> {
         const { response, logObject } = await this.fetchDocumentsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -222,7 +222,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Get a list of documents on the Avalara E-Invoicing platform that have a processing date within the specified date range.
      * Returns a summary of documents for a date range
      */
-    async getDocumentListRaw(requestParameters: GetDocumentListRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentListResponse>, logObject: LogObject }> {
+    async getDocumentListRaw(requestParameters: GetDocumentListInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentListResponse>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getDocumentList.');
         }
@@ -289,7 +289,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Get a list of documents on the Avalara E-Invoicing platform that have a processing date within the specified date range.
      * Returns a summary of documents for a date range
      */
-    async getDocumentList(requestParameters: GetDocumentListRequest, initOverrides?: RequestInit): Promise<DocumentListResponse> {
+    async getDocumentList(requestParameters: GetDocumentListInterface, initOverrides?: RequestInit): Promise<DocumentListResponse> {
         const { response, logObject } = await this.getDocumentListRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -301,7 +301,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Using the unique ID from POST /einvoicing/documents response body, request the current status of a document.
      * Checks the status of a document
      */
-    async getDocumentStatusRaw(requestParameters: GetDocumentStatusRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentStatusResponse>, logObject: LogObject }> {
+    async getDocumentStatusRaw(requestParameters: GetDocumentStatusInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentStatusResponse>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getDocumentStatus.');
         }
@@ -340,7 +340,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Using the unique ID from POST /einvoicing/documents response body, request the current status of a document.
      * Checks the status of a document
      */
-    async getDocumentStatus(requestParameters: GetDocumentStatusRequest, initOverrides?: RequestInit): Promise<DocumentStatusResponse> {
+    async getDocumentStatus(requestParameters: GetDocumentStatusInterface, initOverrides?: RequestInit): Promise<DocumentStatusResponse> {
         const { response, logObject } = await this.getDocumentStatusRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -352,7 +352,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * When a UBL document is sent to this endpoint, it generates a document in the required format as mandated by the specified country. Additionally, it initiates the workflow to transmit the generated document to the relevant tax authority, if necessary.<br><br>The response from the endpoint contains a unique document ID, which can be used to request the status of the document and verify if it was successfully accepted at the destination.<br><br>Furthermore, the unique ID enables the download of a copy of the generated document for reference purposes.
      * Submits a document to Avalara E-Invoicing API
      */
-    async submitDocumentRaw(requestParameters: SubmitDocumentRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentSubmitResponse>, logObject: LogObject }> {
+    async submitDocumentRaw(requestParameters: SubmitDocumentInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentSubmitResponse>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling submitDocument.');
         }
@@ -418,7 +418,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * When a UBL document is sent to this endpoint, it generates a document in the required format as mandated by the specified country. Additionally, it initiates the workflow to transmit the generated document to the relevant tax authority, if necessary.<br><br>The response from the endpoint contains a unique document ID, which can be used to request the status of the document and verify if it was successfully accepted at the destination.<br><br>Furthermore, the unique ID enables the download of a copy of the generated document for reference purposes.
      * Submits a document to Avalara E-Invoicing API
      */
-    async submitDocument(requestParameters: SubmitDocumentRequest, initOverrides?: RequestInit): Promise<DocumentSubmitResponse> {
+    async submitDocument(requestParameters: SubmitDocumentInterface, initOverrides?: RequestInit): Promise<DocumentSubmitResponse> {
         const { response, logObject } = await this.submitDocumentRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

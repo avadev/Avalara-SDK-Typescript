@@ -67,7 +67,7 @@ export function DocumentFetchRequestFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'data': !exists(json, 'data') ? undefined : ((json['data'] as Array<any>).map(DocumentFetchRequestDataInnerFromJSON)),
+        'data': !exists(json, 'data') ? undefined : ((json['data'] as Array<any>)?.map(DocumentFetchRequestDataInnerFromJSON)),
         'metadata': !exists(json, 'metadata') ? undefined : DocumentFetchRequestMetadataFromJSON(json['metadata']),
     };
 }
@@ -81,7 +81,7 @@ export function DocumentFetchRequestToJSON(value?: DocumentFetchRequest | null):
     }
     return {
         
-        'data': value.data === undefined ? undefined : ((value.data as Array<any>).map(DocumentFetchRequestDataInnerToJSON)),
+        'data': value.data === undefined ? undefined : ((value.data as Array<any>)?.map(DocumentFetchRequestDataInnerToJSON)),
         'metadata': DocumentFetchRequestMetadataToJSON(value.metadata),
     };
 }

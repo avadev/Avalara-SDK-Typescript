@@ -69,7 +69,7 @@ export function DirectorySearchResponseFromJSONTyped(json: any, ignoreDiscrimina
         
         'recordSetCount': !exists(json, '@recordSetCount') ? undefined : json['@recordSetCount'],
         'nextLink': !exists(json, '@nextLink') ? undefined : json['@nextLink'],
-        'value': !exists(json, 'value') ? undefined : ((json['value'] as Array<any>).map(DirectorySearchResponseValueInnerFromJSON)),
+        'value': !exists(json, 'value') ? undefined : ((json['value'] as Array<any>)?.map(DirectorySearchResponseValueInnerFromJSON)),
     };
 }
 
@@ -84,6 +84,6 @@ export function DirectorySearchResponseToJSON(value?: DirectorySearchResponse | 
         
         '@recordSetCount': value.recordSetCount,
         '@nextLink': value.nextLink,
-        'value': value.value === undefined ? undefined : ((value.value as Array<any>).map(DirectorySearchResponseValueInnerToJSON)),
+        'value': value.value === undefined ? undefined : ((value.value as Array<any>)?.map(DirectorySearchResponseValueInnerToJSON)),
     };
 }

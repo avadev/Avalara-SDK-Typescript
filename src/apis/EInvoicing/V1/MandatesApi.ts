@@ -38,7 +38,7 @@ import {
     NotFoundErrorToJSON,
 } from '../../../packages/EInvoicing/V1';
 
-export interface GetMandateDataInputFieldsRequest {
+export interface GetMandateDataInputFieldsInterface {
     avalaraVersion: string;
     mandateId: string;
     documentType: string;
@@ -46,7 +46,7 @@ export interface GetMandateDataInputFieldsRequest {
     xAvalaraClient?: string;
 }
 
-export interface GetMandatesRequest {
+export interface GetMandatesInterface {
     avalaraVersion: string;
     xAvalaraClient?: string;
     $filter?: string;
@@ -70,7 +70,7 @@ export class MandatesApi extends runtime.ApiClient {
      * This endpoint provides document field details and the optionality of fields (required, conditional, optional) of different documents supported by the country mandate. Use the GET <code>/mandates</code> endpoint to retrieve all available country mandates, their supported document types and supported versions. You can use the `documentType` and `documentVersion` query parameters to retrieve the input fields for a particular document type and document version.
      * Returns document field information for a country mandate, a selected document type, and its version
      */
-    async getMandateDataInputFieldsRaw(requestParameters: GetMandateDataInputFieldsRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Array<MandateDataInputField>>, logObject: LogObject }> {
+    async getMandateDataInputFieldsRaw(requestParameters: GetMandateDataInputFieldsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Array<MandateDataInputField>>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getMandateDataInputFields.');
         }
@@ -125,7 +125,7 @@ export class MandatesApi extends runtime.ApiClient {
      * This endpoint provides document field details and the optionality of fields (required, conditional, optional) of different documents supported by the country mandate. Use the GET <code>/mandates</code> endpoint to retrieve all available country mandates, their supported document types and supported versions. You can use the `documentType` and `documentVersion` query parameters to retrieve the input fields for a particular document type and document version.
      * Returns document field information for a country mandate, a selected document type, and its version
      */
-    async getMandateDataInputFields(requestParameters: GetMandateDataInputFieldsRequest, initOverrides?: RequestInit): Promise<Array<MandateDataInputField>> {
+    async getMandateDataInputFields(requestParameters: GetMandateDataInputFieldsInterface, initOverrides?: RequestInit): Promise<Array<MandateDataInputField>> {
         const { response, logObject } = await this.getMandateDataInputFieldsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -137,7 +137,7 @@ export class MandatesApi extends runtime.ApiClient {
      * This endpoint offers a list of country mandates supported by the Avalara E-Invoicing API.
      * List country mandates that are supported by the Avalara E-Invoicing platform
      */
-    async getMandatesRaw(requestParameters: GetMandatesRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<MandatesResponse>, logObject: LogObject }> {
+    async getMandatesRaw(requestParameters: GetMandatesInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<MandatesResponse>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getMandates.');
         }
@@ -192,7 +192,7 @@ export class MandatesApi extends runtime.ApiClient {
      * This endpoint offers a list of country mandates supported by the Avalara E-Invoicing API.
      * List country mandates that are supported by the Avalara E-Invoicing platform
      */
-    async getMandates(requestParameters: GetMandatesRequest, initOverrides?: RequestInit): Promise<MandatesResponse> {
+    async getMandates(requestParameters: GetMandatesInterface, initOverrides?: RequestInit): Promise<MandatesResponse> {
         const { response, logObject } = await this.getMandatesRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

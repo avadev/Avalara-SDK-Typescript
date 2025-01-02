@@ -26,7 +26,7 @@ import {
     SubmitInteropDocument202ResponseToJSON,
 } from '../../../packages/EInvoicing/V1';
 
-export interface SubmitInteropDocumentRequest {
+export interface SubmitInteropDocumentInterface {
     documentType: SubmitInteropDocumentDocumentTypeEnum;
     interchangeType: SubmitInteropDocumentInterchangeTypeEnum;
     avalaraVersion: string;
@@ -49,7 +49,7 @@ export class InteropApi extends runtime.ApiClient {
      * This API used by the interoperability partners to submit a document to  their trading partners in Avalara on behalf of their customers. 
      * Submit a document
      */
-    async submitInteropDocumentRaw(requestParameters: SubmitInteropDocumentRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<SubmitInteropDocument202Response>, logObject: LogObject }> {
+    async submitInteropDocumentRaw(requestParameters: SubmitInteropDocumentInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<SubmitInteropDocument202Response>, logObject: LogObject }> {
         if (requestParameters.documentType === null || requestParameters.documentType === undefined) {
             throw new runtime.RequiredError('documentType','Required parameter requestParameters.documentType was null or undefined when calling submitInteropDocument.');
         }
@@ -125,7 +125,7 @@ export class InteropApi extends runtime.ApiClient {
      * This API used by the interoperability partners to submit a document to  their trading partners in Avalara on behalf of their customers. 
      * Submit a document
      */
-    async submitInteropDocument(requestParameters: SubmitInteropDocumentRequest, initOverrides?: RequestInit): Promise<SubmitInteropDocument202Response> {
+    async submitInteropDocument(requestParameters: SubmitInteropDocumentInterface, initOverrides?: RequestInit): Promise<SubmitInteropDocument202Response> {
         const { response, logObject } = await this.submitInteropDocumentRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

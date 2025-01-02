@@ -69,7 +69,7 @@ export function MandatesResponseFromJSONTyped(json: any, ignoreDiscriminator: bo
         
         'recordsetCount': !exists(json, '@recordsetCount') ? undefined : json['@recordsetCount'],
         'nextLink': !exists(json, '@nextLink') ? undefined : json['@nextLink'],
-        'value': !exists(json, 'value') ? undefined : ((json['value'] as Array<any>).map(MandateFromJSON)),
+        'value': !exists(json, 'value') ? undefined : ((json['value'] as Array<any>)?.map(MandateFromJSON)),
     };
 }
 
@@ -84,6 +84,6 @@ export function MandatesResponseToJSON(value?: MandatesResponse | null): any {
         
         '@recordsetCount': value.recordsetCount,
         '@nextLink': value.nextLink,
-        'value': value.value === undefined ? undefined : ((value.value as Array<any>).map(MandateToJSON)),
+        'value': value.value === undefined ? undefined : ((value.value as Array<any>)?.map(MandateToJSON)),
     };
 }

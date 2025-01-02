@@ -69,7 +69,7 @@ export function DocumentStatusResponseFromJSONTyped(json: any, ignoreDiscriminat
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'events': !exists(json, 'events') ? undefined : ((json['events'] as Array<any>).map(StatusEventFromJSON)),
+        'events': !exists(json, 'events') ? undefined : ((json['events'] as Array<any>)?.map(StatusEventFromJSON)),
     };
 }
 
@@ -84,6 +84,6 @@ export function DocumentStatusResponseToJSON(value?: DocumentStatusResponse | nu
         
         'id': value.id,
         'status': value.status,
-        'events': value.events === undefined ? undefined : ((value.events as Array<any>).map(StatusEventToJSON)),
+        'events': value.events === undefined ? undefined : ((value.events as Array<any>)?.map(StatusEventToJSON)),
     };
 }

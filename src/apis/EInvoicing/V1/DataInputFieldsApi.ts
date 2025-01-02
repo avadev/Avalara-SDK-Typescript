@@ -29,7 +29,7 @@ import {
     InternalServerErrorToJSON,
 } from '../../../packages/EInvoicing/V1';
 
-export interface GetDataInputFieldsRequest {
+export interface GetDataInputFieldsInterface {
     avalaraVersion: string;
     xAvalaraClient?: string;
     $filter?: string;
@@ -53,7 +53,7 @@ export class DataInputFieldsApi extends runtime.ApiClient {
      * This endpoint provides a list of required, conditional, and optional fields for each country mandate. You can use the <code>mandates</code> endpoint to retrieve all available country mandates. You can use the $filter query parameter to retrieve fields for a particular mandate
      * Returns the optionality of document fields for different country mandates
      */
-    async getDataInputFieldsRaw(requestParameters: GetDataInputFieldsRequest, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DataInputFieldsResponse>, logObject: LogObject }> {
+    async getDataInputFieldsRaw(requestParameters: GetDataInputFieldsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DataInputFieldsResponse>, logObject: LogObject }> {
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getDataInputFields.');
         }
@@ -108,7 +108,7 @@ export class DataInputFieldsApi extends runtime.ApiClient {
      * This endpoint provides a list of required, conditional, and optional fields for each country mandate. You can use the <code>mandates</code> endpoint to retrieve all available country mandates. You can use the $filter query parameter to retrieve fields for a particular mandate
      * Returns the optionality of document fields for different country mandates
      */
-    async getDataInputFields(requestParameters: GetDataInputFieldsRequest, initOverrides?: RequestInit): Promise<DataInputFieldsResponse> {
+    async getDataInputFields(requestParameters: GetDataInputFieldsInterface, initOverrides?: RequestInit): Promise<DataInputFieldsResponse> {
         const { response, logObject } = await this.getDataInputFieldsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

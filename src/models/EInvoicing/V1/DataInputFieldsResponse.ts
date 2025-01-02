@@ -69,7 +69,7 @@ export function DataInputFieldsResponseFromJSONTyped(json: any, ignoreDiscrimina
         
         'recordsetCount': !exists(json, '@recordsetCount') ? undefined : json['@recordsetCount'],
         'nextLink': !exists(json, '@nextLink') ? undefined : json['@nextLink'],
-        'value': !exists(json, 'value') ? undefined : ((json['value'] as Array<any>).map(DataInputFieldFromJSON)),
+        'value': !exists(json, 'value') ? undefined : ((json['value'] as Array<any>)?.map(DataInputFieldFromJSON)),
     };
 }
 
@@ -84,6 +84,6 @@ export function DataInputFieldsResponseToJSON(value?: DataInputFieldsResponse | 
         
         '@recordsetCount': value.recordsetCount,
         '@nextLink': value.nextLink,
-        'value': value.value === undefined ? undefined : ((value.value as Array<any>).map(DataInputFieldToJSON)),
+        'value': value.value === undefined ? undefined : ((value.value as Array<any>)?.map(DataInputFieldToJSON)),
     };
 }

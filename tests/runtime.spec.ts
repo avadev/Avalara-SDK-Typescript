@@ -1,4 +1,3 @@
-import type { FetchMockStatic } from "fetch-mock";
 import "fetch-mock-jest";
 import fetch from "node-fetch";
 
@@ -10,7 +9,7 @@ import {
 } from "../src/runtime";
 
 jest.mock("node-fetch", () => require("fetch-mock-jest").sandbox());
-const fetchMock = fetch as unknown as FetchMockStatic;
+const fetchMock = fetch as any;
 
 describe("Runtime client: ", () => {
   const qaConfig: Runtime.ConfigurationParameters = {
