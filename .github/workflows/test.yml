@@ -25,7 +25,7 @@ jobs:
           echo "BEARER_TOKEN=${token}" >> $GITHUB_ENV
 
       - name: Check Packages
-        run: ls node_modules/.bin
+        run: ls node_modules
 
       # Use the bearer token as an environment variable in the npm test command
       - name: Run npm test with bearer token
