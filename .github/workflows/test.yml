@@ -11,8 +11,16 @@ jobs:
   test-package:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: npm ci
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
 
       # Step to retrieve the bearer token
       - name: Retrieve bearer token
@@ -27,8 +35,11 @@ jobs:
       - name: Check Packages
         run: ls node_modules
 
+      - name: Build
+        run: npm run build
+
       # Use the bearer token as an environment variable in the npm test command
       - name: Run npm test with bearer token
-        run: npx jest
+        run: npm test
         env:
           BEARER_TOKEN: ${{ env.BEARER_TOKEN }}
