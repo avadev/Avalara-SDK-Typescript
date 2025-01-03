@@ -30,7 +30,7 @@ import {
 } from '../../../packages/EInvoicing/V1';
 
 export interface GetDataInputFieldsInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     xAvalaraClient?: string;
     $filter?: string;
     $top?: number;
@@ -54,6 +54,7 @@ export class DataInputFieldsApi extends runtime.ApiClient {
      * Returns the optionality of document fields for different country mandates
      */
     async getDataInputFieldsRaw(requestParameters: GetDataInputFieldsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DataInputFieldsResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getDataInputFields.');
         }
@@ -82,8 +83,6 @@ export class DataInputFieldsApi extends runtime.ApiClient {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);

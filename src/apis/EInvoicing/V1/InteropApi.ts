@@ -29,7 +29,7 @@ import {
 export interface SubmitInteropDocumentInterface {
     documentType: SubmitInteropDocumentDocumentTypeEnum;
     interchangeType: SubmitInteropDocumentInterchangeTypeEnum;
-    avalaraVersion: string;
+    avalaraVersion?: string;
     xAvalaraClient?: string;
     xCorrelationID?: string;
     fileName?: Blob;
@@ -50,6 +50,7 @@ export class InteropApi extends runtime.ApiClient {
      * Submit a document
      */
     async submitInteropDocumentRaw(requestParameters: SubmitInteropDocumentInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<SubmitInteropDocument202Response>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.documentType === null || requestParameters.documentType === undefined) {
             throw new runtime.RequiredError('documentType','Required parameter requestParameters.documentType was null or undefined when calling submitInteropDocument.');
         }
@@ -74,8 +75,6 @@ export class InteropApi extends runtime.ApiClient {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
