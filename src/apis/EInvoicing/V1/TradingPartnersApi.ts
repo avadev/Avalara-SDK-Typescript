@@ -33,7 +33,7 @@ import {
 } from '../../../packages/EInvoicing/V1';
 
 export interface BatchSearchParticipantsInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     name: string;
     notificationEmail: string;
     file: Blob;
@@ -42,21 +42,21 @@ export interface BatchSearchParticipantsInterface {
 }
 
 export interface DownloadBatchSearchReportInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     id: string;
     xAvalaraClient?: string;
     xCorrelationID?: string;
 }
 
 export interface GetBatchSearchDetailInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     id: string;
     xAvalaraClient?: string;
     xCorrelationID?: string;
 }
 
 export interface ListBatchSearchesInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     xAvalaraClient?: string;
     $filter?: string;
     count?: boolean;
@@ -67,7 +67,7 @@ export interface ListBatchSearchesInterface {
 }
 
 export interface SearchParticipantsInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     $search: string;
     xAvalaraClient?: string;
     count?: boolean;
@@ -93,6 +93,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Creates a batch search and performs a batch search in the directory for participants in the background.
      */
     async batchSearchParticipantsRaw(requestParameters: BatchSearchParticipantsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling batchSearchParticipants.');
         }
@@ -121,8 +122,6 @@ export class TradingPartnersApi extends runtime.ApiClient {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
@@ -183,6 +182,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Download batch search results in a csv file.
      */
     async downloadBatchSearchReportRaw(requestParameters: DownloadBatchSearchReportInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Blob>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling downloadBatchSearchReport.');
         }
@@ -195,8 +195,6 @@ export class TradingPartnersApi extends runtime.ApiClient {
         const requiredScopes = "";
         const authNames: string[] = ['http'];
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
@@ -238,6 +236,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Get the batch search details for a given id.
      */
     async getBatchSearchDetailRaw(requestParameters: GetBatchSearchDetailInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<BatchSearch>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getBatchSearchDetail.');
         }
@@ -250,8 +249,6 @@ export class TradingPartnersApi extends runtime.ApiClient {
         const requiredScopes = "";
         const authNames: string[] = ['http'];
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
@@ -293,6 +290,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * List all batch searches that were previously submitted.
      */
     async listBatchSearchesRaw(requestParameters: ListBatchSearchesInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<BatchSearchListResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling listBatchSearches.');
         }
@@ -321,8 +319,6 @@ export class TradingPartnersApi extends runtime.ApiClient {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
@@ -364,6 +360,7 @@ export class TradingPartnersApi extends runtime.ApiClient {
      * Returns a list of participants matching the input query.
      */
     async searchParticipantsRaw(requestParameters: SearchParticipantsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DirectorySearchResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling searchParticipants.');
         }
@@ -400,8 +397,6 @@ export class TradingPartnersApi extends runtime.ApiClient {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);

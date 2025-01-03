@@ -57,20 +57,20 @@ import {
 } from '../../../packages/EInvoicing/V1';
 
 export interface DownloadDocumentInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     accept: string;
     documentId: string;
     xAvalaraClient?: string;
 }
 
 export interface FetchDocumentsInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     documentFetchRequest: DocumentFetchRequest;
     xAvalaraClient?: string;
 }
 
 export interface GetDocumentListInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     xAvalaraClient?: string;
     startDate?: Date;
     endDate?: Date;
@@ -83,13 +83,13 @@ export interface GetDocumentListInterface {
 }
 
 export interface GetDocumentStatusInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     documentId: string;
     xAvalaraClient?: string;
 }
 
 export interface SubmitDocumentInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     metadata: SubmitDocumentMetadata;
     data: string;
     xAvalaraClient?: string;
@@ -110,6 +110,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Returns a copy of the document
      */
     async downloadDocumentRaw(requestParameters: DownloadDocumentInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Blob>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling downloadDocument.');
         }
@@ -126,8 +127,6 @@ export class DocumentsApi extends runtime.ApiClient {
         const requiredScopes = "";
         const authNames: string[] = ['http'];
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
@@ -169,6 +168,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Fetch the inbound document from a tax authority
      */
     async fetchDocumentsRaw(requestParameters: FetchDocumentsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentFetch>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling fetchDocuments.');
         }
@@ -181,8 +181,6 @@ export class DocumentsApi extends runtime.ApiClient {
         const requiredScopes = "";
         const authNames: string[] = ['http'];
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         headerParameters['Content-Type'] = 'application/json';
 
@@ -223,6 +221,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Returns a summary of documents for a date range
      */
     async getDocumentListRaw(requestParameters: GetDocumentListInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentListResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getDocumentList.');
         }
@@ -264,8 +263,6 @@ export class DocumentsApi extends runtime.ApiClient {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['avalara-version'] = '1.2';
-
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
         }
@@ -302,6 +299,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Checks the status of a document
      */
     async getDocumentStatusRaw(requestParameters: GetDocumentStatusInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentStatusResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getDocumentStatus.');
         }
@@ -314,8 +312,6 @@ export class DocumentsApi extends runtime.ApiClient {
         const requiredScopes = "";
         const authNames: string[] = ['http'];
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
@@ -353,6 +349,7 @@ export class DocumentsApi extends runtime.ApiClient {
      * Submits a document to Avalara E-Invoicing API
      */
     async submitDocumentRaw(requestParameters: SubmitDocumentInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<DocumentSubmitResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling submitDocument.');
         }
@@ -369,8 +366,6 @@ export class DocumentsApi extends runtime.ApiClient {
         const requiredScopes = "";
         const authNames: string[] = ['http'];
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);

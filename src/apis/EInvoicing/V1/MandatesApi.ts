@@ -39,7 +39,7 @@ import {
 } from '../../../packages/EInvoicing/V1';
 
 export interface GetMandateDataInputFieldsInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     mandateId: string;
     documentType: string;
     documentVersion: string;
@@ -47,7 +47,7 @@ export interface GetMandateDataInputFieldsInterface {
 }
 
 export interface GetMandatesInterface {
-    avalaraVersion: string;
+    avalaraVersion?: string;
     xAvalaraClient?: string;
     $filter?: string;
     $top?: number;
@@ -71,6 +71,7 @@ export class MandatesApi extends runtime.ApiClient {
      * Returns document field information for a country mandate, a selected document type, and its version
      */
     async getMandateDataInputFieldsRaw(requestParameters: GetMandateDataInputFieldsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Array<MandateDataInputField>>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getMandateDataInputFields.');
         }
@@ -99,8 +100,6 @@ export class MandatesApi extends runtime.ApiClient {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
@@ -138,6 +137,7 @@ export class MandatesApi extends runtime.ApiClient {
      * List country mandates that are supported by the Avalara E-Invoicing platform
      */
     async getMandatesRaw(requestParameters: GetMandatesInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<MandatesResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '1.2';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getMandates.');
         }
@@ -166,8 +166,6 @@ export class MandatesApi extends runtime.ApiClient {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['avalara-version'] = '1.2';
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
             headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
