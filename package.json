@@ -3,8 +3,8 @@
   "version": "24.12.11",
   "description": "OpenAPI client for avalara-sdk",
   "author": "OpenAPI-Generator",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./index.js",
+  "typings": "./index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
