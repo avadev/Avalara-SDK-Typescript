@@ -7,7 +7,7 @@ import { ApiClient } from "../../src/runtime";
 const configParams: Runtime.ConfigurationParameters = {
   appName: "asv-sdk-test-app",
   appVersion: "1.0",
-  environment: AvaTaxEnvironment.QA,
+  environment: AvaTaxEnvironment.Sandbox,
   machineName: "test-machine",
   timeout: 3000,
   bearerToken: process.env.BEARER_TOKEN_A1099,
