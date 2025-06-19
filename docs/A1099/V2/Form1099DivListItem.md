@@ -1,0 +1,53 @@
+# AvalaraSdk.A1099.V2.Form1099DivListItem
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**totalOrdinaryDividends** | **string** |  | [optional] [default to undefined]
+**qualifiedDividends** | **string** |  | [optional] [default to undefined]
+**totalCapitalGainDistr** | **string** |  | [optional] [default to undefined]
+**unrecapSec1250Gain** | **string** |  | [optional] [default to undefined]
+**section1202Gain** | **string** |  | [optional] [default to undefined]
+**collectiblesGain** | **string** |  | [optional] [default to undefined]
+**section897OrdinaryDividends** | **string** |  | [optional] [default to undefined]
+**section897CapitalGain** | **string** |  | [optional] [default to undefined]
+**nondividendDistributions** | **string** |  | [optional] [default to undefined]
+**federalIncomeTaxWithheld** | **string** |  | [optional] [default to undefined]
+**section199ADividends** | **string** |  | [optional] [default to undefined]
+**investmentExpenses** | **string** |  | [optional] [default to undefined]
+**foreignTaxPaid** | **string** |  | [optional] [default to undefined]
+**foreignCountryOrUSPossession** | **string** |  | [optional] [default to undefined]
+**cashLiquidationDistributions** | **string** |  | [optional] [default to undefined]
+**noncashLiquidationDistributions** | **string** |  | [optional] [default to undefined]
+**exemptInterestDividends** | **string** |  | [optional] [default to undefined]
+**specifiedPrivateActivityBondInterestDividends** | **string** |  | [optional] [default to undefined]
+**fatcaFilingRequirement** | **string** |  | [optional] [default to undefined]
+**stateAndLocalWithholding** | [**StateAndLocalWithholding**](StateAndLocalWithholding.md) |  | [optional] [default to undefined]
+**issuerId** | **string** |  | [optional] [default to undefined]
+**issuerReferenceId** | **string** |  | [optional] [default to undefined]
+**issuerTin** | **string** |  | [optional] [default to undefined]
+**taxYear** | **number** |  | [optional] [default to undefined]
+**referenceId** | **string** |  | [optional] [default to undefined]
+**recipientName** | **string** |  | [optional] [default to undefined]
+**recipientTin** | **string** |  | [optional] [default to undefined]
+**tinType** | **number** |  | [optional] [default to undefined]
+**recipientSecondName** | **string** |  | [optional] [default to undefined]
+**streetAddress** | **string** |  | [optional] [default to undefined]
+**streetAddressLine2** | **string** |  | [optional] [default to undefined]
+**city** | **string** |  | [optional] [default to undefined]
+**state** | **string** |  | [optional] [default to undefined]
+**zip** | **string** |  | [optional] [default to undefined]
+**recipientEmail** | **string** |  | [optional] [default to undefined]
+**accountNumber** | **string** |  | [optional] [default to undefined]
+**officeCode** | **string** |  | [optional] [default to undefined]
+**recipientNonUsProvince** | **string** |  | [optional] [default to undefined]
+**countryCode** | **string** |  | [optional] [default to undefined]
+**federalEFile** | **boolean** |  | [optional] [default to undefined]
+**postalMail** | **boolean** |  | [optional] [default to undefined]
+**stateEFile** | **boolean** |  | [optional] [default to undefined]
+**tinMatch** | **boolean** |  | [optional] [default to undefined]
+**addressVerification** | **boolean** |  | [optional] [default to undefined]
+
+[[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
+

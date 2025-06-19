@@ -25,6 +25,22 @@ export const FALLBACK_TOKEN_URL = "https://identity.avalara.com/connect/token";
 export const FALLBACK_DEVICE_AUTHORIZATION_URL =
   "https://identity.avalara.com/connect/deviceauthorization";
 
+/// <summary>
+/// Official URL of EInvoicing Service (Production by Environment)
+/// </summary>
+export const EINVOICING_SERVICE_PRODUCTION_URL = "https://api.avalara.com";
+export const EINVOICING_SERVICE_SANDBOX_URL = "https://api.sbx.avalara.com";
+export const EINVOICING_SERVICE_QA_URL = "https://superapi.qa.avalara.io";
+export const EINVOICING_SERVICE_DEV_URL = "https://superapi.dev.avalara.io";
+
+/// <summary>
+/// Official URL of A1099 Service (Production by Environment)
+/// </summary>
+export const A1099_SERVICE_PRODUCTION_URL = "https://api.avalara.com/avalara1099";
+export const A1099_SERVICE_SANDBOX_URL = "https://api.sbx.avalara.com/avalara1099";
+export const A1099_SERVICE_QA_URL = "https://api-ava1099.gamma.qa.us-west-2.aws.avalara.io";
+export const A1099_SERVICE_DEV_URL = "https://api-ava1099.gamma.dev.us-west-2.aws.avalara.io";
+
 const isBlob = (value: any) =>
   typeof Blob !== "undefined" && value instanceof Blob;
 
@@ -73,14 +89,16 @@ export class ApiClient {
     context: RequestOpts,
     initOverrides?: RequestInit,
     requiredScopes: string = "",
-    isRetry: boolean = false
+    isRetry: boolean = false,
+    microservice: AvalaraMicroservice = AvalaraMicroservice.None
   ): Promise<ResponseWithLogObject> {
     const logObject = new LogObject(this.logger.logRequestAndResponseInfo);
-    const { url, init, timeoutId } = this.createFetchParams(
+    const { url, init, timeoutId } = this.createFetchParams({
       context,
       logObject,
-      initOverrides
-    );
+      initOverrides,
+      microservice,
+    });
     const { clientId, clientSecret } = this.configuration;
 
     const response = await this.fetchApi(url, init, logObject);
@@ -95,7 +113,13 @@ export class ApiClient {
       const authHeaderValues = authHeader && authHeader.split(" ");
       if (authHeaderValues && authHeaderValues.length === 2 && !isRetry) {
         await this.updateOAuthAccessToken(requiredScopes, authHeaderValues[1]);
-        return this.request(context, initOverrides, requiredScopes, true);
+        return this.request(
+          context,
+          initOverrides,
+          requiredScopes,
+          true,
+          microservice
+        );
       }
     }
     let errorData = null;
@@ -205,12 +229,18 @@ export class ApiClient {
     return strArr.join(" ");
   }
 
-  private createFetchParams(
-    context: RequestOpts,
-    logObject: LogObject,
-    initOverrides?: RequestInit
-  ) {
-    let url = this.configuration.basePath + context.path;
+  private createFetchParams({
+    context,
+    logObject,
+    initOverrides,
+    microservice,
+  }: {
+    context: RequestOpts;
+    logObject: LogObject;
+    initOverrides?: RequestInit;
+    microservice: AvalaraMicroservice;
+  }) {
+    let url = this.configuration.getBasePath(microservice) + context.path;
     if (
       context.query !== undefined &&
       Object.keys(context.query).length !== 0
@@ -343,73 +373,66 @@ export interface ConfigurationParameters {
   logOptions?: LogOptions; // Specify the logging options to be utilized by the SDK.
 }
 
+export enum AvalaraMicroservice {
+  EInvoicing = "einvoicing",
+  A1099 = "a1099",
+  None = "none",
+}
+
 export class Configuration {
   private oidcUrlObject: OIDCMetadata = null;
   constructor(private configuration: ConfigurationParameters) {}
 
-  get basePath(): string {
+  public getBasePath(microservice: AvalaraMicroservice): string {
     const { environment, testBasePath } = this.configuration;
-    let basePath = "";
-    if (environment === AvaTaxEnvironment.Sandbox) {
-      basePath = "https://api.sbx.avalara.com";
-    } else if (environment === AvaTaxEnvironment.Production) {
-      basePath = "https://api.avalara.com";
-    } else if (environment === AvaTaxEnvironment.QA) {
-      basePath = "https://superapi.qa.avalara.io";
-    } else if (environment === AvaTaxEnvironment.Test) {
-      if (!testBasePath) {
-        throw new Error(
-          "TestBasePath must be configured to run in test environment mode."
-        );
-      }
-      basePath = testBasePath;
-    } else {
+    if (environment === AvaTaxEnvironment.Test && !testBasePath) {
       throw new Error(
-        'Environment not configured correctly, Acceptable values are "production", "sandbox", and "test".'
+        "TestBasePath must be configured to run in test environment mode."
       );
     }
-    return basePath;
-  }
 
-  public async setOIDCUrls() {
-    const { environment, testTokenUrl, testDeviceAuthorizationUrl } =
-      this.configuration;
-    if (environment === AvaTaxEnvironment.Test && testTokenUrl) {
-      (this.oidcUrlObject || ({} as OIDCMetadata)).tokenUrl = testTokenUrl;
-      (this.oidcUrlObject || ({} as OIDCMetadata)).deviceAuthorizationUrl =
-        testDeviceAuthorizationUrl;
-    } else if (!this.oidcUrlObject) {
-      try {
-        const response = await fetch(this.getOpenIdConnectUrl, {
-          method: "GET",
-        });
-        const oidcDocument = await response.json();
-        this.oidcUrlObject = {
-          tokenUrl: oidcDocument["token_endpoint"],
-          deviceAuthorizationUrl: oidcDocument["device_authorization_endpoint"],
-        };
-      } catch (ex) {
-        console.log(
-          `Exception when calling OpenIdConnect URL: ${this.getOpenIdConnectUrl} to fetch the token and device auth endpoint. Error: ${ex.message}. Defaulting to Fallback Token URL.`
+    switch (microservice) {
+      case AvalaraMicroservice.EInvoicing:
+        switch (environment) {
+          case AvaTaxEnvironment.Production:
+            return EINVOICING_SERVICE_PRODUCTION_URL;
+          case AvaTaxEnvironment.Sandbox:
+            return EINVOICING_SERVICE_SANDBOX_URL;
+          case AvaTaxEnvironment.QA:
+            return EINVOICING_SERVICE_QA_URL;
+          case AvaTaxEnvironment.DEV:
+            return EINVOICING_SERVICE_DEV_URL;
+          case AvaTaxEnvironment.Test:
+            return testBasePath;
+          default:
+            throw new Error("Invalid Environment");
+        }
+      case AvalaraMicroservice.A1099:
+        switch (environment) {
+          case AvaTaxEnvironment.Production:
+            return A1099_SERVICE_PRODUCTION_URL;
+          case AvaTaxEnvironment.Sandbox:
+            return A1099_SERVICE_SANDBOX_URL;
+          case AvaTaxEnvironment.QA:
+            return A1099_SERVICE_QA_URL;
+          case AvaTaxEnvironment.DEV:
+            return A1099_SERVICE_DEV_URL;
+          case AvaTaxEnvironment.Test:
+            return testBasePath;
+          default:
+            throw new Error("Invalid Environment");
+        }
+      case AvalaraMicroservice.None:
+      default:
+        throw new Error(
+          'Environment not configured correctly, Acceptable values are "production", "sandbox", "qa", "dev", and "test".'
         );
-        this.oidcUrlObject = {
-          tokenUrl: FALLBACK_TOKEN_URL,
-          deviceAuthorizationUrl: FALLBACK_DEVICE_AUTHORIZATION_URL,
-        };
-      }
     }
   }
 
-  get getOpenIdConnectUrl(): string {
-    const { environment } = this.configuration;
-    switch (environment) {
-      case AvaTaxEnvironment.Production:
-        return PRODUCTION_OPENID_CONFIG_URL;
-      case AvaTaxEnvironment.Sandbox:
-        return SANDBOX_OPENID_CONFIG_URL;
-      case AvaTaxEnvironment.QA || AvaTaxEnvironment.Test:
-        return QA_OPENID_CONFIG_URL;
-    }
+  get basePath(): string {
+    // Legacy getter for backward compatibility
+    return this.getBasePath(AvalaraMicroservice.None);
   }
 
   get middleware(): Middleware[] {
@@ -478,6 +501,47 @@ export class Configuration {
 
   get logOptions(): LogOptions | { logEnabled: boolean } {
     return this.configuration.logOptions || { logEnabled: false };
+  }
+
+  public async setOIDCUrls() {
+    const { environment, testTokenUrl, testDeviceAuthorizationUrl } =
+      this.configuration;
+    if (environment === AvaTaxEnvironment.Test && testTokenUrl) {
+      (this.oidcUrlObject || ({} as OIDCMetadata)).tokenUrl = testTokenUrl;
+      (this.oidcUrlObject || ({} as OIDCMetadata)).deviceAuthorizationUrl =
+        testDeviceAuthorizationUrl;
+    } else if (!this.oidcUrlObject) {
+      try {
+        const response = await fetch(this.getOpenIdConnectUrl, {
+          method: "GET",
+        });
+        const oidcDocument = await response.json();
+        this.oidcUrlObject = {
+          tokenUrl: oidcDocument["token_endpoint"],
+          deviceAuthorizationUrl: oidcDocument["device_authorization_endpoint"],
+        };
+      } catch (ex) {
+        console.log(
+          `Exception when calling OpenIdConnect URL: ${this.getOpenIdConnectUrl} to fetch the token and device auth endpoint. Error: ${ex.message}. Defaulting to Fallback Token URL.`
+        );
+        this.oidcUrlObject = {
+          tokenUrl: FALLBACK_TOKEN_URL,
+          deviceAuthorizationUrl: FALLBACK_DEVICE_AUTHORIZATION_URL,
+        };
+      }
+    }
+  }
+
+  get getOpenIdConnectUrl(): string {
+    const { environment } = this.configuration;
+    switch (environment) {
+      case AvaTaxEnvironment.Production:
+        return PRODUCTION_OPENID_CONFIG_URL;
+      case AvaTaxEnvironment.Sandbox:
+        return SANDBOX_OPENID_CONFIG_URL;
+      case AvaTaxEnvironment.QA || AvaTaxEnvironment.Test:
+        return QA_OPENID_CONFIG_URL;
+    }
   }
 }
 
@@ -647,4 +711,5 @@ export enum AvaTaxEnvironment {
   Sandbox = "sandbox",
   Test = "test",
   QA = "qa",
+  DEV = "dev",
 }

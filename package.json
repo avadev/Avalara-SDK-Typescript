@@ -1,6 +1,6 @@
 {
   "name": "avalara-sdk",
-  "version": "24.12.12",
+  "version": "25.6.0",
   "description": "OpenAPI client for avalara-sdk",
   "author": "OpenAPI-Generator",
   "main": "./index.js",
@@ -16,7 +16,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
     "@types/jest": "^29.5.14",
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.19.111",
     "babel-jest": "^29.7.0",
     "dotenv": "^16.0.1",
     "fetch-mock-jest": "^1.5.1",

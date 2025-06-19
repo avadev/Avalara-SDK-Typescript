@@ -1,4 +1,5 @@
 # AvalaraSdk.EInvoicing.V1.ErrorResponse
+Structure for reporting errors encountered during API operations, including title, status, and detailed message.
 
 ## Properties
 

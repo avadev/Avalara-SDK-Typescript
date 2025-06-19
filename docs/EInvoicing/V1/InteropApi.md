@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="submitinteropdocument"></a>
 # **submitInteropDocument**
-> SubmitInteropDocument202Response submitInteropDocument ('ubl-invoice-2.1' | 'ubl-creditnote-2.1' | 'ubl-applicationresponse-2.1' documentType, 'FI-B2B' | 'FI-B2C' | 'FI-B2G' interchangeType, string avalaraVersion, string xAvalaraClient, string xCorrelationID, Blob fileName)
+> SubmitInteropDocument202Response submitInteropDocument ('ubl-invoice-2.1' | 'ubl-creditnote-2.1' | 'ubl-applicationresponse-2.1' documentType, 'FI-B2B-TIEKE' | 'FI-B2G-TIEKE' interchangeType, string avalaraVersion, string xAvalaraClient, string xCorrelationID, Blob fileName)
 
 Submit a document
 
@@ -39,7 +39,7 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **documentType** | **&#39;ubl-invoice-2.1&#39; | &#39;ubl-creditnote-2.1&#39; | &#39;ubl-applicationresponse-2.1&#39;**| Type of the document being uploaded. Partners will be configured in Avalara system to send only certain types of documents. | [default to undefined]
- **interchangeType** | **&#39;FI-B2B&#39; | &#39;FI-B2C&#39; | &#39;FI-B2G&#39;**| Type of interchange (codes in Avalara system that uniquely identifies a type of interchange). Partners will be configured in Avalara system to send documents belonging to certain types of interchanges. | [default to undefined]
+ **interchangeType** | **&#39;FI-B2B-TIEKE&#39; | &#39;FI-B2G-TIEKE&#39;**| Type of interchange (codes in Avalara system that uniquely identifies a type of interchange). Partners will be configured in Avalara system to send documents belonging to certain types of interchanges. | [default to undefined]
  **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
  **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; | [optional] [default to undefined]
  **xCorrelationID** | **string**| The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] [default to undefined]

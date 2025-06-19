@@ -10,7 +10,7 @@ const configParams: Runtime.ConfigurationParameters = {
   environment: AvaTaxEnvironment.Sandbox,
   machineName: "test-machine",
   timeout: 3000,
-  bearerToken: process.env.BEARER_TOKEN,
+  bearerToken: process.env.BEARER_TOKEN_EINVOICING,
 };
 const scopes = "avatax_api";
 

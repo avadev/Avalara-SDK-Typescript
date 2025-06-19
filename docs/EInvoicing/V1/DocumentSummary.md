@@ -6,6 +6,7 @@ Displays a summary of information about the document
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The unique ID for this document | [optional] [default to undefined]
+**companyId** | **string** | Unique identifier that represents the company within the system. | [optional] [default to undefined]
 **processDateTime** | **string** | The date and time when the document was processed, displayed in the format YYYY-MM-DDThh:mm:ss | [optional] [default to undefined]
 **status** | **string** | The Document status | [optional] [default to undefined]
 **supplierName** | **string** | The name of the supplier in the transaction | [optional] [default to undefined]
