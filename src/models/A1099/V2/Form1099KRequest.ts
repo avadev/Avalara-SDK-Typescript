@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    StateAndLocalWithholding,
-    StateAndLocalWithholdingFromJSON,
-    StateAndLocalWithholdingFromJSONTyped,
-    StateAndLocalWithholdingToJSON,
-} from './StateAndLocalWithholding';
+    StateAndLocalWithholdingRequest,
+    StateAndLocalWithholdingRequestFromJSON,
+    StateAndLocalWithholdingRequestFromJSONTyped,
+    StateAndLocalWithholdingRequestToJSON,
+} from './StateAndLocalWithholdingRequest';
 
 /**
  * 
@@ -26,12 +26,6 @@ import {
  * @interface Form1099KRequest
  */
 export interface Form1099KRequest {
-    /**
-     * 
-     * @type {StateAndLocalWithholding}
-     * @memberof Form1099KRequest
-     */
-    stateAndLocalWithholding?: StateAndLocalWithholding | null;
     /**
      * 
      * @type {number}
@@ -157,43 +151,25 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    type?: string;
+    readonly type?: Form1099KRequestTypeEnum;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    issuerId?: string;
+    issuerId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    issuerReferenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099KRequest
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099KRequest
-     */
-    referenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099KRequest
-     */
-    recipientName?: string;
+    recipientName?: string | null;
     /**
      * 
      * @type {string}
@@ -202,10 +178,10 @@ export interface Form1099KRequest {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099KRequest
      */
-    tinType?: number;
+    tinType?: Form1099KRequestTinTypeEnum;
     /**
      * 
      * @type {string}
@@ -217,13 +193,13 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    streetAddress?: string;
+    address?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    streetAddressLine2?: string;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -247,25 +223,25 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -302,9 +278,35 @@ export interface Form1099KRequest {
      * @memberof Form1099KRequest
      */
     addressVerification?: boolean;
+    /**
+     * 
+     * @type {StateAndLocalWithholdingRequest}
+     * @memberof Form1099KRequest
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum Form1099KRequestTypeEnum {
+    Form1099Nec = 'Form1099Nec',
+    Form1099Misc = 'Form1099Misc',
+    Form1099Div = 'Form1099Div',
+    Form1099R = 'Form1099R',
+    Form1099K = 'Form1099K',
+    Form1095B = 'Form1095B'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1099KRequestTinTypeEnum {
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the Form1099KRequest interface.
@@ -325,7 +327,6 @@ export function Form1099KRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
         'filerType': !exists(json, 'filerType') ? undefined : json['filerType'],
         'paymentType': !exists(json, 'paymentType') ? undefined : json['paymentType'],
         'paymentSettlementEntityNamePhoneNumber': !exists(json, 'paymentSettlementEntityNamePhoneNumber') ? undefined : json['paymentSettlementEntityNamePhoneNumber'],
@@ -348,16 +349,13 @@ export function Form1099KRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'december': !exists(json, 'december') ? undefined : json['december'],
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
-        'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
-        'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'streetAddress': !exists(json, 'streetAddress') ? undefined : json['streetAddress'],
-        'streetAddressLine2': !exists(json, 'streetAddressLine2') ? undefined : json['streetAddressLine2'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -371,6 +369,7 @@ export function Form1099KRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -383,7 +382,6 @@ export function Form1099KRequestToJSON(value?: Form1099KRequest | null): any {
     }
     return {
         
-        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
         'filerType': value.filerType,
         'paymentType': value.paymentType,
         'paymentSettlementEntityNamePhoneNumber': value.paymentSettlementEntityNamePhoneNumber,
@@ -404,18 +402,14 @@ export function Form1099KRequestToJSON(value?: Form1099KRequest | null): any {
         'october': value.october,
         'november': value.november,
         'december': value.december,
-        'type': value.type,
         'issuerId': value.issuerId,
-        'issuerReferenceId': value.issuerReferenceId,
-        'issuerTin': value.issuerTin,
-        'taxYear': value.taxYear,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
-        'streetAddress': value.streetAddress,
-        'streetAddressLine2': value.streetAddressLine2,
+        'address': value.address,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
@@ -429,5 +423,6 @@ export function Form1099KRequestToJSON(value?: Form1099KRequest | null): any {
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
+        'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };
 }

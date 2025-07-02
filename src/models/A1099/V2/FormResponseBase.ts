@@ -13,12 +13,79 @@
  */
 
 import { exists, mapValues } from '../../../runtime';
+import {
+    StateAndLocalWithholdingResponse,
+    StateAndLocalWithholdingResponseFromJSON,
+    StateAndLocalWithholdingResponseFromJSONTyped,
+    StateAndLocalWithholdingResponseToJSON,
+} from './StateAndLocalWithholdingResponse';
+import {
+    StateEfileStatusDetailApp,
+    StateEfileStatusDetailAppFromJSON,
+    StateEfileStatusDetailAppFromJSONTyped,
+    StateEfileStatusDetailAppToJSON,
+} from './StateEfileStatusDetailApp';
+import {
+    StatusDetail,
+    StatusDetailFromJSON,
+    StatusDetailFromJSONTyped,
+    StatusDetailToJSON,
+} from './StatusDetail';
+import {
+    ValidationErrorApp,
+    ValidationErrorAppFromJSON,
+    ValidationErrorAppFromJSONTyped,
+    ValidationErrorAppToJSON,
+} from './ValidationErrorApp';
+
 /**
  * 
  * @export
  * @interface FormResponseBase
  */
 export interface FormResponseBase {
+    /**
+     * 
+     * @type {string}
+     * @memberof FormResponseBase
+     */
+    readonly type?: FormResponseBaseTypeEnum;
+    /**
+     * 
+     * @type {Date}
+     * @memberof FormResponseBase
+     */
+    createdAt?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof FormResponseBase
+     */
+    updatedAt?: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof FormResponseBase
+     */
+    userId?: string;
+    /**
+     * 
+     * @type {StateAndLocalWithholdingResponse}
+     * @memberof FormResponseBase
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholdingResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof FormResponseBase
+     */
+    tinType?: FormResponseBaseTinTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FormResponseBase
+     */
+    id?: string;
     /**
      * 
      * @type {string}
@@ -60,13 +127,7 @@ export interface FormResponseBase {
      * @type {string}
      * @memberof FormResponseBase
      */
-    recipientFederalId?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof FormResponseBase
-     */
-    federalIdType?: number;
+    recipientTin?: string;
     /**
      * 
      * @type {string}
@@ -78,13 +139,13 @@ export interface FormResponseBase {
      * @type {string}
      * @memberof FormResponseBase
      */
-    streetAddress?: string;
+    address?: string;
     /**
      * 
      * @type {string}
      * @memberof FormResponseBase
      */
-    streetAddressLine2?: string;
+    address2?: string;
     /**
      * 
      * @type {string}
@@ -133,9 +194,95 @@ export interface FormResponseBase {
      * @memberof FormResponseBase
      */
     countryCode?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FormResponseBase
+     */
+    federalEFile?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FormResponseBase
+     */
+    postalMail?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FormResponseBase
+     */
+    stateEFile?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FormResponseBase
+     */
+    tinMatch?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FormResponseBase
+     */
+    addressVerification?: boolean;
+    /**
+     * 
+     * @type {StatusDetail}
+     * @memberof FormResponseBase
+     */
+    federalEfileStatus?: StatusDetail | null;
+    /**
+     * 
+     * @type {Array<StateEfileStatusDetailApp>}
+     * @memberof FormResponseBase
+     */
+    stateEfileStatus?: Array<StateEfileStatusDetailApp> | null;
+    /**
+     * 
+     * @type {StatusDetail}
+     * @memberof FormResponseBase
+     */
+    postalMailStatus?: StatusDetail | null;
+    /**
+     * 
+     * @type {StatusDetail}
+     * @memberof FormResponseBase
+     */
+    tinMatchStatus?: StatusDetail | null;
+    /**
+     * 
+     * @type {StatusDetail}
+     * @memberof FormResponseBase
+     */
+    addressVerificationStatus?: StatusDetail | null;
+    /**
+     * 
+     * @type {Array<ValidationErrorApp>}
+     * @memberof FormResponseBase
+     */
+    validationErrors?: Array<ValidationErrorApp> | null;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum FormResponseBaseTypeEnum {
+    Form1099Nec = 'Form1099Nec',
+    Form1099Misc = 'Form1099Misc',
+    Form1099Div = 'Form1099Div',
+    Form1099R = 'Form1099R',
+    Form1099K = 'Form1099K',
+    Form1095B = 'Form1095B'
+}/**
+* @export
+* @enum {string}
+*/
+export enum FormResponseBaseTinTypeEnum {
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the FormResponseBase interface.
@@ -156,17 +303,23 @@ export function FormResponseBaseFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
+        'type': !exists(json, 'type') ? undefined : json['type'],
+        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
+        'userId': !exists(json, 'userId') ? undefined : json['userId'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingResponseFromJSON(json['stateAndLocalWithholding']),
+        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
-        'recipientFederalId': !exists(json, 'recipientFederalId') ? undefined : json['recipientFederalId'],
-        'federalIdType': !exists(json, 'federalIdType') ? undefined : json['federalIdType'],
+        'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'streetAddress': !exists(json, 'streetAddress') ? undefined : json['streetAddress'],
-        'streetAddressLine2': !exists(json, 'streetAddressLine2') ? undefined : json['streetAddressLine2'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -175,6 +328,17 @@ export function FormResponseBaseFromJSONTyped(json: any, ignoreDiscriminator: bo
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
         'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
+        'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
+        'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
+        'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : StatusDetailFromJSON(json['federalEfileStatus']),
+        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailAppFromJSON)),
+        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : StatusDetailFromJSON(json['postalMailStatus']),
+        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : StatusDetailFromJSON(json['tinMatchStatus']),
+        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : StatusDetailFromJSON(json['addressVerificationStatus']),
+        'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorAppFromJSON)),
     };
 }
 
@@ -187,17 +351,22 @@ export function FormResponseBaseToJSON(value?: FormResponseBase | null): any {
     }
     return {
         
+        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
+        'userId': value.userId,
+        'stateAndLocalWithholding': StateAndLocalWithholdingResponseToJSON(value.stateAndLocalWithholding),
+        'tinType': value.tinType,
+        'id': value.id,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
-        'recipientFederalId': value.recipientFederalId,
-        'federalIdType': value.federalIdType,
+        'recipientTin': value.recipientTin,
         'recipientSecondName': value.recipientSecondName,
-        'streetAddress': value.streetAddress,
-        'streetAddressLine2': value.streetAddressLine2,
+        'address': value.address,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
@@ -206,5 +375,16 @@ export function FormResponseBaseToJSON(value?: FormResponseBase | null): any {
         'officeCode': value.officeCode,
         'recipientNonUsProvince': value.recipientNonUsProvince,
         'countryCode': value.countryCode,
+        'federalEFile': value.federalEFile,
+        'postalMail': value.postalMail,
+        'stateEFile': value.stateEFile,
+        'tinMatch': value.tinMatch,
+        'addressVerification': value.addressVerification,
+        'federalEfileStatus': StatusDetailToJSON(value.federalEfileStatus),
+        'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailAppToJSON)),
+        'postalMailStatus': StatusDetailToJSON(value.postalMailStatus),
+        'tinMatchStatus': StatusDetailToJSON(value.tinMatchStatus),
+        'addressVerificationStatus': StatusDetailToJSON(value.addressVerificationStatus),
+        'validationErrors': value.validationErrors === undefined ? undefined : (value.validationErrors === null ? null : (value.validationErrors as Array<any>)?.map(ValidationErrorAppToJSON)),
     };
 }

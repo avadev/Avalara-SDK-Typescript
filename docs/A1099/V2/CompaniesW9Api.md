@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="createcompany"></a>
 # **createCompany**
-> CompanyResponseModel createCompany (string avalaraVersion, string xCorrelationId, CompanyCreateUpdateRequestModel companyCreateUpdateRequestModel)
+> CompanyResponseModel createCompany (string avalaraVersion, string xCorrelationId, string xAvalaraClient, CompanyCreateUpdateRequestModel companyCreateUpdateRequestModel)
 
 Creates a new company
 
@@ -43,7 +43,8 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
  **companyCreateUpdateRequestModel** | [**CompanyCreateUpdateRequestModel**](CompanyCreateUpdateRequestModel.md)| The company to create | [optional] 
 
 ### Return type
@@ -71,7 +72,7 @@ Name | Type | Description  | Notes
 
 <a name="deletecompany"></a>
 # **deleteCompany**
-> void deleteCompany (string id, string avalaraVersion, string xCorrelationId)
+> void deleteCompany (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Deletes a company
 
@@ -102,7 +103,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The company to delete | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
@@ -131,7 +133,7 @@ void (empty response body)
 
 <a name="getcompanies"></a>
 # **getCompanies**
-> PaginatedQueryResultModelCompanyResponse getCompanies (string avalaraVersion, string xCorrelationId, string $filter, number $top, number $skip, string $orderBy, boolean count, boolean countOnly)
+> PaginatedQueryResultModelCompanyResponse getCompanies (string avalaraVersion, string $filter, number $top, number $skip, string $orderBy, boolean count, boolean countOnly, string xCorrelationId, string xAvalaraClient)
 
 List companies
 
@@ -161,13 +163,14 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
  **$filter** | **string**| A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. | [optional] [default to undefined]
  **$top** | **number**| If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets. | [optional] [default to undefined]
  **$skip** | **number**| If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. | [optional] [default to undefined]
  **$orderBy** | **string**| A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC. | [optional] [default to undefined]
  **count** | **boolean**| If true, return the global count of elements in the collection. | [optional] [default to undefined]
  **countOnly** | **boolean**| If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true. | [optional] [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
@@ -196,7 +199,7 @@ Name | Type | Description  | Notes
 
 <a name="getcompany"></a>
 # **getCompany**
-> CompanyResponse getCompany (string id, string avalaraVersion, string xCorrelationId)
+> CompanyResponse getCompany (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Retrieve a company
 
@@ -227,7 +230,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| Id of the company | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
@@ -256,7 +260,7 @@ Name | Type | Description  | Notes
 
 <a name="updatecompany"></a>
 # **updateCompany**
-> CompanyResponseModel updateCompany (string id, string avalaraVersion, string xCorrelationId, CompanyCreateUpdateRequestModel companyCreateUpdateRequestModel)
+> CompanyResponseModel updateCompany (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, CompanyCreateUpdateRequestModel companyCreateUpdateRequestModel)
 
 Update a company
 
@@ -287,7 +291,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the company to update | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
  **companyCreateUpdateRequestModel** | [**CompanyCreateUpdateRequestModel**](CompanyCreateUpdateRequestModel.md)| The updated company data | [optional] 
 
 ### Return type

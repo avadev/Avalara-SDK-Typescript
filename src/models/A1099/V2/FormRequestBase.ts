@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../../../runtime';
+import {
+    StateAndLocalWithholdingRequest,
+    StateAndLocalWithholdingRequestFromJSON,
+    StateAndLocalWithholdingRequestFromJSONTyped,
+    StateAndLocalWithholdingRequestToJSON,
+} from './StateAndLocalWithholdingRequest';
+
 /**
  * 
  * @export
@@ -24,37 +31,19 @@ export interface FormRequestBase {
      * @type {string}
      * @memberof FormRequestBase
      */
-    issuerId?: string;
+    issuerId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof FormRequestBase
      */
-    issuerReferenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof FormRequestBase
      */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof FormRequestBase
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof FormRequestBase
-     */
-    referenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FormRequestBase
-     */
-    recipientName?: string;
+    recipientName?: string | null;
     /**
      * 
      * @type {string}
@@ -63,10 +52,10 @@ export interface FormRequestBase {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof FormRequestBase
      */
-    tinType?: number;
+    tinType?: FormRequestBaseTinTypeEnum;
     /**
      * 
      * @type {string}
@@ -78,13 +67,13 @@ export interface FormRequestBase {
      * @type {string}
      * @memberof FormRequestBase
      */
-    streetAddress?: string;
+    address?: string;
     /**
      * 
      * @type {string}
      * @memberof FormRequestBase
      */
-    streetAddressLine2?: string;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -108,25 +97,25 @@ export interface FormRequestBase {
      * @type {string}
      * @memberof FormRequestBase
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof FormRequestBase
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof FormRequestBase
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof FormRequestBase
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -163,9 +152,24 @@ export interface FormRequestBase {
      * @memberof FormRequestBase
      */
     addressVerification?: boolean;
+    /**
+     * 
+     * @type {StateAndLocalWithholdingRequest}
+     * @memberof FormRequestBase
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum FormRequestBaseTinTypeEnum {
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the FormRequestBase interface.
@@ -187,16 +191,13 @@ export function FormRequestBaseFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
-        'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
-        'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'streetAddress': !exists(json, 'streetAddress') ? undefined : json['streetAddress'],
-        'streetAddressLine2': !exists(json, 'streetAddressLine2') ? undefined : json['streetAddressLine2'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -210,6 +211,7 @@ export function FormRequestBaseFromJSONTyped(json: any, ignoreDiscriminator: boo
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -223,16 +225,13 @@ export function FormRequestBaseToJSON(value?: FormRequestBase | null): any {
     return {
         
         'issuerId': value.issuerId,
-        'issuerReferenceId': value.issuerReferenceId,
-        'issuerTin': value.issuerTin,
-        'taxYear': value.taxYear,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
-        'streetAddress': value.streetAddress,
-        'streetAddressLine2': value.streetAddressLine2,
+        'address': value.address,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
@@ -246,5 +245,6 @@ export function FormRequestBaseToJSON(value?: FormRequestBase | null): any {
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
+        'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };
 }

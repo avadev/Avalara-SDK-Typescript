@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    StateAndLocalWithholding,
-    StateAndLocalWithholdingFromJSON,
-    StateAndLocalWithholdingFromJSONTyped,
-    StateAndLocalWithholdingToJSON,
-} from './StateAndLocalWithholding';
+    StateAndLocalWithholdingRequest,
+    StateAndLocalWithholdingRequestFromJSON,
+    StateAndLocalWithholdingRequestFromJSONTyped,
+    StateAndLocalWithholdingRequestToJSON,
+} from './StateAndLocalWithholdingRequest';
 
 /**
  * 
@@ -26,12 +26,6 @@ import {
  * @interface Form1099KListItem
  */
 export interface Form1099KListItem {
-    /**
-     * 
-     * @type {StateAndLocalWithholding}
-     * @memberof Form1099KListItem
-     */
-    stateAndLocalWithholding?: StateAndLocalWithholding | null;
     /**
      * 
      * @type {string}
@@ -157,12 +151,6 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    issuerId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099KListItem
-     */
     issuerReferenceId?: string;
     /**
      * 
@@ -181,13 +169,19 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    referenceId?: string;
+    issuerId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KListItem
      */
-    recipientName?: string;
+    referenceId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099KListItem
+     */
+    recipientName?: string | null;
     /**
      * 
      * @type {string}
@@ -196,10 +190,10 @@ export interface Form1099KListItem {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099KListItem
      */
-    tinType?: number;
+    tinType?: Form1099KListItemTinTypeEnum;
     /**
      * 
      * @type {string}
@@ -211,13 +205,13 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    streetAddress?: string;
+    address?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099KListItem
      */
-    streetAddressLine2?: string;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -241,25 +235,25 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KListItem
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KListItem
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KListItem
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -296,6 +290,12 @@ export interface Form1099KListItem {
      * @memberof Form1099KListItem
      */
     addressVerification?: boolean;
+    /**
+     * 
+     * @type {StateAndLocalWithholdingRequest}
+     * @memberof Form1099KListItem
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
 }
 
 /**
@@ -313,6 +313,15 @@ export enum Form1099KListItemFilerTypeEnum {
 export enum Form1099KListItemPaymentTypeEnum {
     MerchantPaymentCard = 'MerchantPaymentCard',
     ThirdPartyNetwork = 'ThirdPartyNetwork'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1099KListItemTinTypeEnum {
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
 }
 
 /**
@@ -334,7 +343,6 @@ export function Form1099KListItemFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
         'filerType': !exists(json, 'filerType') ? undefined : json['filerType'],
         'paymentType': !exists(json, 'paymentType') ? undefined : json['paymentType'],
         'paymentSettlementEntityNamePhoneNumber': !exists(json, 'paymentSettlementEntityNamePhoneNumber') ? undefined : json['paymentSettlementEntityNamePhoneNumber'],
@@ -355,17 +363,17 @@ export function Form1099KListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'october': !exists(json, 'october') ? undefined : json['october'],
         'november': !exists(json, 'november') ? undefined : json['november'],
         'december': !exists(json, 'december') ? undefined : json['december'],
-        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
+        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'streetAddress': !exists(json, 'streetAddress') ? undefined : json['streetAddress'],
-        'streetAddressLine2': !exists(json, 'streetAddressLine2') ? undefined : json['streetAddressLine2'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -379,6 +387,7 @@ export function Form1099KListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -391,7 +400,6 @@ export function Form1099KListItemToJSON(value?: Form1099KListItem | null): any {
     }
     return {
         
-        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
         'filerType': value.filerType,
         'paymentType': value.paymentType,
         'paymentSettlementEntityNamePhoneNumber': value.paymentSettlementEntityNamePhoneNumber,
@@ -412,17 +420,17 @@ export function Form1099KListItemToJSON(value?: Form1099KListItem | null): any {
         'october': value.october,
         'november': value.november,
         'december': value.december,
-        'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
+        'issuerId': value.issuerId,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
-        'streetAddress': value.streetAddress,
-        'streetAddressLine2': value.streetAddressLine2,
+        'address': value.address,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
@@ -436,5 +444,6 @@ export function Form1099KListItemToJSON(value?: Form1099KListItem | null): any {
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
+        'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };
 }

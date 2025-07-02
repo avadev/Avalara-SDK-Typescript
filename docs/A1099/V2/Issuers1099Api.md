@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="createissuer"></a>
 # **createIssuer**
-> IssuerResponse createIssuer (string avalaraVersion, string xCorrelationId, IssuerCommand issuerCommand)
+> IssuerResponse createIssuer (string avalaraVersion, string xCorrelationId, string xAvalaraClient, IssuerCommand issuerCommand)
 
 Create an issuer
 
@@ -43,7 +43,8 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
  **issuerCommand** | [**IssuerCommand**](IssuerCommand.md)| The issuer to create | [optional] 
 
 ### Return type
@@ -71,7 +72,7 @@ Name | Type | Description  | Notes
 
 <a name="deleteissuer"></a>
 # **deleteIssuer**
-> void deleteIssuer (string id, string avalaraVersion, string xCorrelationId)
+> void deleteIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Delete an issuer
 
@@ -102,7 +103,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| Id of the issuer to delete | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
@@ -129,7 +131,7 @@ void (empty response body)
 
 <a name="getissuer"></a>
 # **getIssuer**
-> IssuerResponse getIssuer (string id, string avalaraVersion, string xCorrelationId)
+> IssuerResponse getIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Get an issuer
 
@@ -160,7 +162,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**|  | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
@@ -187,7 +190,7 @@ Name | Type | Description  | Notes
 
 <a name="getissuers"></a>
 # **getIssuers**
-> PaginatedQueryResultModelIssuerResponse getIssuers (string avalaraVersion, string xCorrelationId, string $filter, number $top, number $skip, string $orderBy, boolean count, boolean countOnly)
+> PaginatedQueryResultModelIssuerResponse getIssuers (string avalaraVersion, string $filter, number $top, number $skip, string $orderBy, boolean count, boolean countOnly, string xCorrelationId, string xAvalaraClient)
 
 List issuers
 
@@ -217,13 +220,14 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
  **$filter** | **string**| A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. | [optional] [default to undefined]
  **$top** | **number**| If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets. | [optional] [default to undefined]
  **$skip** | **number**| If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. | [optional] [default to undefined]
  **$orderBy** | **string**| A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC. | [optional] [default to undefined]
  **count** | **boolean**| If true, return the global count of elements in the collection. | [optional] [default to undefined]
  **countOnly** | **boolean**| If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true. | [optional] [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
@@ -252,7 +256,7 @@ Name | Type | Description  | Notes
 
 <a name="updateissuer"></a>
 # **updateIssuer**
-> void updateIssuer (string id, string avalaraVersion, string xCorrelationId, IssuerCommand issuerCommand)
+> void updateIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, IssuerCommand issuerCommand)
 
 Update an issuer
 
@@ -283,7 +287,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| Id of the issuer to Update | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
  **issuerCommand** | [**IssuerCommand**](IssuerCommand.md)| The issuer to update | [optional] 
 
 ### Return type

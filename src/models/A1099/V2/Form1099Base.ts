@@ -157,7 +157,7 @@ export interface Form1099Base {
      * @type {string}
      * @memberof Form1099Base
      */
-    typeOfTin?: string | null;
+    tinType?: string | null;
     /**
      * 
      * @type {string}
@@ -169,13 +169,13 @@ export interface Form1099Base {
      * @type {string}
      * @memberof Form1099Base
      */
-    firstPayeeName?: string | null;
+    recipientName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099Base
      */
-    secondPayeeName?: string | null;
+    recipientSecondName?: string | null;
     /**
      * 
      * @type {string}
@@ -187,7 +187,7 @@ export interface Form1099Base {
      * @type {string}
      * @memberof Form1099Base
      */
-    addressRecipientSecond?: string | null;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -283,12 +283,12 @@ export function Form1099BaseFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
-        'typeOfTin': !exists(json, 'typeOfTin') ? undefined : json['typeOfTin'],
+        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
-        'firstPayeeName': !exists(json, 'firstPayeeName') ? undefined : json['firstPayeeName'],
-        'secondPayeeName': !exists(json, 'secondPayeeName') ? undefined : json['secondPayeeName'],
+        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
+        'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': !exists(json, 'address') ? undefined : json['address'],
-        'addressRecipientSecond': !exists(json, 'addressRecipientSecond') ? undefined : json['addressRecipientSecond'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -328,12 +328,12 @@ export function Form1099BaseToJSON(value?: Form1099Base | null): any {
         'addressVerificationStatus': Form1099StatusDetailToJSON(value.addressVerificationStatus),
         'referenceId': value.referenceId,
         'email': value.email,
-        'typeOfTin': value.typeOfTin,
+        'tinType': value.tinType,
         'tin': value.tin,
-        'firstPayeeName': value.firstPayeeName,
-        'secondPayeeName': value.secondPayeeName,
+        'recipientName': value.recipientName,
+        'recipientSecondName': value.recipientSecondName,
         'address': value.address,
-        'addressRecipientSecond': value.addressRecipientSecond,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,

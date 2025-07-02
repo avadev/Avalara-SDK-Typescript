@@ -28,12 +28,6 @@ import {
 export interface Form1099RRequest {
     /**
      * 
-     * @type {StateAndLocalWithholdingRequest}
-     * @memberof Form1099RRequest
-     */
-    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
-    /**
-     * 
      * @type {number}
      * @memberof Form1099RRequest
      */
@@ -157,43 +151,25 @@ export interface Form1099RRequest {
      * @type {string}
      * @memberof Form1099RRequest
      */
-    type?: string;
+    readonly type?: Form1099RRequestTypeEnum;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    issuerId?: string;
+    issuerId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    issuerReferenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099RRequest
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099RRequest
-     */
-    referenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099RRequest
-     */
-    recipientName?: string;
+    recipientName?: string | null;
     /**
      * 
      * @type {string}
@@ -202,10 +178,10 @@ export interface Form1099RRequest {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099RRequest
      */
-    tinType?: number;
+    tinType?: Form1099RRequestTinTypeEnum;
     /**
      * 
      * @type {string}
@@ -217,13 +193,13 @@ export interface Form1099RRequest {
      * @type {string}
      * @memberof Form1099RRequest
      */
-    streetAddress?: string;
+    address?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    streetAddressLine2?: string;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -247,25 +223,25 @@ export interface Form1099RRequest {
      * @type {string}
      * @memberof Form1099RRequest
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -302,9 +278,35 @@ export interface Form1099RRequest {
      * @memberof Form1099RRequest
      */
     addressVerification?: boolean;
+    /**
+     * 
+     * @type {StateAndLocalWithholdingRequest}
+     * @memberof Form1099RRequest
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum Form1099RRequestTypeEnum {
+    Form1099Nec = 'Form1099Nec',
+    Form1099Misc = 'Form1099Misc',
+    Form1099Div = 'Form1099Div',
+    Form1099R = 'Form1099R',
+    Form1099K = 'Form1099K',
+    Form1095B = 'Form1095B'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1099RRequestTinTypeEnum {
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the Form1099RRequest interface.
@@ -325,7 +327,6 @@ export function Form1099RRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
         'grossDistribution': !exists(json, 'grossDistribution') ? undefined : json['grossDistribution'],
         'taxableAmount': !exists(json, 'taxableAmount') ? undefined : json['taxableAmount'],
         'taxableAmountNotDetermined': !exists(json, 'taxableAmountNotDetermined') ? undefined : json['taxableAmountNotDetermined'],
@@ -348,16 +349,13 @@ export function Form1099RRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'dateOfPayment': !exists(json, 'dateOfPayment') ? undefined : (new Date(json['dateOfPayment'])),
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
-        'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
-        'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'streetAddress': !exists(json, 'streetAddress') ? undefined : json['streetAddress'],
-        'streetAddressLine2': !exists(json, 'streetAddressLine2') ? undefined : json['streetAddressLine2'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -371,6 +369,7 @@ export function Form1099RRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -383,7 +382,6 @@ export function Form1099RRequestToJSON(value?: Form1099RRequest | null): any {
     }
     return {
         
-        'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
         'grossDistribution': value.grossDistribution,
         'taxableAmount': value.taxableAmount,
         'taxableAmountNotDetermined': value.taxableAmountNotDetermined,
@@ -404,18 +402,14 @@ export function Form1099RRequestToJSON(value?: Form1099RRequest | null): any {
         'firstYearOfDesignatedRothContribution': value.firstYearOfDesignatedRothContribution,
         'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'dateOfPayment': value.dateOfPayment === undefined ? undefined : (value.dateOfPayment.toISOString()),
-        'type': value.type,
         'issuerId': value.issuerId,
-        'issuerReferenceId': value.issuerReferenceId,
-        'issuerTin': value.issuerTin,
-        'taxYear': value.taxYear,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
-        'streetAddress': value.streetAddress,
-        'streetAddressLine2': value.streetAddressLine2,
+        'address': value.address,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
@@ -429,5 +423,6 @@ export function Form1099RRequestToJSON(value?: Form1099RRequest | null): any {
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
+        'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };
 }

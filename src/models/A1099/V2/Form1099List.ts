@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    Form1099ListDataInner,
-    Form1099ListDataInnerFromJSON,
-    Form1099ListDataInnerFromJSONTyped,
-    Form1099ListDataInnerToJSON,
-} from './Form1099ListDataInner';
+    Get1099Form200Response,
+    Get1099Form200ResponseFromJSON,
+    Get1099Form200ResponseFromJSONTyped,
+    Get1099Form200ResponseToJSON,
+} from './Get1099Form200Response';
 
 /**
  * 
@@ -28,10 +28,10 @@ import {
 export interface Form1099List {
     /**
      * 
-     * @type {Array<Form1099ListDataInner>}
+     * @type {Array<Get1099Form200Response>}
      * @memberof Form1099List
      */
-    data?: Array<Form1099ListDataInner> | null;
+    data?: Array<Get1099Form200Response> | null;
 }
 
 
@@ -55,7 +55,7 @@ export function Form1099ListFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
-        'data': !exists(json, 'data') ? undefined : (json['data'] === null ? null : (json['data'] as Array<any>)?.map(Form1099ListDataInnerFromJSON)),
+        'data': !exists(json, 'data') ? undefined : (json['data'] === null ? null : (json['data'] as Array<any>)?.map(Get1099Form200ResponseFromJSON)),
     };
 }
 
@@ -68,6 +68,6 @@ export function Form1099ListToJSON(value?: Form1099List | null): any {
     }
     return {
         
-        'data': value.data === undefined ? undefined : (value.data === null ? null : (value.data as Array<any>)?.map(Form1099ListDataInnerToJSON)),
+        'data': value.data === undefined ? undefined : (value.data === null ? null : (value.data as Array<any>)?.map(Get1099Form200ResponseToJSON)),
     };
 }

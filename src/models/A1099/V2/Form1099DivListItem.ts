@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    StateAndLocalWithholding,
-    StateAndLocalWithholdingFromJSON,
-    StateAndLocalWithholdingFromJSONTyped,
-    StateAndLocalWithholdingToJSON,
-} from './StateAndLocalWithholding';
+    StateAndLocalWithholdingRequest,
+    StateAndLocalWithholdingRequestFromJSON,
+    StateAndLocalWithholdingRequestFromJSONTyped,
+    StateAndLocalWithholdingRequestToJSON,
+} from './StateAndLocalWithholdingRequest';
 
 /**
  * 
@@ -142,18 +142,6 @@ export interface Form1099DivListItem {
     fatcaFilingRequirement?: string;
     /**
      * 
-     * @type {StateAndLocalWithholding}
-     * @memberof Form1099DivListItem
-     */
-    stateAndLocalWithholding?: StateAndLocalWithholding;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099DivListItem
-     */
-    issuerId?: string;
-    /**
-     * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
@@ -175,13 +163,19 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    referenceId?: string;
+    issuerId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    recipientName?: string;
+    referenceId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099DivListItem
+     */
+    recipientName?: string | null;
     /**
      * 
      * @type {string}
@@ -190,10 +184,10 @@ export interface Form1099DivListItem {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099DivListItem
      */
-    tinType?: number;
+    tinType?: Form1099DivListItemTinTypeEnum;
     /**
      * 
      * @type {string}
@@ -205,13 +199,13 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    streetAddress?: string;
+    address?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    streetAddressLine2?: string;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -235,25 +229,25 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -290,9 +284,24 @@ export interface Form1099DivListItem {
      * @memberof Form1099DivListItem
      */
     addressVerification?: boolean;
+    /**
+     * 
+     * @type {StateAndLocalWithholdingRequest}
+     * @memberof Form1099DivListItem
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum Form1099DivListItemTinTypeEnum {
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the Form1099DivListItem interface.
@@ -332,18 +341,17 @@ export function Form1099DivListItemFromJSONTyped(json: any, ignoreDiscriminator:
         'exemptInterestDividends': !exists(json, 'exemptInterestDividends') ? undefined : json['exemptInterestDividends'],
         'specifiedPrivateActivityBondInterestDividends': !exists(json, 'specifiedPrivateActivityBondInterestDividends') ? undefined : json['specifiedPrivateActivityBondInterestDividends'],
         'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
-        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
+        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'streetAddress': !exists(json, 'streetAddress') ? undefined : json['streetAddress'],
-        'streetAddressLine2': !exists(json, 'streetAddressLine2') ? undefined : json['streetAddressLine2'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -357,6 +365,7 @@ export function Form1099DivListItemFromJSONTyped(json: any, ignoreDiscriminator:
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -388,18 +397,17 @@ export function Form1099DivListItemToJSON(value?: Form1099DivListItem | null): a
         'exemptInterestDividends': value.exemptInterestDividends,
         'specifiedPrivateActivityBondInterestDividends': value.specifiedPrivateActivityBondInterestDividends,
         'fatcaFilingRequirement': value.fatcaFilingRequirement,
-        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
-        'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
+        'issuerId': value.issuerId,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
-        'streetAddress': value.streetAddress,
-        'streetAddressLine2': value.streetAddressLine2,
+        'address': value.address,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
@@ -413,5 +421,6 @@ export function Form1099DivListItemToJSON(value?: Form1099DivListItem | null): a
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
+        'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };
 }
