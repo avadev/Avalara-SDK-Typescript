@@ -40,37 +40,42 @@ import {
 
 export interface CreateCompanyInterface {
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
     companyCreateUpdateRequestModel?: CompanyCreateUpdateRequestModel;
 }
 
 export interface DeleteCompanyInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
 }
 
 export interface GetCompaniesInterface {
     avalaraVersion?: string;
-    xCorrelationId: string;
     $filter?: string;
     $top?: number;
     $skip?: number;
     $orderBy?: string;
     count?: boolean;
     countOnly?: boolean;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
 }
 
 export interface GetCompanyInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
 }
 
 export interface UpdateCompanyInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
     companyCreateUpdateRequestModel?: CompanyCreateUpdateRequestModel;
 }
 
@@ -94,10 +99,6 @@ export class CompaniesW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling createCompany.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling createCompany.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -111,6 +112,10 @@ export class CompaniesW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -151,10 +156,6 @@ export class CompaniesW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling deleteCompany.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling deleteCompany.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -166,6 +167,10 @@ export class CompaniesW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -197,10 +202,6 @@ export class CompaniesW9Api extends runtime.ApiClient {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getCompanies.');
-        }
-
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling getCompanies.');
         }
 
         const queryParameters: any = {};
@@ -240,6 +241,10 @@ export class CompaniesW9Api extends runtime.ApiClient {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
         }
 
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
+        }
+
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
         const { response, logObject } = await this.request({
             path: `/w9/companies`,
@@ -277,10 +282,6 @@ export class CompaniesW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getCompany.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling getCompany.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -292,6 +293,10 @@ export class CompaniesW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -331,10 +336,6 @@ export class CompaniesW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling updateCompany.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling updateCompany.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -348,6 +349,10 @@ export class CompaniesW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);

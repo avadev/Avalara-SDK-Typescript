@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="getjob"></a>
 # **getJob**
-> JobResult getJob (string id, string avalaraVersion, string xCorrelationId)
+> JobResult getJob (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Retrieves information about the job
 
@@ -40,7 +40,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| Job id obtained from other API responses, like &#x60;/1099/bulk-upsert&#x60;. | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
- **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 

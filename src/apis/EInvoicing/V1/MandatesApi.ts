@@ -50,7 +50,7 @@ export interface GetMandatesInterface {
     avalaraVersion?: string;
     xAvalaraClient?: string;
     $filter?: string;
-    $top?: string;
+    $top?: number;
     $skip?: string;
     $count?: boolean;
     $countOnly?: boolean;

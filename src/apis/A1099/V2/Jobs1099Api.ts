@@ -29,7 +29,8 @@ import {
 export interface GetJobInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
 }
 
 /**
@@ -56,10 +57,6 @@ export class Jobs1099Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getJob.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling getJob.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -71,6 +68,10 @@ export class Jobs1099Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);

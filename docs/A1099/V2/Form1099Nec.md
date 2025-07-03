@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 **recipientName** | **string** |  | [optional] [default to undefined]
 **recipientSecondName** | **string** |  | [optional] [default to undefined]
 **address** | **string** |  | [optional] [default to undefined]
-**addressRecipientSecond** | **string** |  | [optional] [default to undefined]
+**address2** | **string** |  | [optional] [default to undefined]
 **city** | **string** |  | [optional] [default to undefined]
 **state** | **string** |  | [optional] [default to undefined]
 **zip** | **string** |  | [optional] [default to undefined]

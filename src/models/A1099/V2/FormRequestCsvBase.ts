@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    StateAndLocalWithholding,
-    StateAndLocalWithholdingFromJSON,
-    StateAndLocalWithholdingFromJSONTyped,
-    StateAndLocalWithholdingToJSON,
-} from './StateAndLocalWithholding';
+    StateAndLocalWithholdingRequest,
+    StateAndLocalWithholdingRequestFromJSON,
+    StateAndLocalWithholdingRequestFromJSONTyped,
+    StateAndLocalWithholdingRequestToJSON,
+} from './StateAndLocalWithholdingRequest';
 
 /**
  * 
@@ -31,25 +31,25 @@ export interface FormRequestCsvBase {
      * @type {string}
      * @memberof FormRequestCsvBase
      */
-    issuerReferenceId?: string | null;
+    issuerReferenceId?: string;
     /**
      * 
      * @type {string}
      * @memberof FormRequestCsvBase
      */
-    issuerTin?: string | null;
+    issuerTin?: string;
     /**
      * 
      * @type {number}
      * @memberof FormRequestCsvBase
      */
-    taxYear?: number | null;
+    taxYear?: number;
     /**
      * 
      * @type {string}
      * @memberof FormRequestCsvBase
      */
-    issuerId?: string;
+    issuerId?: string | null;
     /**
      * 
      * @type {string}
@@ -61,7 +61,7 @@ export interface FormRequestCsvBase {
      * @type {string}
      * @memberof FormRequestCsvBase
      */
-    recipientName?: string;
+    recipientName?: string | null;
     /**
      * 
      * @type {string}
@@ -73,25 +73,25 @@ export interface FormRequestCsvBase {
      * @type {string}
      * @memberof FormRequestCsvBase
      */
-    tinType?: string;
+    tinType?: FormRequestCsvBaseTinTypeEnum;
     /**
      * 
      * @type {string}
      * @memberof FormRequestCsvBase
      */
-    recipientSecondName?: string | null;
+    recipientSecondName?: string;
     /**
      * 
      * @type {string}
      * @memberof FormRequestCsvBase
      */
-    streetAddress?: string;
+    address?: string;
     /**
      * 
      * @type {string}
      * @memberof FormRequestCsvBase
      */
-    streetAddressLine2?: string | null;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -172,13 +172,22 @@ export interface FormRequestCsvBase {
     addressVerification?: boolean;
     /**
      * 
-     * @type {StateAndLocalWithholding}
+     * @type {StateAndLocalWithholdingRequest}
      * @memberof FormRequestCsvBase
      */
-    stateAndLocalWithholding?: StateAndLocalWithholding;
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum FormRequestCsvBaseTinTypeEnum {
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the FormRequestCsvBase interface.
@@ -208,8 +217,8 @@ export function FormRequestCsvBaseFromJSONTyped(json: any, ignoreDiscriminator: 
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'streetAddress': !exists(json, 'streetAddress') ? undefined : json['streetAddress'],
-        'streetAddressLine2': !exists(json, 'streetAddressLine2') ? undefined : json['streetAddressLine2'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -223,7 +232,7 @@ export function FormRequestCsvBaseFromJSONTyped(json: any, ignoreDiscriminator: 
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -245,8 +254,8 @@ export function FormRequestCsvBaseToJSON(value?: FormRequestCsvBase | null): any
         'recipientTin': value.recipientTin,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
-        'streetAddress': value.streetAddress,
-        'streetAddressLine2': value.streetAddressLine2,
+        'address': value.address,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
@@ -260,6 +269,6 @@ export function FormRequestCsvBaseToJSON(value?: FormRequestCsvBase | null): any
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
-        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
+        'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };
 }

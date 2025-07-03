@@ -27,7 +27,7 @@ describe("EInvoicing API ", () => {
   it("should be able retrieve a document from the Mandates API", async () => {
     const runtime = new ApiClient(config);
     const api = new MandatesApi(runtime);
-    const result = await api.getMandates({ $top: "10" });
+    const result = await api.getMandates({ $top: 10 });
     expect(result).toBeDefined();
     expect(result.value?.length).toBeGreaterThan(0);
   });

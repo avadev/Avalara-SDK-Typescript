@@ -205,7 +205,7 @@ export interface Form1099Nec {
      * @type {string}
      * @memberof Form1099Nec
      */
-    addressRecipientSecond?: string | null;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -309,7 +309,7 @@ export function Form1099NecFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': !exists(json, 'address') ? undefined : json['address'],
-        'addressRecipientSecond': !exists(json, 'addressRecipientSecond') ? undefined : json['addressRecipientSecond'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -357,7 +357,7 @@ export function Form1099NecToJSON(value?: Form1099Nec | null): any {
         'recipientName': value.recipientName,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
-        'addressRecipientSecond': value.addressRecipientSecond,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
