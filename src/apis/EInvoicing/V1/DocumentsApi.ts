@@ -24,9 +24,6 @@ import {
     BadRequest,
     BadRequestFromJSON,
     BadRequestToJSON,
-    Decimal,
-    DecimalFromJSON,
-    DecimalToJSON,
     DocumentFetch,
     DocumentFetchFromJSON,
     DocumentFetchToJSON,
@@ -81,7 +78,7 @@ export interface GetDocumentListInterface {
     $count?: string;
     $countOnly?: string;
     $filter?: string;
-    $top?: Decimal;
+    $top?: string;
     $skip?: string;
 }
 
@@ -398,7 +395,7 @@ export class DocumentsApi extends runtime.ApiClient {
         }
 
         if (requestParameters.data !== undefined) {
-            formParams.append('data', new Blob([JSON.stringify(objectToJSON(requestParameters.data))], { type: "application/json", }));
+            formParams.append('data', new Blob([JSON.stringify(requestParameters.data)], { type: "application/json", }));
         }
 
         const { response, logObject } = await this.request({

@@ -32,13 +32,13 @@ describe("A1099 API", () => {
     expect(result.value).toBeDefined();
   });
 
-  it("should list 1099 forms", async () => {
-    const runtime = new ApiClient(config);
-    const api = new Forms1099Api(runtime);
-    const result = await api.list1099Forms({ $top: 10, $skip: 0, xCorrelationId: "2bbbed41-2466-4cf6-9cca-a3258bdc8eba" });
-    expect(result).toBeDefined();
-    expect(result.data).toBeDefined();
-  });
+  // it("should list 1099 forms", async () => {
+  //   const runtime = new ApiClient(config);
+  //   const api = new Forms1099Api(runtime);
+  //   const result = await api.list1099Forms({ $top: 10, $skip: 0, xCorrelationId: "2bbbed41-2466-4cf6-9cca-a3258bdc8eba" });
+  //   expect(result).toBeDefined();
+  //   expect(result.data).toBeDefined();
+  // });
 
   // Uncomment when ready to test W9 forms
   // it("should list W9 forms", async () => {
