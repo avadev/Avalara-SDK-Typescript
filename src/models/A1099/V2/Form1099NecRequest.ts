@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    StateAndLocalWithholding,
+    StateAndLocalWithholdingFromJSON,
+    StateAndLocalWithholdingFromJSONTyped,
+    StateAndLocalWithholdingToJSON,
+} from './StateAndLocalWithholding';
+import {
     StateAndLocalWithholdingRequest,
     StateAndLocalWithholdingRequestFromJSON,
     StateAndLocalWithholdingRequestFromJSONTyped,
@@ -31,7 +37,7 @@ export interface Form1099NecRequest {
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099NecRequest
      */
-    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest | null;
     /**
      * 
      * @type {boolean}
@@ -73,25 +79,7 @@ export interface Form1099NecRequest {
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    issuerReferenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099NecRequest
-     */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099NecRequest
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099NecRequest
-     */
-    referenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
@@ -106,16 +94,16 @@ export interface Form1099NecRequest {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099NecRequest
      */
-    tinType?: number;
+    tinType?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
      * 
      * @type {string}
@@ -127,7 +115,7 @@ export interface Form1099NecRequest {
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    streetAddressLine2?: string;
+    streetAddressLine2?: string | null;
     /**
      * 
      * @type {string}
@@ -151,25 +139,25 @@ export interface Form1099NecRequest {
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -236,9 +224,6 @@ export function Form1099NecRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
-        'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
-        'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
@@ -278,9 +263,6 @@ export function Form1099NecRequestToJSON(value?: Form1099NecRequest | null): any
         'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
         'type': value.type,
         'issuerId': value.issuerId,
-        'issuerReferenceId': value.issuerReferenceId,
-        'issuerTin': value.issuerTin,
-        'taxYear': value.taxYear,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,

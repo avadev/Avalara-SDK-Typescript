@@ -1,4 +1,4 @@
-# AvalaraSdk.A1099.V2.Form1099K
+# AvalaraSdk.A1099.V2.Get1099Form200Response
 
 ## Properties
 
@@ -57,6 +57,39 @@ Name | Type | Description | Notes
 **createdAt** | **Date** |  | [optional] [default to undefined]
 **updatedAt** | **Date** |  | [optional] [default to undefined]
 **stateAndLocalWithholding** | [**StateAndLocalWithholding**](StateAndLocalWithholding.md) |  | [optional] [default to undefined]
+**rents** | **number** |  | [optional] [default to undefined]
+**royalties** | **number** |  | [optional] [default to undefined]
+**otherIncome** | **number** |  | [optional] [default to undefined]
+**fedIncomeTaxWithheld** | **number** |  | [optional] [default to undefined]
+**fishingBoatProceeds** | **number** |  | [optional] [default to undefined]
+**medicalAndHealthCare** | **number** |  | [optional] [default to undefined]
+**nonemployeeCompensation** | **number** |  | [optional] [default to undefined]
+**substitutePayments** | **number** |  | [optional] [default to undefined]
+**directSalesIndicator** | **boolean** |  | [optional] [default to undefined]
+**cropInsuranceProceeds** | **number** |  | [optional] [default to undefined]
+**excessGoldenParachute** | **number** |  | [optional] [default to undefined]
+**grossAmountPaidAttorney** | **number** |  | [optional] [default to undefined]
+**section409ADeferrals** | **number** |  | [optional] [default to undefined]
+**section409AIncome** | **number** |  | [optional] [default to undefined]
+**grossDistributions** | **number** |  | [optional] [default to undefined]
+**taxableAmount** | **number** |  | [optional] [default to undefined]
+**taxableAmountNotDetermined** | **boolean** |  | [optional] [default to undefined]
+**totalDistributionIndicator** | **boolean** |  | [optional] [default to undefined]
+**capitalGain** | **number** |  | [optional] [default to undefined]
+**employeeContributions** | **number** |  | [optional] [default to undefined]
+**netUnrealizedAppreciation** | **number** |  | [optional] [default to undefined]
+**distributionCodeRequired** | **string** |  | [optional] [default to undefined]
+**distributionCodeOptional** | **string** |  | [optional] [default to undefined]
+**iraSepSimpleIndicator** | **boolean** |  | [optional] [default to undefined]
+**totalIraSepSimpleDistribution** | **number** |  | [optional] [default to undefined]
+**other** | **number** |  | [optional] [default to undefined]
+**otherPercent** | **string** |  | [optional] [default to undefined]
+**percentageTotalDistribution** | **string** |  | [optional] [default to undefined]
+**totalEmployeeContributions** | **number** |  | [optional] [default to undefined]
+**amountAllocableToIrr** | **number** |  | [optional] [default to undefined]
+**firstYearDesignatedRothContrib** | **string** |  | [optional] [default to undefined]
+**fatcaRequirementIndicator** | **boolean** |  | [optional] [default to undefined]
+**dateOfPayment** | **string** |  | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

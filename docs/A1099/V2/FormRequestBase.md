@@ -5,13 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **issuerId** | **string** |  | [optional] [default to undefined]
-**issuerReferenceId** | **string** |  | [optional] [default to undefined]
-**issuerTin** | **string** |  | [optional] [default to undefined]
-**taxYear** | **number** |  | [optional] [default to undefined]
 **referenceId** | **string** |  | [optional] [default to undefined]
 **recipientName** | **string** |  | [optional] [default to undefined]
 **recipientTin** | **string** |  | [optional] [default to undefined]
-**tinType** | **number** |  | [optional] [default to undefined]
+**tinType** | **string** |  | [optional] [default to undefined]
 **recipientSecondName** | **string** |  | [optional] [default to undefined]
 **streetAddress** | **string** |  | [optional] [default to undefined]
 **streetAddressLine2** | **string** |  | [optional] [default to undefined]
@@ -28,6 +25,7 @@ Name | Type | Description | Notes
 **stateEFile** | **boolean** |  | [optional] [default to undefined]
 **tinMatch** | **boolean** |  | [optional] [default to undefined]
 **addressVerification** | **boolean** |  | [optional] [default to undefined]
+**stateAndLocalWithholding** | [**StateAndLocalWithholding**](StateAndLocalWithholding.md) |  | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

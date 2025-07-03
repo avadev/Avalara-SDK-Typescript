@@ -23,145 +23,157 @@ import {
 /**
  * 
  * @export
- * @interface FormSingleRequestBase
+ * @interface FormRequestCsvBase
  */
-export interface FormSingleRequestBase {
+export interface FormRequestCsvBase {
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
-    type?: string;
+    issuerReferenceId?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
+     */
+    issuerTin?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FormRequestCsvBase
+     */
+    taxYear?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FormRequestCsvBase
      */
     issuerId?: string;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     referenceId?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     recipientName?: string;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     recipientTin?: string;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     tinType?: string;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     recipientSecondName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     streetAddress?: string;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     streetAddressLine2?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     city?: string;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     state?: string;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     zip?: string;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     recipientEmail?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     accountNumber?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     officeCode?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     countryCode?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     federalEFile?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     postalMail?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     stateEFile?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     tinMatch?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     addressVerification?: boolean;
     /**
      * 
      * @type {StateAndLocalWithholding}
-     * @memberof FormSingleRequestBase
+     * @memberof FormRequestCsvBase
      */
     stateAndLocalWithholding?: StateAndLocalWithholding;
 }
@@ -169,25 +181,27 @@ export interface FormSingleRequestBase {
 
 
 /**
- * Check if a given object implements the FormSingleRequestBase interface.
+ * Check if a given object implements the FormRequestCsvBase interface.
  */
-export function instanceOfFormSingleRequestBase(value: object): boolean {
+export function instanceOfFormRequestCsvBase(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function FormSingleRequestBaseFromJSON(json: any): FormSingleRequestBase {
-    return FormSingleRequestBaseFromJSONTyped(json, false);
+export function FormRequestCsvBaseFromJSON(json: any): FormRequestCsvBase {
+    return FormRequestCsvBaseFromJSONTyped(json, false);
 }
 
-export function FormSingleRequestBaseFromJSONTyped(json: any, ignoreDiscriminator: boolean): FormSingleRequestBase {
+export function FormRequestCsvBaseFromJSONTyped(json: any, ignoreDiscriminator: boolean): FormRequestCsvBase {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'type': !exists(json, 'type') ? undefined : json['type'],
+        'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
+        'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
+        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
@@ -213,7 +227,7 @@ export function FormSingleRequestBaseFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function FormSingleRequestBaseToJSON(value?: FormSingleRequestBase | null): any {
+export function FormRequestCsvBaseToJSON(value?: FormRequestCsvBase | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -222,7 +236,9 @@ export function FormSingleRequestBaseToJSON(value?: FormSingleRequestBase | null
     }
     return {
         
-        'type': value.type,
+        'issuerReferenceId': value.issuerReferenceId,
+        'issuerTin': value.issuerTin,
+        'taxYear': value.taxYear,
         'issuerId': value.issuerId,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,

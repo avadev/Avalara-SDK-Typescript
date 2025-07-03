@@ -169,25 +169,7 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    issuerReferenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099KRequest
-     */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099KRequest
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099KRequest
-     */
-    referenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
@@ -202,16 +184,16 @@ export interface Form1099KRequest {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099KRequest
      */
-    tinType?: number;
+    tinType?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
      * 
      * @type {string}
@@ -223,7 +205,7 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    streetAddressLine2?: string;
+    streetAddressLine2?: string | null;
     /**
      * 
      * @type {string}
@@ -247,25 +229,25 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099KRequest
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -348,9 +330,6 @@ export function Form1099KRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'december': !exists(json, 'december') ? undefined : json['december'],
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
-        'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
-        'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
@@ -406,9 +385,6 @@ export function Form1099KRequestToJSON(value?: Form1099KRequest | null): any {
         'december': value.december,
         'type': value.type,
         'issuerId': value.issuerId,
-        'issuerReferenceId': value.issuerReferenceId,
-        'issuerTin': value.issuerTin,
-        'taxYear': value.taxYear,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,

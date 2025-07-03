@@ -1,10 +1,12 @@
-# AvalaraSdk.A1099.V2.FormSingleRequestBase
+# AvalaraSdk.A1099.V2.FormRequestCsvBase
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **string** |  | [optional] [default to undefined]
+**issuerReferenceId** | **string** |  | [optional] [default to undefined]
+**issuerTin** | **string** |  | [optional] [default to undefined]
+**taxYear** | **number** |  | [optional] [default to undefined]
 **issuerId** | **string** |  | [optional] [default to undefined]
 **referenceId** | **string** |  | [optional] [default to undefined]
 **recipientName** | **string** |  | [optional] [default to undefined]

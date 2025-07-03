@@ -28,12 +28,6 @@ import {
 export interface Form1099MiscListItem {
     /**
      * 
-     * @type {StateAndLocalWithholding}
-     * @memberof Form1099MiscListItem
-     */
-    stateAndLocalWithholding?: StateAndLocalWithholding;
-    /**
-     * 
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
@@ -133,31 +127,31 @@ export interface Form1099MiscListItem {
      * @type {string}
      * @memberof Form1099MiscListItem
      */
+    issuerReferenceId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099MiscListItem
+     */
+    issuerTin?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099MiscListItem
+     */
+    taxYear?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099MiscListItem
+     */
     issuerId?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    issuerReferenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099MiscListItem
-     */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099MiscListItem
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099MiscListItem
-     */
-    referenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
@@ -172,16 +166,16 @@ export interface Form1099MiscListItem {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099MiscListItem
      */
-    tinType?: number;
+    tinType?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
      * 
      * @type {string}
@@ -193,7 +187,7 @@ export interface Form1099MiscListItem {
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    streetAddressLine2?: string;
+    streetAddressLine2?: string | null;
     /**
      * 
      * @type {string}
@@ -217,25 +211,25 @@ export interface Form1099MiscListItem {
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -272,6 +266,12 @@ export interface Form1099MiscListItem {
      * @memberof Form1099MiscListItem
      */
     addressVerification?: boolean;
+    /**
+     * 
+     * @type {StateAndLocalWithholding}
+     * @memberof Form1099MiscListItem
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholding;
 }
 
 
@@ -295,7 +295,6 @@ export function Form1099MiscListItemFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
         'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'rents': !exists(json, 'rents') ? undefined : json['rents'],
         'royalties': !exists(json, 'royalties') ? undefined : json['royalties'],
@@ -312,10 +311,10 @@ export function Form1099MiscListItemFromJSONTyped(json: any, ignoreDiscriminator
         'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'excessGoldenParachutePayments': !exists(json, 'excessGoldenParachutePayments') ? undefined : json['excessGoldenParachutePayments'],
         'nonqualifiedDeferredCompensation': !exists(json, 'nonqualifiedDeferredCompensation') ? undefined : json['nonqualifiedDeferredCompensation'],
-        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
+        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
@@ -336,6 +335,7 @@ export function Form1099MiscListItemFromJSONTyped(json: any, ignoreDiscriminator
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -348,7 +348,6 @@ export function Form1099MiscListItemToJSON(value?: Form1099MiscListItem | null):
     }
     return {
         
-        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
         'secondTinNotice': value.secondTinNotice,
         'rents': value.rents,
         'royalties': value.royalties,
@@ -365,10 +364,10 @@ export function Form1099MiscListItemToJSON(value?: Form1099MiscListItem | null):
         'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'excessGoldenParachutePayments': value.excessGoldenParachutePayments,
         'nonqualifiedDeferredCompensation': value.nonqualifiedDeferredCompensation,
-        'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
+        'issuerId': value.issuerId,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
@@ -389,5 +388,6 @@ export function Form1099MiscListItemToJSON(value?: Form1099MiscListItem | null):
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
+        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
     };
 }
