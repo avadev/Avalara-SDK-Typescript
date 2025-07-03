@@ -78,7 +78,7 @@ export interface GetDocumentListInterface {
     $count?: string;
     $countOnly?: string;
     $filter?: string;
-    $top?: number;
+    $top?: string;
     $skip?: string;
 }
 
@@ -99,7 +99,7 @@ export interface SubmitDocumentInterface {
  * 
  */
 export class DocumentsApi extends runtime.ApiClient {
-    public sdkVersion: string = '25.6.0';
+    public sdkVersion: string = '25.7.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -395,7 +395,7 @@ export class DocumentsApi extends runtime.ApiClient {
         }
 
         if (requestParameters.data !== undefined) {
-            formParams.append('data', requestParameters.data as any);
+            formParams.append('data', new Blob([JSON.stringify(requestParameters.data)], { type: "application/json", }));
         }
 
         const { response, logObject } = await this.request({

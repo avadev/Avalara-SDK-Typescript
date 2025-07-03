@@ -50,8 +50,8 @@ export interface GetMandatesInterface {
     avalaraVersion?: string;
     xAvalaraClient?: string;
     $filter?: string;
-    $top?: number;
-    $skip?: number;
+    $top?: string;
+    $skip?: string;
     $count?: boolean;
     $countOnly?: boolean;
 }
@@ -60,7 +60,7 @@ export interface GetMandatesInterface {
  * 
  */
 export class MandatesApi extends runtime.ApiClient {
-    public sdkVersion: string = '25.6.0';
+    public sdkVersion: string = '25.7.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);

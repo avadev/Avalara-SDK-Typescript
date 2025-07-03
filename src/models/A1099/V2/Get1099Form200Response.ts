@@ -42,50 +42,52 @@ import {
 } from './Form1099R';
 
 /**
- * @type Form1099ListDataInner
+ * @type Get1099Form200Response
  * 
  * @export
  */
-export type Form1099ListDataInner = { type: '1099-K' } & Form1099K | { type: '1099-MISC' } & Form1099Misc | { type: '1099-NEC' } & Form1099Nec | { type: '1099-R' } & Form1099R;
+export type Get1099Form200Response = Form1099K | Form1099Misc | Form1099Nec | Form1099R;
 
-export function Form1099ListDataInnerFromJSON(json: any): Form1099ListDataInner {
-    return Form1099ListDataInnerFromJSONTyped(json, false);
+export function Get1099Form200ResponseFromJSON(json: any): Get1099Form200Response {
+    return Get1099Form200ResponseFromJSONTyped(json, false);
 }
 
-export function Form1099ListDataInnerFromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1099ListDataInner {
+export function Get1099Form200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): Get1099Form200Response {
     if (json == null) {
         return json;
     }
-    switch (json['type']) {
-        case '1099-K':
-            return Object.assign({}, Form1099KFromJSONTyped(json, true), { type: '1099-K' } as const);
-        case '1099-MISC':
-            return Object.assign({}, Form1099MiscFromJSONTyped(json, true), { type: '1099-MISC' } as const);
-        case '1099-NEC':
-            return Object.assign({}, Form1099NecFromJSONTyped(json, true), { type: '1099-NEC' } as const);
-        case '1099-R':
-            return Object.assign({}, Form1099RFromJSONTyped(json, true), { type: '1099-R' } as const);
-        default:
-            throw new Error(`No variant of Form1099ListDataInner exists with 'type=${json['type']}'`);
+    if (instanceOfForm1099K(json)) {
+        return Form1099KFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099Misc(json)) {
+        return Form1099MiscFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099Nec(json)) {
+        return Form1099NecFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099R(json)) {
+        return Form1099RFromJSONTyped(json, true);
     }
 }
 
-export function Form1099ListDataInnerToJSON(value?: Form1099ListDataInner | null): any {
+export function Get1099Form200ResponseToJSON(value?: Get1099Form200Response | null): any {
     if (value == null) {
         return value;
     }
-    switch (value['type']) {
-        case '1099-K':
-            return Form1099KToJSON(value);
-        case '1099-MISC':
-            return Form1099MiscToJSON(value);
-        case '1099-NEC':
-            return Form1099NecToJSON(value);
-        case '1099-R':
-            return Form1099RToJSON(value);
-        default:
-            throw new Error(`No variant of Form1099ListDataInner exists with 'type=${value['type']}'`);
+
+    if (instanceOfForm1099K(value)) {
+        return Form1099KToJSON(value as Form1099K);
+    }
+    if (instanceOfForm1099Misc(value)) {
+        return Form1099MiscToJSON(value as Form1099Misc);
+    }
+    if (instanceOfForm1099Nec(value)) {
+        return Form1099NecToJSON(value as Form1099Nec);
+    }
+    if (instanceOfForm1099R(value)) {
+        return Form1099RToJSON(value as Form1099R);
     }
 
+    return {};
 }
 

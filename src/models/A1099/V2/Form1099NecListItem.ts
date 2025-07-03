@@ -28,12 +28,6 @@ import {
 export interface Form1099NecListItem {
     /**
      * 
-     * @type {StateAndLocalWithholding}
-     * @memberof Form1099NecListItem
-     */
-    stateAndLocalWithholding?: StateAndLocalWithholding;
-    /**
-     * 
      * @type {boolean}
      * @memberof Form1099NecListItem
      */
@@ -61,31 +55,31 @@ export interface Form1099NecListItem {
      * @type {string}
      * @memberof Form1099NecListItem
      */
+    issuerReferenceId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099NecListItem
+     */
+    issuerTin?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099NecListItem
+     */
+    taxYear?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099NecListItem
+     */
     issuerId?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecListItem
      */
-    issuerReferenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099NecListItem
-     */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099NecListItem
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099NecListItem
-     */
-    referenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
@@ -100,16 +94,16 @@ export interface Form1099NecListItem {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099NecListItem
      */
-    tinType?: number;
+    tinType?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecListItem
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
      * 
      * @type {string}
@@ -121,7 +115,7 @@ export interface Form1099NecListItem {
      * @type {string}
      * @memberof Form1099NecListItem
      */
-    streetAddressLine2?: string;
+    streetAddressLine2?: string | null;
     /**
      * 
      * @type {string}
@@ -145,25 +139,25 @@ export interface Form1099NecListItem {
      * @type {string}
      * @memberof Form1099NecListItem
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecListItem
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecListItem
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099NecListItem
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -200,6 +194,12 @@ export interface Form1099NecListItem {
      * @memberof Form1099NecListItem
      */
     addressVerification?: boolean;
+    /**
+     * 
+     * @type {StateAndLocalWithholding}
+     * @memberof Form1099NecListItem
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholding;
 }
 
 
@@ -223,15 +223,14 @@ export function Form1099NecListItemFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
         'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'nonemployeeCompensation': !exists(json, 'nonemployeeCompensation') ? undefined : json['nonemployeeCompensation'],
         'payerMadeDirectSales': !exists(json, 'payerMadeDirectSales') ? undefined : json['payerMadeDirectSales'],
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
-        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
+        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
@@ -252,6 +251,7 @@ export function Form1099NecListItemFromJSONTyped(json: any, ignoreDiscriminator:
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -264,15 +264,14 @@ export function Form1099NecListItemToJSON(value?: Form1099NecListItem | null): a
     }
     return {
         
-        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
         'secondTinNotice': value.secondTinNotice,
         'nonemployeeCompensation': value.nonemployeeCompensation,
         'payerMadeDirectSales': value.payerMadeDirectSales,
         'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
-        'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
+        'issuerId': value.issuerId,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
@@ -293,5 +292,6 @@ export function Form1099NecListItemToJSON(value?: Form1099NecListItem | null): a
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
+        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
     };
 }

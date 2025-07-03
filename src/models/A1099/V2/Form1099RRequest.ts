@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    StateAndLocalWithholding,
+    StateAndLocalWithholdingFromJSON,
+    StateAndLocalWithholdingFromJSONTyped,
+    StateAndLocalWithholdingToJSON,
+} from './StateAndLocalWithholding';
+import {
     StateAndLocalWithholdingRequest,
     StateAndLocalWithholdingRequestFromJSON,
     StateAndLocalWithholdingRequestFromJSONTyped,
@@ -169,25 +175,7 @@ export interface Form1099RRequest {
      * @type {string}
      * @memberof Form1099RRequest
      */
-    issuerReferenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099RRequest
-     */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099RRequest
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099RRequest
-     */
-    referenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
@@ -202,16 +190,16 @@ export interface Form1099RRequest {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099RRequest
      */
-    tinType?: number;
+    tinType?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
      * 
      * @type {string}
@@ -223,7 +211,7 @@ export interface Form1099RRequest {
      * @type {string}
      * @memberof Form1099RRequest
      */
-    streetAddressLine2?: string;
+    streetAddressLine2?: string | null;
     /**
      * 
      * @type {string}
@@ -247,25 +235,25 @@ export interface Form1099RRequest {
      * @type {string}
      * @memberof Form1099RRequest
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RRequest
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -348,9 +336,6 @@ export function Form1099RRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'dateOfPayment': !exists(json, 'dateOfPayment') ? undefined : (new Date(json['dateOfPayment'])),
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
-        'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
-        'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
@@ -406,9 +391,6 @@ export function Form1099RRequestToJSON(value?: Form1099RRequest | null): any {
         'dateOfPayment': value.dateOfPayment === undefined ? undefined : (value.dateOfPayment.toISOString()),
         'type': value.type,
         'issuerId': value.issuerId,
-        'issuerReferenceId': value.issuerReferenceId,
-        'issuerTin': value.issuerTin,
-        'taxYear': value.taxYear,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,

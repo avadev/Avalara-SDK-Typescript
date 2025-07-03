@@ -28,12 +28,6 @@ import {
 export interface Form1099RListItem {
     /**
      * 
-     * @type {StateAndLocalWithholding}
-     * @memberof Form1099RListItem
-     */
-    stateAndLocalWithholding?: StateAndLocalWithholding;
-    /**
-     * 
      * @type {number}
      * @memberof Form1099RListItem
      */
@@ -157,31 +151,31 @@ export interface Form1099RListItem {
      * @type {string}
      * @memberof Form1099RListItem
      */
+    issuerReferenceId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099RListItem
+     */
+    issuerTin?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099RListItem
+     */
+    taxYear?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099RListItem
+     */
     issuerId?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099RListItem
      */
-    issuerReferenceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099RListItem
-     */
-    issuerTin?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099RListItem
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099RListItem
-     */
-    referenceId?: string;
+    referenceId?: string | null;
     /**
      * 
      * @type {string}
@@ -196,16 +190,16 @@ export interface Form1099RListItem {
     recipientTin?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Form1099RListItem
      */
-    tinType?: number;
+    tinType?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099RListItem
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
      * 
      * @type {string}
@@ -217,7 +211,7 @@ export interface Form1099RListItem {
      * @type {string}
      * @memberof Form1099RListItem
      */
-    streetAddressLine2?: string;
+    streetAddressLine2?: string | null;
     /**
      * 
      * @type {string}
@@ -241,25 +235,25 @@ export interface Form1099RListItem {
      * @type {string}
      * @memberof Form1099RListItem
      */
-    recipientEmail?: string;
+    recipientEmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RListItem
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RListItem
      */
-    officeCode?: string;
+    officeCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099RListItem
      */
-    recipientNonUsProvince?: string;
+    recipientNonUsProvince?: string | null;
     /**
      * 
      * @type {string}
@@ -296,6 +290,12 @@ export interface Form1099RListItem {
      * @memberof Form1099RListItem
      */
     addressVerification?: boolean;
+    /**
+     * 
+     * @type {StateAndLocalWithholding}
+     * @memberof Form1099RListItem
+     */
+    stateAndLocalWithholding?: StateAndLocalWithholding;
 }
 
 /**
@@ -387,7 +387,6 @@ export function Form1099RListItemFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
         'grossDistribution': !exists(json, 'grossDistribution') ? undefined : json['grossDistribution'],
         'taxableAmount': !exists(json, 'taxableAmount') ? undefined : json['taxableAmount'],
         'taxableAmountNotDetermined': !exists(json, 'taxableAmountNotDetermined') ? undefined : json['taxableAmountNotDetermined'],
@@ -408,10 +407,10 @@ export function Form1099RListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'firstYearOfDesignatedRothContribution': !exists(json, 'firstYearOfDesignatedRothContribution') ? undefined : json['firstYearOfDesignatedRothContribution'],
         'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'dateOfPayment': !exists(json, 'dateOfPayment') ? undefined : (new Date(json['dateOfPayment'])),
-        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
+        'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
@@ -432,6 +431,7 @@ export function Form1099RListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -444,7 +444,6 @@ export function Form1099RListItemToJSON(value?: Form1099RListItem | null): any {
     }
     return {
         
-        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
         'grossDistribution': value.grossDistribution,
         'taxableAmount': value.taxableAmount,
         'taxableAmountNotDetermined': value.taxableAmountNotDetermined,
@@ -465,10 +464,10 @@ export function Form1099RListItemToJSON(value?: Form1099RListItem | null): any {
         'firstYearOfDesignatedRothContribution': value.firstYearOfDesignatedRothContribution,
         'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'dateOfPayment': value.dateOfPayment === undefined ? undefined : (value.dateOfPayment.toISOString()),
-        'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
+        'issuerId': value.issuerId,
         'referenceId': value.referenceId,
         'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
@@ -489,5 +488,6 @@ export function Form1099RListItemToJSON(value?: Form1099RListItem | null): any {
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
+        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
     };
 }
