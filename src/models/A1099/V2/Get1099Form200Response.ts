@@ -12,6 +12,13 @@
  * Do not edit the class manually.
  */
 
+import type { Form1095B } from './Form1095B';
+import {
+    instanceOfForm1095B,
+    Form1095BFromJSON,
+    Form1095BFromJSONTyped,
+    Form1095BToJSON,
+} from './Form1095B';
 import type { Form1099K } from './Form1099K';
 import {
     instanceOfForm1099K,
@@ -46,7 +53,7 @@ import {
  * 
  * @export
  */
-export type Get1099Form200Response = Form1099K | Form1099Misc | Form1099Nec | Form1099R;
+export type Get1099Form200Response = Form1095B | Form1099K | Form1099Misc | Form1099Nec | Form1099R;
 
 export function Get1099Form200ResponseFromJSON(json: any): Get1099Form200Response {
     return Get1099Form200ResponseFromJSONTyped(json, false);
@@ -55,6 +62,9 @@ export function Get1099Form200ResponseFromJSON(json: any): Get1099Form200Respons
 export function Get1099Form200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): Get1099Form200Response {
     if (json == null) {
         return json;
+    }
+    if (instanceOfForm1095B(json)) {
+        return Form1095BFromJSONTyped(json, true);
     }
     if (instanceOfForm1099K(json)) {
         return Form1099KFromJSONTyped(json, true);
@@ -75,6 +85,9 @@ export function Get1099Form200ResponseToJSON(value?: Get1099Form200Response | nu
         return value;
     }
 
+    if (instanceOfForm1095B(value)) {
+        return Form1095BToJSON(value as Form1095B);
+    }
     if (instanceOfForm1099K(value)) {
         return Form1099KToJSON(value as Form1099K);
     }

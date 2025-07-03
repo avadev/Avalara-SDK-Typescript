@@ -24,9 +24,6 @@ import {
     ErrorResponse,
     ErrorResponseFromJSON,
     ErrorResponseToJSON,
-    FormRequestModel,
-    FormRequestModelFromJSON,
-    FormRequestModelToJSON,
     IW9FormDataModelsOneOf,
     IW9FormDataModelsOneOfFromJSON,
     IW9FormDataModelsOneOfToJSON,
@@ -37,55 +34,56 @@ import {
 
 export interface CreateW9FormInterface {
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
     iW9FormDataModelsOneOf?: IW9FormDataModelsOneOf;
 }
 
 export interface DeleteW9FormInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
 }
 
 export interface GetW9FormInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
-}
-
-export interface GetW9FormRequestInterface {
-    formRequestId: string;
-    avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
 }
 
 export interface ListW9FormsInterface {
     avalaraVersion?: string;
-    xCorrelationId: string;
     $filter?: string;
     $top?: number;
     $skip?: number;
     $orderBy?: string;
     count?: boolean;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
 }
 
 export interface SendW9FormEmailInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
 }
 
 export interface UpdateW9FormInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
     iW9FormDataModelsOneOf?: IW9FormDataModelsOneOf;
 }
 
 export interface UploadW9FilesInterface {
     id: string;
     avalaraVersion?: string;
-    xCorrelationId: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
     file?: Blob;
 }
 
@@ -108,10 +106,6 @@ export class FormsW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling createW9Form.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling createW9Form.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -125,6 +119,10 @@ export class FormsW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -164,10 +162,6 @@ export class FormsW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling deleteW9Form.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling deleteW9Form.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -179,6 +173,10 @@ export class FormsW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -216,10 +214,6 @@ export class FormsW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getW9Form.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling getW9Form.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -231,6 +225,10 @@ export class FormsW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -257,60 +255,6 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * Retrieve a form request after creation: not likely to be useful except in testing. Previously-valid form requests will be Not Found after `expires_at`.
-     * Retrieve a form request
-     */
-    async getW9FormRequestRaw(requestParameters: GetW9FormRequestInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<FormRequestModel>, logObject: LogObject }> {
-        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
-        if (requestParameters.formRequestId === null || requestParameters.formRequestId === undefined) {
-            throw new runtime.RequiredError('formRequestId','Required parameter requestParameters.formRequestId was null or undefined when calling getW9FormRequest.');
-        }
-
-        if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
-            throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getW9FormRequest.');
-        }
-
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling getW9FormRequest.');
-        }
-
-        const queryParameters: any = {};
-        const requiredScopes = "";
-        const authNames: string[] = ['http'];
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
-            headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
-        }
-
-        if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
-            headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
-        }
-
-        await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
-        const { response, logObject } = await this.request({
-            path: `/w9/forms/requests/{formRequestId}`.replace(`{${"formRequestId"}}`, encodeURIComponent(String(requestParameters.formRequestId))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
-        logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => FormRequestModelFromJSON(jsonValue)), logObject };
-    }
-
-    /**
-     * Retrieve a form request after creation: not likely to be useful except in testing. Previously-valid form requests will be Not Found after `expires_at`.
-     * Retrieve a form request
-     */
-    async getW9FormRequest(requestParameters: GetW9FormRequestInterface, initOverrides?: RequestInit): Promise<FormRequestModel> {
-        const { response, logObject } = await this.getW9FormRequestRaw(requestParameters, initOverrides);
-        const value = await response.value();
-        logObject.populateResponseBody(value);
-        this.createLogEntry(logObject);
-        return value;
-    }
-
-    /**
      * List W9/W4/W8 forms.
      * List W9/W4/W8 forms.
      */
@@ -318,10 +262,6 @@ export class FormsW9Api extends runtime.ApiClient {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling listW9Forms.');
-        }
-
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling listW9Forms.');
         }
 
         const queryParameters: any = {};
@@ -355,6 +295,10 @@ export class FormsW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -393,10 +337,6 @@ export class FormsW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling sendW9FormEmail.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling sendW9FormEmail.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -408,6 +348,10 @@ export class FormsW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -445,10 +389,6 @@ export class FormsW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling updateW9Form.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling updateW9Form.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -462,6 +402,10 @@ export class FormsW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
@@ -501,10 +445,6 @@ export class FormsW9Api extends runtime.ApiClient {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling uploadW9Files.');
         }
 
-        if (requestParameters.xCorrelationId === null || requestParameters.xCorrelationId === undefined) {
-            throw new runtime.RequiredError('xCorrelationId','Required parameter requestParameters.xCorrelationId was null or undefined when calling uploadW9Files.');
-        }
-
         const queryParameters: any = {};
         const requiredScopes = "";
         const authNames: string[] = ['http'];
@@ -516,6 +456,10 @@ export class FormsW9Api extends runtime.ApiClient {
 
         if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
             headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
         }
 
         await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);

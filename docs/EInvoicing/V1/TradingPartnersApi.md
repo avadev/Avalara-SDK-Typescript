@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 
 <a name="listbatchsearches"></a>
 # **listBatchSearches**
-> BatchSearchListResponse listBatchSearches (string avalaraVersion, string xAvalaraClient, string $filter, boolean count, string $top, string $skip, string $orderBy, string xCorrelationID)
+> BatchSearchListResponse listBatchSearches (string avalaraVersion, string xAvalaraClient, string $filter, boolean count, number $top, string $skip, string $orderBy, string xCorrelationID)
 
 List all batch searches that were previously submitted.
 
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
  **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; | [optional] [default to undefined]
  **$filter** | **string**| Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; .The parameters supported is &lt;code&gt;name&lt;/code&gt;.    Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided parameters. | [optional] [default to undefined]
  **count** | **boolean**| When set to true, the count of the collection is included as @recordSetCount in the response body. | [optional] [default to undefined]
- **$top** | **string**| If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 200 records. | [optional] [default to undefined]
+ **$top** | **number**| The number of items to include in the result. | [optional] [default to undefined]
  **$skip** | **string**| If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] [default to undefined]
  **$orderBy** | **string**| The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. | [optional] [default to undefined]
  **xCorrelationID** | **string**| The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] [default to undefined]
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 
 <a name="searchparticipants"></a>
 # **searchParticipants**
-> DirectorySearchResponse searchParticipants (string avalaraVersion, string $search, string xAvalaraClient, boolean count, string $filter, string $top, string $skip, string $orderBy, string xCorrelationID)
+> DirectorySearchResponse searchParticipants (string avalaraVersion, string $search, string xAvalaraClient, boolean count, string $filter, number $top, string $skip, string $orderBy, string xCorrelationID)
 
 Returns a list of participants matching the input query.
 
@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
  **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; | [optional] [default to undefined]
  **count** | **boolean**| When set to true, the count of the collection is included as @recordSetCount in the response body. | [optional] [default to undefined]
  **$filter** | **string**| Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; .The parameters supported are &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, &lt;code&gt;documentType&lt;/code&gt;, &lt;code&gt;idType&lt;/code&gt;.          Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided parameters. | [optional] [default to undefined]
- **$top** | **string**| If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 200 records. | [optional] [default to undefined]
+ **$top** | **number**| The number of items to include in the result. | [optional] [default to undefined]
  **$skip** | **string**| If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] [default to undefined]
  **$orderBy** | **string**| The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. | [optional] [default to undefined]
  **xCorrelationID** | **string**| The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] [default to undefined]

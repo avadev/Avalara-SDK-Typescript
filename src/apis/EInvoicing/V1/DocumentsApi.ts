@@ -78,7 +78,7 @@ export interface GetDocumentListInterface {
     $count?: string;
     $countOnly?: string;
     $filter?: string;
-    $top?: string;
+    $top?: number;
     $skip?: string;
 }
 

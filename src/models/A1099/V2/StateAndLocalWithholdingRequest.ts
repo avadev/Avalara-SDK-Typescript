@@ -60,7 +60,7 @@ export interface StateAndLocalWithholdingRequest {
      * @type {string}
      * @memberof StateAndLocalWithholdingRequest
      */
-    localityIdNumber?: string;
+    localityIdNumber?: string | null;
     /**
      * 
      * @type {number}

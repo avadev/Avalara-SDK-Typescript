@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    StateAndLocalWithholding,
-    StateAndLocalWithholdingFromJSON,
-    StateAndLocalWithholdingFromJSONTyped,
-    StateAndLocalWithholdingToJSON,
-} from './StateAndLocalWithholding';
+    StateAndLocalWithholdingRequest,
+    StateAndLocalWithholdingRequestFromJSON,
+    StateAndLocalWithholdingRequestFromJSONTyped,
+    StateAndLocalWithholdingRequestToJSON,
+} from './StateAndLocalWithholdingRequest';
 
 /**
  * 
@@ -145,25 +145,25 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    issuerReferenceId?: string | null;
+    issuerReferenceId?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    issuerTin?: string | null;
+    issuerTin?: string;
     /**
      * 
      * @type {number}
      * @memberof Form1099DivListItem
      */
-    taxYear?: number | null;
+    taxYear?: number;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    issuerId?: string;
+    issuerId?: string | null;
     /**
      * 
      * @type {string}
@@ -175,7 +175,7 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    recipientName?: string;
+    recipientName?: string | null;
     /**
      * 
      * @type {string}
@@ -187,25 +187,25 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    tinType?: string;
+    tinType?: Form1099DivListItemTinTypeEnum;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    recipientSecondName?: string | null;
+    recipientSecondName?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    streetAddress?: string;
+    address?: string;
     /**
      * 
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    streetAddressLine2?: string | null;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -286,13 +286,22 @@ export interface Form1099DivListItem {
     addressVerification?: boolean;
     /**
      * 
-     * @type {StateAndLocalWithholding}
+     * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099DivListItem
      */
-    stateAndLocalWithholding?: StateAndLocalWithholding;
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum Form1099DivListItemTinTypeEnum {
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the Form1099DivListItem interface.
@@ -341,8 +350,8 @@ export function Form1099DivListItemFromJSONTyped(json: any, ignoreDiscriminator:
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'streetAddress': !exists(json, 'streetAddress') ? undefined : json['streetAddress'],
-        'streetAddressLine2': !exists(json, 'streetAddressLine2') ? undefined : json['streetAddressLine2'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -356,7 +365,7 @@ export function Form1099DivListItemFromJSONTyped(json: any, ignoreDiscriminator:
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -397,8 +406,8 @@ export function Form1099DivListItemToJSON(value?: Form1099DivListItem | null): a
         'recipientTin': value.recipientTin,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
-        'streetAddress': value.streetAddress,
-        'streetAddressLine2': value.streetAddressLine2,
+        'address': value.address,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
@@ -412,6 +421,6 @@ export function Form1099DivListItemToJSON(value?: Form1099DivListItem | null): a
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
-        'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
+        'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };
 }

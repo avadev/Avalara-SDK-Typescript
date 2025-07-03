@@ -187,7 +187,7 @@ export interface Form1099Base {
      * @type {string}
      * @memberof Form1099Base
      */
-    addressRecipientSecond?: string | null;
+    address2?: string | null;
     /**
      * 
      * @type {string}
@@ -288,7 +288,7 @@ export function Form1099BaseFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': !exists(json, 'address') ? undefined : json['address'],
-        'addressRecipientSecond': !exists(json, 'addressRecipientSecond') ? undefined : json['addressRecipientSecond'],
+        'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
@@ -333,7 +333,7 @@ export function Form1099BaseToJSON(value?: Form1099Base | null): any {
         'recipientName': value.recipientName,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
-        'addressRecipientSecond': value.addressRecipientSecond,
+        'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
