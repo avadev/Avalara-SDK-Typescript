@@ -70,7 +70,7 @@ export interface ListWebhookSubscriptionsInterface {
  * 
  */
 export class SubscriptionsApi extends runtime.ApiClient {
-    public sdkVersion: string = '25.7.0';
+    public sdkVersion: string = '25.7.2';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
