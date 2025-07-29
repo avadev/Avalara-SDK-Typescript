@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -27,121 +27,121 @@ import {
  */
 export interface Form1099RRequest {
     /**
-     * 
+     * Gross distribution
      * @type {number}
      * @memberof Form1099RRequest
      */
     grossDistribution?: number;
     /**
-     * 
+     * Taxable amount
      * @type {number}
      * @memberof Form1099RRequest
      */
     taxableAmount?: number;
     /**
-     * 
+     * Taxable amount not determined
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     taxableAmountNotDetermined?: boolean;
     /**
-     * 
+     * Total distribution
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     totalDistributionDetermined?: boolean;
     /**
-     * 
+     * Capital gain (included in Box 2a)
      * @type {number}
      * @memberof Form1099RRequest
      */
     capitalGain?: number;
     /**
-     * 
+     * Federal income tax withheld
      * @type {number}
      * @memberof Form1099RRequest
      */
     federalIncomeTaxWithheld?: number;
     /**
-     * 
+     * Employee contributions/Designated Roth contributions or insurance premiums
      * @type {number}
      * @memberof Form1099RRequest
      */
     employeeContributionsOrDesignatedRothOrInsurancePremiums?: number;
     /**
-     * 
+     * Net unrealized appreciation in employer's securities
      * @type {number}
      * @memberof Form1099RRequest
      */
     netUnrealizedAppreciationInEmployerSecurities?: number;
     /**
-     * 
+     * Distribution code
      * @type {string}
      * @memberof Form1099RRequest
      */
     distributionCode?: string;
     /**
-     * 
+     * Second distribution code
      * @type {string}
      * @memberof Form1099RRequest
      */
     secondDistributionCode?: string;
     /**
-     * 
+     * IRA/SEP/SIMPLE
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     iraSepSimple?: boolean;
     /**
-     * 
+     * Traditional IRA/SEP/SIMPLE or Roth conversion amount
      * @type {number}
      * @memberof Form1099RRequest
      */
     traditionalIraSepSimpleOrRothConversionAmount?: number;
     /**
-     * 
+     * Other amount
      * @type {number}
      * @memberof Form1099RRequest
      */
     otherAmount?: number;
     /**
-     * 
+     * Other percentage
      * @type {string}
      * @memberof Form1099RRequest
      */
     otherPercentage?: string;
     /**
-     * 
+     * Total distribution percentage
      * @type {string}
      * @memberof Form1099RRequest
      */
     totalDistributionPercentage?: string;
     /**
-     * 
+     * Total employee contributions
      * @type {number}
      * @memberof Form1099RRequest
      */
     totalEmployeeContributions?: number;
     /**
-     * 
+     * Amount allocable to IRR within 5 years
      * @type {number}
      * @memberof Form1099RRequest
      */
     amountAllocableToIrrWithin5Years?: number;
     /**
-     * 
+     * First year of designated Roth contribution
      * @type {string}
      * @memberof Form1099RRequest
      */
     firstYearOfDesignatedRothContribution?: string;
     /**
-     * 
+     * FATCA filing requirement
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     fatcaFilingRequirement?: boolean;
     /**
-     * 
+     * Date of payment
      * @type {Date}
      * @memberof Form1099RRequest
      */
@@ -151,135 +151,139 @@ export interface Form1099RRequest {
      * @type {string}
      * @memberof Form1099RRequest
      */
-    readonly type?: Form1099RRequestTypeEnum;
+    type?: Form1099RRequestTypeEnum;
     /**
-     * 
+     * Issuer ID
      * @type {string}
      * @memberof Form1099RRequest
      */
     issuerId?: string | null;
     /**
-     * 
+     * Reference ID
      * @type {string}
      * @memberof Form1099RRequest
      */
     referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099RRequest
-     */
-    recipientName?: string | null;
-    /**
-     * 
+     * Recipient Tax ID Number
      * @type {string}
      * @memberof Form1099RRequest
      */
     recipientTin?: string;
     /**
-     * 
+     * Recipient name
+     * @type {string}
+     * @memberof Form1099RRequest
+     */
+    recipientName: string;
+    /**
+     * Type of TIN (Tax ID Number). Will be one of:
+     * * SSN
+     * * EIN
+     * * ITIN
+     * * ATIN
      * @type {string}
      * @memberof Form1099RRequest
      */
     tinType?: Form1099RRequestTinTypeEnum;
     /**
-     * 
+     * Recipient second name
      * @type {string}
      * @memberof Form1099RRequest
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
-     * 
+     * Address
      * @type {string}
      * @memberof Form1099RRequest
      */
-    address?: string;
+    address: string;
     /**
-     * 
+     * Address line 2
      * @type {string}
      * @memberof Form1099RRequest
      */
     address2?: string | null;
     /**
-     * 
+     * City
      * @type {string}
      * @memberof Form1099RRequest
      */
-    city?: string;
+    city: string;
     /**
-     * 
+     * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1099RRequest
      */
     state?: string;
     /**
-     * 
+     * Zip/postal code
      * @type {string}
      * @memberof Form1099RRequest
      */
     zip?: string;
     /**
-     * 
+     * Recipient email address
      * @type {string}
      * @memberof Form1099RRequest
      */
     recipientEmail?: string | null;
     /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1099RRequest
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1099RRequest
      */
     officeCode?: string | null;
     /**
-     * 
+     * Foreign province
      * @type {string}
      * @memberof Form1099RRequest
      */
     recipientNonUsProvince?: string | null;
     /**
-     * 
+     * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof Form1099RRequest
      */
-    countryCode?: string;
+    countryCode: string;
     /**
-     * 
+     * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     federalEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     postalMail?: boolean;
     /**
-     * 
+     * Boolean indicating that state e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     stateEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     tinMatch?: boolean;
     /**
-     * 
+     * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RRequest
      */
     addressVerification?: boolean;
     /**
-     * 
+     * State and local withholding information
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099RRequest
      */
@@ -291,12 +295,13 @@ export interface Form1099RRequest {
 * @enum {string}
 */
 export enum Form1099RRequestTypeEnum {
-    Form1099Nec = 'Form1099Nec',
-    Form1099Misc = 'Form1099Misc',
-    Form1099Div = 'Form1099Div',
-    Form1099R = 'Form1099R',
-    Form1099K = 'Form1099K',
-    Form1095B = 'Form1095B'
+    _1099Nec = '1099-NEC',
+    _1099Misc = '1099-MISC',
+    _1099Div = '1099-DIV',
+    _1099R = '1099-R',
+    _1099K = '1099-K',
+    _1095B = '1095-B',
+    _1042S = '1042-S'
 }/**
 * @export
 * @enum {string}
@@ -313,6 +318,10 @@ export enum Form1099RRequestTinTypeEnum {
  */
 export function instanceOfForm1099RRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -350,20 +359,20 @@ export function Form1099RRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
+        'recipientName': json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
@@ -402,10 +411,11 @@ export function Form1099RRequestToJSON(value?: Form1099RRequest | null): any {
         'firstYearOfDesignatedRothContribution': value.firstYearOfDesignatedRothContribution,
         'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'dateOfPayment': value.dateOfPayment === undefined ? undefined : (value.dateOfPayment.toISOString()),
+        'type': value.type,
         'issuerId': value.issuerId,
         'referenceId': value.referenceId,
-        'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
+        'recipientName': value.recipientName,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,

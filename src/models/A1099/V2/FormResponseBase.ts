@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -20,11 +20,11 @@ import {
     StateAndLocalWithholdingResponseToJSON,
 } from './StateAndLocalWithholdingResponse';
 import {
-    StateEfileStatusDetailApp,
-    StateEfileStatusDetailAppFromJSON,
-    StateEfileStatusDetailAppFromJSONTyped,
-    StateEfileStatusDetailAppToJSON,
-} from './StateEfileStatusDetailApp';
+    StateEfileStatusDetailResponse,
+    StateEfileStatusDetailResponseFromJSON,
+    StateEfileStatusDetailResponseFromJSONTyped,
+    StateEfileStatusDetailResponseToJSON,
+} from './StateEfileStatusDetailResponse';
 import {
     StatusDetail,
     StatusDetailFromJSON,
@@ -32,11 +32,11 @@ import {
     StatusDetailToJSON,
 } from './StatusDetail';
 import {
-    ValidationErrorApp,
-    ValidationErrorAppFromJSON,
-    ValidationErrorAppFromJSONTyped,
-    ValidationErrorAppToJSON,
-} from './ValidationErrorApp';
+    ValidationErrorResponse,
+    ValidationErrorResponseFromJSON,
+    ValidationErrorResponseFromJSONTyped,
+    ValidationErrorResponseToJSON,
+} from './ValidationErrorResponse';
 
 /**
  * 
@@ -232,10 +232,10 @@ export interface FormResponseBase {
     federalEfileStatus?: StatusDetail | null;
     /**
      * 
-     * @type {Array<StateEfileStatusDetailApp>}
+     * @type {Array<StateEfileStatusDetailResponse>}
      * @memberof FormResponseBase
      */
-    stateEfileStatus?: Array<StateEfileStatusDetailApp> | null;
+    stateEfileStatus?: Array<StateEfileStatusDetailResponse> | null;
     /**
      * 
      * @type {StatusDetail}
@@ -256,10 +256,10 @@ export interface FormResponseBase {
     addressVerificationStatus?: StatusDetail | null;
     /**
      * 
-     * @type {Array<ValidationErrorApp>}
+     * @type {Array<ValidationErrorResponse>}
      * @memberof FormResponseBase
      */
-    validationErrors?: Array<ValidationErrorApp> | null;
+    validationErrors?: Array<ValidationErrorResponse> | null;
 }
 
 /**
@@ -267,12 +267,13 @@ export interface FormResponseBase {
 * @enum {string}
 */
 export enum FormResponseBaseTypeEnum {
-    Form1099Nec = 'Form1099Nec',
-    Form1099Misc = 'Form1099Misc',
-    Form1099Div = 'Form1099Div',
-    Form1099R = 'Form1099R',
-    Form1099K = 'Form1099K',
-    Form1095B = 'Form1095B'
+    _1099Nec = '1099-NEC',
+    _1099Misc = '1099-MISC',
+    _1099Div = '1099-DIV',
+    _1099R = '1099-R',
+    _1099K = '1099-K',
+    _1095B = '1095-B',
+    _1042S = '1042-S'
 }/**
 * @export
 * @enum {string}
@@ -334,11 +335,11 @@ export function FormResponseBaseFromJSONTyped(json: any, ignoreDiscriminator: bo
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : StatusDetailFromJSON(json['federalEfileStatus']),
-        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailAppFromJSON)),
+        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailResponseFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : StatusDetailFromJSON(json['tinMatchStatus']),
         'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : StatusDetailFromJSON(json['addressVerificationStatus']),
-        'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorAppFromJSON)),
+        'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorResponseFromJSON)),
     };
 }
 
@@ -381,10 +382,10 @@ export function FormResponseBaseToJSON(value?: FormResponseBase | null): any {
         'tinMatch': value.tinMatch,
         'addressVerification': value.addressVerification,
         'federalEfileStatus': StatusDetailToJSON(value.federalEfileStatus),
-        'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailAppToJSON)),
+        'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailResponseToJSON)),
         'postalMailStatus': StatusDetailToJSON(value.postalMailStatus),
         'tinMatchStatus': StatusDetailToJSON(value.tinMatchStatus),
         'addressVerificationStatus': StatusDetailToJSON(value.addressVerificationStatus),
-        'validationErrors': value.validationErrors === undefined ? undefined : (value.validationErrors === null ? null : (value.validationErrors as Array<any>)?.map(ValidationErrorAppToJSON)),
+        'validationErrors': value.validationErrors === undefined ? undefined : (value.validationErrors === null ? null : (value.validationErrors as Array<any>)?.map(ValidationErrorResponseToJSON)),
     };
 }

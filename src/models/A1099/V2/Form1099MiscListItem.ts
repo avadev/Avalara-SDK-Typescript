@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -27,247 +27,251 @@ import {
  */
 export interface Form1099MiscListItem {
     /**
-     * 
+     * Second TIN notice
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
     secondTinNotice?: boolean;
     /**
-     * 
+     * Rents
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     rents?: number;
     /**
-     * 
+     * Royalties
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     royalties?: number;
     /**
-     * 
+     * Other income
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     otherIncome?: number;
     /**
-     * 
+     * Federal income tax withheld
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     fedIncomeTaxWithheld?: number;
     /**
-     * 
+     * Fishing boat proceeds
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     fishingBoatProceeds?: number;
     /**
-     * 
+     * Medical and health care payments
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     medicalHealthCarePayments?: number;
     /**
-     * 
+     * Payer made direct sales totaling $5,000 or more of consumer products to recipient for resale
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
-    payerMadeDirectSales?: boolean;
+    directSalesIndicator?: boolean;
     /**
-     * 
+     * Substitute payments in lieu of dividends or interest
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     substitutePayments?: number;
     /**
-     * 
+     * Crop insurance proceeds
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     cropInsuranceProceeds?: number;
     /**
-     * 
+     * Gross proceeds paid to an attorney
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     grossProceedsPaidToAttorney?: number;
     /**
-     * 
+     * Fish purchased for resale
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     fishPurchasedForResale?: number;
     /**
-     * 
+     * Section 409A deferrals
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     section409ADeferrals?: number;
     /**
-     * 
+     * FATCA filing requirement
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
     fatcaFilingRequirement?: boolean;
     /**
-     * 
+     * (Legacy field) Excess golden parachute payments
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     excessGoldenParachutePayments?: number;
     /**
-     * 
+     * Nonqualified deferred compensation
      * @type {number}
      * @memberof Form1099MiscListItem
      */
     nonqualifiedDeferredCompensation?: number;
     /**
-     * 
+     * Issuer Reference ID. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     issuerReferenceId?: string;
     /**
-     * 
+     * Issuer TIN. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     issuerTin?: string;
     /**
-     * 
+     * Tax year
      * @type {number}
      * @memberof Form1099MiscListItem
      */
-    taxYear?: number;
+    taxYear: number;
     /**
-     * 
+     * Issuer ID
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     issuerId?: string | null;
     /**
-     * 
+     * Reference ID
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099MiscListItem
-     */
-    recipientName?: string | null;
-    /**
-     * 
+     * Recipient Tax ID Number
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     recipientTin?: string;
     /**
-     * 
+     * Recipient name
+     * @type {string}
+     * @memberof Form1099MiscListItem
+     */
+    recipientName: string;
+    /**
+     * Type of TIN (Tax ID Number). Will be one of:
+     * * SSN
+     * * EIN
+     * * ITIN
+     * * ATIN
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     tinType?: Form1099MiscListItemTinTypeEnum;
     /**
-     * 
+     * Recipient second name
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
-     * 
+     * Address
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    address?: string;
+    address: string;
     /**
-     * 
+     * Address line 2
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     address2?: string | null;
     /**
-     * 
+     * City
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    city?: string;
+    city: string;
     /**
-     * 
+     * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     state?: string;
     /**
-     * 
+     * Zip/postal code
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     zip?: string;
     /**
-     * 
+     * Recipient email address
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     recipientEmail?: string | null;
     /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     officeCode?: string | null;
     /**
-     * 
+     * Foreign province
      * @type {string}
      * @memberof Form1099MiscListItem
      */
     recipientNonUsProvince?: string | null;
     /**
-     * 
+     * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof Form1099MiscListItem
      */
-    countryCode?: string;
+    countryCode: string;
     /**
-     * 
+     * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
     federalEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
     postalMail?: boolean;
     /**
-     * 
+     * Boolean indicating that state e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
     stateEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
     tinMatch?: boolean;
     /**
-     * 
+     * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099MiscListItem
      */
     addressVerification?: boolean;
     /**
-     * 
+     * State and local withholding information
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099MiscListItem
      */
@@ -290,6 +294,11 @@ export enum Form1099MiscListItemTinTypeEnum {
  */
 export function instanceOfForm1099MiscListItem(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "taxYear" in value;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -311,7 +320,7 @@ export function Form1099MiscListItemFromJSONTyped(json: any, ignoreDiscriminator
         'fedIncomeTaxWithheld': !exists(json, 'fedIncomeTaxWithheld') ? undefined : json['fedIncomeTaxWithheld'],
         'fishingBoatProceeds': !exists(json, 'fishingBoatProceeds') ? undefined : json['fishingBoatProceeds'],
         'medicalHealthCarePayments': !exists(json, 'medicalHealthCarePayments') ? undefined : json['medicalHealthCarePayments'],
-        'payerMadeDirectSales': !exists(json, 'payerMadeDirectSales') ? undefined : json['payerMadeDirectSales'],
+        'directSalesIndicator': !exists(json, 'directSalesIndicator') ? undefined : json['directSalesIndicator'],
         'substitutePayments': !exists(json, 'substitutePayments') ? undefined : json['substitutePayments'],
         'cropInsuranceProceeds': !exists(json, 'cropInsuranceProceeds') ? undefined : json['cropInsuranceProceeds'],
         'grossProceedsPaidToAttorney': !exists(json, 'grossProceedsPaidToAttorney') ? undefined : json['grossProceedsPaidToAttorney'],
@@ -322,23 +331,23 @@ export function Form1099MiscListItemFromJSONTyped(json: any, ignoreDiscriminator
         'nonqualifiedDeferredCompensation': !exists(json, 'nonqualifiedDeferredCompensation') ? undefined : json['nonqualifiedDeferredCompensation'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
+        'taxYear': json['taxYear'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
+        'recipientName': json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
@@ -364,7 +373,7 @@ export function Form1099MiscListItemToJSON(value?: Form1099MiscListItem | null):
         'fedIncomeTaxWithheld': value.fedIncomeTaxWithheld,
         'fishingBoatProceeds': value.fishingBoatProceeds,
         'medicalHealthCarePayments': value.medicalHealthCarePayments,
-        'payerMadeDirectSales': value.payerMadeDirectSales,
+        'directSalesIndicator': value.directSalesIndicator,
         'substitutePayments': value.substitutePayments,
         'cropInsuranceProceeds': value.cropInsuranceProceeds,
         'grossProceedsPaidToAttorney': value.grossProceedsPaidToAttorney,
@@ -378,8 +387,8 @@ export function Form1099MiscListItemToJSON(value?: Form1099MiscListItem | null):
         'taxYear': value.taxYear,
         'issuerId': value.issuerId,
         'referenceId': value.referenceId,
-        'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
+        'recipientName': value.recipientName,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,

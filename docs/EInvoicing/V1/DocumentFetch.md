@@ -1,5 +1,4 @@
 # AvalaraSdk.EInvoicing.V1.DocumentFetch
-An object of the inbound document
 
 ## Properties
 

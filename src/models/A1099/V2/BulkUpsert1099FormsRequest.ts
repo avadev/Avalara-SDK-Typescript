@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -12,6 +12,13 @@
  * Do not edit the class manually.
  */
 
+import type { Form1042SList } from './Form1042SList';
+import {
+    instanceOfForm1042SList,
+    Form1042SListFromJSON,
+    Form1042SListFromJSONTyped,
+    Form1042SListToJSON,
+} from './Form1042SList';
 import type { Form1095BList } from './Form1095BList';
 import {
     instanceOfForm1095BList,
@@ -60,7 +67,7 @@ import {
  * 
  * @export
  */
-export type BulkUpsert1099FormsRequest = Form1095BList | Form1099DivList | Form1099KList | Form1099MiscList | Form1099NecList | Form1099RList;
+export type BulkUpsert1099FormsRequest = Form1042SList | Form1095BList | Form1099DivList | Form1099KList | Form1099MiscList | Form1099NecList | Form1099RList;
 
 export function BulkUpsert1099FormsRequestFromJSON(json: any): BulkUpsert1099FormsRequest {
     return BulkUpsert1099FormsRequestFromJSONTyped(json, false);
@@ -69,6 +76,9 @@ export function BulkUpsert1099FormsRequestFromJSON(json: any): BulkUpsert1099For
 export function BulkUpsert1099FormsRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): BulkUpsert1099FormsRequest {
     if (json == null) {
         return json;
+    }
+    if (instanceOfForm1042SList(json)) {
+        return Form1042SListFromJSONTyped(json, true);
     }
     if (instanceOfForm1095BList(json)) {
         return Form1095BListFromJSONTyped(json, true);
@@ -95,6 +105,9 @@ export function BulkUpsert1099FormsRequestToJSON(value?: BulkUpsert1099FormsRequ
         return value;
     }
 
+    if (instanceOfForm1042SList(value)) {
+        return Form1042SListToJSON(value as Form1042SList);
+    }
     if (instanceOfForm1095BList(value)) {
         return Form1095BListToJSON(value as Form1095BList);
     }

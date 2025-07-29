@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **fedIncomeTaxWithheld** | **number** |  | [optional] [default to undefined]
 **fishingBoatProceeds** | **number** |  | [optional] [default to undefined]
 **medicalHealthCarePayments** | **number** |  | [optional] [default to undefined]
-**payerMadeDirectSales** | **boolean** |  | [optional] [default to undefined]
+**directSalesIndicator** | **boolean** |  | [optional] [default to undefined]
 **substitutePayments** | **number** |  | [optional] [default to undefined]
 **cropInsuranceProceeds** | **number** |  | [optional] [default to undefined]
 **grossProceedsPaidToAttorney** | **number** |  | [optional] [default to undefined]
@@ -51,11 +51,11 @@ Name | Type | Description | Notes
 **tinMatch** | **boolean** |  | [optional] [default to undefined]
 **addressVerification** | **boolean** |  | [optional] [default to undefined]
 **federalEfileStatus** | [**StatusDetail**](StatusDetail.md) |  | [optional] [default to undefined]
-**stateEfileStatus** | [**Array&lt;StateEfileStatusDetailApp&gt;**](StateEfileStatusDetailApp.md) |  | [optional] [default to undefined]
+**stateEfileStatus** | [**Array&lt;StateEfileStatusDetailResponse&gt;**](StateEfileStatusDetailResponse.md) |  | [optional] [default to undefined]
 **postalMailStatus** | [**StatusDetail**](StatusDetail.md) |  | [optional] [default to undefined]
 **tinMatchStatus** | [**StatusDetail**](StatusDetail.md) |  | [optional] [default to undefined]
 **addressVerificationStatus** | [**StatusDetail**](StatusDetail.md) |  | [optional] [default to undefined]
-**validationErrors** | [**Array&lt;ValidationErrorApp&gt;**](ValidationErrorApp.md) |  | [optional] [default to undefined]
+**validationErrors** | [**Array&lt;ValidationErrorResponse&gt;**](ValidationErrorResponse.md) |  | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

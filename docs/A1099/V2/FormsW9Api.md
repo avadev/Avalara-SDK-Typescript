@@ -4,20 +4,22 @@ All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/a
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createW9Form**](FormsW9Api.md#createw9form) | **POST** /w9/forms | Create a W9/W4/W8 form
-[**deleteW9Form**](FormsW9Api.md#deletew9form) | **DELETE** /w9/forms/{id} | Delete a form
+[**createW9Form**](FormsW9Api.md#createw9formoperation) | **POST** /w9/forms | Create a W9/W4/W8 form
+[**deleteW9Form**](FormsW9Api.md#deletew9form) | **DELETE** /w9/forms/{id} | Delete a W9/W4/W8 form
 [**getW9Form**](FormsW9Api.md#getw9form) | **GET** /w9/forms/{id} | Retrieve a W9/W4/W8 form
-[**listW9Forms**](FormsW9Api.md#listw9forms) | **GET** /w9/forms | List W9/W4/W8 forms.
-[**sendW9FormEmail**](FormsW9Api.md#sendw9formemail) | **POST** /w9/forms/{id}/$send-email | Sends a W9 email request to a vendor/payee
+[**listW9Forms**](FormsW9Api.md#listw9forms) | **GET** /w9/forms | List W9/W4/W8 forms
+[**sendW9FormEmail**](FormsW9Api.md#sendw9formemail) | **POST** /w9/forms/{id}/$send-email | Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
 [**updateW9Form**](FormsW9Api.md#updatew9form) | **PUT** /w9/forms/{id} | Update a W9/W4/W8 form
-[**uploadW9Files**](FormsW9Api.md#uploadw9files) | **PUT** /w9/forms/{id}/attachment | Upload files for a W9/W4/W8 form
+[**uploadW9Files**](FormsW9Api.md#uploadw9files) | **POST** /w9/forms/{id}/attachment | Replace the PDF file for a W9/W4/W8 form
 
 
-<a name="createw9form"></a>
+<a name="createw9formoperation"></a>
 # **createW9Form**
-> IW9FormDataModelsOneOf createW9Form (string avalaraVersion, string xCorrelationId, string xAvalaraClient, IW9FormDataModelsOneOf iW9FormDataModelsOneOf)
+> CreateW9Form201Response createW9Form (string avalaraVersion, string xCorrelationId, string xAvalaraClient, CreateW9FormRequest createW9FormRequest)
 
 Create a W9/W4/W8 form
+
+Create a W9/W4/W8 form.
 
 ### Example
 ```typescript
@@ -45,11 +47,11 @@ Name | Type | Description  | Notes
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
- **iW9FormDataModelsOneOf** | [**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)| Form to be created | [optional] 
+ **createW9FormRequest** | [**CreateW9FormRequest**](CreateW9FormRequest.md)| Form to be created | [optional] 
 
 ### Return type
 
-[**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)
+[**CreateW9Form201Response**](CreateW9Form201Response.md)
 
 ### Authorization
 
@@ -64,7 +66,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | The created W9/W4/W8 form |  -  |
+| **201** | The created W9/W4/W8 form |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
 
@@ -74,9 +76,9 @@ Name | Type | Description  | Notes
 # **deleteW9Form**
 > void deleteW9Form (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
-Delete a form
+Delete a W9/W4/W8 form
 
-Delete a form
+Delete a W9/W4/W8 form.
 
 ### Example
 ```typescript
@@ -101,7 +103,7 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Id of the form to delete | [default to undefined]
+ **id** | **string**| ID of the form to delete | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
@@ -131,11 +133,11 @@ void (empty response body)
 
 <a name="getw9form"></a>
 # **getW9Form**
-> IW9FormDataModelsOneOf getW9Form (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
+> CreateW9Form201Response getW9Form (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Retrieve a W9/W4/W8 form
 
-Retrieve a W9/W4/W8 form
+Retrieve a W9/W4/W8 form.
 
 ### Example
 ```typescript
@@ -160,14 +162,14 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Id of the form | [default to undefined]
+ **id** | **string**| ID of the form | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
-[**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)
+[**CreateW9Form201Response**](CreateW9Form201Response.md)
 
 ### Authorization
 
@@ -192,7 +194,7 @@ Name | Type | Description  | Notes
 # **listW9Forms**
 > PaginatedW9FormsModel listW9Forms (string avalaraVersion, string $filter, number $top, number $skip, string $orderBy, boolean count, string xCorrelationId, string xAvalaraClient)
 
-List W9/W4/W8 forms.
+List W9/W4/W8 forms
 
 List W9/W4/W8 forms.
 
@@ -255,7 +257,9 @@ Name | Type | Description  | Notes
 # **sendW9FormEmail**
 > IW9FormDataModelsOneOf sendW9FormEmail (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
-Sends a W9 email request to a vendor/payee
+Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
+
+Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
 
 ### Example
 ```typescript
@@ -314,6 +318,8 @@ Name | Type | Description  | Notes
 
 Update a W9/W4/W8 form
 
+Update a W9/W4/W8 form.
+
 ### Example
 ```typescript
 import * as AvalaraSdk from 'avalara-sdk';
@@ -337,7 +343,7 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Id of the form to update | [default to undefined]
+ **id** | **string**| ID of the form to update | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
@@ -368,11 +374,11 @@ Name | Type | Description  | Notes
 
 <a name="uploadw9files"></a>
 # **uploadW9Files**
-> string uploadW9Files (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, Blob file)
+> void uploadW9Files (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, Blob file)
 
-Upload files for a W9/W4/W8 form
+Replace the PDF file for a W9/W4/W8 form
 
-Upload files for a W9/W4/W8 form
+Replaces the PDF file for a W9/W4/W8 form.
 
 ### Example
 ```typescript
@@ -405,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+void (empty response body)
 
 ### Authorization
 
@@ -420,8 +426,8 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | W9/W4/W8 form with id |  -  |
-| **400** | Bad request (e.g., invalid sort key) |  -  |
+| **200** |  |  -  |
+| **400** | Bad request (e.g., Only .pdf files are allowed.) |  -  |
 | **401** | Authentication failed |  -  |
 | **404** | Not Found |  -  |
 

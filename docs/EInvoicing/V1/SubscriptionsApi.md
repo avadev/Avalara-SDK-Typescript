@@ -41,7 +41,7 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The version of the API to use, e.g., \&quot;1.3\&quot;. | [default to undefined]
+ **avalaraVersion** | **string**| The version of the API to use, e.g., \&quot;1.4\&quot;. | [default to undefined]
  **subscriptionRegistration** | [**SubscriptionRegistration**](SubscriptionRegistration.md)|  | 
  **xCorrelationID** | **string**| A unique identifier for tracking the request and its response | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Client application identification | [optional] [default to undefined]
@@ -102,7 +102,7 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **subscriptionId** | **string**|  | [default to undefined]
- **avalaraVersion** | **string**| The version of the API to use, e.g., \&quot;1.3\&quot;. | [default to undefined]
+ **avalaraVersion** | **string**| The version of the API to use, e.g., \&quot;1.4\&quot;. | [default to undefined]
  **xCorrelationID** | **string**| A unique identifier for tracking the request and its response | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Client application identification | [optional] [default to undefined]
 
@@ -162,7 +162,7 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **subscriptionId** | **string**|  | [default to undefined]
- **avalaraVersion** | **string**| The version of the API to use, e.g., \&quot;1.3\&quot;. | [default to undefined]
+ **avalaraVersion** | **string**| The version of the API to use, e.g., \&quot;1.4\&quot;. | [default to undefined]
  **xCorrelationID** | **string**| A unique identifier for tracking the request and its response | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Client application identification | [optional] [default to undefined]
 
@@ -221,7 +221,7 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The version of the API to use, e.g., \&quot;1.3\&quot;. | [default to undefined]
+ **avalaraVersion** | **string**| The version of the API to use, e.g., \&quot;1.4\&quot;. | [default to undefined]
  **xCorrelationID** | **string**| A unique identifier for tracking the request and its response | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Client application identification | [optional] [default to undefined]
  **$top** | **number**| The number of items to include in the result. | [optional] [default to undefined]

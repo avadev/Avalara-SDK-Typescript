@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -27,271 +27,275 @@ import {
  */
 export interface Form1099RListItem {
     /**
-     * 
+     * Gross distribution
      * @type {number}
      * @memberof Form1099RListItem
      */
     grossDistribution?: number;
     /**
-     * 
+     * Taxable amount
      * @type {number}
      * @memberof Form1099RListItem
      */
     taxableAmount?: number;
     /**
-     * 
+     * Taxable amount not determined
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     taxableAmountNotDetermined?: boolean;
     /**
-     * 
+     * Total distribution
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     totalDistributionDetermined?: boolean;
     /**
-     * 
+     * Capital gain (included in Box 2a)
      * @type {number}
      * @memberof Form1099RListItem
      */
     capitalGain?: number;
     /**
-     * 
+     * Federal income tax withheld
      * @type {number}
      * @memberof Form1099RListItem
      */
     federalIncomeTaxWithheld?: number;
     /**
-     * 
+     * Employee contributions/Designated Roth contributions or insurance premiums
      * @type {number}
      * @memberof Form1099RListItem
      */
     employeeContributionsOrDesignatedRothOrInsurancePremiums?: number;
     /**
-     * 
+     * Net unrealized appreciation in employer's securities
      * @type {number}
      * @memberof Form1099RListItem
      */
     netUnrealizedAppreciationInEmployerSecurities?: number;
     /**
-     * 
+     * Distribution code
      * @type {string}
      * @memberof Form1099RListItem
      */
     distributionCode?: Form1099RListItemDistributionCodeEnum;
     /**
-     * 
+     * Second distribution code
      * @type {string}
      * @memberof Form1099RListItem
      */
     secondDistributionCode?: Form1099RListItemSecondDistributionCodeEnum;
     /**
-     * 
+     * IRA/SEP/SIMPLE
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     iraSepSimple?: boolean;
     /**
-     * 
+     * Traditional IRA/SEP/SIMPLE or Roth conversion amount
      * @type {number}
      * @memberof Form1099RListItem
      */
     traditionalIraSepSimpleOrRothConversionAmount?: number;
     /**
-     * 
+     * Other amount
      * @type {number}
      * @memberof Form1099RListItem
      */
     otherAmount?: number;
     /**
-     * 
+     * Other percentage
      * @type {string}
      * @memberof Form1099RListItem
      */
     otherPercentage?: string;
     /**
-     * 
+     * Total distribution percentage
      * @type {string}
      * @memberof Form1099RListItem
      */
     totalDistributionPercentage?: string;
     /**
-     * 
+     * Total employee contributions
      * @type {number}
      * @memberof Form1099RListItem
      */
     totalEmployeeContributions?: number;
     /**
-     * 
+     * Amount allocable to IRR within 5 years
      * @type {number}
      * @memberof Form1099RListItem
      */
     amountAllocableToIrrWithin5Years?: number;
     /**
-     * 
+     * First year of designated Roth contribution
      * @type {number}
      * @memberof Form1099RListItem
      */
     firstYearOfDesignatedRothContribution?: number;
     /**
-     * 
+     * FATCA filing requirement
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     fatcaFilingRequirement?: boolean;
     /**
-     * 
+     * Date of payment
      * @type {Date}
      * @memberof Form1099RListItem
      */
     dateOfPayment?: Date;
     /**
-     * 
+     * Issuer Reference ID. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099RListItem
      */
     issuerReferenceId?: string;
     /**
-     * 
+     * Issuer TIN. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099RListItem
      */
     issuerTin?: string;
     /**
-     * 
+     * Tax year
      * @type {number}
      * @memberof Form1099RListItem
      */
-    taxYear?: number;
+    taxYear: number;
     /**
-     * 
+     * Issuer ID
      * @type {string}
      * @memberof Form1099RListItem
      */
     issuerId?: string | null;
     /**
-     * 
+     * Reference ID
      * @type {string}
      * @memberof Form1099RListItem
      */
     referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099RListItem
-     */
-    recipientName?: string | null;
-    /**
-     * 
+     * Recipient Tax ID Number
      * @type {string}
      * @memberof Form1099RListItem
      */
     recipientTin?: string;
     /**
-     * 
+     * Recipient name
+     * @type {string}
+     * @memberof Form1099RListItem
+     */
+    recipientName: string;
+    /**
+     * Type of TIN (Tax ID Number). Will be one of:
+     * * SSN
+     * * EIN
+     * * ITIN
+     * * ATIN
      * @type {string}
      * @memberof Form1099RListItem
      */
     tinType?: Form1099RListItemTinTypeEnum;
     /**
-     * 
+     * Recipient second name
      * @type {string}
      * @memberof Form1099RListItem
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
-     * 
+     * Address
      * @type {string}
      * @memberof Form1099RListItem
      */
-    address?: string;
+    address: string;
     /**
-     * 
+     * Address line 2
      * @type {string}
      * @memberof Form1099RListItem
      */
     address2?: string | null;
     /**
-     * 
+     * City
      * @type {string}
      * @memberof Form1099RListItem
      */
-    city?: string;
+    city: string;
     /**
-     * 
+     * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1099RListItem
      */
     state?: string;
     /**
-     * 
+     * Zip/postal code
      * @type {string}
      * @memberof Form1099RListItem
      */
     zip?: string;
     /**
-     * 
+     * Recipient email address
      * @type {string}
      * @memberof Form1099RListItem
      */
     recipientEmail?: string | null;
     /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1099RListItem
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1099RListItem
      */
     officeCode?: string | null;
     /**
-     * 
+     * Foreign province
      * @type {string}
      * @memberof Form1099RListItem
      */
     recipientNonUsProvince?: string | null;
     /**
-     * 
+     * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof Form1099RListItem
      */
-    countryCode?: string;
+    countryCode: string;
     /**
-     * 
+     * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     federalEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     postalMail?: boolean;
     /**
-     * 
+     * Boolean indicating that state e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     stateEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     tinMatch?: boolean;
     /**
-     * 
+     * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099RListItem
      */
     addressVerification?: boolean;
     /**
-     * 
+     * State and local withholding information
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099RListItem
      */
@@ -303,35 +307,35 @@ export interface Form1099RListItem {
 * @enum {string}
 */
 export enum Form1099RListItemDistributionCodeEnum {
-    EarlyDistributionNoException = 'EarlyDistributionNoException',
-    EarlyDistributionWithException = 'EarlyDistributionWithException',
-    Disability = 'Disability',
-    Death = 'Death',
-    ProhibitedTransaction = 'ProhibitedTransaction',
-    Section1035Exchange = 'Section1035Exchange',
-    NormalDistribution = 'NormalDistribution',
-    ExcessContributionsCurrentYear = 'ExcessContributionsCurrentYear',
-    CurrentLifeInsuranceProtectionCost = 'CurrentLifeInsuranceProtectionCost',
-    TenYearTaxOption = 'TenYearTaxOption',
-    DesignatedRothDistribution = 'DesignatedRothDistribution',
-    ReportableDeathBenefits = 'ReportableDeathBenefits',
-    NonqualifiedAnnuityPayments = 'NonqualifiedAnnuityPayments',
-    EpcrsDistribution = 'EPCRSDistribution',
-    CharitableGiftAnnuity = 'CharitableGiftAnnuity',
-    DirectRollover = 'DirectRollover',
-    RothAccountToIraDirectRollover = 'RothAccountToIRADirectRollover',
-    EarlyRothIraDistribution = 'EarlyRothIRADistribution',
-    IraAssetsNoFmv = 'IRAAssetsNoFMV',
-    LoansDeemedDistributions = 'LoansDeemedDistributions',
-    QualifiedPlanLoanOffsets = 'QualifiedPlanLoanOffsets',
-    RecharacterizedIraNextYear = 'RecharacterizedIRANextYear',
-    ExcessContributionsPreviousYear = 'ExcessContributionsPreviousYear',
-    QualifiedRothIraDistribution = 'QualifiedRothIRADistribution',
-    RecharacterizedIraPreviousYear = 'RecharacterizedIRAPreviousYear',
-    EarlySimpleIraDistribution = 'EarlySimpleIRADistribution',
-    RothIraDistributionException = 'RothIRADistributionException',
-    EsopDistribution = 'ESOPDistribution',
-    LongTermCareInsurance = 'LongTermCareInsurance'
+    _1 = '1',
+    _2 = '2',
+    _3 = '3',
+    _4 = '4',
+    _5 = '5',
+    _6 = '6',
+    _7 = '7',
+    _8 = '8',
+    _9 = '9',
+    A = 'A',
+    B = 'B',
+    C = 'C',
+    D = 'D',
+    E = 'E',
+    F = 'F',
+    G = 'G',
+    H = 'H',
+    J = 'J',
+    K = 'K',
+    L = 'L',
+    M = 'M',
+    N = 'N',
+    P = 'P',
+    Q = 'Q',
+    R = 'R',
+    S = 'S',
+    T = 'T',
+    U = 'U',
+    W = 'W'
 }/**
 * @export
 * @enum {string}
@@ -382,6 +386,11 @@ export enum Form1099RListItemTinTypeEnum {
  */
 export function instanceOfForm1099RListItem(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "taxYear" in value;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -418,23 +427,23 @@ export function Form1099RListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'dateOfPayment': !exists(json, 'dateOfPayment') ? undefined : (new Date(json['dateOfPayment'])),
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
+        'taxYear': json['taxYear'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
+        'recipientName': json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
@@ -478,8 +487,8 @@ export function Form1099RListItemToJSON(value?: Form1099RListItem | null): any {
         'taxYear': value.taxYear,
         'issuerId': value.issuerId,
         'referenceId': value.referenceId,
-        'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
+        'recipientName': value.recipientName,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,

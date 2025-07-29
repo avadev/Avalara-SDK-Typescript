@@ -4,8 +4,8 @@ All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/a
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createCompany**](CompaniesW9Api.md#createcompany) | **POST** /w9/companies | Creates a new company
-[**deleteCompany**](CompaniesW9Api.md#deletecompany) | **DELETE** /w9/companies/{id} | Deletes a company
+[**createCompany**](CompaniesW9Api.md#createcompany) | **POST** /w9/companies | Create a company
+[**deleteCompany**](CompaniesW9Api.md#deletecompany) | **DELETE** /w9/companies/{id} | Delete a company
 [**getCompanies**](CompaniesW9Api.md#getcompanies) | **GET** /w9/companies | List companies
 [**getCompany**](CompaniesW9Api.md#getcompany) | **GET** /w9/companies/{id} | Retrieve a company
 [**updateCompany**](CompaniesW9Api.md#updatecompany) | **PUT** /w9/companies/{id} | Update a company
@@ -15,9 +15,9 @@ Method | HTTP request | Description
 # **createCompany**
 > CompanyResponseModel createCompany (string avalaraVersion, string xCorrelationId, string xAvalaraClient, CompanyCreateUpdateRequestModel companyCreateUpdateRequestModel)
 
-Creates a new company
+Create a company
 
-Creates a new company
+Create a company.
 
 ### Example
 ```typescript
@@ -74,9 +74,9 @@ Name | Type | Description  | Notes
 # **deleteCompany**
 > void deleteCompany (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
-Deletes a company
+Delete a company
 
-Deletes a company
+Delete a company.
 
 ### Example
 ```typescript
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 Retrieve a company
 
-Retrieve an existing company
+Retrieve a company.
 
 ### Example
 ```typescript
@@ -264,7 +264,7 @@ Name | Type | Description  | Notes
 
 Update a company
 
-Update a company
+Update a company.
 
 ### Example
 ```typescript

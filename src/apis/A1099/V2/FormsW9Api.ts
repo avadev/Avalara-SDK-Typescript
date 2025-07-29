@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -18,6 +18,12 @@ import { RequestInit } from 'node-fetch';
 import LogObject from '../../../utils/logObject';
 
 import {
+    CreateW9Form201Response,
+    CreateW9Form201ResponseFromJSON,
+    CreateW9Form201ResponseToJSON,
+    CreateW9FormRequest,
+    CreateW9FormRequestFromJSON,
+    CreateW9FormRequestToJSON,
     ErrorModel,
     ErrorModelFromJSON,
     ErrorModelToJSON,
@@ -32,11 +38,11 @@ import {
     PaginatedW9FormsModelToJSON,
 } from '../../../packages/A1099/V2';
 
-export interface CreateW9FormInterface {
+export interface CreateW9FormOperationInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    iW9FormDataModelsOneOf?: IW9FormDataModelsOneOf;
+    createW9FormRequest?: CreateW9FormRequest;
 }
 
 export interface DeleteW9FormInterface {
@@ -91,16 +97,17 @@ export interface UploadW9FilesInterface {
  * 
  */
 export class FormsW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.7.2';
+    public sdkVersion: string = '25.8.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
     }
 
     /**
+     * Create a W9/W4/W8 form.
      * Create a W9/W4/W8 form
      */
-    async createW9FormRaw(requestParameters: CreateW9FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IW9FormDataModelsOneOf>, logObject: LogObject }> {
+    async createW9FormRaw(requestParameters: CreateW9FormOperationInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CreateW9Form201Response>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling createW9Form.');
@@ -131,16 +138,17 @@ export class FormsW9Api extends runtime.ApiClient {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: IW9FormDataModelsOneOfToJSON(requestParameters.iW9FormDataModelsOneOf),
+            body: CreateW9FormRequestToJSON(requestParameters.createW9FormRequest),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => IW9FormDataModelsOneOfFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => CreateW9Form201ResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
+     * Create a W9/W4/W8 form.
      * Create a W9/W4/W8 form
      */
-    async createW9Form(requestParameters: CreateW9FormInterface, initOverrides?: RequestInit): Promise<IW9FormDataModelsOneOf> {
+    async createW9Form(requestParameters: CreateW9FormOperationInterface, initOverrides?: RequestInit): Promise<CreateW9Form201Response> {
         const { response, logObject } = await this.createW9FormRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -149,8 +157,8 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * Delete a form
-     * Delete a form
+     * Delete a W9/W4/W8 form.
+     * Delete a W9/W4/W8 form
      */
     async deleteW9FormRaw(requestParameters: DeleteW9FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
@@ -191,8 +199,8 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * Delete a form
-     * Delete a form
+     * Delete a W9/W4/W8 form.
+     * Delete a W9/W4/W8 form
      */
     async deleteW9Form(requestParameters: DeleteW9FormInterface, initOverrides?: RequestInit): Promise<void> {
         const { logObject } = await this.deleteW9FormRaw(requestParameters, initOverrides);
@@ -201,10 +209,10 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * Retrieve a W9/W4/W8 form
+     * Retrieve a W9/W4/W8 form.
      * Retrieve a W9/W4/W8 form
      */
-    async getW9FormRaw(requestParameters: GetW9FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IW9FormDataModelsOneOf>, logObject: LogObject }> {
+    async getW9FormRaw(requestParameters: GetW9FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CreateW9Form201Response>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getW9Form.');
@@ -239,14 +247,14 @@ export class FormsW9Api extends runtime.ApiClient {
             query: queryParameters,
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => IW9FormDataModelsOneOfFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => CreateW9Form201ResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
-     * Retrieve a W9/W4/W8 form
+     * Retrieve a W9/W4/W8 form.
      * Retrieve a W9/W4/W8 form
      */
-    async getW9Form(requestParameters: GetW9FormInterface, initOverrides?: RequestInit): Promise<IW9FormDataModelsOneOf> {
+    async getW9Form(requestParameters: GetW9FormInterface, initOverrides?: RequestInit): Promise<CreateW9Form201Response> {
         const { response, logObject } = await this.getW9FormRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -256,7 +264,7 @@ export class FormsW9Api extends runtime.ApiClient {
 
     /**
      * List W9/W4/W8 forms.
-     * List W9/W4/W8 forms.
+     * List W9/W4/W8 forms
      */
     async listW9FormsRaw(requestParameters: ListW9FormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<PaginatedW9FormsModel>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
@@ -314,7 +322,7 @@ export class FormsW9Api extends runtime.ApiClient {
 
     /**
      * List W9/W4/W8 forms.
-     * List W9/W4/W8 forms.
+     * List W9/W4/W8 forms
      */
     async listW9Forms(requestParameters: ListW9FormsInterface, initOverrides?: RequestInit): Promise<PaginatedW9FormsModel> {
         const { response, logObject } = await this.listW9FormsRaw(requestParameters, initOverrides);
@@ -325,7 +333,8 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * Sends a W9 email request to a vendor/payee
+     * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
+     * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
      */
     async sendW9FormEmailRaw(requestParameters: SendW9FormEmailInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IW9FormDataModelsOneOf>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
@@ -366,7 +375,8 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * Sends a W9 email request to a vendor/payee
+     * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
+     * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
      */
     async sendW9FormEmail(requestParameters: SendW9FormEmailInterface, initOverrides?: RequestInit): Promise<IW9FormDataModelsOneOf> {
         const { response, logObject } = await this.sendW9FormEmailRaw(requestParameters, initOverrides);
@@ -377,6 +387,7 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
+     * Update a W9/W4/W8 form.
      * Update a W9/W4/W8 form
      */
     async updateW9FormRaw(requestParameters: UpdateW9FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IW9FormDataModelsOneOf>, logObject: LogObject }> {
@@ -421,6 +432,7 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
+     * Update a W9/W4/W8 form.
      * Update a W9/W4/W8 form
      */
     async updateW9Form(requestParameters: UpdateW9FormInterface, initOverrides?: RequestInit): Promise<IW9FormDataModelsOneOf> {
@@ -432,10 +444,10 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * Upload files for a W9/W4/W8 form
-     * Upload files for a W9/W4/W8 form
+     * Replaces the PDF file for a W9/W4/W8 form.
+     * Replace the PDF file for a W9/W4/W8 form
      */
-    async uploadW9FilesRaw(requestParameters: UploadW9FilesInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<string>, logObject: LogObject }> {
+    async uploadW9FilesRaw(requestParameters: UploadW9FilesInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling uploadW9Files.');
@@ -485,25 +497,23 @@ export class FormsW9Api extends runtime.ApiClient {
 
         const { response, logObject } = await this.request({
             path: `/w9/forms/{id}/attachment`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PUT',
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: formParams,
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.TextApiResponse(response) as any, logObject };
+        return { response: new runtime.VoidApiResponse(response), logObject };
     }
 
     /**
-     * Upload files for a W9/W4/W8 form
-     * Upload files for a W9/W4/W8 form
+     * Replaces the PDF file for a W9/W4/W8 form.
+     * Replace the PDF file for a W9/W4/W8 form
      */
-    async uploadW9Files(requestParameters: UploadW9FilesInterface, initOverrides?: RequestInit): Promise<string> {
-        const { response, logObject } = await this.uploadW9FilesRaw(requestParameters, initOverrides);
-        const value = await response.value();
-        logObject.populateResponseBody(value);
+    async uploadW9Files(requestParameters: UploadW9FilesInterface, initOverrides?: RequestInit): Promise<void> {
+        const { logObject } = await this.uploadW9FilesRaw(requestParameters, initOverrides);
+        logObject.populateResponseBody(null);
         this.createLogEntry(logObject);
-        return value;
     }
 
 }
