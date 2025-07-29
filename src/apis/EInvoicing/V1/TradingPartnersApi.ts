@@ -100,7 +100,7 @@ export interface ListBatchSearchesInterface {
     $filter?: string;
     count?: boolean;
     $top?: number;
-    $skip?: string;
+    $skip?: number;
     $orderBy?: string;
     xCorrelationID?: string;
 }
@@ -112,7 +112,7 @@ export interface SearchParticipantsInterface {
     count?: boolean;
     $filter?: string;
     $top?: number;
-    $skip?: string;
+    $skip?: number;
     $orderBy?: string;
     xCorrelationID?: string;
 }

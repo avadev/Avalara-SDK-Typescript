@@ -79,7 +79,7 @@ export interface GetDocumentListInterface {
     $countOnly?: string;
     $filter?: string;
     $top?: number;
-    $skip?: string;
+    $skip?: number;
 }
 
 export interface GetDocumentStatusInterface {

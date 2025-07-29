@@ -21,9 +21,6 @@ import {
     BadRequest,
     BadRequestFromJSON,
     BadRequestToJSON,
-    Decimal,
-    DecimalFromJSON,
-    DecimalToJSON,
     ForbiddenError,
     ForbiddenErrorFromJSON,
     ForbiddenErrorToJSON,
@@ -54,7 +51,7 @@ export interface GetMandatesInterface {
     xAvalaraClient?: string;
     $filter?: string;
     $top?: number;
-    $skip?: Decimal;
+    $skip?: number;
     $count?: boolean;
     $countOnly?: boolean;
 }

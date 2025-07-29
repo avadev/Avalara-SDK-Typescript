@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 <a name="getmandates"></a>
 # **getMandates**
-> MandatesResponse getMandates (string avalaraVersion, string xAvalaraClient, string $filter, number $top, Decimal $skip, boolean $count, boolean $countOnly)
+> MandatesResponse getMandates (string avalaraVersion, string xAvalaraClient, string $filter, number $top, number $skip, boolean $count, boolean $countOnly)
 
 List country mandates that are supported by the Avalara E-Invoicing platform
 
@@ -106,7 +106,7 @@ Name | Type | Description  | Notes
  **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
  **$filter** | **string**| Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. | [optional] [default to undefined]
  **$top** | **number**| The number of items to include in the result. | [optional] [default to undefined]
- **$skip** | **Decimal**| If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] [default to undefined]
+ **$skip** | **number**| The number of items to skip in the result. | [optional] [default to undefined]
  **$count** | **boolean**| When set to true, the count of the collection is also returned in the response body. | [optional] [default to undefined]
  **$countOnly** | **boolean**| When set to true, only the count of the collection is returned | [optional] [default to undefined]
 
