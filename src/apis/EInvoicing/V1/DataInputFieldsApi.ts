@@ -36,7 +36,7 @@ export interface GetDataInputFieldsInterface {
     avalaraVersion?: string;
     xAvalaraClient?: string;
     $filter?: string;
-    $top?: Decimal;
+    $top?: number;
     $skip?: Decimal;
     $count?: boolean;
     $countOnly?: boolean;

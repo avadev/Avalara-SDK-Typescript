@@ -24,9 +24,6 @@ import {
     BadRequest,
     BadRequestFromJSON,
     BadRequestToJSON,
-    Decimal,
-    DecimalFromJSON,
-    DecimalToJSON,
     DocumentFetch,
     DocumentFetchFromJSON,
     DocumentFetchToJSON,
@@ -81,7 +78,7 @@ export interface GetDocumentListInterface {
     $count?: string;
     $countOnly?: string;
     $filter?: string;
-    $top?: Decimal;
+    $top?: number;
     $skip?: string;
 }
 

@@ -99,7 +99,7 @@ export interface ListBatchSearchesInterface {
     xAvalaraClient?: string;
     $filter?: string;
     count?: boolean;
-    $top?: string;
+    $top?: number;
     $skip?: string;
     $orderBy?: string;
     xCorrelationID?: string;
@@ -111,7 +111,7 @@ export interface SearchParticipantsInterface {
     xAvalaraClient?: string;
     count?: boolean;
     $filter?: string;
-    $top?: string;
+    $top?: number;
     $skip?: string;
     $orderBy?: string;
     xCorrelationID?: string;
