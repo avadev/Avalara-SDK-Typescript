@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -31,135 +31,139 @@ export interface FormSingleRequestBase {
      * @type {string}
      * @memberof FormSingleRequestBase
      */
-    readonly type?: FormSingleRequestBaseTypeEnum;
+    type?: FormSingleRequestBaseTypeEnum;
     /**
-     * 
+     * Issuer ID
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     issuerId?: string | null;
     /**
-     * 
+     * Reference ID
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof FormSingleRequestBase
-     */
-    recipientName?: string | null;
-    /**
-     * 
+     * Recipient Tax ID Number
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     recipientTin?: string;
     /**
-     * 
+     * Recipient name
+     * @type {string}
+     * @memberof FormSingleRequestBase
+     */
+    recipientName: string;
+    /**
+     * Type of TIN (Tax ID Number). Will be one of:
+     * * SSN
+     * * EIN
+     * * ITIN
+     * * ATIN
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     tinType?: FormSingleRequestBaseTinTypeEnum;
     /**
-     * 
+     * Recipient second name
      * @type {string}
      * @memberof FormSingleRequestBase
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
-     * 
+     * Address
      * @type {string}
      * @memberof FormSingleRequestBase
      */
-    address?: string;
+    address: string;
     /**
-     * 
+     * Address line 2
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     address2?: string | null;
     /**
-     * 
+     * City
      * @type {string}
      * @memberof FormSingleRequestBase
      */
-    city?: string;
+    city: string;
     /**
-     * 
+     * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     state?: string;
     /**
-     * 
+     * Zip/postal code
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     zip?: string;
     /**
-     * 
+     * Recipient email address
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     recipientEmail?: string | null;
     /**
-     * 
+     * Account number
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     officeCode?: string | null;
     /**
-     * 
+     * Foreign province
      * @type {string}
      * @memberof FormSingleRequestBase
      */
     recipientNonUsProvince?: string | null;
     /**
-     * 
+     * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof FormSingleRequestBase
      */
-    countryCode?: string;
+    countryCode: string;
     /**
-     * 
+     * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof FormSingleRequestBase
      */
     federalEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
      * @memberof FormSingleRequestBase
      */
     postalMail?: boolean;
     /**
-     * 
+     * Boolean indicating that state e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof FormSingleRequestBase
      */
     stateEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
      * @memberof FormSingleRequestBase
      */
     tinMatch?: boolean;
     /**
-     * 
+     * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof FormSingleRequestBase
      */
     addressVerification?: boolean;
     /**
-     * 
+     * State and local withholding information
      * @type {StateAndLocalWithholdingRequest}
      * @memberof FormSingleRequestBase
      */
@@ -171,12 +175,13 @@ export interface FormSingleRequestBase {
 * @enum {string}
 */
 export enum FormSingleRequestBaseTypeEnum {
-    Form1099Nec = 'Form1099Nec',
-    Form1099Misc = 'Form1099Misc',
-    Form1099Div = 'Form1099Div',
-    Form1099R = 'Form1099R',
-    Form1099K = 'Form1099K',
-    Form1095B = 'Form1095B'
+    _1099Nec = '1099-NEC',
+    _1099Misc = '1099-MISC',
+    _1099Div = '1099-DIV',
+    _1099R = '1099-R',
+    _1099K = '1099-K',
+    _1095B = '1095-B',
+    _1042S = '1042-S'
 }/**
 * @export
 * @enum {string}
@@ -193,6 +198,10 @@ export enum FormSingleRequestBaseTinTypeEnum {
  */
 export function instanceOfFormSingleRequestBase(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -210,20 +219,20 @@ export function FormSingleRequestBaseFromJSONTyped(json: any, ignoreDiscriminato
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
+        'recipientName': json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
@@ -242,10 +251,11 @@ export function FormSingleRequestBaseToJSON(value?: FormSingleRequestBase | null
     }
     return {
         
+        'type': value.type,
         'issuerId': value.issuerId,
         'referenceId': value.referenceId,
-        'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
+        'recipientName': value.recipientName,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,

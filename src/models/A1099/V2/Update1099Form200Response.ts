@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -12,6 +12,13 @@
  * Do not edit the class manually.
  */
 
+import type { Form1042SResponse } from './Form1042SResponse';
+import {
+    instanceOfForm1042SResponse,
+    Form1042SResponseFromJSON,
+    Form1042SResponseFromJSONTyped,
+    Form1042SResponseToJSON,
+} from './Form1042SResponse';
 import type { Form1099DivResponse } from './Form1099DivResponse';
 import {
     instanceOfForm1099DivResponse,
@@ -46,7 +53,7 @@ import {
  * 
  * @export
  */
-export type Update1099Form200Response = Form1099DivResponse | Form1099MiscResponse | Form1099NecResponse | FormResponseBase;
+export type Update1099Form200Response = Form1042SResponse | Form1099DivResponse | Form1099MiscResponse | Form1099NecResponse | FormResponseBase;
 
 export function Update1099Form200ResponseFromJSON(json: any): Update1099Form200Response {
     return Update1099Form200ResponseFromJSONTyped(json, false);
@@ -55,6 +62,9 @@ export function Update1099Form200ResponseFromJSON(json: any): Update1099Form200R
 export function Update1099Form200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): Update1099Form200Response {
     if (json == null) {
         return json;
+    }
+    if (instanceOfForm1042SResponse(json)) {
+        return Form1042SResponseFromJSONTyped(json, true);
     }
     if (instanceOfForm1099DivResponse(json)) {
         return Form1099DivResponseFromJSONTyped(json, true);
@@ -75,6 +85,9 @@ export function Update1099Form200ResponseToJSON(value?: Update1099Form200Respons
         return value;
     }
 
+    if (instanceOfForm1042SResponse(value)) {
+        return Form1042SResponseToJSON(value as Form1042SResponse);
+    }
     if (instanceOfForm1099DivResponse(value)) {
         return Form1099DivResponseToJSON(value as Form1099DivResponse);
     }

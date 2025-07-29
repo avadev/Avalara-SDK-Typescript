@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -33,175 +33,179 @@ import {
  */
 export interface Form1095BListItem {
     /**
-     * 
+     * Employee's first name
      * @type {string}
      * @memberof Form1095BListItem
      */
     employeeFirstName?: string;
     /**
-     * 
+     * Employee's middle name
      * @type {string}
      * @memberof Form1095BListItem
      */
     employeeMiddleName?: string | null;
     /**
-     * 
+     * Employee's last name
      * @type {string}
      * @memberof Form1095BListItem
      */
     employeeLastName?: string;
     /**
-     * 
+     * Employee's name suffix
      * @type {string}
      * @memberof Form1095BListItem
      */
     employeeNameSuffix?: string | null;
     /**
-     * 
+     * Employee's date of birth
      * @type {Date}
      * @memberof Form1095BListItem
      */
     employeeDateOfBirth?: Date | null;
     /**
-     * 
+     * Origin of health coverage code
      * @type {string}
      * @memberof Form1095BListItem
      */
     originOfHealthCoverageCode?: Form1095BListItemOriginOfHealthCoverageCodeEnum;
     /**
-     * 
+     * Covered individuals information
      * @type {Array<CoveredIndividualRequest>}
      * @memberof Form1095BListItem
      */
     coveredIndividuals?: Array<CoveredIndividualRequest>;
     /**
-     * 
+     * Issuer ID
      * @type {string}
      * @memberof Form1095BListItem
      */
     issuerId?: string | null;
     /**
-     * 
+     * Reference ID
      * @type {string}
      * @memberof Form1095BListItem
      */
     referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1095BListItem
-     */
-    recipientName?: string | null;
-    /**
-     * 
+     * Recipient Tax ID Number
      * @type {string}
      * @memberof Form1095BListItem
      */
     recipientTin?: string;
     /**
-     * 
+     * Recipient name
+     * @type {string}
+     * @memberof Form1095BListItem
+     */
+    recipientName: string;
+    /**
+     * Type of TIN (Tax ID Number). Will be one of:
+     * * SSN
+     * * EIN
+     * * ITIN
+     * * ATIN
      * @type {string}
      * @memberof Form1095BListItem
      */
     tinType?: Form1095BListItemTinTypeEnum;
     /**
-     * 
+     * Recipient second name
      * @type {string}
      * @memberof Form1095BListItem
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
-     * 
+     * Address
      * @type {string}
      * @memberof Form1095BListItem
      */
-    address?: string;
+    address: string;
     /**
-     * 
+     * Address line 2
      * @type {string}
      * @memberof Form1095BListItem
      */
     address2?: string | null;
     /**
-     * 
+     * City
      * @type {string}
      * @memberof Form1095BListItem
      */
-    city?: string;
+    city: string;
     /**
-     * 
+     * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1095BListItem
      */
     state?: string;
     /**
-     * 
+     * Zip/postal code
      * @type {string}
      * @memberof Form1095BListItem
      */
     zip?: string;
     /**
-     * 
+     * Recipient email address
      * @type {string}
      * @memberof Form1095BListItem
      */
     recipientEmail?: string | null;
     /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1095BListItem
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1095BListItem
      */
     officeCode?: string | null;
     /**
-     * 
+     * Foreign province
      * @type {string}
      * @memberof Form1095BListItem
      */
     recipientNonUsProvince?: string | null;
     /**
-     * 
+     * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof Form1095BListItem
      */
-    countryCode?: string;
+    countryCode: string;
     /**
-     * 
+     * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1095BListItem
      */
     federalEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
      * @memberof Form1095BListItem
      */
     postalMail?: boolean;
     /**
-     * 
+     * Boolean indicating that state e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1095BListItem
      */
     stateEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
      * @memberof Form1095BListItem
      */
     tinMatch?: boolean;
     /**
-     * 
+     * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1095BListItem
      */
     addressVerification?: boolean;
     /**
-     * 
+     * State and local withholding information
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1095BListItem
      */
@@ -213,13 +217,13 @@ export interface Form1095BListItem {
 * @enum {string}
 */
 export enum Form1095BListItemOriginOfHealthCoverageCodeEnum {
-    SmallBusinessHealthOptionsProgram = 'SmallBusinessHealthOptionsProgram',
-    EmployerSponsored = 'EmployerSponsored',
-    GovernmentSponsored = 'GovernmentSponsored',
-    IndividualMarket = 'IndividualMarket',
-    MultiemployerPlan = 'MultiemployerPlan',
-    OtherDesignatedMinimumEssentialCoverage = 'OtherDesignatedMinimumEssentialCoverage',
-    EmployerSponsoredIndividualHra = 'EmployerSponsoredIndividualHra'
+    A = 'A',
+    B = 'B',
+    C = 'C',
+    D = 'D',
+    E = 'E',
+    F = 'F',
+    G = 'G'
 }/**
 * @export
 * @enum {string}
@@ -236,6 +240,10 @@ export enum Form1095BListItemTinTypeEnum {
  */
 export function instanceOfForm1095BListItem(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -259,20 +267,20 @@ export function Form1095BListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'coveredIndividuals': !exists(json, 'coveredIndividuals') ? undefined : ((json['coveredIndividuals'] as Array<any>)?.map(CoveredIndividualRequestFromJSON)),
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
+        'recipientName': json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
@@ -300,8 +308,8 @@ export function Form1095BListItemToJSON(value?: Form1095BListItem | null): any {
         'coveredIndividuals': value.coveredIndividuals === undefined ? undefined : ((value.coveredIndividuals as Array<any>)?.map(CoveredIndividualRequestToJSON)),
         'issuerId': value.issuerId,
         'referenceId': value.referenceId,
-        'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
+        'recipientName': value.recipientName,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,

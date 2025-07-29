@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 
 <a name="getdocumentlist"></a>
 # **getDocumentList**
-> DocumentListResponse getDocumentList (string avalaraVersion, string xAvalaraClient, Date startDate, Date endDate, string flow, string $count, string $countOnly, string $filter, number $top, string $skip)
+> DocumentListResponse getDocumentList (string avalaraVersion, string xAvalaraClient, Date startDate, Date endDate, string flow, string $count, string $countOnly, string $filter, number $top, number $skip)
 
 Returns a summary of documents for a date range
 
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
  **$countOnly** | **string**| When set to true, only the count of the collection is returned | [optional] [default to undefined]
  **$filter** | **string**| Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed. | [optional] [default to undefined]
  **$top** | **number**| The number of items to include in the result. | [optional] [default to undefined]
- **$skip** | **string**| If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] [default to undefined]
+ **$skip** | **number**| The number of items to skip in the result. | [optional] [default to undefined]
 
 ### Return type
 

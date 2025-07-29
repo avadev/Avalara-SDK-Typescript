@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createIssuer**](Issuers1099Api.md#createissuer) | **POST** /1099/issuers | Create an issuer
 [**deleteIssuer**](Issuers1099Api.md#deleteissuer) | **DELETE** /1099/issuers/{id} | Delete an issuer
-[**getIssuer**](Issuers1099Api.md#getissuer) | **GET** /1099/issuers/{id} | Get an issuer
+[**getIssuer**](Issuers1099Api.md#getissuer) | **GET** /1099/issuers/{id} | Retrieve an issuer
 [**getIssuers**](Issuers1099Api.md#getissuers) | **GET** /1099/issuers | List issuers
 [**updateIssuer**](Issuers1099Api.md#updateissuer) | **PUT** /1099/issuers/{id} | Update an issuer
 
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Create an issuer
 
-Create a new issuer
+Create an issuer (also known as a Payer).
 
 ### Example
 ```typescript
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 Delete an issuer
 
-Delete an issuer
+Delete an issuer (also known as a Payer).
 
 ### Example
 ```typescript
@@ -133,9 +133,9 @@ void (empty response body)
 # **getIssuer**
 > IssuerResponse getIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
-Get an issuer
+Retrieve an issuer
 
-Get an issuer
+Retrieve an issuer (also known as a Payer).
 
 ### Example
 ```typescript
@@ -160,7 +160,7 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**|  | [default to undefined]
+ **id** | **string**| Id of the issuer to retrieve | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
 
 List issuers
 
-List issuers for a given tax year. Filterable fields are name, referenceId and taxYear
+List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
 
 ### Example
 ```typescript
@@ -260,7 +260,7 @@ Name | Type | Description  | Notes
 
 Update an issuer
 
-Update an existing issuer
+Update an issuer (also known as a Payer).
 
 ### Example
 ```typescript
@@ -285,7 +285,7 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Id of the issuer to Update | [default to undefined]
+ **id** | **string**| Id of the issuer to update | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]

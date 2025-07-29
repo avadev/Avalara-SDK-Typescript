@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -27,271 +27,275 @@ import {
  */
 export interface Form1099KListItem {
     /**
-     * 
+     * Filer type (PSE or EPF)
      * @type {string}
      * @memberof Form1099KListItem
      */
     filerType?: Form1099KListItemFilerTypeEnum;
     /**
-     * 
+     * Payment type (payment card or third party network)
      * @type {string}
      * @memberof Form1099KListItem
      */
     paymentType?: Form1099KListItemPaymentTypeEnum;
     /**
-     * 
+     * Payment settlement entity name and phone number
      * @type {string}
      * @memberof Form1099KListItem
      */
     paymentSettlementEntityNamePhoneNumber?: string | null;
     /**
-     * 
+     * Gross amount of payment card/third party network transactions
      * @type {number}
      * @memberof Form1099KListItem
      */
     grossAmountPaymentCard?: number;
     /**
-     * 
+     * Card not present transactions
      * @type {number}
      * @memberof Form1099KListItem
      */
     cardNotPresentTransactions?: number | null;
     /**
-     * 
+     * Merchant category code
      * @type {string}
      * @memberof Form1099KListItem
      */
     merchantCategoryCode?: string | null;
     /**
-     * 
+     * Number of payment transactions
      * @type {number}
      * @memberof Form1099KListItem
      */
     paymentTransactionNumber?: number;
     /**
-     * 
+     * Federal income tax withheld
      * @type {number}
      * @memberof Form1099KListItem
      */
     federalIncomeTaxWithheld?: number | null;
     /**
-     * 
+     * January gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     january?: number | null;
     /**
-     * 
+     * February gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     february?: number | null;
     /**
-     * 
+     * March gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     march?: number | null;
     /**
-     * 
+     * April gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     april?: number | null;
     /**
-     * 
+     * May gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     may?: number | null;
     /**
-     * 
+     * June gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     june?: number | null;
     /**
-     * 
+     * July gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     july?: number | null;
     /**
-     * 
+     * August gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     august?: number | null;
     /**
-     * 
+     * September gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     sept?: number | null;
     /**
-     * 
+     * October gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     october?: number | null;
     /**
-     * 
+     * November gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     november?: number | null;
     /**
-     * 
+     * December gross payments
      * @type {number}
      * @memberof Form1099KListItem
      */
     december?: number | null;
     /**
-     * 
+     * Issuer Reference ID. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099KListItem
      */
     issuerReferenceId?: string;
     /**
-     * 
+     * Issuer TIN. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099KListItem
      */
     issuerTin?: string;
     /**
-     * 
+     * Tax year
      * @type {number}
      * @memberof Form1099KListItem
      */
-    taxYear?: number;
+    taxYear: number;
     /**
-     * 
+     * Issuer ID
      * @type {string}
      * @memberof Form1099KListItem
      */
     issuerId?: string | null;
     /**
-     * 
+     * Reference ID
      * @type {string}
      * @memberof Form1099KListItem
      */
     referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099KListItem
-     */
-    recipientName?: string | null;
-    /**
-     * 
+     * Recipient Tax ID Number
      * @type {string}
      * @memberof Form1099KListItem
      */
     recipientTin?: string;
     /**
-     * 
+     * Recipient name
+     * @type {string}
+     * @memberof Form1099KListItem
+     */
+    recipientName: string;
+    /**
+     * Type of TIN (Tax ID Number). Will be one of:
+     * * SSN
+     * * EIN
+     * * ITIN
+     * * ATIN
      * @type {string}
      * @memberof Form1099KListItem
      */
     tinType?: Form1099KListItemTinTypeEnum;
     /**
-     * 
+     * Recipient second name
      * @type {string}
      * @memberof Form1099KListItem
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
-     * 
+     * Address
      * @type {string}
      * @memberof Form1099KListItem
      */
-    address?: string;
+    address: string;
     /**
-     * 
+     * Address line 2
      * @type {string}
      * @memberof Form1099KListItem
      */
     address2?: string | null;
     /**
-     * 
+     * City
      * @type {string}
      * @memberof Form1099KListItem
      */
-    city?: string;
+    city: string;
     /**
-     * 
+     * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1099KListItem
      */
     state?: string;
     /**
-     * 
+     * Zip/postal code
      * @type {string}
      * @memberof Form1099KListItem
      */
     zip?: string;
     /**
-     * 
+     * Recipient email address
      * @type {string}
      * @memberof Form1099KListItem
      */
     recipientEmail?: string | null;
     /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1099KListItem
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1099KListItem
      */
     officeCode?: string | null;
     /**
-     * 
+     * Foreign province
      * @type {string}
      * @memberof Form1099KListItem
      */
     recipientNonUsProvince?: string | null;
     /**
-     * 
+     * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof Form1099KListItem
      */
-    countryCode?: string;
+    countryCode: string;
     /**
-     * 
+     * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099KListItem
      */
     federalEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099KListItem
      */
     postalMail?: boolean;
     /**
-     * 
+     * Boolean indicating that state e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099KListItem
      */
     stateEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099KListItem
      */
     tinMatch?: boolean;
     /**
-     * 
+     * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099KListItem
      */
     addressVerification?: boolean;
     /**
-     * 
+     * State and local withholding information
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099KListItem
      */
@@ -329,6 +333,11 @@ export enum Form1099KListItemTinTypeEnum {
  */
 export function instanceOfForm1099KListItem(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "taxYear" in value;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -365,23 +374,23 @@ export function Form1099KListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'december': !exists(json, 'december') ? undefined : json['december'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
+        'taxYear': json['taxYear'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
+        'recipientName': json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
@@ -425,8 +434,8 @@ export function Form1099KListItemToJSON(value?: Form1099KListItem | null): any {
         'taxYear': value.taxYear,
         'issuerId': value.issuerId,
         'referenceId': value.referenceId,
-        'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
+        'recipientName': value.recipientName,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,

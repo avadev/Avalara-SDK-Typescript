@@ -4,22 +4,22 @@ All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/a
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bulkUpsert1099Forms**](Forms1099Api.md#bulkupsert1099formsoperation) | **POST** /1099/forms/$bulk-upsert | Creates or updates multiple 1099 forms.
-[**create1099Form**](Forms1099Api.md#create1099form) | **POST** /1099/forms | Creates a 1099 form.
-[**delete1099Form**](Forms1099Api.md#delete1099form) | **DELETE** /1099/forms/{id} | Deletes a 1099 form.
-[**get1099Form**](Forms1099Api.md#get1099form) | **GET** /1099/forms/{id} | Retrieves a 1099 form.
-[**get1099FormPdf**](Forms1099Api.md#get1099formpdf) | **GET** /1099/forms/{id}/pdf | Retrieves the PDF file for a single 1099 by form id.
-[**list1099Forms**](Forms1099Api.md#list1099forms) | **GET** /1099/forms | Retrieves a list of 1099 forms based on query parameters.
-[**update1099Form**](Forms1099Api.md#update1099form) | **PUT** /1099/forms/{id} | Updates a 1099 form.
+[**bulkUpsert1099Forms**](Forms1099Api.md#bulkupsert1099formsoperation) | **POST** /1099/forms/$bulk-upsert | Create or update multiple 1099/1095/W2/1042S forms
+[**create1099Form**](Forms1099Api.md#create1099form) | **POST** /1099/forms | Create a 1099/1095/W2/1042S form
+[**delete1099Form**](Forms1099Api.md#delete1099form) | **DELETE** /1099/forms/{id} | Delete a 1099/1095/W2/1042S form
+[**get1099Form**](Forms1099Api.md#get1099form) | **GET** /1099/forms/{id} | Retrieve a 1099/1095/W2/1042S form
+[**get1099FormPdf**](Forms1099Api.md#get1099formpdf) | **GET** /1099/forms/{id}/pdf | Retrieve the PDF file for a 1099/1095/W2/1042S form
+[**list1099Forms**](Forms1099Api.md#list1099forms) | **GET** /1099/forms | List 1099/1095/W2/1042S forms
+[**update1099Form**](Forms1099Api.md#update1099form) | **PUT** /1099/forms/{id} | Update a 1099/1095/W2/1042S form
 
 
 <a name="bulkupsert1099formsoperation"></a>
 # **bulkUpsert1099Forms**
 > Form1099ProccessResult bulkUpsert1099Forms (string avalaraVersion, boolean dryRun, string xCorrelationId, string xAvalaraClient, BulkUpsert1099FormsRequest bulkUpsert1099FormsRequest)
 
-Creates or updates multiple 1099 forms.
+Create or update multiple 1099/1095/W2/1042S forms
 
-This endpoint allows you to create or update multiple 1099 forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  ```json  {     \"formType\": \"1099-MISC\",     \"forms\": [         {             \"IssuerId\": \"123456\",             \"IssuerReferenceId\": \"REF123\",             \"IssuerTin\": \"12-3456789\",             \"TaxYear\": 2023,             \"ReferenceId\": \"FORM123456\",             \"RecipientName\": \"John Doe\",             \"RecipientTin\": \"987-65-4321\",             \"TinType\": \"IEN\",             \"RecipientSecondName\": \"Jane Doe\",             \"Address\": \"123 Main Street\",             \"Address2\": \"Apt 4B\",             \"City\": \"New York\",             \"State\": \"NY\",             \"Zip\": \"10001\",             \"RecipientEmail\": \"john.doe@email.com\",             \"AccountNumber\": \"ACC123456\",             \"OfficeCode\": \"NYC01\",             \"SecondTinNotice\": false,             \"RecipientNonUsProvince\": \"\",             \"CountryCode\": \"US\",             \"Rents\": 12000.00,             \"Royalties\": 5000.00,             \"OtherIncome\": 3000.00,             \"FishingBoatProceeds\": 0.00,             \"MedicalHealthCarePayments\": 15000.00,             \"SubstitutePayments\": 1000.00,             \"CropInsuranceProceeds\": 0.00,             \"GrossProceedsPaidToAttorney\": 7500.00,             \"FishPurchasedForResale\": 0.00,             \"FedIncomeTaxWithheld\": 5000.00,             \"Section409ADeferrals\": 0.00,             \"ExcessGoldenParachutePayments\": 0.00,             \"NonqualifiedDeferredCompensation\": 0.00,             \"PayerMadeDirectSales\": false,             \"FatcaFilingRequirement\": false,             \"StateAndLocalWithholding\": {               \"StateTaxWithheld\": 2500.00,               \"LocalTaxWithheld\": 1000.00,               \"State\": \"NY\",               \"StateIdNumber\": \"NY123456\",               \"Locality\": \"New York City\",               \"StateIncome\": 35000.00,               \"LocalIncome\": 35000.00             }         }     ]  }  ```                **Form 1099-NEC:**  ```json  {    \"formType\": \"1099-NEC\",    \"forms\": [      {        \"issuerID\": \"180337282\",        \"issuerReferenceId\": \"ISS123\",        \"issuerTin\": \"12-3000000\",        \"taxYear\": 2024,        \"referenceID\": \"REF-002\",        \"recipientName\": \"Jane Smith\",        \"recipientSecondName\": \"\",        \"recipientTin\": \"987-65-4321\",        \"tinType\": \"IEN\",        \"address\": \"123 Center St\",        \"address2\": \"\",        \"city\": \"Santa Monica\",        \"state\": \"CA\",        \"zip\": \"90401\",        \"countryCode\": \"US\",        \"recipientNonUsProvince\": \"\",        \"recipientEmail\": \"\",        \"accountNumber\": \"\",        \"officeCode\": \"\",        \"secondTinNotice\": false,        \"nonemployeeCompensation\": 123.45,        \"payerMadeDirectSales\": false,        \"federalIncomeTaxWithheld\": 12.34,        \"stateAndLocalWithholding\": {          \"state\": \"CA\",          \"stateIdNumber\": \"123123123\"          \"stateIncome\": 123.45,          \"stateTaxWithheld\": 12.34,          \"locality\": \"Santa Monica\",          \"localityIdNumber\": \"456456\",          \"localTaxWithheld\": 12.34          \"localIncome\": 50000.00         },        \"federalEFile\": true,        \"postalMail\": true,        \"stateEFile\": true,        \"tinMatch\": true,        \"addressVerification\": true       }     ]   }  ```  For the full version of the payload and its schema details, refer to the Swagger schemas section.
+This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  ```json  {     \"formType\": \"1099-MISC\",     \"forms\": [         {             \"IssuerId\": \"123456\",             \"IssuerReferenceId\": \"REF123\",             \"IssuerTin\": \"12-3456789\",             \"TaxYear\": 2023,             \"ReferenceId\": \"FORM123456\",             \"RecipientName\": \"John Doe\",             \"RecipientTin\": \"587-65-4321\",             \"TinType\": \"SSN\",             \"RecipientSecondName\": \"Jane Doe\",             \"Address\": \"123 Main Street\",             \"Address2\": \"Apt 4B\",             \"City\": \"New York\",             \"State\": \"NY\",             \"Zip\": \"10001\",             \"RecipientEmail\": \"john.doe@email.com\",             \"AccountNumber\": \"ACC123456\",             \"OfficeCode\": \"NYC01\",             \"SecondTinNotice\": false,             \"RecipientNonUsProvince\": \"\",             \"CountryCode\": \"US\",             \"Rents\": 12000.00,             \"Royalties\": 5000.00,             \"OtherIncome\": 3000.00,             \"FishingBoatProceeds\": 0.00,             \"MedicalHealthCarePayments\": 15000.00,             \"SubstitutePayments\": 1000.00,             \"CropInsuranceProceeds\": 0.00,             \"GrossProceedsPaidToAttorney\": 7500.00,             \"FishPurchasedForResale\": 0.00,             \"FedIncomeTaxWithheld\": 5000.00,             \"Section409ADeferrals\": 0.00,             \"ExcessGoldenParachutePayments\": 0.00,             \"NonqualifiedDeferredCompensation\": 0.00,             \"DirectSalesIndicator\": false,             \"FatcaFilingRequirement\": false,             \"StateAndLocalWithholding\": {               \"StateTaxWithheld\": 2500.00,               \"LocalTaxWithheld\": 1000.00,               \"State\": \"NY\",               \"StateIdNumber\": \"NY123456\",               \"Locality\": \"New York City\",               \"StateIncome\": 35000.00,               \"LocalIncome\": 35000.00             }         }     ]  }  ```                **Form 1099-NEC:**  ```json  {    \"formType\": \"1099-NEC\",    \"forms\": [      {        \"issuerID\": \"180337282\",        \"issuerReferenceId\": \"ISS123\",        \"issuerTin\": \"12-3000000\",        \"taxYear\": 2024,        \"referenceID\": \"REF-002\",        \"recipientName\": \"Jane Smith\",        \"recipientSecondName\": \"\",        \"recipientTin\": \"587-65-4321\",        \"tinType\": \"SSN\",        \"address\": \"123 Center St\",        \"address2\": \"\",        \"city\": \"Santa Monica\",        \"state\": \"CA\",        \"zip\": \"90401\",        \"countryCode\": \"US\",        \"recipientNonUsProvince\": \"\",        \"recipientEmail\": \"\",        \"accountNumber\": \"\",        \"officeCode\": \"\",        \"secondTinNotice\": false,        \"nonemployeeCompensation\": 123.45,        \"directSalesIndicator\": false,        \"federalIncomeTaxWithheld\": 12.34,        \"stateAndLocalWithholding\": {          \"state\": \"CA\",          \"stateIdNumber\": \"123123123\",          \"stateIncome\": 123.45,          \"stateTaxWithheld\": 12.34,          \"locality\": \"Santa Monica\",          \"localityIdNumber\": \"456456\",          \"localTaxWithheld\": 12.34,          \"localIncome\": 50000.00         },        \"federalEFile\": true,        \"postalMail\": true,        \"stateEFile\": true,        \"tinMatch\": true,        \"addressVerification\": true       }     ]   }  ```  For the full version of the payload and its schema details, refer to the Swagger schemas section.
 
 ### Example
 ```typescript
@@ -77,9 +77,11 @@ Name | Type | Description  | Notes
 
 <a name="create1099form"></a>
 # **create1099Form**
-> Get1099Form200Response create1099Form (string avalaraVersion, string xCorrelationId, string xAvalaraClient, ICreateForm1099Request iCreateForm1099Request)
+> Create1099Form201Response create1099Form (string avalaraVersion, string xCorrelationId, string xAvalaraClient, ICreateForm1099Request iCreateForm1099Request)
 
-Creates a 1099 form.
+Create a 1099/1095/W2/1042S form
+
+Create a 1099/1095/W2/1042S form.
 
 ### Example
 ```typescript
@@ -111,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Get1099Form200Response**](Get1099Form200Response.md)
+[**Create1099Form201Response**](Create1099Form201Response.md)
 
 ### Authorization
 
@@ -137,7 +139,9 @@ Name | Type | Description  | Notes
 # **delete1099Form**
 > void delete1099Form (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
-Deletes a 1099 form.
+Delete a 1099/1095/W2/1042S form
+
+Delete a 1099/1095/W2/1042S form.
 
 ### Example
 ```typescript
@@ -197,7 +201,9 @@ void (empty response body)
 # **get1099Form**
 > Get1099Form200Response get1099Form (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
-Retrieves a 1099 form.
+Retrieve a 1099/1095/W2/1042S form
+
+Retrieve a 1099/1095/W2/1042S form.
 
 ### Example
 ```typescript
@@ -254,9 +260,11 @@ Name | Type | Description  | Notes
 
 <a name="get1099formpdf"></a>
 # **get1099FormPdf**
-> Update1099Form200Response get1099FormPdf (string id, string avalaraVersion, boolean markEdelivered, string xCorrelationId, string xAvalaraClient)
+> Blob get1099FormPdf (string id, string avalaraVersion, boolean markEdelivered, string xCorrelationId, string xAvalaraClient)
 
-Retrieves the PDF file for a single 1099 by form id.
+Retrieve the PDF file for a 1099/1095/W2/1042S form
+
+Retrieve the PDF file for a 1099/1095/W2/1042S form.
 
 ### Example
 ```typescript
@@ -281,15 +289,15 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**|  | [default to undefined]
+ **id** | **string**| The ID of the form | [default to undefined]
  **avalaraVersion** | **string**| API version | [default to undefined]
- **markEdelivered** | **boolean**| The parameter for marked e-delivered | [optional] [default to undefined]
+ **markEdelivered** | **boolean**| Optional boolean that if set indicates that the form should be marked as having been successfully edelivered | [optional] [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
-[**Update1099Form200Response**](Update1099Form200Response.md)
+**Blob**
 
 ### Authorization
 
@@ -298,7 +306,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/pdf, application/json
 
 
 ### HTTP response details
@@ -314,9 +322,11 @@ Name | Type | Description  | Notes
 
 <a name="list1099forms"></a>
 # **list1099Forms**
-> Form1099List list1099Forms (string avalaraVersion, string $filter, number $top, number $skip, string $orderBy, string xCorrelationId, string xAvalaraClient)
+> Form1099ListResponse list1099Forms (string avalaraVersion, string $filter, number $top, number $skip, string $orderBy, string xCorrelationId, string xAvalaraClient)
 
-Retrieves a list of 1099 forms based on query parameters.
+List 1099/1095/W2/1042S forms
+
+List 1099/1095/W2/1042S forms. Filterable fields are name, referenceId and taxYear.
 
 ### Example
 ```typescript
@@ -351,7 +361,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Form1099List**](Form1099List.md)
+[**Form1099ListResponse**](Form1099ListResponse.md)
 
 ### Authorization
 
@@ -378,7 +388,9 @@ Name | Type | Description  | Notes
 # **update1099Form**
 > Update1099Form200Response update1099Form (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, IUpdateForm1099Request iUpdateForm1099Request)
 
-Updates a 1099 form.
+Update a 1099/1095/W2/1042S form
+
+Update a 1099/1095/W2/1042S form.
 
 ### Example
 ```typescript

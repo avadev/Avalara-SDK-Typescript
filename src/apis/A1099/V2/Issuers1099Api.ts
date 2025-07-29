@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -77,14 +77,14 @@ export interface UpdateIssuerInterface {
  * 
  */
 export class Issuers1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.7.2';
+    public sdkVersion: string = '25.8.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
     }
 
     /**
-     * Create a new issuer
+     * Create an issuer (also known as a Payer).
      * Create an issuer
      */
     async createIssuerRaw(requestParameters: CreateIssuerInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IssuerResponse>, logObject: LogObject }> {
@@ -125,7 +125,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Create a new issuer
+     * Create an issuer (also known as a Payer).
      * Create an issuer
      */
     async createIssuer(requestParameters: CreateIssuerInterface, initOverrides?: RequestInit): Promise<IssuerResponse> {
@@ -137,7 +137,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Delete an issuer
+     * Delete an issuer (also known as a Payer).
      * Delete an issuer
      */
     async deleteIssuerRaw(requestParameters: DeleteIssuerInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
@@ -179,7 +179,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Delete an issuer
+     * Delete an issuer (also known as a Payer).
      * Delete an issuer
      */
     async deleteIssuer(requestParameters: DeleteIssuerInterface, initOverrides?: RequestInit): Promise<void> {
@@ -189,8 +189,8 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Get an issuer
-     * Get an issuer
+     * Retrieve an issuer (also known as a Payer).
+     * Retrieve an issuer
      */
     async getIssuerRaw(requestParameters: GetIssuerInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IssuerResponse>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
@@ -231,8 +231,8 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Get an issuer
-     * Get an issuer
+     * Retrieve an issuer (also known as a Payer).
+     * Retrieve an issuer
      */
     async getIssuer(requestParameters: GetIssuerInterface, initOverrides?: RequestInit): Promise<IssuerResponse> {
         const { response, logObject } = await this.getIssuerRaw(requestParameters, initOverrides);
@@ -243,7 +243,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * List issuers for a given tax year. Filterable fields are name, referenceId and taxYear
+     * List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
      * List issuers
      */
     async getIssuersRaw(requestParameters: GetIssuersInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<PaginatedQueryResultModelIssuerResponse>, logObject: LogObject }> {
@@ -305,7 +305,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * List issuers for a given tax year. Filterable fields are name, referenceId and taxYear
+     * List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
      * List issuers
      */
     async getIssuers(requestParameters: GetIssuersInterface, initOverrides?: RequestInit): Promise<PaginatedQueryResultModelIssuerResponse> {
@@ -317,7 +317,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Update an existing issuer
+     * Update an issuer (also known as a Payer).
      * Update an issuer
      */
     async updateIssuerRaw(requestParameters: UpdateIssuerInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
@@ -362,7 +362,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Update an existing issuer
+     * Update an issuer (also known as a Payer).
      * Update an issuer
      */
     async updateIssuer(requestParameters: UpdateIssuerInterface, initOverrides?: RequestInit): Promise<void> {

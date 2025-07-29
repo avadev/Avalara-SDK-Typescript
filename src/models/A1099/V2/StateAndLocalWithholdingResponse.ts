@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -20,49 +20,49 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface StateAndLocalWithholdingResponse {
     /**
-     * 
+     * Amount of state tax that was withheld
      * @type {number}
      * @memberof StateAndLocalWithholdingResponse
      */
     stateTaxWithheld?: number;
     /**
-     * 
+     * US state
      * @type {string}
      * @memberof StateAndLocalWithholdingResponse
      */
     state?: string;
     /**
-     * 
+     * State ID number of the entity issuing the form
      * @type {string}
      * @memberof StateAndLocalWithholdingResponse
      */
     stateIdNumber?: string;
     /**
-     * 
+     * Amount of state income
      * @type {number}
      * @memberof StateAndLocalWithholdingResponse
      */
     stateIncome?: number;
     /**
-     * 
+     * Amount of local tax that was withheld
      * @type {number}
      * @memberof StateAndLocalWithholdingResponse
      */
     localTaxWithheld?: number;
     /**
-     * 
+     * Locality name
      * @type {string}
      * @memberof StateAndLocalWithholdingResponse
      */
     locality?: string;
     /**
-     * 
+     * Locality ID number of the entity issuing the form
      * @type {string}
      * @memberof StateAndLocalWithholdingResponse
      */
     localityIdNumber?: string | null;
     /**
-     * 
+     * Amount of local income
      * @type {number}
      * @memberof StateAndLocalWithholdingResponse
      */

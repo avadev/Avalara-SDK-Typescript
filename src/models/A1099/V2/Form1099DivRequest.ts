@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -27,115 +27,115 @@ import {
  */
 export interface Form1099DivRequest {
     /**
-     * 
+     * Total ordinary dividends
      * @type {string}
      * @memberof Form1099DivRequest
      */
     totalOrdinaryDividends?: string;
     /**
-     * 
+     * Qualified dividends
      * @type {string}
      * @memberof Form1099DivRequest
      */
     qualifiedDividends?: string;
     /**
-     * 
+     * Total capital gain distributions
      * @type {string}
      * @memberof Form1099DivRequest
      */
     totalCapitalGainDistr?: string;
     /**
-     * 
+     * Unrecaptured Section 1250 gain
      * @type {string}
      * @memberof Form1099DivRequest
      */
     unrecapSec1250Gain?: string;
     /**
-     * 
+     * Section 1202 gain
      * @type {string}
      * @memberof Form1099DivRequest
      */
     section1202Gain?: string;
     /**
-     * 
+     * Collectibles (28%) gain
      * @type {string}
      * @memberof Form1099DivRequest
      */
     collectiblesGain?: string;
     /**
-     * 
+     * Section 897 ordinary dividends
      * @type {string}
      * @memberof Form1099DivRequest
      */
     section897OrdinaryDividends?: string;
     /**
-     * 
+     * Section 897 capital gain
      * @type {string}
      * @memberof Form1099DivRequest
      */
     section897CapitalGain?: string;
     /**
-     * 
+     * Nondividend distributions
      * @type {string}
      * @memberof Form1099DivRequest
      */
     nondividendDistributions?: string;
     /**
-     * 
+     * Federal income tax withheld
      * @type {string}
      * @memberof Form1099DivRequest
      */
     federalIncomeTaxWithheld?: string;
     /**
-     * 
+     * Section 199A dividends
      * @type {string}
      * @memberof Form1099DivRequest
      */
     section199ADividends?: string;
     /**
-     * 
+     * Investment expenses
      * @type {string}
      * @memberof Form1099DivRequest
      */
     investmentExpenses?: string;
     /**
-     * 
+     * Foreign tax paid
      * @type {string}
      * @memberof Form1099DivRequest
      */
     foreignTaxPaid?: string;
     /**
-     * 
+     * Foreign country or U.S. possession
      * @type {string}
      * @memberof Form1099DivRequest
      */
     foreignCountryOrUSPossession?: string;
     /**
-     * 
+     * Cash liquidation distributions
      * @type {string}
      * @memberof Form1099DivRequest
      */
     cashLiquidationDistributions?: string;
     /**
-     * 
+     * Noncash liquidation distributions
      * @type {string}
      * @memberof Form1099DivRequest
      */
     noncashLiquidationDistributions?: string;
     /**
-     * 
+     * Exempt-interest dividends
      * @type {string}
      * @memberof Form1099DivRequest
      */
     exemptInterestDividends?: string;
     /**
-     * 
+     * Specified private activity bond interest dividends
      * @type {string}
      * @memberof Form1099DivRequest
      */
     specifiedPrivateActivityBondInterestDividends?: string;
     /**
-     * 
+     * FATCA filing requirement
      * @type {string}
      * @memberof Form1099DivRequest
      */
@@ -145,135 +145,139 @@ export interface Form1099DivRequest {
      * @type {string}
      * @memberof Form1099DivRequest
      */
-    readonly type?: Form1099DivRequestTypeEnum;
+    type?: Form1099DivRequestTypeEnum;
     /**
-     * 
+     * Issuer ID
      * @type {string}
      * @memberof Form1099DivRequest
      */
     issuerId?: string | null;
     /**
-     * 
+     * Reference ID
      * @type {string}
      * @memberof Form1099DivRequest
      */
     referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099DivRequest
-     */
-    recipientName?: string | null;
-    /**
-     * 
+     * Recipient Tax ID Number
      * @type {string}
      * @memberof Form1099DivRequest
      */
     recipientTin?: string;
     /**
-     * 
+     * Recipient name
+     * @type {string}
+     * @memberof Form1099DivRequest
+     */
+    recipientName: string;
+    /**
+     * Type of TIN (Tax ID Number). Will be one of:
+     * * SSN
+     * * EIN
+     * * ITIN
+     * * ATIN
      * @type {string}
      * @memberof Form1099DivRequest
      */
     tinType?: Form1099DivRequestTinTypeEnum;
     /**
-     * 
+     * Recipient second name
      * @type {string}
      * @memberof Form1099DivRequest
      */
-    recipientSecondName?: string;
+    recipientSecondName?: string | null;
     /**
-     * 
+     * Address
      * @type {string}
      * @memberof Form1099DivRequest
      */
-    address?: string;
+    address: string;
     /**
-     * 
+     * Address line 2
      * @type {string}
      * @memberof Form1099DivRequest
      */
     address2?: string | null;
     /**
-     * 
+     * City
      * @type {string}
      * @memberof Form1099DivRequest
      */
-    city?: string;
+    city: string;
     /**
-     * 
+     * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1099DivRequest
      */
     state?: string;
     /**
-     * 
+     * Zip/postal code
      * @type {string}
      * @memberof Form1099DivRequest
      */
     zip?: string;
     /**
-     * 
+     * Recipient email address
      * @type {string}
      * @memberof Form1099DivRequest
      */
     recipientEmail?: string | null;
     /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1099DivRequest
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1099DivRequest
      */
     officeCode?: string | null;
     /**
-     * 
+     * Foreign province
      * @type {string}
      * @memberof Form1099DivRequest
      */
     recipientNonUsProvince?: string | null;
     /**
-     * 
+     * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof Form1099DivRequest
      */
-    countryCode?: string;
+    countryCode: string;
     /**
-     * 
+     * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099DivRequest
      */
     federalEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099DivRequest
      */
     postalMail?: boolean;
     /**
-     * 
+     * Boolean indicating that state e-filing should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099DivRequest
      */
     stateEFile?: boolean;
     /**
-     * 
+     * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099DivRequest
      */
     tinMatch?: boolean;
     /**
-     * 
+     * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099DivRequest
      */
     addressVerification?: boolean;
     /**
-     * 
+     * State and local withholding information
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099DivRequest
      */
@@ -285,12 +289,13 @@ export interface Form1099DivRequest {
 * @enum {string}
 */
 export enum Form1099DivRequestTypeEnum {
-    Form1099Nec = 'Form1099Nec',
-    Form1099Misc = 'Form1099Misc',
-    Form1099Div = 'Form1099Div',
-    Form1099R = 'Form1099R',
-    Form1099K = 'Form1099K',
-    Form1095B = 'Form1095B'
+    _1099Nec = '1099-NEC',
+    _1099Misc = '1099-MISC',
+    _1099Div = '1099-DIV',
+    _1099R = '1099-R',
+    _1099K = '1099-K',
+    _1095B = '1095-B',
+    _1042S = '1042-S'
 }/**
 * @export
 * @enum {string}
@@ -307,6 +312,10 @@ export enum Form1099DivRequestTinTypeEnum {
  */
 export function instanceOfForm1099DivRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -343,20 +352,20 @@ export function Form1099DivRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
+        'recipientName': json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
@@ -394,10 +403,11 @@ export function Form1099DivRequestToJSON(value?: Form1099DivRequest | null): any
         'exemptInterestDividends': value.exemptInterestDividends,
         'specifiedPrivateActivityBondInterestDividends': value.specifiedPrivateActivityBondInterestDividends,
         'fatcaFilingRequirement': value.fatcaFilingRequirement,
+        'type': value.type,
         'issuerId': value.issuerId,
         'referenceId': value.referenceId,
-        'recipientName': value.recipientName,
         'recipientTin': value.recipientTin,
+        'recipientName': value.recipientName,
         'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,

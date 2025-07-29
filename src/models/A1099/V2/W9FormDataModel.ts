@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -1683,9 +1683,9 @@ export function W9FormDataModelToJSON(value?: W9FormDataModel | null): any {
         'certifyBox41': value.certifyBox41,
         'certifyBox43': value.certifyBox43,
         'certifyPart29Signature': value.certifyPart29Signature,
-        'part19FormationOrResolutionDate': value.part19FormationOrResolutionDate === undefined ? undefined : (value.part19FormationOrResolutionDate === null ? null : value.part19FormationOrResolutionDate.toISOString()),
-        'part20FilingDate': value.part20FilingDate === undefined ? undefined : (value.part20FilingDate === null ? null : value.part20FilingDate.toISOString()),
-        'part21DeterminationDate': value.part21DeterminationDate === undefined ? undefined : (value.part21DeterminationDate === null ? null : value.part21DeterminationDate.toISOString()),
+        'part19FormationOrResolutionDate': value.part19FormationOrResolutionDate === undefined ? undefined : (value.part19FormationOrResolutionDate === null ? null : value.part19FormationOrResolutionDate.toISOString().substr(0,10)),
+        'part20FilingDate': value.part20FilingDate === undefined ? undefined : (value.part20FilingDate === null ? null : value.part20FilingDate.toISOString().substr(0,10)),
+        'part21DeterminationDate': value.part21DeterminationDate === undefined ? undefined : (value.part21DeterminationDate === null ? null : value.part21DeterminationDate.toISOString().substr(0,10)),
         'substantialUsOwners': value.substantialUsOwners === undefined ? undefined : ((value.substantialUsOwners as Array<any>)?.map(W8BenESubstantialUsOwnerDataModelToJSON)),
         'birthday': value.birthday,
         'foreignTinNotRequired': value.foreignTinNotRequired,
@@ -1764,7 +1764,7 @@ export function W9FormDataModelToJSON(value?: W9FormDataModel | null): any {
         'certifyBox40': value.certifyBox40,
         'box41SponsoringEntity': value.box41SponsoringEntity,
         'certifyBox42': value.certifyBox42,
-        'box35FormedOnDate': value.box35FormedOnDate === undefined ? undefined : (value.box35FormedOnDate === null ? null : value.box35FormedOnDate.toISOString()),
-        'box36FiledOnDate': value.box36FiledOnDate === undefined ? undefined : (value.box36FiledOnDate === null ? null : value.box36FiledOnDate.toISOString()),
+        'box35FormedOnDate': value.box35FormedOnDate === undefined ? undefined : (value.box35FormedOnDate === null ? null : value.box35FormedOnDate.toISOString().substr(0,10)),
+        'box36FiledOnDate': value.box36FiledOnDate === undefined ? undefined : (value.box36FiledOnDate === null ? null : value.box36FiledOnDate.toISOString().substr(0,10)),
     };
 }
