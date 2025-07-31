@@ -26,6 +26,13 @@ import {
     Form1099DivResponseFromJSONTyped,
     Form1099DivResponseToJSON,
 } from './Form1099DivResponse';
+import type { Form1099KResponse } from './Form1099KResponse';
+import {
+    instanceOfForm1099KResponse,
+    Form1099KResponseFromJSON,
+    Form1099KResponseFromJSONTyped,
+    Form1099KResponseToJSON,
+} from './Form1099KResponse';
 import type { Form1099MiscResponse } from './Form1099MiscResponse';
 import {
     instanceOfForm1099MiscResponse,
@@ -53,7 +60,7 @@ import {
  * 
  * @export
  */
-export type Update1099Form200Response = Form1042SResponse | Form1099DivResponse | Form1099MiscResponse | Form1099NecResponse | FormResponseBase;
+export type Update1099Form200Response = Form1042SResponse | Form1099DivResponse | Form1099KResponse | Form1099MiscResponse | Form1099NecResponse | FormResponseBase;
 
 export function Update1099Form200ResponseFromJSON(json: any): Update1099Form200Response {
     return Update1099Form200ResponseFromJSONTyped(json, false);
@@ -68,6 +75,9 @@ export function Update1099Form200ResponseFromJSONTyped(json: any, ignoreDiscrimi
     }
     if (instanceOfForm1099DivResponse(json)) {
         return Form1099DivResponseFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099KResponse(json)) {
+        return Form1099KResponseFromJSONTyped(json, true);
     }
     if (instanceOfForm1099MiscResponse(json)) {
         return Form1099MiscResponseFromJSONTyped(json, true);
@@ -90,6 +100,9 @@ export function Update1099Form200ResponseToJSON(value?: Update1099Form200Respons
     }
     if (instanceOfForm1099DivResponse(value)) {
         return Form1099DivResponseToJSON(value as Form1099DivResponse);
+    }
+    if (instanceOfForm1099KResponse(value)) {
+        return Form1099KResponseToJSON(value as Form1099KResponse);
     }
     if (instanceOfForm1099MiscResponse(value)) {
         return Form1099MiscResponseToJSON(value as Form1099MiscResponse);

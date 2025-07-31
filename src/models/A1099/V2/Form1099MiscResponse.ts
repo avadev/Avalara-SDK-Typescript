@@ -46,12 +46,6 @@ import {
 export interface Form1099MiscResponse {
     /**
      * 
-     * @type {boolean}
-     * @memberof Form1099MiscResponse
-     */
-    secondTinNotice?: boolean;
-    /**
-     * 
      * @type {number}
      * @memberof Form1099MiscResponse
      */
@@ -85,7 +79,7 @@ export interface Form1099MiscResponse {
      * @type {number}
      * @memberof Form1099MiscResponse
      */
-    medicalHealthCarePayments?: number;
+    medicalAndHealthCarePayments?: number;
     /**
      * 
      * @type {boolean}
@@ -158,12 +152,6 @@ export interface Form1099MiscResponse {
      * @memberof Form1099MiscResponse
      */
     updatedAt?: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099MiscResponse
-     */
-    userId?: string;
     /**
      * 
      * @type {StateAndLocalWithholdingResponse}
@@ -265,7 +253,7 @@ export interface Form1099MiscResponse {
      * @type {string}
      * @memberof Form1099MiscResponse
      */
-    recipientEmail?: string;
+    email?: string;
     /**
      * 
      * @type {string}
@@ -283,7 +271,7 @@ export interface Form1099MiscResponse {
      * @type {string}
      * @memberof Form1099MiscResponse
      */
-    recipientNonUsProvince?: string;
+    nonUsProvince?: string;
     /**
      * 
      * @type {string}
@@ -319,6 +307,18 @@ export interface Form1099MiscResponse {
      * @type {boolean}
      * @memberof Form1099MiscResponse
      */
+    noTin?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1099MiscResponse
+     */
+    secondTinNotice?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1099MiscResponse
+     */
     addressVerification?: boolean;
     /**
      * 
@@ -326,6 +326,12 @@ export interface Form1099MiscResponse {
      * @memberof Form1099MiscResponse
      */
     federalEfileStatus?: StatusDetail | null;
+    /**
+     * 
+     * @type {StatusDetail}
+     * @memberof Form1099MiscResponse
+     */
+    eDeliveryStatus?: StatusDetail | null;
     /**
      * 
      * @type {Array<StateEfileStatusDetailResponse>}
@@ -369,7 +375,8 @@ export enum Form1099MiscResponseTypeEnum {
     _1099R = '1099-R',
     _1099K = '1099-K',
     _1095B = '1095-B',
-    _1042S = '1042-S'
+    _1042S = '1042-S',
+    _1095C = '1095-C'
 }/**
 * @export
 * @enum {string}
@@ -400,13 +407,12 @@ export function Form1099MiscResponseFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'rents': !exists(json, 'rents') ? undefined : json['rents'],
         'royalties': !exists(json, 'royalties') ? undefined : json['royalties'],
         'otherIncome': !exists(json, 'otherIncome') ? undefined : json['otherIncome'],
         'fedIncomeTaxWithheld': !exists(json, 'fedIncomeTaxWithheld') ? undefined : json['fedIncomeTaxWithheld'],
         'fishingBoatProceeds': !exists(json, 'fishingBoatProceeds') ? undefined : json['fishingBoatProceeds'],
-        'medicalHealthCarePayments': !exists(json, 'medicalHealthCarePayments') ? undefined : json['medicalHealthCarePayments'],
+        'medicalAndHealthCarePayments': !exists(json, 'medicalAndHealthCarePayments') ? undefined : json['medicalAndHealthCarePayments'],
         'directSalesIndicator': !exists(json, 'directSalesIndicator') ? undefined : json['directSalesIndicator'],
         'substitutePayments': !exists(json, 'substitutePayments') ? undefined : json['substitutePayments'],
         'cropInsuranceProceeds': !exists(json, 'cropInsuranceProceeds') ? undefined : json['cropInsuranceProceeds'],
@@ -419,7 +425,6 @@ export function Form1099MiscResponseFromJSONTyped(json: any, ignoreDiscriminator
         'type': !exists(json, 'type') ? undefined : json['type'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
-        'userId': !exists(json, 'userId') ? undefined : json['userId'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingResponseFromJSON(json['stateAndLocalWithholding']),
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'id': !exists(json, 'id') ? undefined : json['id'],
@@ -436,17 +441,20 @@ export function Form1099MiscResponseFromJSONTyped(json: any, ignoreDiscriminator
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : StatusDetailFromJSON(json['federalEfileStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : StatusDetailFromJSON(json['eDeliveryStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailResponseFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : StatusDetailFromJSON(json['tinMatchStatus']),
@@ -464,13 +472,12 @@ export function Form1099MiscResponseToJSON(value?: Form1099MiscResponse | null):
     }
     return {
         
-        'secondTinNotice': value.secondTinNotice,
         'rents': value.rents,
         'royalties': value.royalties,
         'otherIncome': value.otherIncome,
         'fedIncomeTaxWithheld': value.fedIncomeTaxWithheld,
         'fishingBoatProceeds': value.fishingBoatProceeds,
-        'medicalHealthCarePayments': value.medicalHealthCarePayments,
+        'medicalAndHealthCarePayments': value.medicalAndHealthCarePayments,
         'directSalesIndicator': value.directSalesIndicator,
         'substitutePayments': value.substitutePayments,
         'cropInsuranceProceeds': value.cropInsuranceProceeds,
@@ -482,7 +489,6 @@ export function Form1099MiscResponseToJSON(value?: Form1099MiscResponse | null):
         'nonqualifiedDeferredCompensation': value.nonqualifiedDeferredCompensation,
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
-        'userId': value.userId,
         'stateAndLocalWithholding': StateAndLocalWithholdingResponseToJSON(value.stateAndLocalWithholding),
         'tinType': value.tinType,
         'id': value.id,
@@ -499,17 +505,20 @@ export function Form1099MiscResponseToJSON(value?: Form1099MiscResponse | null):
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'recipientEmail': value.recipientEmail,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'recipientNonUsProvince': value.recipientNonUsProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
         'federalEFile': value.federalEFile,
         'postalMail': value.postalMail,
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'addressVerification': value.addressVerification,
         'federalEfileStatus': StatusDetailToJSON(value.federalEfileStatus),
+        'eDeliveryStatus': StatusDetailToJSON(value.eDeliveryStatus),
         'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailResponseToJSON)),
         'postalMailStatus': StatusDetailToJSON(value.postalMailStatus),
         'tinMatchStatus': StatusDetailToJSON(value.tinMatchStatus),

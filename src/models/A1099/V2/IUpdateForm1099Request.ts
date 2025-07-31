@@ -19,6 +19,13 @@ import {
     Form1099DivRequestFromJSONTyped,
     Form1099DivRequestToJSON,
 } from './Form1099DivRequest';
+import type { Form1099KRequest } from './Form1099KRequest';
+import {
+    instanceOfForm1099KRequest,
+    Form1099KRequestFromJSON,
+    Form1099KRequestFromJSONTyped,
+    Form1099KRequestToJSON,
+} from './Form1099KRequest';
 import type { Form1099MiscRequest } from './Form1099MiscRequest';
 import {
     instanceOfForm1099MiscRequest,
@@ -39,7 +46,7 @@ import {
  * 
  * @export
  */
-export type IUpdateForm1099Request = Form1099DivRequest | Form1099MiscRequest | Form1099NecRequest;
+export type IUpdateForm1099Request = Form1099DivRequest | Form1099KRequest | Form1099MiscRequest | Form1099NecRequest;
 
 export function IUpdateForm1099RequestFromJSON(json: any): IUpdateForm1099Request {
     return IUpdateForm1099RequestFromJSONTyped(json, false);
@@ -51,6 +58,9 @@ export function IUpdateForm1099RequestFromJSONTyped(json: any, ignoreDiscriminat
     }
     if (instanceOfForm1099DivRequest(json)) {
         return Form1099DivRequestFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099KRequest(json)) {
+        return Form1099KRequestFromJSONTyped(json, true);
     }
     if (instanceOfForm1099MiscRequest(json)) {
         return Form1099MiscRequestFromJSONTyped(json, true);
@@ -67,6 +77,9 @@ export function IUpdateForm1099RequestToJSON(value?: IUpdateForm1099Request | nu
 
     if (instanceOfForm1099DivRequest(value)) {
         return Form1099DivRequestToJSON(value as Form1099DivRequest);
+    }
+    if (instanceOfForm1099KRequest(value)) {
+        return Form1099KRequestToJSON(value as Form1099KRequest);
     }
     if (instanceOfForm1099MiscRequest(value)) {
         return Form1099MiscRequestToJSON(value as Form1099MiscRequest);

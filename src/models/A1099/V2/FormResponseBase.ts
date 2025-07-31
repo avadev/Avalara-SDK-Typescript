@@ -64,12 +64,6 @@ export interface FormResponseBase {
     updatedAt?: Date;
     /**
      * 
-     * @type {string}
-     * @memberof FormResponseBase
-     */
-    userId?: string;
-    /**
-     * 
      * @type {StateAndLocalWithholdingResponse}
      * @memberof FormResponseBase
      */
@@ -169,7 +163,7 @@ export interface FormResponseBase {
      * @type {string}
      * @memberof FormResponseBase
      */
-    recipientEmail?: string;
+    email?: string;
     /**
      * 
      * @type {string}
@@ -187,7 +181,7 @@ export interface FormResponseBase {
      * @type {string}
      * @memberof FormResponseBase
      */
-    recipientNonUsProvince?: string;
+    nonUsProvince?: string;
     /**
      * 
      * @type {string}
@@ -223,6 +217,18 @@ export interface FormResponseBase {
      * @type {boolean}
      * @memberof FormResponseBase
      */
+    noTin?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FormResponseBase
+     */
+    secondTinNotice?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FormResponseBase
+     */
     addressVerification?: boolean;
     /**
      * 
@@ -230,6 +236,12 @@ export interface FormResponseBase {
      * @memberof FormResponseBase
      */
     federalEfileStatus?: StatusDetail | null;
+    /**
+     * 
+     * @type {StatusDetail}
+     * @memberof FormResponseBase
+     */
+    eDeliveryStatus?: StatusDetail | null;
     /**
      * 
      * @type {Array<StateEfileStatusDetailResponse>}
@@ -273,7 +285,8 @@ export enum FormResponseBaseTypeEnum {
     _1099R = '1099-R',
     _1099K = '1099-K',
     _1095B = '1095-B',
-    _1042S = '1042-S'
+    _1042S = '1042-S',
+    _1095C = '1095-C'
 }/**
 * @export
 * @enum {string}
@@ -307,7 +320,6 @@ export function FormResponseBaseFromJSONTyped(json: any, ignoreDiscriminator: bo
         'type': !exists(json, 'type') ? undefined : json['type'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
-        'userId': !exists(json, 'userId') ? undefined : json['userId'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingResponseFromJSON(json['stateAndLocalWithholding']),
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'id': !exists(json, 'id') ? undefined : json['id'],
@@ -324,17 +336,20 @@ export function FormResponseBaseFromJSONTyped(json: any, ignoreDiscriminator: bo
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : StatusDetailFromJSON(json['federalEfileStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : StatusDetailFromJSON(json['eDeliveryStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailResponseFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : StatusDetailFromJSON(json['tinMatchStatus']),
@@ -354,7 +369,6 @@ export function FormResponseBaseToJSON(value?: FormResponseBase | null): any {
         
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
-        'userId': value.userId,
         'stateAndLocalWithholding': StateAndLocalWithholdingResponseToJSON(value.stateAndLocalWithholding),
         'tinType': value.tinType,
         'id': value.id,
@@ -371,17 +385,20 @@ export function FormResponseBaseToJSON(value?: FormResponseBase | null): any {
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'recipientEmail': value.recipientEmail,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'recipientNonUsProvince': value.recipientNonUsProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
         'federalEFile': value.federalEFile,
         'postalMail': value.postalMail,
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'addressVerification': value.addressVerification,
         'federalEfileStatus': StatusDetailToJSON(value.federalEfileStatus),
+        'eDeliveryStatus': StatusDetailToJSON(value.eDeliveryStatus),
         'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailResponseToJSON)),
         'postalMailStatus': StatusDetailToJSON(value.postalMailStatus),
         'tinMatchStatus': StatusDetailToJSON(value.tinMatchStatus),

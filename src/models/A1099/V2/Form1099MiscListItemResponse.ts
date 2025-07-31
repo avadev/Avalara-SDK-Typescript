@@ -14,12 +14,6 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    Form1099StatusDetailResponse,
-    Form1099StatusDetailResponseFromJSON,
-    Form1099StatusDetailResponseFromJSONTyped,
-    Form1099StatusDetailResponseToJSON,
-} from './Form1099StatusDetailResponse';
-import {
     StateAndLocalWithholdingResponse,
     StateAndLocalWithholdingResponseFromJSON,
     StateAndLocalWithholdingResponseFromJSONTyped,
@@ -31,6 +25,12 @@ import {
     StateEfileStatusDetailResponseFromJSONTyped,
     StateEfileStatusDetailResponseToJSON,
 } from './StateEfileStatusDetailResponse';
+import {
+    StatusDetail,
+    StatusDetailFromJSON,
+    StatusDetailFromJSONTyped,
+    StatusDetailToJSON,
+} from './StatusDetail';
 import {
     ValidationErrorResponse,
     ValidationErrorResponseFromJSON,
@@ -79,7 +79,7 @@ export interface Form1099MiscListItemResponse {
      * @type {number}
      * @memberof Form1099MiscListItemResponse
      */
-    medicalAndHealthCare?: number | null;
+    medicalAndHealthCarePayments?: number | null;
     /**
      * Substitute payments in lieu of dividends or interest
      * @type {number}
@@ -103,13 +103,19 @@ export interface Form1099MiscListItemResponse {
      * @type {number}
      * @memberof Form1099MiscListItemResponse
      */
-    excessGoldenParachute?: number | null;
+    excessGoldenParachutePayments?: number | null;
     /**
      * Gross proceeds paid to an attorney
      * @type {number}
      * @memberof Form1099MiscListItemResponse
      */
-    grossAmountPaidAttorney?: number | null;
+    grossProceedsPaidToAttorney?: number | null;
+    /**
+     * Fish purchased for resale
+     * @type {number}
+     * @memberof Form1099MiscListItemResponse
+     */
+    fishPurchasedForResale?: number | null;
     /**
      * Section 409A deferrals
      * @type {number}
@@ -121,7 +127,7 @@ export interface Form1099MiscListItemResponse {
      * @type {number}
      * @memberof Form1099MiscListItemResponse
      */
-    section409AIncome?: number | null;
+    nonqualifiedDeferredCompensation?: number | null;
     /**
      * ID of the form
      * @type {string}
@@ -208,10 +214,10 @@ export interface Form1099MiscListItemResponse {
     federalEfile: boolean;
     /**
      * Federal e-file status
-     * @type {Form1099StatusDetailResponse}
+     * @type {StatusDetail}
      * @memberof Form1099MiscListItemResponse
      */
-    readonly federalEfileStatus?: Form1099StatusDetailResponse;
+    readonly federalEfileStatus?: StatusDetail;
     /**
      * Boolean indicating that state e-filing has been scheduled for this form
      * @type {boolean}
@@ -232,10 +238,10 @@ export interface Form1099MiscListItemResponse {
     postalMail: boolean;
     /**
      * Postal mail to recipient status
-     * @type {Form1099StatusDetailResponse}
+     * @type {StatusDetail}
      * @memberof Form1099MiscListItemResponse
      */
-    readonly postalMailStatus?: Form1099StatusDetailResponse | null;
+    readonly postalMailStatus?: StatusDetail | null;
     /**
      * Boolean indicating that TIN Matching has been scheduled for this form
      * @type {boolean}
@@ -244,10 +250,10 @@ export interface Form1099MiscListItemResponse {
     tinMatch: boolean;
     /**
      * TIN Match status
-     * @type {Form1099StatusDetailResponse}
+     * @type {StatusDetail}
      * @memberof Form1099MiscListItemResponse
      */
-    readonly tinMatchStatus?: Form1099StatusDetailResponse | null;
+    readonly tinMatchStatus?: StatusDetail | null;
     /**
      * Boolean indicating that address verification has been scheduled for this form
      * @type {boolean}
@@ -256,10 +262,16 @@ export interface Form1099MiscListItemResponse {
     addressVerification: boolean;
     /**
      * Address verification status
-     * @type {Form1099StatusDetailResponse}
+     * @type {StatusDetail}
      * @memberof Form1099MiscListItemResponse
      */
-    readonly addressVerificationStatus?: Form1099StatusDetailResponse | null;
+    readonly addressVerificationStatus?: StatusDetail | null;
+    /**
+     * EDelivery status
+     * @type {StatusDetail}
+     * @memberof Form1099MiscListItemResponse
+     */
+    readonly eDeliveryStatus?: StatusDetail | null;
     /**
      * Reference ID
      * @type {string}
@@ -288,6 +300,18 @@ export interface Form1099MiscListItemResponse {
      * @memberof Form1099MiscListItemResponse
      */
     tin?: string | null;
+    /**
+     * Indicates whether the recipient has no TIN
+     * @type {boolean}
+     * @memberof Form1099MiscListItemResponse
+     */
+    noTin?: boolean;
+    /**
+     * Second Tin Notice
+     * @type {boolean}
+     * @memberof Form1099MiscListItemResponse
+     */
+    secondTinNotice?: boolean | null;
     /**
      * Recipient name
      * @type {string}
@@ -335,13 +359,31 @@ export interface Form1099MiscListItemResponse {
      * @type {string}
      * @memberof Form1099MiscListItemResponse
      */
-    foreignProvince?: string | null;
+    nonUsProvince?: string | null;
     /**
      * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof Form1099MiscListItemResponse
      */
     countryCode?: string | null;
+    /**
+     * Account Number
+     * @type {string}
+     * @memberof Form1099MiscListItemResponse
+     */
+    accountNumber?: string | null;
+    /**
+     * Office Code
+     * @type {string}
+     * @memberof Form1099MiscListItemResponse
+     */
+    officeCode?: string | null;
+    /**
+     * FATCA filing requirement
+     * @type {boolean}
+     * @memberof Form1099MiscListItemResponse
+     */
+    fatcaFilingRequirement?: boolean | null;
     /**
      * Validation errors
      * @type {Array<ValidationErrorResponse>}
@@ -402,14 +444,15 @@ export function Form1099MiscListItemResponseFromJSONTyped(json: any, ignoreDiscr
         'otherIncome': !exists(json, 'otherIncome') ? undefined : json['otherIncome'],
         'fedIncomeTaxWithheld': !exists(json, 'fedIncomeTaxWithheld') ? undefined : json['fedIncomeTaxWithheld'],
         'fishingBoatProceeds': !exists(json, 'fishingBoatProceeds') ? undefined : json['fishingBoatProceeds'],
-        'medicalAndHealthCare': !exists(json, 'medicalAndHealthCare') ? undefined : json['medicalAndHealthCare'],
+        'medicalAndHealthCarePayments': !exists(json, 'medicalAndHealthCarePayments') ? undefined : json['medicalAndHealthCarePayments'],
         'substitutePayments': !exists(json, 'substitutePayments') ? undefined : json['substitutePayments'],
         'directSalesIndicator': !exists(json, 'directSalesIndicator') ? undefined : json['directSalesIndicator'],
         'cropInsuranceProceeds': !exists(json, 'cropInsuranceProceeds') ? undefined : json['cropInsuranceProceeds'],
-        'excessGoldenParachute': !exists(json, 'excessGoldenParachute') ? undefined : json['excessGoldenParachute'],
-        'grossAmountPaidAttorney': !exists(json, 'grossAmountPaidAttorney') ? undefined : json['grossAmountPaidAttorney'],
+        'excessGoldenParachutePayments': !exists(json, 'excessGoldenParachutePayments') ? undefined : json['excessGoldenParachutePayments'],
+        'grossProceedsPaidToAttorney': !exists(json, 'grossProceedsPaidToAttorney') ? undefined : json['grossProceedsPaidToAttorney'],
+        'fishPurchasedForResale': !exists(json, 'fishPurchasedForResale') ? undefined : json['fishPurchasedForResale'],
         'section409ADeferrals': !exists(json, 'section409ADeferrals') ? undefined : json['section409ADeferrals'],
-        'section409AIncome': !exists(json, 'section409AIncome') ? undefined : json['section409AIncome'],
+        'nonqualifiedDeferredCompensation': !exists(json, 'nonqualifiedDeferredCompensation') ? undefined : json['nonqualifiedDeferredCompensation'],
         'id': json['id'],
         'type': json['type'],
         'issuerId': json['issuerId'],
@@ -417,19 +460,22 @@ export function Form1099MiscListItemResponseFromJSONTyped(json: any, ignoreDiscr
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'federalEfile': json['federalEfile'],
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailResponseFromJSON(json['federalEfileStatus']),
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : StatusDetailFromJSON(json['federalEfileStatus']),
         'stateEfile': json['stateEfile'],
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailResponseFromJSON)),
         'postalMail': json['postalMail'],
-        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailResponseFromJSON(json['postalMailStatus']),
+        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatch': json['tinMatch'],
-        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailResponseFromJSON(json['tinMatchStatus']),
+        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : StatusDetailFromJSON(json['tinMatchStatus']),
         'addressVerification': json['addressVerification'],
-        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailResponseFromJSON(json['addressVerificationStatus']),
+        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : StatusDetailFromJSON(json['addressVerificationStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : StatusDetailFromJSON(json['eDeliveryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': !exists(json, 'address') ? undefined : json['address'],
@@ -437,8 +483,11 @@ export function Form1099MiscListItemResponseFromJSONTyped(json: any, ignoreDiscr
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
+        'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorResponseFromJSON)),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
@@ -460,14 +509,15 @@ export function Form1099MiscListItemResponseToJSON(value?: Form1099MiscListItemR
         'otherIncome': value.otherIncome,
         'fedIncomeTaxWithheld': value.fedIncomeTaxWithheld,
         'fishingBoatProceeds': value.fishingBoatProceeds,
-        'medicalAndHealthCare': value.medicalAndHealthCare,
+        'medicalAndHealthCarePayments': value.medicalAndHealthCarePayments,
         'substitutePayments': value.substitutePayments,
         'directSalesIndicator': value.directSalesIndicator,
         'cropInsuranceProceeds': value.cropInsuranceProceeds,
-        'excessGoldenParachute': value.excessGoldenParachute,
-        'grossAmountPaidAttorney': value.grossAmountPaidAttorney,
+        'excessGoldenParachutePayments': value.excessGoldenParachutePayments,
+        'grossProceedsPaidToAttorney': value.grossProceedsPaidToAttorney,
+        'fishPurchasedForResale': value.fishPurchasedForResale,
         'section409ADeferrals': value.section409ADeferrals,
-        'section409AIncome': value.section409AIncome,
+        'nonqualifiedDeferredCompensation': value.nonqualifiedDeferredCompensation,
         'type': value.type,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
@@ -482,6 +532,8 @@ export function Form1099MiscListItemResponseToJSON(value?: Form1099MiscListItemR
         'email': value.email,
         'tinType': value.tinType,
         'tin': value.tin,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'recipientName': value.recipientName,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
@@ -489,8 +541,11 @@ export function Form1099MiscListItemResponseToJSON(value?: Form1099MiscListItemR
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'foreignProvince': value.foreignProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
+        'accountNumber': value.accountNumber,
+        'officeCode': value.officeCode,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'stateAndLocalWithholding': StateAndLocalWithholdingResponseToJSON(value.stateAndLocalWithholding),
     };
 }

@@ -45,12 +45,6 @@ export interface Form1042SRequest {
      */
     uniqueFormId?: string;
     /**
-     * No TIN indicator
-     * @type {boolean}
-     * @memberof Form1042SRequest
-     */
-    noTin?: boolean | null;
-    /**
      * Recipient's date of birth
      * @type {Date}
      * @memberof Form1042SRequest
@@ -217,7 +211,7 @@ export interface Form1042SRequest {
      * @type {string}
      * @memberof Form1042SRequest
      */
-    recipientName: string;
+    recipientName?: string | null;
     /**
      * Type of TIN (Tax ID Number). Will be one of:
      * * SSN
@@ -269,7 +263,7 @@ export interface Form1042SRequest {
      * @type {string}
      * @memberof Form1042SRequest
      */
-    recipientEmail?: string | null;
+    email?: string | null;
     /**
      * Account number
      * @type {string}
@@ -287,7 +281,7 @@ export interface Form1042SRequest {
      * @type {string}
      * @memberof Form1042SRequest
      */
-    recipientNonUsProvince?: string | null;
+    nonUsProvince?: string | null;
     /**
      * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
@@ -319,6 +313,18 @@ export interface Form1042SRequest {
      */
     tinMatch?: boolean;
     /**
+     * Indicates whether the recipient has no TIN
+     * @type {boolean}
+     * @memberof Form1042SRequest
+     */
+    noTin?: boolean;
+    /**
+     * Second TIN notice in three years
+     * @type {boolean}
+     * @memberof Form1042SRequest
+     */
+    secondTinNotice?: boolean | null;
+    /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1042SRequest
@@ -337,7 +343,8 @@ export enum Form1042SRequestTypeEnum {
     _1099R = '1099-R',
     _1099K = '1099-K',
     _1095B = '1095-B',
-    _1042S = '1042-S'
+    _1042S = '1042-S',
+    _1095C = '1095-C'
 }/**
 * @export
 * @enum {string}
@@ -354,7 +361,6 @@ export enum Form1042SRequestTinTypeEnum {
  */
 export function instanceOfForm1042SRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "recipientName" in value;
     isInstance = isInstance && "address" in value;
     isInstance = isInstance && "city" in value;
     isInstance = isInstance && "countryCode" in value;
@@ -373,7 +379,6 @@ export function Form1042SRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'uniqueFormId': !exists(json, 'uniqueFormId') ? undefined : json['uniqueFormId'],
-        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
         'recipientDateOfBirth': !exists(json, 'recipientDateOfBirth') ? undefined : (json['recipientDateOfBirth'] === null ? null : new Date(json['recipientDateOfBirth'])),
         'recipientGiin': !exists(json, 'recipientGiin') ? undefined : json['recipientGiin'],
         'recipientForeignTin': !exists(json, 'recipientForeignTin') ? undefined : json['recipientForeignTin'],
@@ -401,7 +406,7 @@ export function Form1042SRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
-        'recipientName': json['recipientName'],
+        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': json['address'],
@@ -409,15 +414,17 @@ export function Form1042SRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
     };
 }
@@ -432,7 +439,6 @@ export function Form1042SRequestToJSON(value?: Form1042SRequest | null): any {
     return {
         
         'uniqueFormId': value.uniqueFormId,
-        'noTin': value.noTin,
         'recipientDateOfBirth': value.recipientDateOfBirth === undefined ? undefined : (value.recipientDateOfBirth === null ? null : value.recipientDateOfBirth.toISOString()),
         'recipientGiin': value.recipientGiin,
         'recipientForeignTin': value.recipientForeignTin,
@@ -468,15 +474,17 @@ export function Form1042SRequestToJSON(value?: Form1042SRequest | null): any {
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'recipientEmail': value.recipientEmail,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'recipientNonUsProvince': value.recipientNonUsProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
         'federalEFile': value.federalEFile,
         'postalMail': value.postalMail,
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'addressVerification': value.addressVerification,
     };
 }

@@ -46,12 +46,6 @@ import {
 export interface Form1099NecResponse {
     /**
      * 
-     * @type {boolean}
-     * @memberof Form1099NecResponse
-     */
-    secondTinNotice?: boolean;
-    /**
-     * 
      * @type {number}
      * @memberof Form1099NecResponse
      */
@@ -86,12 +80,6 @@ export interface Form1099NecResponse {
      * @memberof Form1099NecResponse
      */
     updatedAt?: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099NecResponse
-     */
-    userId?: string;
     /**
      * 
      * @type {StateAndLocalWithholdingResponse}
@@ -193,7 +181,7 @@ export interface Form1099NecResponse {
      * @type {string}
      * @memberof Form1099NecResponse
      */
-    recipientEmail?: string;
+    email?: string;
     /**
      * 
      * @type {string}
@@ -211,7 +199,7 @@ export interface Form1099NecResponse {
      * @type {string}
      * @memberof Form1099NecResponse
      */
-    recipientNonUsProvince?: string;
+    nonUsProvince?: string;
     /**
      * 
      * @type {string}
@@ -247,6 +235,18 @@ export interface Form1099NecResponse {
      * @type {boolean}
      * @memberof Form1099NecResponse
      */
+    noTin?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1099NecResponse
+     */
+    secondTinNotice?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1099NecResponse
+     */
     addressVerification?: boolean;
     /**
      * 
@@ -254,6 +254,12 @@ export interface Form1099NecResponse {
      * @memberof Form1099NecResponse
      */
     federalEfileStatus?: StatusDetail | null;
+    /**
+     * 
+     * @type {StatusDetail}
+     * @memberof Form1099NecResponse
+     */
+    eDeliveryStatus?: StatusDetail | null;
     /**
      * 
      * @type {Array<StateEfileStatusDetailResponse>}
@@ -297,7 +303,8 @@ export enum Form1099NecResponseTypeEnum {
     _1099R = '1099-R',
     _1099K = '1099-K',
     _1095B = '1095-B',
-    _1042S = '1042-S'
+    _1042S = '1042-S',
+    _1095C = '1095-C'
 }/**
 * @export
 * @enum {string}
@@ -328,14 +335,12 @@ export function Form1099NecResponseFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'nonemployeeCompensation': !exists(json, 'nonemployeeCompensation') ? undefined : json['nonemployeeCompensation'],
         'directSalesIndicator': !exists(json, 'directSalesIndicator') ? undefined : json['directSalesIndicator'],
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
         'type': !exists(json, 'type') ? undefined : json['type'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
-        'userId': !exists(json, 'userId') ? undefined : json['userId'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingResponseFromJSON(json['stateAndLocalWithholding']),
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'id': !exists(json, 'id') ? undefined : json['id'],
@@ -352,17 +357,20 @@ export function Form1099NecResponseFromJSONTyped(json: any, ignoreDiscriminator:
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : StatusDetailFromJSON(json['federalEfileStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : StatusDetailFromJSON(json['eDeliveryStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailResponseFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : StatusDetailFromJSON(json['tinMatchStatus']),
@@ -380,13 +388,11 @@ export function Form1099NecResponseToJSON(value?: Form1099NecResponse | null): a
     }
     return {
         
-        'secondTinNotice': value.secondTinNotice,
         'nonemployeeCompensation': value.nonemployeeCompensation,
         'directSalesIndicator': value.directSalesIndicator,
         'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
-        'userId': value.userId,
         'stateAndLocalWithholding': StateAndLocalWithholdingResponseToJSON(value.stateAndLocalWithholding),
         'tinType': value.tinType,
         'id': value.id,
@@ -403,17 +409,20 @@ export function Form1099NecResponseToJSON(value?: Form1099NecResponse | null): a
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'recipientEmail': value.recipientEmail,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'recipientNonUsProvince': value.recipientNonUsProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
         'federalEFile': value.federalEFile,
         'postalMail': value.postalMail,
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'addressVerification': value.addressVerification,
         'federalEfileStatus': StatusDetailToJSON(value.federalEfileStatus),
+        'eDeliveryStatus': StatusDetailToJSON(value.eDeliveryStatus),
         'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailResponseToJSON)),
         'postalMailStatus': StatusDetailToJSON(value.postalMailStatus),
         'tinMatchStatus': StatusDetailToJSON(value.tinMatchStatus),

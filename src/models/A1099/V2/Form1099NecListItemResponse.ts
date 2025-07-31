@@ -14,12 +14,6 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    Form1099StatusDetailResponse,
-    Form1099StatusDetailResponseFromJSON,
-    Form1099StatusDetailResponseFromJSONTyped,
-    Form1099StatusDetailResponseToJSON,
-} from './Form1099StatusDetailResponse';
-import {
     StateAndLocalWithholdingResponse,
     StateAndLocalWithholdingResponseFromJSON,
     StateAndLocalWithholdingResponseFromJSONTyped,
@@ -31,6 +25,12 @@ import {
     StateEfileStatusDetailResponseFromJSONTyped,
     StateEfileStatusDetailResponseToJSON,
 } from './StateEfileStatusDetailResponse';
+import {
+    StatusDetail,
+    StatusDetailFromJSON,
+    StatusDetailFromJSONTyped,
+    StatusDetailToJSON,
+} from './StatusDetail';
 import {
     ValidationErrorResponse,
     ValidationErrorResponseFromJSON,
@@ -148,10 +148,10 @@ export interface Form1099NecListItemResponse {
     federalEfile: boolean;
     /**
      * Federal e-file status
-     * @type {Form1099StatusDetailResponse}
+     * @type {StatusDetail}
      * @memberof Form1099NecListItemResponse
      */
-    readonly federalEfileStatus?: Form1099StatusDetailResponse;
+    readonly federalEfileStatus?: StatusDetail;
     /**
      * Boolean indicating that state e-filing has been scheduled for this form
      * @type {boolean}
@@ -172,10 +172,10 @@ export interface Form1099NecListItemResponse {
     postalMail: boolean;
     /**
      * Postal mail to recipient status
-     * @type {Form1099StatusDetailResponse}
+     * @type {StatusDetail}
      * @memberof Form1099NecListItemResponse
      */
-    readonly postalMailStatus?: Form1099StatusDetailResponse | null;
+    readonly postalMailStatus?: StatusDetail | null;
     /**
      * Boolean indicating that TIN Matching has been scheduled for this form
      * @type {boolean}
@@ -184,10 +184,10 @@ export interface Form1099NecListItemResponse {
     tinMatch: boolean;
     /**
      * TIN Match status
-     * @type {Form1099StatusDetailResponse}
+     * @type {StatusDetail}
      * @memberof Form1099NecListItemResponse
      */
-    readonly tinMatchStatus?: Form1099StatusDetailResponse | null;
+    readonly tinMatchStatus?: StatusDetail | null;
     /**
      * Boolean indicating that address verification has been scheduled for this form
      * @type {boolean}
@@ -196,10 +196,16 @@ export interface Form1099NecListItemResponse {
     addressVerification: boolean;
     /**
      * Address verification status
-     * @type {Form1099StatusDetailResponse}
+     * @type {StatusDetail}
      * @memberof Form1099NecListItemResponse
      */
-    readonly addressVerificationStatus?: Form1099StatusDetailResponse | null;
+    readonly addressVerificationStatus?: StatusDetail | null;
+    /**
+     * EDelivery status
+     * @type {StatusDetail}
+     * @memberof Form1099NecListItemResponse
+     */
+    readonly eDeliveryStatus?: StatusDetail | null;
     /**
      * Reference ID
      * @type {string}
@@ -228,6 +234,18 @@ export interface Form1099NecListItemResponse {
      * @memberof Form1099NecListItemResponse
      */
     tin?: string | null;
+    /**
+     * Indicates whether the recipient has no TIN
+     * @type {boolean}
+     * @memberof Form1099NecListItemResponse
+     */
+    noTin?: boolean;
+    /**
+     * Second Tin Notice
+     * @type {boolean}
+     * @memberof Form1099NecListItemResponse
+     */
+    secondTinNotice?: boolean | null;
     /**
      * Recipient name
      * @type {string}
@@ -275,13 +293,31 @@ export interface Form1099NecListItemResponse {
      * @type {string}
      * @memberof Form1099NecListItemResponse
      */
-    foreignProvince?: string | null;
+    nonUsProvince?: string | null;
     /**
      * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
      * @memberof Form1099NecListItemResponse
      */
     countryCode?: string | null;
+    /**
+     * Account Number
+     * @type {string}
+     * @memberof Form1099NecListItemResponse
+     */
+    accountNumber?: string | null;
+    /**
+     * Office Code
+     * @type {string}
+     * @memberof Form1099NecListItemResponse
+     */
+    officeCode?: string | null;
+    /**
+     * FATCA filing requirement
+     * @type {boolean}
+     * @memberof Form1099NecListItemResponse
+     */
+    fatcaFilingRequirement?: boolean | null;
     /**
      * Validation errors
      * @type {Array<ValidationErrorResponse>}
@@ -347,19 +383,22 @@ export function Form1099NecListItemResponseFromJSONTyped(json: any, ignoreDiscri
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'federalEfile': json['federalEfile'],
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailResponseFromJSON(json['federalEfileStatus']),
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : StatusDetailFromJSON(json['federalEfileStatus']),
         'stateEfile': json['stateEfile'],
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailResponseFromJSON)),
         'postalMail': json['postalMail'],
-        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailResponseFromJSON(json['postalMailStatus']),
+        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatch': json['tinMatch'],
-        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailResponseFromJSON(json['tinMatchStatus']),
+        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : StatusDetailFromJSON(json['tinMatchStatus']),
         'addressVerification': json['addressVerification'],
-        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailResponseFromJSON(json['addressVerificationStatus']),
+        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : StatusDetailFromJSON(json['addressVerificationStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : StatusDetailFromJSON(json['eDeliveryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': !exists(json, 'address') ? undefined : json['address'],
@@ -367,8 +406,11 @@ export function Form1099NecListItemResponseFromJSONTyped(json: any, ignoreDiscri
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
+        'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorResponseFromJSON)),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
@@ -402,6 +444,8 @@ export function Form1099NecListItemResponseToJSON(value?: Form1099NecListItemRes
         'email': value.email,
         'tinType': value.tinType,
         'tin': value.tin,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'recipientName': value.recipientName,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
@@ -409,8 +453,11 @@ export function Form1099NecListItemResponseToJSON(value?: Form1099NecListItemRes
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'foreignProvince': value.foreignProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
+        'accountNumber': value.accountNumber,
+        'officeCode': value.officeCode,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'stateAndLocalWithholding': StateAndLocalWithholdingResponseToJSON(value.stateAndLocalWithholding),
     };
 }
