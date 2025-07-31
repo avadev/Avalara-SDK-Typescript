@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **tin** | **string** | The taxpayer identification number (TIN). | [optional] [default to undefined]
 **backupWithholding** | **boolean** | Indicates whether backup withholding applies. | [optional] [default to undefined]
 **is1099able** | **boolean** | Indicates whether the individual or entity should be issued a 1099 form. | [optional] [default to undefined]
+**tinMatchStatus** | [**TinMatchStatusResponse**](TinMatchStatusResponse.md) | The TIN Match status from IRS. | [optional] [default to undefined]
 **id** | **string** | The unique identifier for the form. | [optional] [default to undefined]
 **type** | **string** | The form type. | [optional] [default to undefined]
 **entryStatus** | **string** | The form status. | [optional] [default to undefined]

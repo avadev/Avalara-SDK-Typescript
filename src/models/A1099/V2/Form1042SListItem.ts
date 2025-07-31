@@ -205,7 +205,7 @@ export interface Form1042SListItem {
      * @type {string}
      * @memberof Form1042SListItem
      */
-    recipientName: string;
+    recipientName?: string | null;
     /**
      * Type of TIN (Tax ID Number). Will be one of:
      * * SSN
@@ -257,7 +257,7 @@ export interface Form1042SListItem {
      * @type {string}
      * @memberof Form1042SListItem
      */
-    recipientEmail?: string | null;
+    email?: string | null;
     /**
      * Account number
      * @type {string}
@@ -275,7 +275,7 @@ export interface Form1042SListItem {
      * @type {string}
      * @memberof Form1042SListItem
      */
-    recipientNonUsProvince?: string | null;
+    nonUsProvince?: string | null;
     /**
      * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
@@ -307,6 +307,12 @@ export interface Form1042SListItem {
      */
     tinMatch?: boolean;
     /**
+     * Second TIN notice in three years
+     * @type {boolean}
+     * @memberof Form1042SListItem
+     */
+    secondTinNotice?: boolean | null;
+    /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1042SListItem
@@ -317,7 +323,7 @@ export interface Form1042SListItem {
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1042SListItem
      */
-    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest | null;
 }
 
 /**
@@ -487,7 +493,6 @@ export enum Form1042SListItemTinTypeEnum {
  */
 export function instanceOfForm1042SListItem(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "recipientName" in value;
     isInstance = isInstance && "address" in value;
     isInstance = isInstance && "city" in value;
     isInstance = isInstance && "countryCode" in value;
@@ -532,7 +537,7 @@ export function Form1042SListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
-        'recipientName': json['recipientName'],
+        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': json['address'],
@@ -540,15 +545,16 @@ export function Form1042SListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
@@ -598,15 +604,16 @@ export function Form1042SListItemToJSON(value?: Form1042SListItem | null): any {
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'recipientEmail': value.recipientEmail,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'recipientNonUsProvince': value.recipientNonUsProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
         'federalEFile': value.federalEFile,
         'postalMail': value.postalMail,
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
+        'secondTinNotice': value.secondTinNotice,
         'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };

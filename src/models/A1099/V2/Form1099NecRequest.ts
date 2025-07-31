@@ -27,12 +27,6 @@ import {
  */
 export interface Form1099NecRequest {
     /**
-     * Second TIN notice
-     * @type {boolean}
-     * @memberof Form1099NecRequest
-     */
-    secondTinNotice?: boolean;
-    /**
      * Nonemployee compensation
      * @type {number}
      * @memberof Form1099NecRequest
@@ -79,7 +73,7 @@ export interface Form1099NecRequest {
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    recipientName: string;
+    recipientName?: string | null;
     /**
      * Type of TIN (Tax ID Number). Will be one of:
      * * SSN
@@ -131,7 +125,7 @@ export interface Form1099NecRequest {
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    recipientEmail?: string | null;
+    email?: string | null;
     /**
      * Account number
      * @type {string}
@@ -149,7 +143,7 @@ export interface Form1099NecRequest {
      * @type {string}
      * @memberof Form1099NecRequest
      */
-    recipientNonUsProvince?: string | null;
+    nonUsProvince?: string | null;
     /**
      * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
@@ -181,6 +175,18 @@ export interface Form1099NecRequest {
      */
     tinMatch?: boolean;
     /**
+     * Indicates whether the recipient has no TIN
+     * @type {boolean}
+     * @memberof Form1099NecRequest
+     */
+    noTin?: boolean;
+    /**
+     * Second TIN notice in three years
+     * @type {boolean}
+     * @memberof Form1099NecRequest
+     */
+    secondTinNotice?: boolean | null;
+    /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099NecRequest
@@ -191,7 +197,7 @@ export interface Form1099NecRequest {
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099NecRequest
      */
-    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest | null;
 }
 
 /**
@@ -205,7 +211,8 @@ export enum Form1099NecRequestTypeEnum {
     _1099R = '1099-R',
     _1099K = '1099-K',
     _1095B = '1095-B',
-    _1042S = '1042-S'
+    _1042S = '1042-S',
+    _1095C = '1095-C'
 }/**
 * @export
 * @enum {string}
@@ -223,7 +230,6 @@ export enum Form1099NecRequestTinTypeEnum {
 export function instanceOfForm1099NecRequest(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "nonemployeeCompensation" in value;
-    isInstance = isInstance && "recipientName" in value;
     isInstance = isInstance && "address" in value;
     isInstance = isInstance && "city" in value;
     isInstance = isInstance && "countryCode" in value;
@@ -241,7 +247,6 @@ export function Form1099NecRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'nonemployeeCompensation': json['nonemployeeCompensation'],
         'directSalesIndicator': !exists(json, 'directSalesIndicator') ? undefined : json['directSalesIndicator'],
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
@@ -249,7 +254,7 @@ export function Form1099NecRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
-        'recipientName': json['recipientName'],
+        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': json['address'],
@@ -257,15 +262,17 @@ export function Form1099NecRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
@@ -280,7 +287,6 @@ export function Form1099NecRequestToJSON(value?: Form1099NecRequest | null): any
     }
     return {
         
-        'secondTinNotice': value.secondTinNotice,
         'nonemployeeCompensation': value.nonemployeeCompensation,
         'directSalesIndicator': value.directSalesIndicator,
         'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
@@ -296,15 +302,17 @@ export function Form1099NecRequestToJSON(value?: Form1099NecRequest | null): any
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'recipientEmail': value.recipientEmail,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'recipientNonUsProvince': value.recipientNonUsProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
         'federalEFile': value.federalEFile,
         'postalMail': value.postalMail,
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };

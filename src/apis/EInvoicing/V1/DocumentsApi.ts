@@ -99,7 +99,7 @@ export interface SubmitDocumentInterface {
  * 
  */
 export class DocumentsApi extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.0';
+    public sdkVersion: string = '25.8.1';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);

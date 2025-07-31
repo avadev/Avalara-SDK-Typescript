@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../../../runtime';
+import {
+    TinMatchStatusResponse,
+    TinMatchStatusResponseFromJSON,
+    TinMatchStatusResponseFromJSONTyped,
+    TinMatchStatusResponseToJSON,
+} from './TinMatchStatusResponse';
+
 /**
  * 
  * @export
@@ -127,6 +134,12 @@ export interface W9FormResponse {
      * @memberof W9FormResponse
      */
     is1099able?: boolean;
+    /**
+     * The TIN Match status from IRS.
+     * @type {TinMatchStatusResponse}
+     * @memberof W9FormResponse
+     */
+    tinMatchStatus?: TinMatchStatusResponse;
     /**
      * The unique identifier for the form.
      * @type {string}
@@ -252,6 +265,7 @@ export function W9FormResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
         'backupWithholding': !exists(json, 'backupWithholding') ? undefined : json['backupWithholding'],
         'is1099able': !exists(json, 'is1099able') ? undefined : json['is1099able'],
+        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : TinMatchStatusResponseFromJSON(json['tinMatchStatus']),
         'id': !exists(json, 'id') ? undefined : json['id'],
         'type': !exists(json, 'type') ? undefined : json['type'],
         'entryStatus': !exists(json, 'entryStatus') ? undefined : json['entryStatus'],
@@ -296,6 +310,7 @@ export function W9FormResponseToJSON(value?: W9FormResponse | null): any {
         'tin': value.tin,
         'backupWithholding': value.backupWithholding,
         'is1099able': value.is1099able,
+        'tinMatchStatus': TinMatchStatusResponseToJSON(value.tinMatchStatus),
         'id': value.id,
         'type': value.type,
         'entryStatus': value.entryStatus,

@@ -60,79 +60,79 @@ export interface CoveredIndividualRequest {
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator0?: boolean;
+    coveredAllMonths?: boolean;
     /**
      * Coverage indicator for January
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator1?: boolean;
+    coveredJanuary?: boolean;
     /**
      * Coverage indicator for February
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator2?: boolean;
+    coveredFebruary?: boolean;
     /**
      * Coverage indicator for March
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator3?: boolean;
+    coveredMarch?: boolean;
     /**
      * Coverage indicator for April
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator4?: boolean;
+    coveredApril?: boolean;
     /**
      * Coverage indicator for May
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator5?: boolean;
+    coveredMay?: boolean;
     /**
      * Coverage indicator for June
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator6?: boolean;
+    coveredJune?: boolean;
     /**
      * Coverage indicator for July
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator7?: boolean;
+    coveredJuly?: boolean;
     /**
      * Coverage indicator for August
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator8?: boolean;
+    coveredAugust?: boolean;
     /**
      * Coverage indicator for September
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator9?: boolean;
+    coveredSeptember?: boolean;
     /**
      * Coverage indicator for October
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator10?: boolean;
+    coveredOctober?: boolean;
     /**
      * Coverage indicator for November
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator11?: boolean;
+    coveredNovember?: boolean;
     /**
      * Coverage indicator for December
      * @type {boolean}
      * @memberof CoveredIndividualRequest
      */
-    coveredMonthIndicator12?: boolean;
+    coveredDecember?: boolean;
 }
 
 
@@ -162,19 +162,19 @@ export function CoveredIndividualRequestFromJSONTyped(json: any, ignoreDiscrimin
         'nameSuffix': !exists(json, 'nameSuffix') ? undefined : json['nameSuffix'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
         'birthDate': !exists(json, 'birthDate') ? undefined : (json['birthDate'] === null ? null : new Date(json['birthDate'])),
-        'coveredMonthIndicator0': !exists(json, 'coveredMonthIndicator0') ? undefined : json['coveredMonthIndicator0'],
-        'coveredMonthIndicator1': !exists(json, 'coveredMonthIndicator1') ? undefined : json['coveredMonthIndicator1'],
-        'coveredMonthIndicator2': !exists(json, 'coveredMonthIndicator2') ? undefined : json['coveredMonthIndicator2'],
-        'coveredMonthIndicator3': !exists(json, 'coveredMonthIndicator3') ? undefined : json['coveredMonthIndicator3'],
-        'coveredMonthIndicator4': !exists(json, 'coveredMonthIndicator4') ? undefined : json['coveredMonthIndicator4'],
-        'coveredMonthIndicator5': !exists(json, 'coveredMonthIndicator5') ? undefined : json['coveredMonthIndicator5'],
-        'coveredMonthIndicator6': !exists(json, 'coveredMonthIndicator6') ? undefined : json['coveredMonthIndicator6'],
-        'coveredMonthIndicator7': !exists(json, 'coveredMonthIndicator7') ? undefined : json['coveredMonthIndicator7'],
-        'coveredMonthIndicator8': !exists(json, 'coveredMonthIndicator8') ? undefined : json['coveredMonthIndicator8'],
-        'coveredMonthIndicator9': !exists(json, 'coveredMonthIndicator9') ? undefined : json['coveredMonthIndicator9'],
-        'coveredMonthIndicator10': !exists(json, 'coveredMonthIndicator10') ? undefined : json['coveredMonthIndicator10'],
-        'coveredMonthIndicator11': !exists(json, 'coveredMonthIndicator11') ? undefined : json['coveredMonthIndicator11'],
-        'coveredMonthIndicator12': !exists(json, 'coveredMonthIndicator12') ? undefined : json['coveredMonthIndicator12'],
+        'coveredAllMonths': !exists(json, 'coveredAllMonths') ? undefined : json['coveredAllMonths'],
+        'coveredJanuary': !exists(json, 'coveredJanuary') ? undefined : json['coveredJanuary'],
+        'coveredFebruary': !exists(json, 'coveredFebruary') ? undefined : json['coveredFebruary'],
+        'coveredMarch': !exists(json, 'coveredMarch') ? undefined : json['coveredMarch'],
+        'coveredApril': !exists(json, 'coveredApril') ? undefined : json['coveredApril'],
+        'coveredMay': !exists(json, 'coveredMay') ? undefined : json['coveredMay'],
+        'coveredJune': !exists(json, 'coveredJune') ? undefined : json['coveredJune'],
+        'coveredJuly': !exists(json, 'coveredJuly') ? undefined : json['coveredJuly'],
+        'coveredAugust': !exists(json, 'coveredAugust') ? undefined : json['coveredAugust'],
+        'coveredSeptember': !exists(json, 'coveredSeptember') ? undefined : json['coveredSeptember'],
+        'coveredOctober': !exists(json, 'coveredOctober') ? undefined : json['coveredOctober'],
+        'coveredNovember': !exists(json, 'coveredNovember') ? undefined : json['coveredNovember'],
+        'coveredDecember': !exists(json, 'coveredDecember') ? undefined : json['coveredDecember'],
     };
 }
 
@@ -193,18 +193,18 @@ export function CoveredIndividualRequestToJSON(value?: CoveredIndividualRequest 
         'nameSuffix': value.nameSuffix,
         'tin': value.tin,
         'birthDate': value.birthDate === undefined ? undefined : (value.birthDate === null ? null : value.birthDate.toISOString()),
-        'coveredMonthIndicator0': value.coveredMonthIndicator0,
-        'coveredMonthIndicator1': value.coveredMonthIndicator1,
-        'coveredMonthIndicator2': value.coveredMonthIndicator2,
-        'coveredMonthIndicator3': value.coveredMonthIndicator3,
-        'coveredMonthIndicator4': value.coveredMonthIndicator4,
-        'coveredMonthIndicator5': value.coveredMonthIndicator5,
-        'coveredMonthIndicator6': value.coveredMonthIndicator6,
-        'coveredMonthIndicator7': value.coveredMonthIndicator7,
-        'coveredMonthIndicator8': value.coveredMonthIndicator8,
-        'coveredMonthIndicator9': value.coveredMonthIndicator9,
-        'coveredMonthIndicator10': value.coveredMonthIndicator10,
-        'coveredMonthIndicator11': value.coveredMonthIndicator11,
-        'coveredMonthIndicator12': value.coveredMonthIndicator12,
+        'coveredAllMonths': value.coveredAllMonths,
+        'coveredJanuary': value.coveredJanuary,
+        'coveredFebruary': value.coveredFebruary,
+        'coveredMarch': value.coveredMarch,
+        'coveredApril': value.coveredApril,
+        'coveredMay': value.coveredMay,
+        'coveredJune': value.coveredJune,
+        'coveredJuly': value.coveredJuly,
+        'coveredAugust': value.coveredAugust,
+        'coveredSeptember': value.coveredSeptember,
+        'coveredOctober': value.coveredOctober,
+        'coveredNovember': value.coveredNovember,
+        'coveredDecember': value.coveredDecember,
     };
 }

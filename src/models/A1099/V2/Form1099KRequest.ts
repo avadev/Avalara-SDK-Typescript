@@ -28,16 +28,16 @@ import {
 export interface Form1099KRequest {
     /**
      * Filer type (PSE or EPF)
-     * @type {number}
+     * @type {string}
      * @memberof Form1099KRequest
      */
-    filerType?: number;
+    filerType?: Form1099KRequestFilerTypeEnum;
     /**
      * Payment type (payment card or third party network)
-     * @type {number}
+     * @type {string}
      * @memberof Form1099KRequest
      */
-    paymentType?: number;
+    paymentType?: Form1099KRequestPaymentTypeEnum;
     /**
      * Payment settlement entity name and phone number
      * @type {string}
@@ -175,7 +175,7 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    recipientName: string;
+    recipientName?: string | null;
     /**
      * Type of TIN (Tax ID Number). Will be one of:
      * * SSN
@@ -227,7 +227,7 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    recipientEmail?: string | null;
+    email?: string | null;
     /**
      * Account number
      * @type {string}
@@ -245,7 +245,7 @@ export interface Form1099KRequest {
      * @type {string}
      * @memberof Form1099KRequest
      */
-    recipientNonUsProvince?: string | null;
+    nonUsProvince?: string | null;
     /**
      * Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
      * @type {string}
@@ -277,6 +277,18 @@ export interface Form1099KRequest {
      */
     tinMatch?: boolean;
     /**
+     * Indicates whether the recipient has no TIN
+     * @type {boolean}
+     * @memberof Form1099KRequest
+     */
+    noTin?: boolean;
+    /**
+     * Second TIN notice in three years
+     * @type {boolean}
+     * @memberof Form1099KRequest
+     */
+    secondTinNotice?: boolean | null;
+    /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099KRequest
@@ -287,10 +299,25 @@ export interface Form1099KRequest {
      * @type {StateAndLocalWithholdingRequest}
      * @memberof Form1099KRequest
      */
-    stateAndLocalWithholding?: StateAndLocalWithholdingRequest;
+    stateAndLocalWithholding?: StateAndLocalWithholdingRequest | null;
 }
 
 /**
+* @export
+* @enum {string}
+*/
+export enum Form1099KRequestFilerTypeEnum {
+    Pse = 'PSE',
+    Epf = 'EPF',
+    Other = 'Other'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1099KRequestPaymentTypeEnum {
+    MerchantPaymentCard = 'MerchantPaymentCard',
+    ThirdPartyNetwork = 'ThirdPartyNetwork'
+}/**
 * @export
 * @enum {string}
 */
@@ -301,7 +328,8 @@ export enum Form1099KRequestTypeEnum {
     _1099R = '1099-R',
     _1099K = '1099-K',
     _1095B = '1095-B',
-    _1042S = '1042-S'
+    _1042S = '1042-S',
+    _1095C = '1095-C'
 }/**
 * @export
 * @enum {string}
@@ -318,7 +346,6 @@ export enum Form1099KRequestTinTypeEnum {
  */
 export function instanceOfForm1099KRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "recipientName" in value;
     isInstance = isInstance && "address" in value;
     isInstance = isInstance && "city" in value;
     isInstance = isInstance && "countryCode" in value;
@@ -360,7 +387,7 @@ export function Form1099KRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'recipientTin': !exists(json, 'recipientTin') ? undefined : json['recipientTin'],
-        'recipientName': json['recipientName'],
+        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': json['address'],
@@ -368,15 +395,17 @@ export function Form1099KRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'recipientEmail': !exists(json, 'recipientEmail') ? undefined : json['recipientEmail'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'recipientNonUsProvince': !exists(json, 'recipientNonUsProvince') ? undefined : json['recipientNonUsProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
@@ -423,15 +452,17 @@ export function Form1099KRequestToJSON(value?: Form1099KRequest | null): any {
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'recipientEmail': value.recipientEmail,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'recipientNonUsProvince': value.recipientNonUsProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
         'federalEFile': value.federalEFile,
         'postalMail': value.postalMail,
         'stateEFile': value.stateEFile,
         'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };
