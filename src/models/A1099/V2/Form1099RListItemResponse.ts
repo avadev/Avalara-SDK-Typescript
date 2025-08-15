@@ -153,12 +153,6 @@ export interface Form1099RListItemResponse {
      */
     firstYearDesignatedRothContrib?: string | null;
     /**
-     * FATCA filing requirement
-     * @type {boolean}
-     * @memberof Form1099RListItemResponse
-     */
-    fatcaRequirementIndicator?: boolean | null;
-    /**
      * Date of payment
      * @type {string}
      * @memberof Form1099RListItemResponse
@@ -493,7 +487,6 @@ export function Form1099RListItemResponseFromJSONTyped(json: any, ignoreDiscrimi
         'totalEmployeeContributions': !exists(json, 'totalEmployeeContributions') ? undefined : json['totalEmployeeContributions'],
         'amountAllocableToIrr': !exists(json, 'amountAllocableToIrr') ? undefined : json['amountAllocableToIrr'],
         'firstYearDesignatedRothContrib': !exists(json, 'firstYearDesignatedRothContrib') ? undefined : json['firstYearDesignatedRothContrib'],
-        'fatcaRequirementIndicator': !exists(json, 'fatcaRequirementIndicator') ? undefined : json['fatcaRequirementIndicator'],
         'dateOfPayment': !exists(json, 'dateOfPayment') ? undefined : json['dateOfPayment'],
         'id': json['id'],
         'type': json['type'],
@@ -564,7 +557,6 @@ export function Form1099RListItemResponseToJSON(value?: Form1099RListItemRespons
         'totalEmployeeContributions': value.totalEmployeeContributions,
         'amountAllocableToIrr': value.amountAllocableToIrr,
         'firstYearDesignatedRothContrib': value.firstYearDesignatedRothContrib,
-        'fatcaRequirementIndicator': value.fatcaRequirementIndicator,
         'dateOfPayment': value.dateOfPayment,
         'type': value.type,
         'issuerId': value.issuerId,

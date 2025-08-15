@@ -19,6 +19,13 @@ import {
     Form1042SResponseFromJSONTyped,
     Form1042SResponseToJSON,
 } from './Form1042SResponse';
+import type { Form1095BResponse } from './Form1095BResponse';
+import {
+    instanceOfForm1095BResponse,
+    Form1095BResponseFromJSON,
+    Form1095BResponseFromJSONTyped,
+    Form1095BResponseToJSON,
+} from './Form1095BResponse';
 import type { Form1099DivResponse } from './Form1099DivResponse';
 import {
     instanceOfForm1099DivResponse,
@@ -26,6 +33,13 @@ import {
     Form1099DivResponseFromJSONTyped,
     Form1099DivResponseToJSON,
 } from './Form1099DivResponse';
+import type { Form1099IntResponse } from './Form1099IntResponse';
+import {
+    instanceOfForm1099IntResponse,
+    Form1099IntResponseFromJSON,
+    Form1099IntResponseFromJSONTyped,
+    Form1099IntResponseToJSON,
+} from './Form1099IntResponse';
 import type { Form1099KResponse } from './Form1099KResponse';
 import {
     instanceOfForm1099KResponse,
@@ -47,6 +61,13 @@ import {
     Form1099NecResponseFromJSONTyped,
     Form1099NecResponseToJSON,
 } from './Form1099NecResponse';
+import type { Form1099RResponse } from './Form1099RResponse';
+import {
+    instanceOfForm1099RResponse,
+    Form1099RResponseFromJSON,
+    Form1099RResponseFromJSONTyped,
+    Form1099RResponseToJSON,
+} from './Form1099RResponse';
 import type { FormResponseBase } from './FormResponseBase';
 import {
     instanceOfFormResponseBase,
@@ -60,7 +81,7 @@ import {
  * 
  * @export
  */
-export type Update1099Form200Response = Form1042SResponse | Form1099DivResponse | Form1099KResponse | Form1099MiscResponse | Form1099NecResponse | FormResponseBase;
+export type Update1099Form200Response = Form1042SResponse | Form1095BResponse | Form1099DivResponse | Form1099IntResponse | Form1099KResponse | Form1099MiscResponse | Form1099NecResponse | Form1099RResponse | FormResponseBase;
 
 export function Update1099Form200ResponseFromJSON(json: any): Update1099Form200Response {
     return Update1099Form200ResponseFromJSONTyped(json, false);
@@ -73,8 +94,14 @@ export function Update1099Form200ResponseFromJSONTyped(json: any, ignoreDiscrimi
     if (instanceOfForm1042SResponse(json)) {
         return Form1042SResponseFromJSONTyped(json, true);
     }
+    if (instanceOfForm1095BResponse(json)) {
+        return Form1095BResponseFromJSONTyped(json, true);
+    }
     if (instanceOfForm1099DivResponse(json)) {
         return Form1099DivResponseFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099IntResponse(json)) {
+        return Form1099IntResponseFromJSONTyped(json, true);
     }
     if (instanceOfForm1099KResponse(json)) {
         return Form1099KResponseFromJSONTyped(json, true);
@@ -84,6 +111,9 @@ export function Update1099Form200ResponseFromJSONTyped(json: any, ignoreDiscrimi
     }
     if (instanceOfForm1099NecResponse(json)) {
         return Form1099NecResponseFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099RResponse(json)) {
+        return Form1099RResponseFromJSONTyped(json, true);
     }
     if (instanceOfFormResponseBase(json)) {
         return FormResponseBaseFromJSONTyped(json, true);
@@ -98,8 +128,14 @@ export function Update1099Form200ResponseToJSON(value?: Update1099Form200Respons
     if (instanceOfForm1042SResponse(value)) {
         return Form1042SResponseToJSON(value as Form1042SResponse);
     }
+    if (instanceOfForm1095BResponse(value)) {
+        return Form1095BResponseToJSON(value as Form1095BResponse);
+    }
     if (instanceOfForm1099DivResponse(value)) {
         return Form1099DivResponseToJSON(value as Form1099DivResponse);
+    }
+    if (instanceOfForm1099IntResponse(value)) {
+        return Form1099IntResponseToJSON(value as Form1099IntResponse);
     }
     if (instanceOfForm1099KResponse(value)) {
         return Form1099KResponseToJSON(value as Form1099KResponse);
@@ -109,6 +145,9 @@ export function Update1099Form200ResponseToJSON(value?: Update1099Form200Respons
     }
     if (instanceOfForm1099NecResponse(value)) {
         return Form1099NecResponseToJSON(value as Form1099NecResponse);
+    }
+    if (instanceOfForm1099RResponse(value)) {
+        return Form1099RResponseToJSON(value as Form1099RResponse);
     }
     if (instanceOfFormResponseBase(value)) {
         return FormResponseBaseToJSON(value as FormResponseBase);

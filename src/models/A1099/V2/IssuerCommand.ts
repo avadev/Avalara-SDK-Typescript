@@ -24,7 +24,7 @@ export interface IssuerCommand {
      * @type {string}
      * @memberof IssuerCommand
      */
-    name?: string;
+    name?: string | null;
     /**
      * Optional DBA name or continuation of a long legal name
      * @type {string}

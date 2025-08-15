@@ -192,11 +192,11 @@ Name | Type | Description  | Notes
 
 <a name="listw9forms"></a>
 # **listW9Forms**
-> PaginatedW9FormsModel listW9Forms (string avalaraVersion, string $filter, number $top, number $skip, string $orderBy, boolean count, string xCorrelationId, string xAvalaraClient)
+> PaginatedQueryResultModelW9FormBaseResponse listW9Forms (string avalaraVersion, string $filter, number $top, number $skip, string $orderBy, boolean count, boolean countOnly, string xCorrelationId, string xAvalaraClient)
 
 List W9/W4/W8 forms
 
-List W9/W4/W8 forms.
+List W9/W4/W8 forms. Filterable/Sortable fields are: \"companyId\", \"type\", \"displayName\", \"entryStatus\", \"email\", \"archived\" and \"referenceId\".
 
 ### Example
 ```typescript
@@ -222,17 +222,18 @@ const result = await api.createUser();
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **avalaraVersion** | **string**| API version | [default to undefined]
- **$filter** | **string**| A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. | [optional] [default to undefined]
- **$top** | **number**| If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records. | [optional] [default to 10]
- **$skip** | **number**| If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. | [optional] [default to 0]
+ **$filter** | **string**| A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. | [optional] [default to undefined]
+ **$top** | **number**| If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets. | [optional] [default to undefined]
+ **$skip** | **number**| If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. | [optional] [default to undefined]
  **$orderBy** | **string**| A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC. | [optional] [default to undefined]
- **count** | **boolean**| When true, returns a @recordSetCount in the result set | [optional] [default to undefined]
+ **count** | **boolean**| If true, return the global count of elements in the collection. | [optional] [default to undefined]
+ **countOnly** | **boolean**| If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true. | [optional] [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
 
 ### Return type
 
-[**PaginatedW9FormsModel**](PaginatedW9FormsModel.md)
+[**PaginatedQueryResultModelW9FormBaseResponse**](PaginatedQueryResultModelW9FormBaseResponse.md)
 
 ### Authorization
 
@@ -247,9 +248,9 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of forms |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
+| **200** | List of forms |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

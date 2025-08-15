@@ -46,6 +46,120 @@ import {
 export interface Form1099DivResponse {
     /**
      * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    totalOrdinaryDividends?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    qualifiedDividends?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    totalCapitalGainDistributions?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    unrecapturedSection1250Gain?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    section1202Gain?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    collectiblesGain?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    section897OrdinaryDividends?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    section897CapitalGain?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    nondividendDistributions?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    federalIncomeTaxWithheld?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    section199ADividends?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    investmentExpenses?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    foreignTaxPaid?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099DivResponse
+     */
+    foreignCountryOrUSPossession?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    cashLiquidationDistributions?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    noncashLiquidationDistributions?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    exemptInterestDividends?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099DivResponse
+     */
+    specifiedPrivateActivityBondInterestDividends?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1099DivResponse
+     */
+    fatcaFilingRequirement?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof Form1099DivResponse
      */
@@ -286,7 +400,8 @@ export enum Form1099DivResponseTypeEnum {
     _1099K = '1099-K',
     _1095B = '1095-B',
     _1042S = '1042-S',
-    _1095C = '1095-C'
+    _1095C = '1095-C',
+    _1099Int = '1099-INT'
 }/**
 * @export
 * @enum {string}
@@ -317,6 +432,25 @@ export function Form1099DivResponseFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
+        'totalOrdinaryDividends': !exists(json, 'totalOrdinaryDividends') ? undefined : json['totalOrdinaryDividends'],
+        'qualifiedDividends': !exists(json, 'qualifiedDividends') ? undefined : json['qualifiedDividends'],
+        'totalCapitalGainDistributions': !exists(json, 'totalCapitalGainDistributions') ? undefined : json['totalCapitalGainDistributions'],
+        'unrecapturedSection1250Gain': !exists(json, 'unrecapturedSection1250Gain') ? undefined : json['unrecapturedSection1250Gain'],
+        'section1202Gain': !exists(json, 'section1202Gain') ? undefined : json['section1202Gain'],
+        'collectiblesGain': !exists(json, 'collectiblesGain') ? undefined : json['collectiblesGain'],
+        'section897OrdinaryDividends': !exists(json, 'section897OrdinaryDividends') ? undefined : json['section897OrdinaryDividends'],
+        'section897CapitalGain': !exists(json, 'section897CapitalGain') ? undefined : json['section897CapitalGain'],
+        'nondividendDistributions': !exists(json, 'nondividendDistributions') ? undefined : json['nondividendDistributions'],
+        'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
+        'section199ADividends': !exists(json, 'section199ADividends') ? undefined : json['section199ADividends'],
+        'investmentExpenses': !exists(json, 'investmentExpenses') ? undefined : json['investmentExpenses'],
+        'foreignTaxPaid': !exists(json, 'foreignTaxPaid') ? undefined : json['foreignTaxPaid'],
+        'foreignCountryOrUSPossession': !exists(json, 'foreignCountryOrUSPossession') ? undefined : json['foreignCountryOrUSPossession'],
+        'cashLiquidationDistributions': !exists(json, 'cashLiquidationDistributions') ? undefined : json['cashLiquidationDistributions'],
+        'noncashLiquidationDistributions': !exists(json, 'noncashLiquidationDistributions') ? undefined : json['noncashLiquidationDistributions'],
+        'exemptInterestDividends': !exists(json, 'exemptInterestDividends') ? undefined : json['exemptInterestDividends'],
+        'specifiedPrivateActivityBondInterestDividends': !exists(json, 'specifiedPrivateActivityBondInterestDividends') ? undefined : json['specifiedPrivateActivityBondInterestDividends'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'type': !exists(json, 'type') ? undefined : json['type'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
@@ -367,6 +501,25 @@ export function Form1099DivResponseToJSON(value?: Form1099DivResponse | null): a
     }
     return {
         
+        'totalOrdinaryDividends': value.totalOrdinaryDividends,
+        'qualifiedDividends': value.qualifiedDividends,
+        'totalCapitalGainDistributions': value.totalCapitalGainDistributions,
+        'unrecapturedSection1250Gain': value.unrecapturedSection1250Gain,
+        'section1202Gain': value.section1202Gain,
+        'collectiblesGain': value.collectiblesGain,
+        'section897OrdinaryDividends': value.section897OrdinaryDividends,
+        'section897CapitalGain': value.section897CapitalGain,
+        'nondividendDistributions': value.nondividendDistributions,
+        'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
+        'section199ADividends': value.section199ADividends,
+        'investmentExpenses': value.investmentExpenses,
+        'foreignTaxPaid': value.foreignTaxPaid,
+        'foreignCountryOrUSPossession': value.foreignCountryOrUSPossession,
+        'cashLiquidationDistributions': value.cashLiquidationDistributions,
+        'noncashLiquidationDistributions': value.noncashLiquidationDistributions,
+        'exemptInterestDividends': value.exemptInterestDividends,
+        'specifiedPrivateActivityBondInterestDividends': value.specifiedPrivateActivityBondInterestDividends,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
         'stateAndLocalWithholding': StateAndLocalWithholdingResponseToJSON(value.stateAndLocalWithholding),

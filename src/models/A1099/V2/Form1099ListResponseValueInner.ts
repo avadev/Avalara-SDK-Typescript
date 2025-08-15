@@ -40,6 +40,13 @@ import {
     Form1099DivListItemResponseFromJSONTyped,
     Form1099DivListItemResponseToJSON,
 } from './Form1099DivListItemResponse';
+import type { Form1099IntListItemResponse } from './Form1099IntListItemResponse';
+import {
+    instanceOfForm1099IntListItemResponse,
+    Form1099IntListItemResponseFromJSON,
+    Form1099IntListItemResponseFromJSONTyped,
+    Form1099IntListItemResponseToJSON,
+} from './Form1099IntListItemResponse';
 import type { Form1099KListItemResponse } from './Form1099KListItemResponse';
 import {
     instanceOfForm1099KListItemResponse,
@@ -74,7 +81,7 @@ import {
  * 
  * @export
  */
-export type Form1099ListResponseValueInner = Form1042SListItemResponse | Form1095BListItemResponse | Form1099BaseResponse | Form1099DivListItemResponse | Form1099KListItemResponse | Form1099MiscListItemResponse | Form1099NecListItemResponse | Form1099RListItemResponse;
+export type Form1099ListResponseValueInner = Form1042SListItemResponse | Form1095BListItemResponse | Form1099BaseResponse | Form1099DivListItemResponse | Form1099IntListItemResponse | Form1099KListItemResponse | Form1099MiscListItemResponse | Form1099NecListItemResponse | Form1099RListItemResponse;
 
 export function Form1099ListResponseValueInnerFromJSON(json: any): Form1099ListResponseValueInner {
     return Form1099ListResponseValueInnerFromJSONTyped(json, false);
@@ -95,6 +102,9 @@ export function Form1099ListResponseValueInnerFromJSONTyped(json: any, ignoreDis
     }
     if (instanceOfForm1099DivListItemResponse(json)) {
         return Form1099DivListItemResponseFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099IntListItemResponse(json)) {
+        return Form1099IntListItemResponseFromJSONTyped(json, true);
     }
     if (instanceOfForm1099KListItemResponse(json)) {
         return Form1099KListItemResponseFromJSONTyped(json, true);
@@ -126,6 +136,9 @@ export function Form1099ListResponseValueInnerToJSON(value?: Form1099ListRespons
     }
     if (instanceOfForm1099DivListItemResponse(value)) {
         return Form1099DivListItemResponseToJSON(value as Form1099DivListItemResponse);
+    }
+    if (instanceOfForm1099IntListItemResponse(value)) {
+        return Form1099IntListItemResponseToJSON(value as Form1099IntListItemResponse);
     }
     if (instanceOfForm1099KListItemResponse(value)) {
         return Form1099KListItemResponseToJSON(value as Form1099KListItemResponse);

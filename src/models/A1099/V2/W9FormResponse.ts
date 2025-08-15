@@ -19,13 +19,19 @@ import {
     TinMatchStatusResponseFromJSONTyped,
     TinMatchStatusResponseToJSON,
 } from './TinMatchStatusResponse';
+import {
+    W9FormBaseResponse,
+    W9FormBaseResponseFromJSON,
+    W9FormBaseResponseFromJSONTyped,
+    W9FormBaseResponseToJSON,
+} from './W9FormBaseResponse';
 
 /**
  * 
  * @export
  * @interface W9FormResponse
  */
-export interface W9FormResponse {
+export interface W9FormResponse extends W9FormBaseResponse {
     /**
      * The name of the individual or entity associated with the form.
      * @type {string}
@@ -140,90 +146,6 @@ export interface W9FormResponse {
      * @memberof W9FormResponse
      */
     tinMatchStatus?: TinMatchStatusResponse;
-    /**
-     * The unique identifier for the form.
-     * @type {string}
-     * @memberof W9FormResponse
-     */
-    id?: string;
-    /**
-     * The form type.
-     * @type {string}
-     * @memberof W9FormResponse
-     */
-    type?: string;
-    /**
-     * The form status.
-     * @type {string}
-     * @memberof W9FormResponse
-     */
-    entryStatus?: string;
-    /**
-     * The timestamp for the latest status update.
-     * @type {Date}
-     * @memberof W9FormResponse
-     */
-    entryStatusDate?: Date | null;
-    /**
-     * A reference identifier for the form.
-     * @type {string}
-     * @memberof W9FormResponse
-     */
-    referenceId?: string | null;
-    /**
-     * The ID of the associated company.
-     * @type {string}
-     * @memberof W9FormResponse
-     */
-    companyId?: string;
-    /**
-     * The display name associated with the form.
-     * @type {string}
-     * @memberof W9FormResponse
-     */
-    displayName?: string;
-    /**
-     * The email address of the individual associated with the form.
-     * @type {string}
-     * @memberof W9FormResponse
-     */
-    email?: string | null;
-    /**
-     * Indicates whether the form is archived.
-     * @type {boolean}
-     * @memberof W9FormResponse
-     */
-    archived?: boolean;
-    /**
-     * The signature of the form.
-     * @type {string}
-     * @memberof W9FormResponse
-     */
-    signature?: string | null;
-    /**
-     * The date the form was signed.
-     * @type {Date}
-     * @memberof W9FormResponse
-     */
-    signedDate?: Date | null;
-    /**
-     * The date when e-delivery was consented.
-     * @type {Date}
-     * @memberof W9FormResponse
-     */
-    eDeliveryConsentedAt?: Date | null;
-    /**
-     * The creation date of the form.
-     * @type {Date}
-     * @memberof W9FormResponse
-     */
-    createdAt?: Date;
-    /**
-     * The last updated date of the form.
-     * @type {Date}
-     * @memberof W9FormResponse
-     */
-    updatedAt?: Date;
 }
 
 
@@ -246,7 +168,7 @@ export function W9FormResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         return json;
     }
     return {
-        
+        ...W9FormBaseResponseFromJSONTyped(json, ignoreDiscriminator),
         'name': !exists(json, 'name') ? undefined : json['name'],
         'businessName': !exists(json, 'businessName') ? undefined : json['businessName'],
         'businessClassification': !exists(json, 'businessClassification') ? undefined : json['businessClassification'],
@@ -266,20 +188,6 @@ export function W9FormResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         'backupWithholding': !exists(json, 'backupWithholding') ? undefined : json['backupWithholding'],
         'is1099able': !exists(json, 'is1099able') ? undefined : json['is1099able'],
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : TinMatchStatusResponseFromJSON(json['tinMatchStatus']),
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
-        'entryStatus': !exists(json, 'entryStatus') ? undefined : json['entryStatus'],
-        'entryStatusDate': !exists(json, 'entryStatusDate') ? undefined : (json['entryStatusDate'] === null ? null : new Date(json['entryStatusDate'])),
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
-        'displayName': !exists(json, 'displayName') ? undefined : json['displayName'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'archived': !exists(json, 'archived') ? undefined : json['archived'],
-        'signature': !exists(json, 'signature') ? undefined : json['signature'],
-        'signedDate': !exists(json, 'signedDate') ? undefined : (json['signedDate'] === null ? null : new Date(json['signedDate'])),
-        'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
-        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
 }
 
@@ -291,7 +199,7 @@ export function W9FormResponseToJSON(value?: W9FormResponse | null): any {
         return null;
     }
     return {
-        
+        ...W9FormBaseResponseToJSON(value),
         'name': value.name,
         'businessName': value.businessName,
         'businessClassification': value.businessClassification,
@@ -311,19 +219,5 @@ export function W9FormResponseToJSON(value?: W9FormResponse | null): any {
         'backupWithholding': value.backupWithholding,
         'is1099able': value.is1099able,
         'tinMatchStatus': TinMatchStatusResponseToJSON(value.tinMatchStatus),
-        'id': value.id,
-        'type': value.type,
-        'entryStatus': value.entryStatus,
-        'entryStatusDate': value.entryStatusDate === undefined ? undefined : (value.entryStatusDate === null ? null : value.entryStatusDate.toISOString()),
-        'referenceId': value.referenceId,
-        'companyId': value.companyId,
-        'displayName': value.displayName,
-        'email': value.email,
-        'archived': value.archived,
-        'signature': value.signature,
-        'signedDate': value.signedDate === undefined ? undefined : (value.signedDate === null ? null : value.signedDate.toISOString()),
-        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
     };
 }

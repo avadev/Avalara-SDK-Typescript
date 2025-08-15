@@ -205,7 +205,7 @@ export interface Form1042SRequest {
      * @type {string}
      * @memberof Form1042SRequest
      */
-    recipientTin?: string;
+    recipientTin?: string | null;
     /**
      * Recipient name
      * @type {string}
@@ -233,7 +233,7 @@ export interface Form1042SRequest {
      * @type {string}
      * @memberof Form1042SRequest
      */
-    address: string;
+    address?: string | null;
     /**
      * Address line 2
      * @type {string}
@@ -245,19 +245,19 @@ export interface Form1042SRequest {
      * @type {string}
      * @memberof Form1042SRequest
      */
-    city: string;
+    city?: string | null;
     /**
      * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1042SRequest
      */
-    state?: string;
+    state?: string | null;
     /**
      * Zip/postal code
      * @type {string}
      * @memberof Form1042SRequest
      */
-    zip?: string;
+    zip?: string | null;
     /**
      * Recipient email address
      * @type {string}
@@ -287,7 +287,7 @@ export interface Form1042SRequest {
      * @type {string}
      * @memberof Form1042SRequest
      */
-    countryCode: string;
+    countryCode?: string | null;
     /**
      * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
@@ -325,6 +325,12 @@ export interface Form1042SRequest {
      */
     secondTinNotice?: boolean | null;
     /**
+     * Fatca filing requirement
+     * @type {boolean}
+     * @memberof Form1042SRequest
+     */
+    fatcaFilingRequirement?: boolean;
+    /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1042SRequest
@@ -344,7 +350,8 @@ export enum Form1042SRequestTypeEnum {
     _1099K = '1099-K',
     _1095B = '1095-B',
     _1042S = '1042-S',
-    _1095C = '1095-C'
+    _1095C = '1095-C',
+    _1099Int = '1099-INT'
 }/**
 * @export
 * @enum {string}
@@ -361,9 +368,6 @@ export enum Form1042SRequestTinTypeEnum {
  */
 export function instanceOfForm1042SRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "address" in value;
-    isInstance = isInstance && "city" in value;
-    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -409,22 +413,23 @@ export function Form1042SRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': json['address'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': json['city'],
+        'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
-        'countryCode': json['countryCode'],
+        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
         'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
     };
 }
@@ -485,6 +490,7 @@ export function Form1042SRequestToJSON(value?: Form1042SRequest | null): any {
         'tinMatch': value.tinMatch,
         'noTin': value.noTin,
         'secondTinNotice': value.secondTinNotice,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'addressVerification': value.addressVerification,
     };
 }

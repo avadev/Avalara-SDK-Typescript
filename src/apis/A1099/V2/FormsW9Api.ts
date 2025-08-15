@@ -33,9 +33,9 @@ import {
     IW9FormDataModelsOneOf,
     IW9FormDataModelsOneOfFromJSON,
     IW9FormDataModelsOneOfToJSON,
-    PaginatedW9FormsModel,
-    PaginatedW9FormsModelFromJSON,
-    PaginatedW9FormsModelToJSON,
+    PaginatedQueryResultModelW9FormBaseResponse,
+    PaginatedQueryResultModelW9FormBaseResponseFromJSON,
+    PaginatedQueryResultModelW9FormBaseResponseToJSON,
 } from '../../../packages/A1099/V2';
 
 export interface CreateW9FormOperationInterface {
@@ -66,6 +66,7 @@ export interface ListW9FormsInterface {
     $skip?: number;
     $orderBy?: string;
     count?: boolean;
+    countOnly?: boolean;
     xCorrelationId?: string;
     xAvalaraClient?: string;
 }
@@ -97,7 +98,7 @@ export interface UploadW9FilesInterface {
  * 
  */
 export class FormsW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.1';
+    public sdkVersion: string = '25.8.2';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -263,10 +264,10 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * List W9/W4/W8 forms.
+     * List W9/W4/W8 forms. Filterable/Sortable fields are: \"companyId\", \"type\", \"displayName\", \"entryStatus\", \"email\", \"archived\" and \"referenceId\".
      * List W9/W4/W8 forms
      */
-    async listW9FormsRaw(requestParameters: ListW9FormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<PaginatedW9FormsModel>, logObject: LogObject }> {
+    async listW9FormsRaw(requestParameters: ListW9FormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<PaginatedQueryResultModelW9FormBaseResponse>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling listW9Forms.');
@@ -295,6 +296,10 @@ export class FormsW9Api extends runtime.ApiClient {
             queryParameters['count'] = requestParameters.count;
         }
 
+        if (requestParameters.countOnly !== undefined) {
+            queryParameters['countOnly'] = requestParameters.countOnly;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
@@ -317,14 +322,14 @@ export class FormsW9Api extends runtime.ApiClient {
             query: queryParameters,
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => PaginatedW9FormsModelFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => PaginatedQueryResultModelW9FormBaseResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
-     * List W9/W4/W8 forms.
+     * List W9/W4/W8 forms. Filterable/Sortable fields are: \"companyId\", \"type\", \"displayName\", \"entryStatus\", \"email\", \"archived\" and \"referenceId\".
      * List W9/W4/W8 forms
      */
-    async listW9Forms(requestParameters: ListW9FormsInterface, initOverrides?: RequestInit): Promise<PaginatedW9FormsModel> {
+    async listW9Forms(requestParameters: ListW9FormsInterface, initOverrides?: RequestInit): Promise<PaginatedQueryResultModelW9FormBaseResponse> {
         const { response, logObject } = await this.listW9FormsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

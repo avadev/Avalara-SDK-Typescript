@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -160,6 +160,12 @@ export interface Form1095B {
     addressVerificationStatus?: Form1099StatusDetail | null;
     /**
      * 
+     * @type {Form1099StatusDetail}
+     * @memberof Form1095B
+     */
+    eDeliveryStatus?: Form1099StatusDetail | null;
+    /**
+     * 
      * @type {string}
      * @memberof Form1095B
      */
@@ -178,10 +184,28 @@ export interface Form1095B {
     tinType?: string | null;
     /**
      * 
+     * @type {boolean}
+     * @memberof Form1095B
+     */
+    fatcaFilingRequirement?: boolean | null;
+    /**
+     * 
      * @type {string}
      * @memberof Form1095B
      */
     tin?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1095B
+     */
+    noTin?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1095B
+     */
+    secondTinNotice?: boolean | null;
     /**
      * 
      * @type {string}
@@ -229,13 +253,25 @@ export interface Form1095B {
      * @type {string}
      * @memberof Form1095B
      */
-    foreignProvince?: string | null;
+    nonUsProvince?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1095B
      */
     countryCode?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1095B
+     */
+    accountNumber?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1095B
+     */
+    officeCode?: string | null;
     /**
      * 
      * @type {Array<ValidationError>}
@@ -301,10 +337,14 @@ export function Form1095BFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': !exists(json, 'address') ? undefined : json['address'],
@@ -312,8 +352,10 @@ export function Form1095BFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
+        'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
@@ -348,10 +390,14 @@ export function Form1095BToJSON(value?: Form1095B | null): any {
         'tinMatchStatus': Form1099StatusDetailToJSON(value.tinMatchStatus),
         'addressVerification': value.addressVerification,
         'addressVerificationStatus': Form1099StatusDetailToJSON(value.addressVerificationStatus),
+        'eDeliveryStatus': Form1099StatusDetailToJSON(value.eDeliveryStatus),
         'referenceId': value.referenceId,
         'email': value.email,
         'tinType': value.tinType,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'tin': value.tin,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'recipientName': value.recipientName,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
@@ -359,8 +405,10 @@ export function Form1095BToJSON(value?: Form1095B | null): any {
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'foreignProvince': value.foreignProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
+        'accountNumber': value.accountNumber,
+        'officeCode': value.officeCode,
         'validationErrors': value.validationErrors === undefined ? undefined : (value.validationErrors === null ? null : (value.validationErrors as Array<any>)?.map(ValidationErrorToJSON)),
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),

@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    ErrorResponseErrorsInner,
-    ErrorResponseErrorsInnerFromJSON,
-    ErrorResponseErrorsInnerFromJSONTyped,
-    ErrorResponseErrorsInnerToJSON,
-} from './ErrorResponseErrorsInner';
+    ErrorResponseItem,
+    ErrorResponseItemFromJSON,
+    ErrorResponseItemFromJSONTyped,
+    ErrorResponseItemToJSON,
+} from './ErrorResponseItem';
 
 /**
  * 
@@ -34,10 +34,10 @@ export interface ErrorResponse {
     title?: string | null;
     /**
      * 
-     * @type {Array<ErrorResponseErrorsInner>}
+     * @type {Array<ErrorResponseItem>}
      * @memberof ErrorResponse
      */
-    errors?: Array<ErrorResponseErrorsInner> | null;
+    errors?: Array<ErrorResponseItem> | null;
 }
 
 
@@ -62,7 +62,7 @@ export function ErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'title': !exists(json, 'title') ? undefined : json['title'],
-        'errors': !exists(json, 'errors') ? undefined : (json['errors'] === null ? null : (json['errors'] as Array<any>)?.map(ErrorResponseErrorsInnerFromJSON)),
+        'errors': !exists(json, 'errors') ? undefined : (json['errors'] === null ? null : (json['errors'] as Array<any>)?.map(ErrorResponseItemFromJSON)),
     };
 }
 
@@ -76,6 +76,6 @@ export function ErrorResponseToJSON(value?: ErrorResponse | null): any {
     return {
         
         'title': value.title,
-        'errors': value.errors === undefined ? undefined : (value.errors === null ? null : (value.errors as Array<any>)?.map(ErrorResponseErrorsInnerToJSON)),
+        'errors': value.errors === undefined ? undefined : (value.errors === null ? null : (value.errors as Array<any>)?.map(ErrorResponseItemToJSON)),
     };
 }

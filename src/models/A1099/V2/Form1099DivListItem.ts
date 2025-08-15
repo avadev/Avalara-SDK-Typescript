@@ -28,82 +28,82 @@ import {
 export interface Form1099DivListItem {
     /**
      * Total ordinary dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    totalOrdinaryDividends?: string | null;
+    totalOrdinaryDividends?: number | null;
     /**
      * Qualified dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    qualifiedDividends?: string | null;
+    qualifiedDividends?: number | null;
     /**
      * Total capital gain distributions
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    totalCapitalGainDistributions?: string | null;
+    totalCapitalGainDistributions?: number | null;
     /**
      * Unrecaptured Section 1250 gain
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    unrecapturedSection1250Gain?: string | null;
+    unrecapturedSection1250Gain?: number | null;
     /**
      * Section 1202 gain
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    section1202Gain?: string | null;
+    section1202Gain?: number | null;
     /**
      * Collectibles (28%) gain
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    collectiblesGain?: string | null;
+    collectiblesGain?: number | null;
     /**
      * Section 897 ordinary dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    section897OrdinaryDividends?: string | null;
+    section897OrdinaryDividends?: number | null;
     /**
      * Section 897 capital gain
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    section897CapitalGain?: string | null;
+    section897CapitalGain?: number | null;
     /**
      * Nondividend distributions
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    nondividendDistributions?: string | null;
+    nondividendDistributions?: number | null;
     /**
      * Federal income tax withheld
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    federalIncomeTaxWithheld?: string | null;
+    federalIncomeTaxWithheld?: number | null;
     /**
      * Section 199A dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    section199ADividends?: string | null;
+    section199ADividends?: number | null;
     /**
      * Investment expenses
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    investmentExpenses?: string | null;
+    investmentExpenses?: number | null;
     /**
      * Foreign tax paid
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    foreignTaxPaid?: string | null;
+    foreignTaxPaid?: number | null;
     /**
      * Foreign country or U.S. possession
      * @type {string}
@@ -112,28 +112,28 @@ export interface Form1099DivListItem {
     foreignCountryOrUSPossession?: string | null;
     /**
      * Cash liquidation distributions
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    cashLiquidationDistributions?: string | null;
+    cashLiquidationDistributions?: number | null;
     /**
      * Noncash liquidation distributions
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    noncashLiquidationDistributions?: string | null;
+    noncashLiquidationDistributions?: number | null;
     /**
      * Exempt-interest dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    exemptInterestDividends?: string | null;
+    exemptInterestDividends?: number | null;
     /**
      * Specified private activity bond interest dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItem
      */
-    specifiedPrivateActivityBondInterestDividends?: string | null;
+    specifiedPrivateActivityBondInterestDividends?: number | null;
     /**
      * FATCA filing requirement
      * @type {boolean}
@@ -145,13 +145,13 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    issuerReferenceId?: string;
+    issuerReferenceId?: string | null;
     /**
      * Issuer TIN. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    issuerTin?: string;
+    issuerTin?: string | null;
     /**
      * Tax year
      * @type {number}
@@ -175,7 +175,7 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    recipientTin?: string;
+    recipientTin?: string | null;
     /**
      * Recipient name
      * @type {string}
@@ -203,7 +203,7 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    address: string;
+    address?: string | null;
     /**
      * Address line 2
      * @type {string}
@@ -215,19 +215,19 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    city: string;
+    city?: string | null;
     /**
      * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    state?: string;
+    state?: string | null;
     /**
      * Zip/postal code
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    zip?: string;
+    zip?: string | null;
     /**
      * Recipient email address
      * @type {string}
@@ -257,7 +257,7 @@ export interface Form1099DivListItem {
      * @type {string}
      * @memberof Form1099DivListItem
      */
-    countryCode: string;
+    countryCode?: string | null;
     /**
      * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
@@ -325,9 +325,6 @@ export enum Form1099DivListItemTinTypeEnum {
 export function instanceOfForm1099DivListItem(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "taxYear" in value;
-    isInstance = isInstance && "address" in value;
-    isInstance = isInstance && "city" in value;
-    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -370,16 +367,16 @@ export function Form1099DivListItemFromJSONTyped(json: any, ignoreDiscriminator:
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': json['address'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': json['city'],
+        'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
-        'countryCode': json['countryCode'],
+        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],

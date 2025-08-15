@@ -421,7 +421,8 @@ export enum Form1099KResponseTypeEnum {
     _1099K = '1099-K',
     _1095B = '1095-B',
     _1042S = '1042-S',
-    _1095C = '1095-C'
+    _1095C = '1095-C',
+    _1099Int = '1099-INT'
 }/**
 * @export
 * @enum {string}
