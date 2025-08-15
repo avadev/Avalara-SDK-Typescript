@@ -19,6 +19,12 @@ import {
     DataFromJSONTyped,
     DataToJSON,
 } from './Data';
+import {
+    Form1099ProccessResultProcessedFormsInner,
+    Form1099ProccessResultProcessedFormsInnerFromJSON,
+    Form1099ProccessResultProcessedFormsInnerFromJSONTyped,
+    Form1099ProccessResultProcessedFormsInnerToJSON,
+} from './Form1099ProccessResultProcessedFormsInner';
 
 /**
  * 
@@ -32,6 +38,12 @@ export interface Form1099ProccessResult {
      * @memberof Form1099ProccessResult
      */
     jobData?: Data;
+    /**
+     * 
+     * @type {Array<Form1099ProccessResultProcessedFormsInner>}
+     * @memberof Form1099ProccessResult
+     */
+    processedForms?: Array<Form1099ProccessResultProcessedFormsInner> | null;
 }
 
 
@@ -56,6 +68,7 @@ export function Form1099ProccessResultFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'jobData': !exists(json, 'jobData') ? undefined : DataFromJSON(json['jobData']),
+        'processedForms': !exists(json, 'processedForms') ? undefined : (json['processedForms'] === null ? null : (json['processedForms'] as Array<any>)?.map(Form1099ProccessResultProcessedFormsInnerFromJSON)),
     };
 }
 
@@ -69,5 +82,6 @@ export function Form1099ProccessResultToJSON(value?: Form1099ProccessResult | nu
     return {
         
         'jobData': DataToJSON(value.jobData),
+        'processedForms': value.processedForms === undefined ? undefined : (value.processedForms === null ? null : (value.processedForms as Array<any>)?.map(Form1099ProccessResultProcessedFormsInnerToJSON)),
     };
 }

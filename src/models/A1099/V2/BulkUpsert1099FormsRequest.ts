@@ -40,6 +40,13 @@ import {
     Form1099DivListFromJSONTyped,
     Form1099DivListToJSON,
 } from './Form1099DivList';
+import type { Form1099IntList } from './Form1099IntList';
+import {
+    instanceOfForm1099IntList,
+    Form1099IntListFromJSON,
+    Form1099IntListFromJSONTyped,
+    Form1099IntListToJSON,
+} from './Form1099IntList';
 import type { Form1099KList } from './Form1099KList';
 import {
     instanceOfForm1099KList,
@@ -74,7 +81,7 @@ import {
  * 
  * @export
  */
-export type BulkUpsert1099FormsRequest = Form1042SList | Form1095BList | Form1095CList | Form1099DivList | Form1099KList | Form1099MiscList | Form1099NecList | Form1099RList;
+export type BulkUpsert1099FormsRequest = Form1042SList | Form1095BList | Form1095CList | Form1099DivList | Form1099IntList | Form1099KList | Form1099MiscList | Form1099NecList | Form1099RList;
 
 export function BulkUpsert1099FormsRequestFromJSON(json: any): BulkUpsert1099FormsRequest {
     return BulkUpsert1099FormsRequestFromJSONTyped(json, false);
@@ -95,6 +102,9 @@ export function BulkUpsert1099FormsRequestFromJSONTyped(json: any, ignoreDiscrim
     }
     if (instanceOfForm1099DivList(json)) {
         return Form1099DivListFromJSONTyped(json, true);
+    }
+    if (instanceOfForm1099IntList(json)) {
+        return Form1099IntListFromJSONTyped(json, true);
     }
     if (instanceOfForm1099KList(json)) {
         return Form1099KListFromJSONTyped(json, true);
@@ -126,6 +136,9 @@ export function BulkUpsert1099FormsRequestToJSON(value?: BulkUpsert1099FormsRequ
     }
     if (instanceOfForm1099DivList(value)) {
         return Form1099DivListToJSON(value as Form1099DivList);
+    }
+    if (instanceOfForm1099IntList(value)) {
+        return Form1099IntListToJSON(value as Form1099IntList);
     }
     if (instanceOfForm1099KList(value)) {
         return Form1099KListToJSON(value as Form1099KList);

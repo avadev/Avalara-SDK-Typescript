@@ -151,13 +151,13 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    issuerReferenceId?: string;
+    issuerReferenceId?: string | null;
     /**
      * Issuer TIN. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099KListItem
      */
-    issuerTin?: string;
+    issuerTin?: string | null;
     /**
      * Tax year
      * @type {number}
@@ -181,7 +181,7 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    recipientTin?: string;
+    recipientTin?: string | null;
     /**
      * Recipient name
      * @type {string}
@@ -209,7 +209,7 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    address: string;
+    address?: string | null;
     /**
      * Address line 2
      * @type {string}
@@ -221,19 +221,19 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    city: string;
+    city?: string | null;
     /**
      * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1099KListItem
      */
-    state?: string;
+    state?: string | null;
     /**
      * Zip/postal code
      * @type {string}
      * @memberof Form1099KListItem
      */
-    zip?: string;
+    zip?: string | null;
     /**
      * Recipient email address
      * @type {string}
@@ -263,7 +263,7 @@ export interface Form1099KListItem {
      * @type {string}
      * @memberof Form1099KListItem
      */
-    countryCode: string;
+    countryCode?: string | null;
     /**
      * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
@@ -300,6 +300,12 @@ export interface Form1099KListItem {
      * @memberof Form1099KListItem
      */
     secondTinNotice?: boolean | null;
+    /**
+     * Fatca filing requirement
+     * @type {boolean}
+     * @memberof Form1099KListItem
+     */
+    fatcaFilingRequirement?: boolean;
     /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
@@ -346,9 +352,6 @@ export enum Form1099KListItemTinTypeEnum {
 export function instanceOfForm1099KListItem(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "taxYear" in value;
-    isInstance = isInstance && "address" in value;
-    isInstance = isInstance && "city" in value;
-    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -392,22 +395,23 @@ export function Form1099KListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': json['address'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': json['city'],
+        'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
-        'countryCode': json['countryCode'],
+        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
         'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
@@ -467,6 +471,7 @@ export function Form1099KListItemToJSON(value?: Form1099KListItem | null): any {
         'tinMatch': value.tinMatch,
         'noTin': value.noTin,
         'secondTinNotice': value.secondTinNotice,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };

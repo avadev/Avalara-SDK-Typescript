@@ -46,82 +46,82 @@ import {
 export interface Form1099DivListItemResponse {
     /**
      * Total ordinary dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    totalOrdinaryDividends?: string | null;
+    totalOrdinaryDividends?: number | null;
     /**
      * Qualified dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    qualifiedDividends?: string | null;
+    qualifiedDividends?: number | null;
     /**
      * Total capital gain distributions
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    totalCapitalGainDistributions?: string | null;
+    totalCapitalGainDistributions?: number | null;
     /**
      * Unrecaptured Section 1250 gain
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    unrecapturedSection1250Gain?: string | null;
+    unrecapturedSection1250Gain?: number | null;
     /**
      * Section 1202 gain
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    section1202Gain?: string | null;
+    section1202Gain?: number | null;
     /**
      * Collectibles (28%) gain
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    collectiblesGain?: string | null;
+    collectiblesGain?: number | null;
     /**
      * Section 897 ordinary dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    section897OrdinaryDividends?: string | null;
+    section897OrdinaryDividends?: number | null;
     /**
      * Section 897 capital gain
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    section897CapitalGain?: string | null;
+    section897CapitalGain?: number | null;
     /**
      * Nondividend distributions
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    nondividendDistributions?: string | null;
+    nondividendDistributions?: number | null;
     /**
      * Federal income tax withheld
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    federalIncomeTaxWithheld?: string | null;
+    federalIncomeTaxWithheld?: number | null;
     /**
      * Section 199A dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    section199ADividends?: string | null;
+    section199ADividends?: number | null;
     /**
      * Investment expenses
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    investmentExpenses?: string | null;
+    investmentExpenses?: number | null;
     /**
      * Foreign tax paid
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    foreignTaxPaid?: string | null;
+    foreignTaxPaid?: number | null;
     /**
      * Foreign country or U.S. possession
      * @type {string}
@@ -130,28 +130,28 @@ export interface Form1099DivListItemResponse {
     foreignCountryOrUSPossession?: string | null;
     /**
      * Cash liquidation distributions
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    cashLiquidationDistributions?: string | null;
+    cashLiquidationDistributions?: number | null;
     /**
      * Noncash liquidation distributions
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    noncashLiquidationDistributions?: string | null;
+    noncashLiquidationDistributions?: number | null;
     /**
      * Exempt-interest dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    exemptInterestDividends?: string | null;
+    exemptInterestDividends?: number | null;
     /**
      * Specified private activity bond interest dividends
-     * @type {string}
+     * @type {number}
      * @memberof Form1099DivListItemResponse
      */
-    specifiedPrivateActivityBondInterestDividends?: string | null;
+    specifiedPrivateActivityBondInterestDividends?: number | null;
     /**
      * FATCA filing requirement
      * @type {boolean}

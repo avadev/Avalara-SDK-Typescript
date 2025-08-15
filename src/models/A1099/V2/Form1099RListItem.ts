@@ -151,13 +151,13 @@ export interface Form1099RListItem {
      * @type {string}
      * @memberof Form1099RListItem
      */
-    issuerReferenceId?: string;
+    issuerReferenceId?: string | null;
     /**
      * Issuer TIN. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof Form1099RListItem
      */
-    issuerTin?: string;
+    issuerTin?: string | null;
     /**
      * Tax year
      * @type {number}
@@ -181,7 +181,7 @@ export interface Form1099RListItem {
      * @type {string}
      * @memberof Form1099RListItem
      */
-    recipientTin?: string;
+    recipientTin?: string | null;
     /**
      * Recipient name
      * @type {string}
@@ -209,7 +209,7 @@ export interface Form1099RListItem {
      * @type {string}
      * @memberof Form1099RListItem
      */
-    address: string;
+    address?: string | null;
     /**
      * Address line 2
      * @type {string}
@@ -221,19 +221,19 @@ export interface Form1099RListItem {
      * @type {string}
      * @memberof Form1099RListItem
      */
-    city: string;
+    city?: string | null;
     /**
      * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof Form1099RListItem
      */
-    state?: string;
+    state?: string | null;
     /**
      * Zip/postal code
      * @type {string}
      * @memberof Form1099RListItem
      */
-    zip?: string;
+    zip?: string | null;
     /**
      * Recipient email address
      * @type {string}
@@ -263,7 +263,7 @@ export interface Form1099RListItem {
      * @type {string}
      * @memberof Form1099RListItem
      */
-    countryCode: string;
+    countryCode?: string | null;
     /**
      * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
@@ -399,9 +399,6 @@ export enum Form1099RListItemTinTypeEnum {
 export function instanceOfForm1099RListItem(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "taxYear" in value;
-    isInstance = isInstance && "address" in value;
-    isInstance = isInstance && "city" in value;
-    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -445,16 +442,16 @@ export function Form1099RListItemFromJSONTyped(json: any, ignoreDiscriminator: b
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': json['address'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': json['city'],
+        'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
-        'countryCode': json['countryCode'],
+        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],

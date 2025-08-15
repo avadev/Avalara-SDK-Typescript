@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -79,13 +79,7 @@ export interface Form1099Misc {
      * @type {number}
      * @memberof Form1099Misc
      */
-    medicalAndHealthCare?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099Misc
-     */
-    nonemployeeCompensation?: number | null;
+    medicalAndHealthCarePayments?: number | null;
     /**
      * 
      * @type {number}
@@ -109,13 +103,19 @@ export interface Form1099Misc {
      * @type {number}
      * @memberof Form1099Misc
      */
-    excessGoldenParachute?: number | null;
+    excessGoldenParachutePayments?: number | null;
     /**
      * 
      * @type {number}
      * @memberof Form1099Misc
      */
-    grossAmountPaidAttorney?: number | null;
+    grossProceedsPaidToAttorney?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Form1099Misc
+     */
+    fishPurchasedForResale?: number | null;
     /**
      * 
      * @type {number}
@@ -127,7 +127,7 @@ export interface Form1099Misc {
      * @type {number}
      * @memberof Form1099Misc
      */
-    section409AIncome?: number | null;
+    nonqualifiedDeferredCompensation?: number | null;
     /**
      * 
      * @type {string}
@@ -226,6 +226,12 @@ export interface Form1099Misc {
     addressVerificationStatus?: Form1099StatusDetail | null;
     /**
      * 
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099Misc
+     */
+    eDeliveryStatus?: Form1099StatusDetail | null;
+    /**
+     * 
      * @type {string}
      * @memberof Form1099Misc
      */
@@ -244,10 +250,28 @@ export interface Form1099Misc {
     tinType?: string | null;
     /**
      * 
+     * @type {boolean}
+     * @memberof Form1099Misc
+     */
+    fatcaFilingRequirement?: boolean | null;
+    /**
+     * 
      * @type {string}
      * @memberof Form1099Misc
      */
     tin?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1099Misc
+     */
+    noTin?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Form1099Misc
+     */
+    secondTinNotice?: boolean | null;
     /**
      * 
      * @type {string}
@@ -295,13 +319,25 @@ export interface Form1099Misc {
      * @type {string}
      * @memberof Form1099Misc
      */
-    foreignProvince?: string | null;
+    nonUsProvince?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Form1099Misc
      */
     countryCode?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099Misc
+     */
+    accountNumber?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Form1099Misc
+     */
+    officeCode?: string | null;
     /**
      * 
      * @type {Array<ValidationError>}
@@ -354,15 +390,15 @@ export function Form1099MiscFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'otherIncome': !exists(json, 'otherIncome') ? undefined : json['otherIncome'],
         'fedIncomeTaxWithheld': !exists(json, 'fedIncomeTaxWithheld') ? undefined : json['fedIncomeTaxWithheld'],
         'fishingBoatProceeds': !exists(json, 'fishingBoatProceeds') ? undefined : json['fishingBoatProceeds'],
-        'medicalAndHealthCare': !exists(json, 'medicalAndHealthCare') ? undefined : json['medicalAndHealthCare'],
-        'nonemployeeCompensation': !exists(json, 'nonemployeeCompensation') ? undefined : json['nonemployeeCompensation'],
+        'medicalAndHealthCarePayments': !exists(json, 'medicalAndHealthCarePayments') ? undefined : json['medicalAndHealthCarePayments'],
         'substitutePayments': !exists(json, 'substitutePayments') ? undefined : json['substitutePayments'],
         'directSalesIndicator': !exists(json, 'directSalesIndicator') ? undefined : json['directSalesIndicator'],
         'cropInsuranceProceeds': !exists(json, 'cropInsuranceProceeds') ? undefined : json['cropInsuranceProceeds'],
-        'excessGoldenParachute': !exists(json, 'excessGoldenParachute') ? undefined : json['excessGoldenParachute'],
-        'grossAmountPaidAttorney': !exists(json, 'grossAmountPaidAttorney') ? undefined : json['grossAmountPaidAttorney'],
+        'excessGoldenParachutePayments': !exists(json, 'excessGoldenParachutePayments') ? undefined : json['excessGoldenParachutePayments'],
+        'grossProceedsPaidToAttorney': !exists(json, 'grossProceedsPaidToAttorney') ? undefined : json['grossProceedsPaidToAttorney'],
+        'fishPurchasedForResale': !exists(json, 'fishPurchasedForResale') ? undefined : json['fishPurchasedForResale'],
         'section409ADeferrals': !exists(json, 'section409ADeferrals') ? undefined : json['section409ADeferrals'],
-        'section409AIncome': !exists(json, 'section409AIncome') ? undefined : json['section409AIncome'],
+        'nonqualifiedDeferredCompensation': !exists(json, 'nonqualifiedDeferredCompensation') ? undefined : json['nonqualifiedDeferredCompensation'],
         'id': !exists(json, 'id') ? undefined : json['id'],
         'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
@@ -379,10 +415,14 @@ export function Form1099MiscFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
         'address': !exists(json, 'address') ? undefined : json['address'],
@@ -390,8 +430,10 @@ export function Form1099MiscFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
+        'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
@@ -413,15 +455,15 @@ export function Form1099MiscToJSON(value?: Form1099Misc | null): any {
         'otherIncome': value.otherIncome,
         'fedIncomeTaxWithheld': value.fedIncomeTaxWithheld,
         'fishingBoatProceeds': value.fishingBoatProceeds,
-        'medicalAndHealthCare': value.medicalAndHealthCare,
-        'nonemployeeCompensation': value.nonemployeeCompensation,
+        'medicalAndHealthCarePayments': value.medicalAndHealthCarePayments,
         'substitutePayments': value.substitutePayments,
         'directSalesIndicator': value.directSalesIndicator,
         'cropInsuranceProceeds': value.cropInsuranceProceeds,
-        'excessGoldenParachute': value.excessGoldenParachute,
-        'grossAmountPaidAttorney': value.grossAmountPaidAttorney,
+        'excessGoldenParachutePayments': value.excessGoldenParachutePayments,
+        'grossProceedsPaidToAttorney': value.grossProceedsPaidToAttorney,
+        'fishPurchasedForResale': value.fishPurchasedForResale,
         'section409ADeferrals': value.section409ADeferrals,
-        'section409AIncome': value.section409AIncome,
+        'nonqualifiedDeferredCompensation': value.nonqualifiedDeferredCompensation,
         'id': value.id,
         'type': value.type,
         'issuerId': value.issuerId,
@@ -438,10 +480,14 @@ export function Form1099MiscToJSON(value?: Form1099Misc | null): any {
         'tinMatchStatus': Form1099StatusDetailToJSON(value.tinMatchStatus),
         'addressVerification': value.addressVerification,
         'addressVerificationStatus': Form1099StatusDetailToJSON(value.addressVerificationStatus),
+        'eDeliveryStatus': Form1099StatusDetailToJSON(value.eDeliveryStatus),
         'referenceId': value.referenceId,
         'email': value.email,
         'tinType': value.tinType,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'tin': value.tin,
+        'noTin': value.noTin,
+        'secondTinNotice': value.secondTinNotice,
         'recipientName': value.recipientName,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
@@ -449,8 +495,10 @@ export function Form1099MiscToJSON(value?: Form1099Misc | null): any {
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'foreignProvince': value.foreignProvince,
+        'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
+        'accountNumber': value.accountNumber,
+        'officeCode': value.officeCode,
         'validationErrors': value.validationErrors === undefined ? undefined : (value.validationErrors === null ? null : (value.validationErrors as Array<any>)?.map(ValidationErrorToJSON)),
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),

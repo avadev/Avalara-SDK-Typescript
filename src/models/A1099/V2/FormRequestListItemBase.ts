@@ -31,13 +31,13 @@ export interface FormRequestListItemBase {
      * @type {string}
      * @memberof FormRequestListItemBase
      */
-    issuerReferenceId?: string;
+    issuerReferenceId?: string | null;
     /**
      * Issuer TIN. One of `issuerReferenceId` or `issuerTin` is required.
      * @type {string}
      * @memberof FormRequestListItemBase
      */
-    issuerTin?: string;
+    issuerTin?: string | null;
     /**
      * Tax year
      * @type {number}
@@ -61,7 +61,7 @@ export interface FormRequestListItemBase {
      * @type {string}
      * @memberof FormRequestListItemBase
      */
-    recipientTin?: string;
+    recipientTin?: string | null;
     /**
      * Recipient name
      * @type {string}
@@ -89,7 +89,7 @@ export interface FormRequestListItemBase {
      * @type {string}
      * @memberof FormRequestListItemBase
      */
-    address: string;
+    address?: string | null;
     /**
      * Address line 2
      * @type {string}
@@ -101,19 +101,19 @@ export interface FormRequestListItemBase {
      * @type {string}
      * @memberof FormRequestListItemBase
      */
-    city: string;
+    city?: string | null;
     /**
      * US state. Required if CountryCode is "US".
      * @type {string}
      * @memberof FormRequestListItemBase
      */
-    state?: string;
+    state?: string | null;
     /**
      * Zip/postal code
      * @type {string}
      * @memberof FormRequestListItemBase
      */
-    zip?: string;
+    zip?: string | null;
     /**
      * Recipient email address
      * @type {string}
@@ -143,7 +143,7 @@ export interface FormRequestListItemBase {
      * @type {string}
      * @memberof FormRequestListItemBase
      */
-    countryCode: string;
+    countryCode?: string | null;
     /**
      * Boolean indicating that federal e-filing should be scheduled for this form
      * @type {boolean}
@@ -181,6 +181,12 @@ export interface FormRequestListItemBase {
      */
     secondTinNotice?: boolean | null;
     /**
+     * Fatca filing requirement
+     * @type {boolean}
+     * @memberof FormRequestListItemBase
+     */
+    fatcaFilingRequirement?: boolean;
+    /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof FormRequestListItemBase
@@ -211,9 +217,6 @@ export enum FormRequestListItemBaseTinTypeEnum {
 export function instanceOfFormRequestListItemBase(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "taxYear" in value;
-    isInstance = isInstance && "address" in value;
-    isInstance = isInstance && "city" in value;
-    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -237,22 +240,23 @@ export function FormRequestListItemBaseFromJSONTyped(json: any, ignoreDiscrimina
         'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': json['address'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': json['city'],
+        'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
-        'countryCode': json['countryCode'],
+        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
         'federalEFile': !exists(json, 'federalEFile') ? undefined : json['federalEFile'],
         'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
         'stateEFile': !exists(json, 'stateEFile') ? undefined : json['stateEFile'],
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
         'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingRequestFromJSON(json['stateAndLocalWithholding']),
     };
@@ -292,6 +296,7 @@ export function FormRequestListItemBaseToJSON(value?: FormRequestListItemBase | 
         'tinMatch': value.tinMatch,
         'noTin': value.noTin,
         'secondTinNotice': value.secondTinNotice,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingRequestToJSON(value.stateAndLocalWithholding),
     };

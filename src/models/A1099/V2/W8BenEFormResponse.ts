@@ -19,13 +19,19 @@ import {
     SubstantialUsOwnerResponseFromJSONTyped,
     SubstantialUsOwnerResponseToJSON,
 } from './SubstantialUsOwnerResponse';
+import {
+    W9FormBaseResponse,
+    W9FormBaseResponseFromJSON,
+    W9FormBaseResponseFromJSONTyped,
+    W9FormBaseResponseToJSON,
+} from './W9FormBaseResponse';
 
 /**
  * 
  * @export
  * @interface W8BenEFormResponse
  */
-export interface W8BenEFormResponse {
+export interface W8BenEFormResponse extends W9FormBaseResponse {
     /**
      * The name of the individual or entity associated with the form.
      * @type {string}
@@ -635,90 +641,6 @@ export interface W8BenEFormResponse {
      * @memberof W8BenEFormResponse
      */
     capacityToSignCertification?: boolean;
-    /**
-     * The unique identifier for the form.
-     * @type {string}
-     * @memberof W8BenEFormResponse
-     */
-    id?: string;
-    /**
-     * The form type.
-     * @type {string}
-     * @memberof W8BenEFormResponse
-     */
-    type?: string;
-    /**
-     * The form status.
-     * @type {string}
-     * @memberof W8BenEFormResponse
-     */
-    entryStatus?: string;
-    /**
-     * The timestamp for the latest status update.
-     * @type {Date}
-     * @memberof W8BenEFormResponse
-     */
-    entryStatusDate?: Date | null;
-    /**
-     * A reference identifier for the form.
-     * @type {string}
-     * @memberof W8BenEFormResponse
-     */
-    referenceId?: string | null;
-    /**
-     * The ID of the associated company.
-     * @type {string}
-     * @memberof W8BenEFormResponse
-     */
-    companyId?: string;
-    /**
-     * The display name associated with the form.
-     * @type {string}
-     * @memberof W8BenEFormResponse
-     */
-    displayName?: string;
-    /**
-     * The email address of the individual associated with the form.
-     * @type {string}
-     * @memberof W8BenEFormResponse
-     */
-    email?: string | null;
-    /**
-     * Indicates whether the form is archived.
-     * @type {boolean}
-     * @memberof W8BenEFormResponse
-     */
-    archived?: boolean;
-    /**
-     * The signature of the form.
-     * @type {string}
-     * @memberof W8BenEFormResponse
-     */
-    signature?: string | null;
-    /**
-     * The date the form was signed.
-     * @type {Date}
-     * @memberof W8BenEFormResponse
-     */
-    signedDate?: Date | null;
-    /**
-     * The date when e-delivery was consented.
-     * @type {Date}
-     * @memberof W8BenEFormResponse
-     */
-    eDeliveryConsentedAt?: Date | null;
-    /**
-     * The creation date of the form.
-     * @type {Date}
-     * @memberof W8BenEFormResponse
-     */
-    createdAt?: Date;
-    /**
-     * The last updated date of the form.
-     * @type {Date}
-     * @memberof W8BenEFormResponse
-     */
-    updatedAt?: Date;
 }
 
 
@@ -741,7 +663,7 @@ export function W8BenEFormResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         return json;
     }
     return {
-        
+        ...W9FormBaseResponseFromJSONTyped(json, ignoreDiscriminator),
         'name': !exists(json, 'name') ? undefined : json['name'],
         'citizenshipCountry': !exists(json, 'citizenshipCountry') ? undefined : json['citizenshipCountry'],
         'disregardedEntity': !exists(json, 'disregardedEntity') ? undefined : json['disregardedEntity'],
@@ -838,20 +760,6 @@ export function W8BenEFormResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'substantialUsOwners': !exists(json, 'substantialUsOwners') ? undefined : ((json['substantialUsOwners'] as Array<any>)?.map(SubstantialUsOwnerResponseFromJSON)),
         'signerName': !exists(json, 'signerName') ? undefined : json['signerName'],
         'capacityToSignCertification': !exists(json, 'capacityToSignCertification') ? undefined : json['capacityToSignCertification'],
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
-        'entryStatus': !exists(json, 'entryStatus') ? undefined : json['entryStatus'],
-        'entryStatusDate': !exists(json, 'entryStatusDate') ? undefined : (json['entryStatusDate'] === null ? null : new Date(json['entryStatusDate'])),
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
-        'displayName': !exists(json, 'displayName') ? undefined : json['displayName'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'archived': !exists(json, 'archived') ? undefined : json['archived'],
-        'signature': !exists(json, 'signature') ? undefined : json['signature'],
-        'signedDate': !exists(json, 'signedDate') ? undefined : (json['signedDate'] === null ? null : new Date(json['signedDate'])),
-        'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
-        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
 }
 
@@ -863,7 +771,7 @@ export function W8BenEFormResponseToJSON(value?: W8BenEFormResponse | null): any
         return null;
     }
     return {
-        
+        ...W9FormBaseResponseToJSON(value),
         'name': value.name,
         'citizenshipCountry': value.citizenshipCountry,
         'disregardedEntity': value.disregardedEntity,
@@ -960,19 +868,5 @@ export function W8BenEFormResponseToJSON(value?: W8BenEFormResponse | null): any
         'substantialUsOwners': value.substantialUsOwners === undefined ? undefined : ((value.substantialUsOwners as Array<any>)?.map(SubstantialUsOwnerResponseToJSON)),
         'signerName': value.signerName,
         'capacityToSignCertification': value.capacityToSignCertification,
-        'id': value.id,
-        'type': value.type,
-        'entryStatus': value.entryStatus,
-        'entryStatusDate': value.entryStatusDate === undefined ? undefined : (value.entryStatusDate === null ? null : value.entryStatusDate.toISOString()),
-        'referenceId': value.referenceId,
-        'companyId': value.companyId,
-        'displayName': value.displayName,
-        'email': value.email,
-        'archived': value.archived,
-        'signature': value.signature,
-        'signedDate': value.signedDate === undefined ? undefined : (value.signedDate === null ? null : value.signedDate.toISOString()),
-        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
     };
 }
