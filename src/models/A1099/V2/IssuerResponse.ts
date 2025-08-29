@@ -20,115 +20,113 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface IssuerResponse {
     /**
-     * Unique identifier set when the record is created
+     * Unique identifier set when the record is created.
      * @type {string}
      * @memberof IssuerResponse
      */
-    readonly id?: string;
+    id?: string;
     /**
-     * Legal name, not DBA
+     * Date time when the record was created.
+     * @type {Date}
+     * @memberof IssuerResponse
+     */
+    createdAt?: Date;
+    /**
+     * Date time when the record was last updated.
+     * @type {Date}
+     * @memberof IssuerResponse
+     */
+    updatedAt?: Date;
+    /**
+     * Legal name. Not the DBA name.
      * @type {string}
      * @memberof IssuerResponse
      */
-    name?: string;
+    name: string | null;
     /**
-     * Optional DBA name or continuation of a long legal name
+     * Doing Business As (DBA) name or continuation of a long legal name. Use either this or 'transferAgentName'.
      * @type {string}
      * @memberof IssuerResponse
      */
-    nameDba?: string;
+    dbaName?: string | null;
     /**
-     * Tax identification number
+     * Federal Tax Identification Number (TIN).
      * @type {string}
      * @memberof IssuerResponse
      */
-    tin?: string;
+    tin?: string | null;
     /**
-     * Optional identifier for your reference, never shown to any agency or recipient.
-     * We will also prefix download filenames with this value, if present.
-     * Can only include letters, numbers, dashes, underscores and spaces.
+     * Internal reference ID. Never shown to any agency or recipient. If present, it will prefix download filenames. Allowed characters: letters, numbers, dashes, underscores, and spaces.
      * @type {string}
      * @memberof IssuerResponse
      */
-    referenceId?: string;
+    referenceId?: string | null;
     /**
-     * Telephone number
+     * Contact phone number (must contain at least 10 digits, max 15 characters). For recipient inquiries.
      * @type {string}
      * @memberof IssuerResponse
      */
-    telephone?: string;
+    telephone: string | null;
     /**
-     * Tax year
+     * Tax year for which the forms are being filed (e.g., 2024). Must be within current tax year and current tax year - 4.
      * @type {number}
      * @memberof IssuerResponse
      */
-    taxYear?: number | null;
+    taxYear: number | null;
     /**
-     * If there is a transfer agent, use the address of the transfer agent.
+     * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes. If there is a transfer agent, use the transfer agent's shipping address.
      * @type {string}
      * @memberof IssuerResponse
      */
     countryCode?: string | null;
     /**
-     * Email address
+     * Contact email address. For recipient inquiries.
      * @type {string}
      * @memberof IssuerResponse
      */
-    email?: string | null;
+    email: string | null;
     /**
-     * Address
+     * Address.
      * @type {string}
      * @memberof IssuerResponse
      */
-    address?: string | null;
+    address: string | null;
     /**
-     * City
+     * City.
      * @type {string}
      * @memberof IssuerResponse
      */
-    city?: string | null;
+    city: string | null;
     /**
-     * State
+     * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
      * @memberof IssuerResponse
      */
-    state?: string | null;
+    state: string | null;
     /**
-     * Zip code
+     * ZIP/postal code.
      * @type {string}
      * @memberof IssuerResponse
      */
-    zip?: string | null;
+    zip: string | null;
     /**
-     * Foreign province
+     * Province or region for non-US/CA addresses.
      * @type {string}
      * @memberof IssuerResponse
      */
     foreignProvince?: string | null;
     /**
-     * Transfer Agent's Name
+     * Name of the transfer agent, if applicable — optional; use either this or 'dbaName'.
      * @type {string}
      * @memberof IssuerResponse
      */
     transferAgentName?: string | null;
     /**
-     * Last year of filing for this payer
+     * Indicates if this is the issuer's final year filing.
      * @type {boolean}
      * @memberof IssuerResponse
      */
-    lastFiling?: boolean;
-    /**
-     * Date time when the issuer was created
-     * @type {Date}
-     * @memberof IssuerResponse
-     */
-    readonly createdAt?: Date;
-    /**
-     * Date time when the issuer was updated
-     * @type {Date}
-     * @memberof IssuerResponse
-     */
-    readonly updatedAt?: Date;
+    lastFiling: boolean | null;
 }
 
 
@@ -138,6 +136,15 @@ export interface IssuerResponse {
  */
 export function instanceOfIssuerResponse(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "telephone" in value;
+    isInstance = isInstance && "taxYear" in value;
+    isInstance = isInstance && "email" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "state" in value;
+    isInstance = isInstance && "zip" in value;
+    isInstance = isInstance && "lastFiling" in value;
 
     return isInstance;
 }
@@ -153,23 +160,23 @@ export function IssuerResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'nameDba': !exists(json, 'nameDba') ? undefined : json['nameDba'],
-        'tin': !exists(json, 'tin') ? undefined : json['tin'],
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'telephone': !exists(json, 'telephone') ? undefined : json['telephone'],
-        'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
-        'state': !exists(json, 'state') ? undefined : json['state'],
-        'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
-        'transferAgentName': !exists(json, 'transferAgentName') ? undefined : json['transferAgentName'],
-        'lastFiling': !exists(json, 'lastFiling') ? undefined : json['lastFiling'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
+        'name': json['name'],
+        'dbaName': !exists(json, 'dbaName') ? undefined : json['dbaName'],
+        'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
+        'telephone': json['telephone'],
+        'taxYear': json['taxYear'],
+        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'email': json['email'],
+        'address': json['address'],
+        'city': json['city'],
+        'state': json['state'],
+        'zip': json['zip'],
+        'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
+        'transferAgentName': !exists(json, 'transferAgentName') ? undefined : json['transferAgentName'],
+        'lastFiling': json['lastFiling'],
     };
 }
 
@@ -182,8 +189,11 @@ export function IssuerResponseToJSON(value?: IssuerResponse | null): any {
     }
     return {
         
+        'id': value.id,
+        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
         'name': value.name,
-        'nameDba': value.nameDba,
+        'dbaName': value.dbaName,
         'tin': value.tin,
         'referenceId': value.referenceId,
         'telephone': value.telephone,

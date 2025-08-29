@@ -20,103 +20,103 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface CompanyCreateUpdateRequestModel {
     /**
-     * 
+     * Legal name. Not the DBA name.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    name?: string;
+    name: string | null;
     /**
-     * 
+     * Doing Business As (DBA) name or continuation of a long legal name.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    email?: string;
+    dbaName?: string | null;
     /**
-     * 
+     * Contact email address. For inquiries by vendors/employees.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    address?: string;
+    email: string | null;
     /**
-     * 
+     * Address.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    city?: string;
+    address: string | null;
     /**
-     * 
+     * City.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    state?: string;
+    city: string | null;
     /**
-     * 
+     * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    zip?: string;
+    state?: string | null;
     /**
-     * 
+     * ZIP/postal code.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    telephone?: string;
+    zip: string | null;
     /**
-     * 
+     * Contact phone number (must contain at least 10 digits, max 15 characters).
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    tin?: string;
+    telephone: string | null;
     /**
-     * 
+     * Federal Tax Identification Number (TIN). EIN/Tax ID (required for US companies).
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    dbaName?: string;
+    tin: string | null;
     /**
-     * 
+     * Internal reference ID. Never shown to any agency or recipient.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    referenceId?: string;
+    referenceId?: string | null;
     /**
-     * 
+     * Indicates whether the company authorizes IRS TIN matching.
      * @type {boolean}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    doTinMatch?: boolean;
+    doTinMatch?: boolean | null;
     /**
-     * 
+     * Group name for organizing companies (creates or finds group by name).
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    groupName?: string;
+    groupName?: string | null;
     /**
-     * 
+     * Province or region for non-US/CA addresses.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    foreignProvince?: string;
+    foreignProvince?: string | null;
     /**
-     * 
+     * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
      * @type {string}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    countryCode?: string;
+    countryCode: string | null;
     /**
-     * 
+     * Boolean to enable automatic reminder emails (default: false).
      * @type {boolean}
      * @memberof CompanyCreateUpdateRequestModel
      */
-    resendRequests?: boolean;
+    resendRequests?: boolean | null;
     /**
-     * 
+     * Days between reminder emails (7-365, required if resendRequests is true).
      * @type {number}
      * @memberof CompanyCreateUpdateRequestModel
      */
     resendIntervalDays?: number | null;
     /**
-     * 
+     * Maximum number of reminder attempts (1-52, required if resendRequests is true).
      * @type {number}
      * @memberof CompanyCreateUpdateRequestModel
      */
@@ -130,6 +130,14 @@ export interface CompanyCreateUpdateRequestModel {
  */
 export function instanceOfCompanyCreateUpdateRequestModel(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "email" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "zip" in value;
+    isInstance = isInstance && "telephone" in value;
+    isInstance = isInstance && "tin" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -144,20 +152,20 @@ export function CompanyCreateUpdateRequestModelFromJSONTyped(json: any, ignoreDi
     }
     return {
         
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
-        'state': !exists(json, 'state') ? undefined : json['state'],
-        'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'telephone': !exists(json, 'telephone') ? undefined : json['telephone'],
-        'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'name': json['name'],
         'dbaName': !exists(json, 'dbaName') ? undefined : json['dbaName'],
+        'email': json['email'],
+        'address': json['address'],
+        'city': json['city'],
+        'state': !exists(json, 'state') ? undefined : json['state'],
+        'zip': json['zip'],
+        'telephone': json['telephone'],
+        'tin': json['tin'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'doTinMatch': !exists(json, 'doTinMatch') ? undefined : json['doTinMatch'],
         'groupName': !exists(json, 'groupName') ? undefined : json['groupName'],
         'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'countryCode': json['countryCode'],
         'resendRequests': !exists(json, 'resendRequests') ? undefined : json['resendRequests'],
         'resendIntervalDays': !exists(json, 'resendIntervalDays') ? undefined : json['resendIntervalDays'],
         'maxReminderAttempts': !exists(json, 'maxReminderAttempts') ? undefined : json['maxReminderAttempts'],
@@ -174,6 +182,7 @@ export function CompanyCreateUpdateRequestModelToJSON(value?: CompanyCreateUpdat
     return {
         
         'name': value.name,
+        'dbaName': value.dbaName,
         'email': value.email,
         'address': value.address,
         'city': value.city,
@@ -181,7 +190,6 @@ export function CompanyCreateUpdateRequestModelToJSON(value?: CompanyCreateUpdat
         'zip': value.zip,
         'telephone': value.telephone,
         'tin': value.tin,
-        'dbaName': value.dbaName,
         'referenceId': value.referenceId,
         'doTinMatch': value.doTinMatch,
         'groupName': value.groupName,

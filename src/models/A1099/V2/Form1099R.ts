@@ -39,368 +39,403 @@ import {
 } from './ValidationError';
 
 /**
- * 
+ * Form 1099-R: Distributions From Pensions, Annuities, Retirement or Profit-Sharing Plans, IRAs, Insurance Contracts, etc.
  * @export
  * @interface Form1099R
  */
 export interface Form1099R {
     /**
-     * 
+     * Gross distribution
      * @type {number}
      * @memberof Form1099R
      */
-    grossDistributions?: number | null;
+    grossDistribution?: number | null;
     /**
-     * 
+     * Taxable amount
      * @type {number}
      * @memberof Form1099R
      */
     taxableAmount?: number | null;
     /**
-     * 
+     * Taxable amount not determined
      * @type {boolean}
      * @memberof Form1099R
      */
     taxableAmountNotDetermined?: boolean | null;
     /**
-     * 
+     * Total distribution
      * @type {boolean}
      * @memberof Form1099R
      */
-    totalDistributionIndicator?: boolean | null;
+    totalDistributionDetermined?: boolean | null;
     /**
-     * 
+     * Capital gain (included in Box 2a)
      * @type {number}
      * @memberof Form1099R
      */
     capitalGain?: number | null;
     /**
-     * 
+     * Federal income tax withheld
      * @type {number}
      * @memberof Form1099R
      */
-    fedIncomeTaxWithheld?: number | null;
+    federalIncomeTaxWithheld?: number | null;
     /**
-     * 
+     * Employee contributions/Designated Roth contributions or insurance premiums
      * @type {number}
      * @memberof Form1099R
      */
-    employeeContributions?: number | null;
+    employeeContributionsOrDesignatedRothOrInsurancePremiums?: number | null;
     /**
-     * 
+     * Net unrealized appreciation in employer's securities
      * @type {number}
      * @memberof Form1099R
      */
-    netUnrealizedAppreciation?: number | null;
+    netUnrealizedAppreciationInEmployerSecurities?: number | null;
     /**
-     * 
+     * Distribution code
      * @type {string}
      * @memberof Form1099R
      */
-    distributionCodeRequired?: string | null;
+    distributionCode?: string | null;
     /**
-     * 
+     * Second distribution code
      * @type {string}
      * @memberof Form1099R
      */
-    distributionCodeOptional?: string | null;
+    secondDistributionCode?: string | null;
     /**
-     * 
+     * IRA/SEP/SIMPLE
      * @type {boolean}
      * @memberof Form1099R
      */
-    iraSepSimpleIndicator?: boolean | null;
+    iraSepSimple?: boolean | null;
     /**
-     * 
+     * Traditional IRA/SEP/SIMPLE or Roth conversion amount
      * @type {number}
      * @memberof Form1099R
      */
-    totalIraSepSimpleDistribution?: number | null;
+    traditionalIraSepSimpleOrRothConversionAmount?: number | null;
     /**
-     * 
+     * Other amount
      * @type {number}
      * @memberof Form1099R
      */
-    other?: number | null;
+    otherAmount?: number | null;
     /**
-     * 
+     * Other percentage
      * @type {string}
      * @memberof Form1099R
      */
-    otherPercent?: string | null;
+    otherPercentage?: string | null;
     /**
-     * 
+     * Total distribution percentage
      * @type {string}
      * @memberof Form1099R
      */
-    percentageTotalDistribution?: string | null;
+    totalDistributionPercentage?: string | null;
     /**
-     * 
+     * Total employee contributions
      * @type {number}
      * @memberof Form1099R
      */
     totalEmployeeContributions?: number | null;
     /**
-     * 
+     * Amount allocable to IRR within 5 years
      * @type {number}
      * @memberof Form1099R
      */
-    amountAllocableToIrr?: number | null;
+    amountAllocableToIrrWithin5Years?: number | null;
     /**
-     * 
+     * First year of designated Roth contribution
      * @type {string}
      * @memberof Form1099R
      */
-    firstYearDesignatedRothContrib?: string | null;
+    firstYearOfDesignatedRothContribution?: string | null;
     /**
-     * 
-     * @type {string}
+     * Date of payment
+     * @type {Date}
      * @memberof Form1099R
      */
-    dateOfPayment?: string | null;
+    dateOfPayment?: Date | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099R
-     */
-    id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099R
-     */
-    type?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099R
-     */
-    issuerId?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099R
-     */
-    issuerReferenceId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099R
-     */
-    issuerTin?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099R
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099R
-     */
-    federalEfile?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099R
-     */
-    federalEfileStatus?: Form1099StatusDetail;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099R
-     */
-    stateEfile?: boolean;
-    /**
-     * 
-     * @type {Array<StateEfileStatusDetail>}
-     * @memberof Form1099R
-     */
-    stateEfileStatus?: Array<StateEfileStatusDetail> | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099R
-     */
-    postalMail?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099R
-     */
-    postalMailStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099R
-     */
-    tinMatch?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099R
-     */
-    tinMatchStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099R
-     */
-    addressVerification?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099R
-     */
-    addressVerificationStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099R
-     */
-    eDeliveryStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099R
-     */
-    referenceId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099R
-     */
-    email?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099R
-     */
-    tinType?: string | null;
-    /**
-     * 
+     * FATCA filing requirement
      * @type {boolean}
      * @memberof Form1099R
      */
     fatcaFilingRequirement?: boolean | null;
     /**
-     * 
+     * Form type
+     * @type {string}
+     * @memberof Form1099R
+     */
+    type: Form1099RTypeEnum;
+    /**
+     * Form ID. Unique identifier set when the record is created.
+     * @type {string}
+     * @memberof Form1099R
+     */
+    readonly id?: string | null;
+    /**
+     * Issuer ID - only required when creating forms
+     * @type {string}
+     * @memberof Form1099R
+     */
+    issuerId?: string | null;
+    /**
+     * Issuer Reference ID - only required when creating forms
+     * @type {string}
+     * @memberof Form1099R
+     */
+    issuerReferenceId?: string | null;
+    /**
+     * Issuer TIN - readonly
+     * @type {string}
+     * @memberof Form1099R
+     */
+    issuerTin?: string | null;
+    /**
+     * Tax Year - only required when creating forms
+     * @type {number}
+     * @memberof Form1099R
+     */
+    taxYear?: number | null;
+    /**
+     * Internal reference ID. Never shown to any agency or recipient.
+     * @type {string}
+     * @memberof Form1099R
+     */
+    referenceId?: string | null;
+    /**
+     * Recipient's Federal Tax Identification Number (TIN).
      * @type {string}
      * @memberof Form1099R
      */
     tin?: string | null;
     /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099R
-     */
-    noTin?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099R
-     */
-    secondTinNotice?: boolean | null;
-    /**
-     * 
+     * Recipient name
      * @type {string}
      * @memberof Form1099R
      */
-    recipientName?: string | null;
+    recipientName: string | null;
     /**
-     * 
+     * Type of TIN (Tax ID Number)
+     * @type {string}
+     * @memberof Form1099R
+     */
+    tinType?: Form1099RTinTypeEnum;
+    /**
+     * Recipient second name
      * @type {string}
      * @memberof Form1099R
      */
     recipientSecondName?: string | null;
     /**
-     * 
+     * Address.
      * @type {string}
      * @memberof Form1099R
      */
-    address?: string | null;
+    address: string | null;
     /**
-     * 
+     * Address line 2.
      * @type {string}
      * @memberof Form1099R
      */
     address2?: string | null;
     /**
-     * 
+     * City.
      * @type {string}
      * @memberof Form1099R
      */
-    city?: string | null;
+    city: string | null;
     /**
-     * 
+     * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
      * @memberof Form1099R
      */
     state?: string | null;
     /**
-     * 
+     * ZIP/postal code.
      * @type {string}
      * @memberof Form1099R
      */
     zip?: string | null;
     /**
-     * 
+     * Recipient's Contact email address.
      * @type {string}
      * @memberof Form1099R
      */
-    nonUsProvince?: string | null;
+    email?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099R
-     */
-    countryCode?: string | null;
-    /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1099R
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1099R
      */
     officeCode?: string | null;
     /**
-     * 
-     * @type {Array<ValidationError>}
+     * Province or region for non-US/CA addresses.
+     * @type {string}
      * @memberof Form1099R
      */
-    validationErrors?: Array<ValidationError> | null;
+    nonUsProvince?: string | null;
     /**
-     * 
+     * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
+     * @type {string}
+     * @memberof Form1099R
+     */
+    countryCode: string | null;
+    /**
+     * Date when federal e-filing should be scheduled for this form
      * @type {Date}
      * @memberof Form1099R
      */
-    createdAt?: Date;
+    federalEfileDate?: Date | null;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1099R
+     */
+    postalMail?: boolean | null;
+    /**
+     * Date when state e-filing should be scheduled for this form
      * @type {Date}
      * @memberof Form1099R
      */
-    updatedAt?: Date;
+    stateEfileDate?: Date | null;
     /**
-     * 
+     * Date when recipient e-delivery should be scheduled for this form
+     * @type {Date}
+     * @memberof Form1099R
+     */
+    recipientEdeliveryDate?: Date | null;
+    /**
+     * Boolean indicating that TIN Matching should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1099R
+     */
+    tinMatch?: boolean | null;
+    /**
+     * No TIN indicator
+     * @type {boolean}
+     * @memberof Form1099R
+     */
+    noTin?: boolean | null;
+    /**
+     * Boolean indicating that address verification should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1099R
+     */
+    addressVerification?: boolean | null;
+    /**
+     * State and local withholding information
      * @type {StateAndLocalWithholding}
      * @memberof Form1099R
      */
     stateAndLocalWithholding?: StateAndLocalWithholding | null;
+    /**
+     * Second TIN notice
+     * @type {boolean}
+     * @memberof Form1099R
+     */
+    secondTinNotice?: boolean;
+    /**
+     * Federal e-file status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099R
+     */
+    readonly federalEfileStatus?: Form1099StatusDetail | null;
+    /**
+     * State e-file status
+     * @type {Array<StateEfileStatusDetail>}
+     * @memberof Form1099R
+     */
+    readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
+    /**
+     * Postal mail to recipient status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099R
+     */
+    readonly postalMailStatus?: Form1099StatusDetail | null;
+    /**
+     * TIN Match status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099R
+     */
+    readonly tinMatchStatus?: Form1099StatusDetail | null;
+    /**
+     * Address verification status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099R
+     */
+    readonly addressVerificationStatus?: Form1099StatusDetail | null;
+    /**
+     * EDelivery status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099R
+     */
+    readonly eDeliveryStatus?: Form1099StatusDetail | null;
+    /**
+     * Validation errors
+     * @type {Array<ValidationError>}
+     * @memberof Form1099R
+     */
+    readonly validationErrors?: Array<ValidationError> | null;
+    /**
+     * Date time when the record was created.
+     * @type {Date}
+     * @memberof Form1099R
+     */
+    readonly createdAt?: Date;
+    /**
+     * Date time when the record was last updated.
+     * @type {Date}
+     * @memberof Form1099R
+     */
+    readonly updatedAt?: Date;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum Form1099RTypeEnum {
+    _1099Nec = '1099-NEC',
+    _1099Misc = '1099-MISC',
+    _1099Div = '1099-DIV',
+    _1099R = '1099-R',
+    _1099K = '1099-K',
+    _1095B = '1095-B',
+    _1042S = '1042-S',
+    _1095C = '1095-C',
+    _1099Int = '1099-INT'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1099RTinTypeEnum {
+    Empty = 'Empty',
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the Form1099R interface.
  */
 export function instanceOfForm1099R(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "type" in value;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -415,64 +450,65 @@ export function Form1099RFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
-        'grossDistributions': !exists(json, 'grossDistributions') ? undefined : json['grossDistributions'],
+        'grossDistribution': !exists(json, 'grossDistribution') ? undefined : json['grossDistribution'],
         'taxableAmount': !exists(json, 'taxableAmount') ? undefined : json['taxableAmount'],
         'taxableAmountNotDetermined': !exists(json, 'taxableAmountNotDetermined') ? undefined : json['taxableAmountNotDetermined'],
-        'totalDistributionIndicator': !exists(json, 'totalDistributionIndicator') ? undefined : json['totalDistributionIndicator'],
+        'totalDistributionDetermined': !exists(json, 'totalDistributionDetermined') ? undefined : json['totalDistributionDetermined'],
         'capitalGain': !exists(json, 'capitalGain') ? undefined : json['capitalGain'],
-        'fedIncomeTaxWithheld': !exists(json, 'fedIncomeTaxWithheld') ? undefined : json['fedIncomeTaxWithheld'],
-        'employeeContributions': !exists(json, 'employeeContributions') ? undefined : json['employeeContributions'],
-        'netUnrealizedAppreciation': !exists(json, 'netUnrealizedAppreciation') ? undefined : json['netUnrealizedAppreciation'],
-        'distributionCodeRequired': !exists(json, 'distributionCodeRequired') ? undefined : json['distributionCodeRequired'],
-        'distributionCodeOptional': !exists(json, 'distributionCodeOptional') ? undefined : json['distributionCodeOptional'],
-        'iraSepSimpleIndicator': !exists(json, 'iraSepSimpleIndicator') ? undefined : json['iraSepSimpleIndicator'],
-        'totalIraSepSimpleDistribution': !exists(json, 'totalIraSepSimpleDistribution') ? undefined : json['totalIraSepSimpleDistribution'],
-        'other': !exists(json, 'other') ? undefined : json['other'],
-        'otherPercent': !exists(json, 'otherPercent') ? undefined : json['otherPercent'],
-        'percentageTotalDistribution': !exists(json, 'percentageTotalDistribution') ? undefined : json['percentageTotalDistribution'],
+        'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
+        'employeeContributionsOrDesignatedRothOrInsurancePremiums': !exists(json, 'employeeContributionsOrDesignatedRothOrInsurancePremiums') ? undefined : json['employeeContributionsOrDesignatedRothOrInsurancePremiums'],
+        'netUnrealizedAppreciationInEmployerSecurities': !exists(json, 'netUnrealizedAppreciationInEmployerSecurities') ? undefined : json['netUnrealizedAppreciationInEmployerSecurities'],
+        'distributionCode': !exists(json, 'distributionCode') ? undefined : json['distributionCode'],
+        'secondDistributionCode': !exists(json, 'secondDistributionCode') ? undefined : json['secondDistributionCode'],
+        'iraSepSimple': !exists(json, 'iraSepSimple') ? undefined : json['iraSepSimple'],
+        'traditionalIraSepSimpleOrRothConversionAmount': !exists(json, 'traditionalIraSepSimpleOrRothConversionAmount') ? undefined : json['traditionalIraSepSimpleOrRothConversionAmount'],
+        'otherAmount': !exists(json, 'otherAmount') ? undefined : json['otherAmount'],
+        'otherPercentage': !exists(json, 'otherPercentage') ? undefined : json['otherPercentage'],
+        'totalDistributionPercentage': !exists(json, 'totalDistributionPercentage') ? undefined : json['totalDistributionPercentage'],
         'totalEmployeeContributions': !exists(json, 'totalEmployeeContributions') ? undefined : json['totalEmployeeContributions'],
-        'amountAllocableToIrr': !exists(json, 'amountAllocableToIrr') ? undefined : json['amountAllocableToIrr'],
-        'firstYearDesignatedRothContrib': !exists(json, 'firstYearDesignatedRothContrib') ? undefined : json['firstYearDesignatedRothContrib'],
-        'dateOfPayment': !exists(json, 'dateOfPayment') ? undefined : json['dateOfPayment'],
+        'amountAllocableToIrrWithin5Years': !exists(json, 'amountAllocableToIrrWithin5Years') ? undefined : json['amountAllocableToIrrWithin5Years'],
+        'firstYearOfDesignatedRothContribution': !exists(json, 'firstYearOfDesignatedRothContribution') ? undefined : json['firstYearOfDesignatedRothContribution'],
+        'dateOfPayment': !exists(json, 'dateOfPayment') ? undefined : (json['dateOfPayment'] === null ? null : new Date(json['dateOfPayment'])),
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
+        'type': json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
-        'federalEfile': !exists(json, 'federalEfile') ? undefined : json['federalEfile'],
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
-        'stateEfile': !exists(json, 'stateEfile') ? undefined : json['stateEfile'],
-        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
-        'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
-        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
-        'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
-        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
-        'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
-        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
-        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
-        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
-        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
-        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
+        'recipientName': json['recipientName'],
+        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
+        'countryCode': json['countryCode'],
+        'federalEfileDate': !exists(json, 'federalEfileDate') ? undefined : (json['federalEfileDate'] === null ? null : new Date(json['federalEfileDate'])),
+        'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
+        'stateEfileDate': !exists(json, 'stateEfileDate') ? undefined : (json['stateEfileDate'] === null ? null : new Date(json['stateEfileDate'])),
+        'recipientEdeliveryDate': !exists(json, 'recipientEdeliveryDate') ? undefined : (json['recipientEdeliveryDate'] === null ? null : new Date(json['recipientEdeliveryDate'])),
+        'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
+        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
+        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
+        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
+        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -485,63 +521,54 @@ export function Form1099RToJSON(value?: Form1099R | null): any {
     }
     return {
         
-        'grossDistributions': value.grossDistributions,
+        'grossDistribution': value.grossDistribution,
         'taxableAmount': value.taxableAmount,
         'taxableAmountNotDetermined': value.taxableAmountNotDetermined,
-        'totalDistributionIndicator': value.totalDistributionIndicator,
+        'totalDistributionDetermined': value.totalDistributionDetermined,
         'capitalGain': value.capitalGain,
-        'fedIncomeTaxWithheld': value.fedIncomeTaxWithheld,
-        'employeeContributions': value.employeeContributions,
-        'netUnrealizedAppreciation': value.netUnrealizedAppreciation,
-        'distributionCodeRequired': value.distributionCodeRequired,
-        'distributionCodeOptional': value.distributionCodeOptional,
-        'iraSepSimpleIndicator': value.iraSepSimpleIndicator,
-        'totalIraSepSimpleDistribution': value.totalIraSepSimpleDistribution,
-        'other': value.other,
-        'otherPercent': value.otherPercent,
-        'percentageTotalDistribution': value.percentageTotalDistribution,
+        'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
+        'employeeContributionsOrDesignatedRothOrInsurancePremiums': value.employeeContributionsOrDesignatedRothOrInsurancePremiums,
+        'netUnrealizedAppreciationInEmployerSecurities': value.netUnrealizedAppreciationInEmployerSecurities,
+        'distributionCode': value.distributionCode,
+        'secondDistributionCode': value.secondDistributionCode,
+        'iraSepSimple': value.iraSepSimple,
+        'traditionalIraSepSimpleOrRothConversionAmount': value.traditionalIraSepSimpleOrRothConversionAmount,
+        'otherAmount': value.otherAmount,
+        'otherPercentage': value.otherPercentage,
+        'totalDistributionPercentage': value.totalDistributionPercentage,
         'totalEmployeeContributions': value.totalEmployeeContributions,
-        'amountAllocableToIrr': value.amountAllocableToIrr,
-        'firstYearDesignatedRothContrib': value.firstYearDesignatedRothContrib,
-        'dateOfPayment': value.dateOfPayment,
-        'id': value.id,
+        'amountAllocableToIrrWithin5Years': value.amountAllocableToIrrWithin5Years,
+        'firstYearOfDesignatedRothContribution': value.firstYearOfDesignatedRothContribution,
+        'dateOfPayment': value.dateOfPayment === undefined ? undefined : (value.dateOfPayment === null ? null : value.dateOfPayment.toISOString().substr(0,10)),
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'type': value.type,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
-        'federalEfile': value.federalEfile,
-        'federalEfileStatus': Form1099StatusDetailToJSON(value.federalEfileStatus),
-        'stateEfile': value.stateEfile,
-        'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailToJSON)),
-        'postalMail': value.postalMail,
-        'postalMailStatus': Form1099StatusDetailToJSON(value.postalMailStatus),
-        'tinMatch': value.tinMatch,
-        'tinMatchStatus': Form1099StatusDetailToJSON(value.tinMatchStatus),
-        'addressVerification': value.addressVerification,
-        'addressVerificationStatus': Form1099StatusDetailToJSON(value.addressVerificationStatus),
-        'eDeliveryStatus': Form1099StatusDetailToJSON(value.eDeliveryStatus),
         'referenceId': value.referenceId,
-        'email': value.email,
-        'tinType': value.tinType,
-        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'tin': value.tin,
-        'noTin': value.noTin,
-        'secondTinNotice': value.secondTinNotice,
         'recipientName': value.recipientName,
+        'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
         'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'nonUsProvince': value.nonUsProvince,
-        'countryCode': value.countryCode,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'validationErrors': value.validationErrors === undefined ? undefined : (value.validationErrors === null ? null : (value.validationErrors as Array<any>)?.map(ValidationErrorToJSON)),
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
+        'nonUsProvince': value.nonUsProvince,
+        'countryCode': value.countryCode,
+        'federalEfileDate': value.federalEfileDate === undefined ? undefined : (value.federalEfileDate === null ? null : value.federalEfileDate.toISOString().substr(0,10)),
+        'postalMail': value.postalMail,
+        'stateEfileDate': value.stateEfileDate === undefined ? undefined : (value.stateEfileDate === null ? null : value.stateEfileDate.toISOString().substr(0,10)),
+        'recipientEdeliveryDate': value.recipientEdeliveryDate === undefined ? undefined : (value.recipientEdeliveryDate === null ? null : value.recipientEdeliveryDate.toISOString().substr(0,10)),
+        'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
+        'secondTinNotice': value.secondTinNotice,
     };
 }

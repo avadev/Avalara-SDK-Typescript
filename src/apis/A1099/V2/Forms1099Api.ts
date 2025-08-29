@@ -18,48 +18,36 @@ import { RequestInit } from 'node-fetch';
 import LogObject from '../../../utils/logObject';
 
 import {
-    BulkUpsert1099FormsRequest,
-    BulkUpsert1099FormsRequestFromJSON,
-    BulkUpsert1099FormsRequestToJSON,
-    Create1099Form201Response,
-    Create1099Form201ResponseFromJSON,
-    Create1099Form201ResponseToJSON,
     ErrorResponse,
     ErrorResponseFromJSON,
     ErrorResponseToJSON,
-    Form1099ListResponse,
-    Form1099ListResponseFromJSON,
-    Form1099ListResponseToJSON,
-    Form1099ProccessResult,
-    Form1099ProccessResultFromJSON,
-    Form1099ProccessResultToJSON,
+    Form1099ListRequest,
+    Form1099ListRequestFromJSON,
+    Form1099ListRequestToJSON,
     Get1099Form200Response,
     Get1099Form200ResponseFromJSON,
     Get1099Form200ResponseToJSON,
-    ICreateForm1099Request,
-    ICreateForm1099RequestFromJSON,
-    ICreateForm1099RequestToJSON,
-    IUpdateForm1099Request,
-    IUpdateForm1099RequestFromJSON,
-    IUpdateForm1099RequestToJSON,
-    Update1099Form200Response,
-    Update1099Form200ResponseFromJSON,
-    Update1099Form200ResponseToJSON,
+    JobResponse,
+    JobResponseFromJSON,
+    JobResponseToJSON,
+    PaginatedQueryResultModelForm1099Base,
+    PaginatedQueryResultModelForm1099BaseFromJSON,
+    PaginatedQueryResultModelForm1099BaseToJSON,
 } from '../../../packages/A1099/V2';
 
-export interface BulkUpsert1099FormsOperationInterface {
+export interface BulkUpsert1099FormsInterface {
     avalaraVersion?: string;
     dryRun?: boolean;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    bulkUpsert1099FormsRequest?: BulkUpsert1099FormsRequest;
+    form1099ListRequest?: Form1099ListRequest;
 }
 
 export interface Create1099FormInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    iCreateForm1099Request?: ICreateForm1099Request;
+    get1099Form200Response?: Get1099Form200Response;
 }
 
 export interface Delete1099FormInterface {
@@ -90,6 +78,8 @@ export interface List1099FormsInterface {
     $top?: number;
     $skip?: number;
     $orderBy?: string;
+    count?: boolean;
+    countOnly?: boolean;
     xCorrelationId?: string;
     xAvalaraClient?: string;
 }
@@ -99,24 +89,24 @@ export interface Update1099FormInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    iUpdateForm1099Request?: IUpdateForm1099Request;
+    get1099Form200Response?: Get1099Form200Response;
 }
 
 /**
  * 
  */
 export class Forms1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.2';
+    public sdkVersion: string = '25.8.3';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
     }
 
     /**
-     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  ```json  {     \"formType\": \"1099-MISC\",     \"forms\": [         {             \"IssuerId\": \"123456\",             \"IssuerReferenceId\": \"REF123\",             \"IssuerTin\": \"12-3456789\",             \"TaxYear\": 2023,             \"ReferenceId\": \"FORM123456\",             \"RecipientName\": \"John Doe\",             \"RecipientTin\": \"587-65-4321\",             \"TinType\": \"SSN\",             \"RecipientSecondName\": \"Jane Doe\",             \"Address\": \"123 Main Street\",             \"Address2\": \"Apt 4B\",             \"City\": \"New York\",             \"State\": \"NY\",             \"Zip\": \"10001\",             \"Email\": \"john.doe@email.com\",             \"AccountNumber\": \"ACC123456\",             \"OfficeCode\": \"NYC01\",             \"SecondTinNotice\": false,             \"NonUsProvince\": \"\",             \"CountryCode\": \"US\",             \"Rents\": 12000.00,             \"Royalties\": 5000.00,             \"OtherIncome\": 3000.00,             \"FishingBoatProceeds\": 0.00,             \"MedicalAndHealthCarePayments\": 15000.00,             \"SubstitutePayments\": 1000.00,             \"CropInsuranceProceeds\": 0.00,             \"GrossProceedsPaidToAttorney\": 7500.00,             \"FishPurchasedForResale\": 0.00,             \"FedIncomeTaxWithheld\": 5000.00,             \"Section409ADeferrals\": 0.00,             \"ExcessGoldenParachutePayments\": 0.00,             \"NonqualifiedDeferredCompensation\": 0.00,             \"DirectSalesIndicator\": false,             \"FatcaFilingRequirement\": false,             \"StateAndLocalWithholding\": {               \"StateTaxWithheld\": 2500.00,               \"LocalTaxWithheld\": 1000.00,               \"State\": \"NY\",               \"StateIdNumber\": \"NY123456\",               \"Locality\": \"New York City\",               \"StateIncome\": 35000.00,               \"LocalIncome\": 35000.00             }         }     ]  }  ```                **Form 1099-NEC:**  ```json  {    \"formType\": \"1099-NEC\",    \"forms\": [      {        \"issuerID\": \"180337282\",        \"issuerReferenceId\": \"ISS123\",        \"issuerTin\": \"12-3000000\",        \"taxYear\": 2024,        \"referenceID\": \"REF-002\",        \"recipientName\": \"Jane Smith\",        \"recipientSecondName\": \"\",        \"recipientTin\": \"587-65-4321\",        \"tinType\": \"SSN\",        \"address\": \"123 Center St\",        \"address2\": \"\",        \"city\": \"Santa Monica\",        \"state\": \"CA\",        \"zip\": \"90401\",        \"countryCode\": \"US\",        \"nonUsProvince\": \"\",        \"email\": \"\",        \"accountNumber\": \"\",        \"officeCode\": \"\",        \"secondTinNotice\": false,        \"nonemployeeCompensation\": 123.45,        \"directSalesIndicator\": false,        \"federalIncomeTaxWithheld\": 12.34,        \"stateAndLocalWithholding\": {          \"state\": \"CA\",          \"stateIdNumber\": \"123123123\",          \"stateIncome\": 123.45,          \"stateTaxWithheld\": 12.34,          \"locality\": \"Santa Monica\",          \"localityIdNumber\": \"456456\",          \"localTaxWithheld\": 12.34,          \"localIncome\": 50000.00         },        \"federalEFile\": true,        \"postalMail\": true,        \"stateEFile\": true,        \"tinMatch\": true,        \"addressVerification\": true       }     ]   }  ```  For the full version of the payload and its schema details, refer to the Swagger schemas section.
+     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.
      * Create or update multiple 1099/1095/W2/1042S forms
      */
-    async bulkUpsert1099FormsRaw(requestParameters: BulkUpsert1099FormsOperationInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Form1099ProccessResult>, logObject: LogObject }> {
+    async bulkUpsert1099FormsRaw(requestParameters: BulkUpsert1099FormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<JobResponse>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling bulkUpsert1099Forms.');
@@ -151,17 +141,17 @@ export class Forms1099Api extends runtime.ApiClient {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: BulkUpsert1099FormsRequestToJSON(requestParameters.bulkUpsert1099FormsRequest),
+            body: Form1099ListRequestToJSON(requestParameters.form1099ListRequest),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => Form1099ProccessResultFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => JobResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
-     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  ```json  {     \"formType\": \"1099-MISC\",     \"forms\": [         {             \"IssuerId\": \"123456\",             \"IssuerReferenceId\": \"REF123\",             \"IssuerTin\": \"12-3456789\",             \"TaxYear\": 2023,             \"ReferenceId\": \"FORM123456\",             \"RecipientName\": \"John Doe\",             \"RecipientTin\": \"587-65-4321\",             \"TinType\": \"SSN\",             \"RecipientSecondName\": \"Jane Doe\",             \"Address\": \"123 Main Street\",             \"Address2\": \"Apt 4B\",             \"City\": \"New York\",             \"State\": \"NY\",             \"Zip\": \"10001\",             \"Email\": \"john.doe@email.com\",             \"AccountNumber\": \"ACC123456\",             \"OfficeCode\": \"NYC01\",             \"SecondTinNotice\": false,             \"NonUsProvince\": \"\",             \"CountryCode\": \"US\",             \"Rents\": 12000.00,             \"Royalties\": 5000.00,             \"OtherIncome\": 3000.00,             \"FishingBoatProceeds\": 0.00,             \"MedicalAndHealthCarePayments\": 15000.00,             \"SubstitutePayments\": 1000.00,             \"CropInsuranceProceeds\": 0.00,             \"GrossProceedsPaidToAttorney\": 7500.00,             \"FishPurchasedForResale\": 0.00,             \"FedIncomeTaxWithheld\": 5000.00,             \"Section409ADeferrals\": 0.00,             \"ExcessGoldenParachutePayments\": 0.00,             \"NonqualifiedDeferredCompensation\": 0.00,             \"DirectSalesIndicator\": false,             \"FatcaFilingRequirement\": false,             \"StateAndLocalWithholding\": {               \"StateTaxWithheld\": 2500.00,               \"LocalTaxWithheld\": 1000.00,               \"State\": \"NY\",               \"StateIdNumber\": \"NY123456\",               \"Locality\": \"New York City\",               \"StateIncome\": 35000.00,               \"LocalIncome\": 35000.00             }         }     ]  }  ```                **Form 1099-NEC:**  ```json  {    \"formType\": \"1099-NEC\",    \"forms\": [      {        \"issuerID\": \"180337282\",        \"issuerReferenceId\": \"ISS123\",        \"issuerTin\": \"12-3000000\",        \"taxYear\": 2024,        \"referenceID\": \"REF-002\",        \"recipientName\": \"Jane Smith\",        \"recipientSecondName\": \"\",        \"recipientTin\": \"587-65-4321\",        \"tinType\": \"SSN\",        \"address\": \"123 Center St\",        \"address2\": \"\",        \"city\": \"Santa Monica\",        \"state\": \"CA\",        \"zip\": \"90401\",        \"countryCode\": \"US\",        \"nonUsProvince\": \"\",        \"email\": \"\",        \"accountNumber\": \"\",        \"officeCode\": \"\",        \"secondTinNotice\": false,        \"nonemployeeCompensation\": 123.45,        \"directSalesIndicator\": false,        \"federalIncomeTaxWithheld\": 12.34,        \"stateAndLocalWithholding\": {          \"state\": \"CA\",          \"stateIdNumber\": \"123123123\",          \"stateIncome\": 123.45,          \"stateTaxWithheld\": 12.34,          \"locality\": \"Santa Monica\",          \"localityIdNumber\": \"456456\",          \"localTaxWithheld\": 12.34,          \"localIncome\": 50000.00         },        \"federalEFile\": true,        \"postalMail\": true,        \"stateEFile\": true,        \"tinMatch\": true,        \"addressVerification\": true       }     ]   }  ```  For the full version of the payload and its schema details, refer to the Swagger schemas section.
+     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.
      * Create or update multiple 1099/1095/W2/1042S forms
      */
-    async bulkUpsert1099Forms(requestParameters: BulkUpsert1099FormsOperationInterface, initOverrides?: RequestInit): Promise<Form1099ProccessResult> {
+    async bulkUpsert1099Forms(requestParameters: BulkUpsert1099FormsInterface, initOverrides?: RequestInit): Promise<JobResponse> {
         const { response, logObject } = await this.bulkUpsert1099FormsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -173,7 +163,7 @@ export class Forms1099Api extends runtime.ApiClient {
      * Create a 1099/1095/W2/1042S form.
      * Create a 1099/1095/W2/1042S form
      */
-    async create1099FormRaw(requestParameters: Create1099FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Create1099Form201Response>, logObject: LogObject }> {
+    async create1099FormRaw(requestParameters: Create1099FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Get1099Form200Response>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling create1099Form.');
@@ -204,17 +194,17 @@ export class Forms1099Api extends runtime.ApiClient {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ICreateForm1099RequestToJSON(requestParameters.iCreateForm1099Request),
+            body: Get1099Form200ResponseToJSON(requestParameters.get1099Form200Response),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => Create1099Form201ResponseFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => Get1099Form200ResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
      * Create a 1099/1095/W2/1042S form.
      * Create a 1099/1095/W2/1042S form
      */
-    async create1099Form(requestParameters: Create1099FormInterface, initOverrides?: RequestInit): Promise<Create1099Form201Response> {
+    async create1099Form(requestParameters: Create1099FormInterface, initOverrides?: RequestInit): Promise<Get1099Form200Response> {
         const { response, logObject } = await this.create1099FormRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -387,10 +377,10 @@ export class Forms1099Api extends runtime.ApiClient {
     }
 
     /**
-     * List 1099/1095/W2/1042S forms. Filterable fields are name, referenceId and taxYear.
+     * List 1099/1095/W2/1042S forms.                Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.                Supported filtering fields are as follows:                - issuerId  - issuerReferenceId  - taxYear  - addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified  - createdAt  - edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted  - email  - federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held  - recipientName  - mailStatus - possible values are: sent, unscheduled, pending, delivered  - referenceId  - tinMatchStatus - possible values are: none, pending, matched, failed  - type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC  - updatedAt  - validity - possible values are: true, false                For more information on filtering, see <see href=\"https://developer.avalara.com/avatax/filtering-in-rest/\">Filtering in REST</see>.
      * List 1099/1095/W2/1042S forms
      */
-    async list1099FormsRaw(requestParameters: List1099FormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Form1099ListResponse>, logObject: LogObject }> {
+    async list1099FormsRaw(requestParameters: List1099FormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<PaginatedQueryResultModelForm1099Base>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling list1099Forms.');
@@ -415,6 +405,14 @@ export class Forms1099Api extends runtime.ApiClient {
             queryParameters['$orderBy'] = requestParameters.$orderBy;
         }
 
+        if (requestParameters.count !== undefined) {
+            queryParameters['count'] = requestParameters.count;
+        }
+
+        if (requestParameters.countOnly !== undefined) {
+            queryParameters['countOnly'] = requestParameters.countOnly;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
@@ -437,14 +435,14 @@ export class Forms1099Api extends runtime.ApiClient {
             query: queryParameters,
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => Form1099ListResponseFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => PaginatedQueryResultModelForm1099BaseFromJSON(jsonValue)), logObject };
     }
 
     /**
-     * List 1099/1095/W2/1042S forms. Filterable fields are name, referenceId and taxYear.
+     * List 1099/1095/W2/1042S forms.                Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.                Supported filtering fields are as follows:                - issuerId  - issuerReferenceId  - taxYear  - addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified  - createdAt  - edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted  - email  - federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held  - recipientName  - mailStatus - possible values are: sent, unscheduled, pending, delivered  - referenceId  - tinMatchStatus - possible values are: none, pending, matched, failed  - type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC  - updatedAt  - validity - possible values are: true, false                For more information on filtering, see <see href=\"https://developer.avalara.com/avatax/filtering-in-rest/\">Filtering in REST</see>.
      * List 1099/1095/W2/1042S forms
      */
-    async list1099Forms(requestParameters: List1099FormsInterface, initOverrides?: RequestInit): Promise<Form1099ListResponse> {
+    async list1099Forms(requestParameters: List1099FormsInterface, initOverrides?: RequestInit): Promise<PaginatedQueryResultModelForm1099Base> {
         const { response, logObject } = await this.list1099FormsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -456,7 +454,7 @@ export class Forms1099Api extends runtime.ApiClient {
      * Update a 1099/1095/W2/1042S form.
      * Update a 1099/1095/W2/1042S form
      */
-    async update1099FormRaw(requestParameters: Update1099FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Update1099Form200Response>, logObject: LogObject }> {
+    async update1099FormRaw(requestParameters: Update1099FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Get1099Form200Response>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling update1099Form.');
@@ -491,17 +489,17 @@ export class Forms1099Api extends runtime.ApiClient {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: IUpdateForm1099RequestToJSON(requestParameters.iUpdateForm1099Request),
+            body: Get1099Form200ResponseToJSON(requestParameters.get1099Form200Response),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => Update1099Form200ResponseFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => Get1099Form200ResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
      * Update a 1099/1095/W2/1042S form.
      * Update a 1099/1095/W2/1042S form
      */
-    async update1099Form(requestParameters: Update1099FormInterface, initOverrides?: RequestInit): Promise<Update1099Form200Response> {
+    async update1099Form(requestParameters: Update1099FormInterface, initOverrides?: RequestInit): Promise<Get1099Form200Response> {
         const { response, logObject } = await this.update1099FormRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

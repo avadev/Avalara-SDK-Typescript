@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    EntryStatusResponse,
+    EntryStatusResponseFromJSON,
+    EntryStatusResponseFromJSONTyped,
+    EntryStatusResponseToJSON,
+} from './EntryStatusResponse';
+import {
     SubstantialUsOwnerResponse,
     SubstantialUsOwnerResponseFromJSON,
     SubstantialUsOwnerResponseFromJSONTyped,

@@ -18,6 +18,9 @@ import { RequestInit } from 'node-fetch';
 import LogObject from '../../../utils/logObject';
 
 import {
+    CreateAndSendW9FormEmailRequest,
+    CreateAndSendW9FormEmailRequestFromJSON,
+    CreateAndSendW9FormEmailRequestToJSON,
     CreateW9Form201Response,
     CreateW9Form201ResponseFromJSON,
     CreateW9Form201ResponseToJSON,
@@ -37,6 +40,13 @@ import {
     PaginatedQueryResultModelW9FormBaseResponseFromJSON,
     PaginatedQueryResultModelW9FormBaseResponseToJSON,
 } from '../../../packages/A1099/V2';
+
+export interface CreateAndSendW9FormEmailOperationInterface {
+    avalaraVersion?: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
+    createAndSendW9FormEmailRequest?: CreateAndSendW9FormEmailRequest;
+}
 
 export interface CreateW9FormOperationInterface {
     avalaraVersion?: string;
@@ -98,10 +108,63 @@ export interface UploadW9FilesInterface {
  * 
  */
 export class FormsW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.2';
+    public sdkVersion: string = '25.8.3';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
+    }
+
+    /**
+     * Create a minimal W9/W4/W8 form and sends the e-mail request.
+     * Create a minimal W9/W4/W8 form and sends the e-mail request
+     */
+    async createAndSendW9FormEmailRaw(requestParameters: CreateAndSendW9FormEmailOperationInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CreateW9Form201Response>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
+        if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
+            throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling createAndSendW9FormEmail.');
+        }
+
+        const queryParameters: any = {};
+        const requiredScopes = "";
+        const authNames: string[] = ['http'];
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
+            headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
+        }
+
+        if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
+            headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
+        }
+
+        await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
+        const { response, logObject } = await this.request({
+            path: `/w9/forms/$create-and-send-email`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateAndSendW9FormEmailRequestToJSON(requestParameters.createAndSendW9FormEmailRequest),
+        }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
+        logObject.populateResponseInfo(response);
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => CreateW9Form201ResponseFromJSON(jsonValue)), logObject };
+    }
+
+    /**
+     * Create a minimal W9/W4/W8 form and sends the e-mail request.
+     * Create a minimal W9/W4/W8 form and sends the e-mail request
+     */
+    async createAndSendW9FormEmail(requestParameters: CreateAndSendW9FormEmailOperationInterface, initOverrides?: RequestInit): Promise<CreateW9Form201Response> {
+        const { response, logObject } = await this.createAndSendW9FormEmailRaw(requestParameters, initOverrides);
+        const value = await response.value();
+        logObject.populateResponseBody(value);
+        this.createLogEntry(logObject);
+        return value;
     }
 
     /**
@@ -338,10 +401,10 @@ export class FormsW9Api extends runtime.ApiClient {
     }
 
     /**
-     * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
+     * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.   If the form is not in \'Requested\' status, it will either use an existing descendant form   in \'Requested\' status or create a new minimal form and send the email request.
      * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
      */
-    async sendW9FormEmailRaw(requestParameters: SendW9FormEmailInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IW9FormDataModelsOneOf>, logObject: LogObject }> {
+    async sendW9FormEmailRaw(requestParameters: SendW9FormEmailInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CreateW9Form201Response>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling sendW9FormEmail.');
@@ -376,14 +439,14 @@ export class FormsW9Api extends runtime.ApiClient {
             query: queryParameters,
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => IW9FormDataModelsOneOfFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => CreateW9Form201ResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
-     * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
+     * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.   If the form is not in \'Requested\' status, it will either use an existing descendant form   in \'Requested\' status or create a new minimal form and send the email request.
      * Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
      */
-    async sendW9FormEmail(requestParameters: SendW9FormEmailInterface, initOverrides?: RequestInit): Promise<IW9FormDataModelsOneOf> {
+    async sendW9FormEmail(requestParameters: SendW9FormEmailInterface, initOverrides?: RequestInit): Promise<CreateW9Form201Response> {
         const { response, logObject } = await this.sendW9FormEmailRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

@@ -758,11 +758,23 @@ export interface W8ImyFormRequest {
      */
     signerName?: string | null;
     /**
+     * The date when e-delivery was consented.
+     * @type {Date}
+     * @memberof W8ImyFormRequest
+     */
+    eDeliveryConsentedAt?: Date | null;
+    /**
+     * The signature of the form.
+     * @type {string}
+     * @memberof W8ImyFormRequest
+     */
+    signature?: string | null;
+    /**
      * The ID of the associated company.
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    companyId?: string;
+    companyId: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -775,18 +787,6 @@ export interface W8ImyFormRequest {
      * @memberof W8ImyFormRequest
      */
     email?: string | null;
-    /**
-     * The date when e-delivery was consented.
-     * @type {Date}
-     * @memberof W8ImyFormRequest
-     */
-    eDeliveryConsentedAt?: Date | null;
-    /**
-     * The signature of the form.
-     * @type {string}
-     * @memberof W8ImyFormRequest
-     */
-    signature?: string | null;
 }
 
 /**
@@ -806,6 +806,7 @@ export enum W8ImyFormRequestTypeEnum {
  */
 export function instanceOfW8ImyFormRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "companyId" in value;
 
     return isInstance;
 }
@@ -932,11 +933,11 @@ export function W8ImyFormRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'sponsoredDirectReportingNffeCertification': !exists(json, 'sponsoredDirectReportingNffeCertification') ? undefined : json['sponsoredDirectReportingNffeCertification'],
         'directReportingNffeSponsoringEntity': !exists(json, 'directReportingNffeSponsoringEntity') ? undefined : json['directReportingNffeSponsoringEntity'],
         'signerName': !exists(json, 'signerName') ? undefined : json['signerName'],
-        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
+        'companyId': json['companyId'],
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
     };
 }
 
@@ -1060,10 +1061,10 @@ export function W8ImyFormRequestToJSON(value?: W8ImyFormRequest | null): any {
         'sponsoredDirectReportingNffeCertification': value.sponsoredDirectReportingNffeCertification,
         'directReportingNffeSponsoringEntity': value.directReportingNffeSponsoringEntity,
         'signerName': value.signerName,
+        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
+        'signature': value.signature,
         'companyId': value.companyId,
         'referenceId': value.referenceId,
         'email': value.email,
-        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
-        'signature': value.signature,
     };
 }

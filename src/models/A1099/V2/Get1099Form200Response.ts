@@ -12,76 +12,76 @@
  * Do not edit the class manually.
  */
 
-import type { Form1042SListItemResponse } from './Form1042SListItemResponse';
+import type { Form1042S } from './Form1042S';
 import {
-    instanceOfForm1042SListItemResponse,
-    Form1042SListItemResponseFromJSON,
-    Form1042SListItemResponseFromJSONTyped,
-    Form1042SListItemResponseToJSON,
-} from './Form1042SListItemResponse';
-import type { Form1095BListItemResponse } from './Form1095BListItemResponse';
+    instanceOfForm1042S,
+    Form1042SFromJSON,
+    Form1042SFromJSONTyped,
+    Form1042SToJSON,
+} from './Form1042S';
+import type { Form1095B } from './Form1095B';
 import {
-    instanceOfForm1095BListItemResponse,
-    Form1095BListItemResponseFromJSON,
-    Form1095BListItemResponseFromJSONTyped,
-    Form1095BListItemResponseToJSON,
-} from './Form1095BListItemResponse';
-import type { Form1099BaseResponse } from './Form1099BaseResponse';
+    instanceOfForm1095B,
+    Form1095BFromJSON,
+    Form1095BFromJSONTyped,
+    Form1095BToJSON,
+} from './Form1095B';
+import type { Form1095C } from './Form1095C';
 import {
-    instanceOfForm1099BaseResponse,
-    Form1099BaseResponseFromJSON,
-    Form1099BaseResponseFromJSONTyped,
-    Form1099BaseResponseToJSON,
-} from './Form1099BaseResponse';
-import type { Form1099DivListItemResponse } from './Form1099DivListItemResponse';
+    instanceOfForm1095C,
+    Form1095CFromJSON,
+    Form1095CFromJSONTyped,
+    Form1095CToJSON,
+} from './Form1095C';
+import type { Form1099Div } from './Form1099Div';
 import {
-    instanceOfForm1099DivListItemResponse,
-    Form1099DivListItemResponseFromJSON,
-    Form1099DivListItemResponseFromJSONTyped,
-    Form1099DivListItemResponseToJSON,
-} from './Form1099DivListItemResponse';
-import type { Form1099IntListItemResponse } from './Form1099IntListItemResponse';
+    instanceOfForm1099Div,
+    Form1099DivFromJSON,
+    Form1099DivFromJSONTyped,
+    Form1099DivToJSON,
+} from './Form1099Div';
+import type { Form1099Int } from './Form1099Int';
 import {
-    instanceOfForm1099IntListItemResponse,
-    Form1099IntListItemResponseFromJSON,
-    Form1099IntListItemResponseFromJSONTyped,
-    Form1099IntListItemResponseToJSON,
-} from './Form1099IntListItemResponse';
-import type { Form1099KListItemResponse } from './Form1099KListItemResponse';
+    instanceOfForm1099Int,
+    Form1099IntFromJSON,
+    Form1099IntFromJSONTyped,
+    Form1099IntToJSON,
+} from './Form1099Int';
+import type { Form1099K } from './Form1099K';
 import {
-    instanceOfForm1099KListItemResponse,
-    Form1099KListItemResponseFromJSON,
-    Form1099KListItemResponseFromJSONTyped,
-    Form1099KListItemResponseToJSON,
-} from './Form1099KListItemResponse';
-import type { Form1099MiscListItemResponse } from './Form1099MiscListItemResponse';
+    instanceOfForm1099K,
+    Form1099KFromJSON,
+    Form1099KFromJSONTyped,
+    Form1099KToJSON,
+} from './Form1099K';
+import type { Form1099Misc } from './Form1099Misc';
 import {
-    instanceOfForm1099MiscListItemResponse,
-    Form1099MiscListItemResponseFromJSON,
-    Form1099MiscListItemResponseFromJSONTyped,
-    Form1099MiscListItemResponseToJSON,
-} from './Form1099MiscListItemResponse';
-import type { Form1099NecListItemResponse } from './Form1099NecListItemResponse';
+    instanceOfForm1099Misc,
+    Form1099MiscFromJSON,
+    Form1099MiscFromJSONTyped,
+    Form1099MiscToJSON,
+} from './Form1099Misc';
+import type { Form1099Nec } from './Form1099Nec';
 import {
-    instanceOfForm1099NecListItemResponse,
-    Form1099NecListItemResponseFromJSON,
-    Form1099NecListItemResponseFromJSONTyped,
-    Form1099NecListItemResponseToJSON,
-} from './Form1099NecListItemResponse';
-import type { Form1099RListItemResponse } from './Form1099RListItemResponse';
+    instanceOfForm1099Nec,
+    Form1099NecFromJSON,
+    Form1099NecFromJSONTyped,
+    Form1099NecToJSON,
+} from './Form1099Nec';
+import type { Form1099R } from './Form1099R';
 import {
-    instanceOfForm1099RListItemResponse,
-    Form1099RListItemResponseFromJSON,
-    Form1099RListItemResponseFromJSONTyped,
-    Form1099RListItemResponseToJSON,
-} from './Form1099RListItemResponse';
+    instanceOfForm1099R,
+    Form1099RFromJSON,
+    Form1099RFromJSONTyped,
+    Form1099RToJSON,
+} from './Form1099R';
 
 /**
  * @type Get1099Form200Response
  * 
  * @export
  */
-export type Get1099Form200Response = Form1042SListItemResponse | Form1095BListItemResponse | Form1099BaseResponse | Form1099DivListItemResponse | Form1099IntListItemResponse | Form1099KListItemResponse | Form1099MiscListItemResponse | Form1099NecListItemResponse | Form1099RListItemResponse;
+export type Get1099Form200Response = Form1042S | Form1095B | Form1095C | Form1099Div | Form1099Int | Form1099K | Form1099Misc | Form1099Nec | Form1099R;
 
 export function Get1099Form200ResponseFromJSON(json: any): Get1099Form200Response {
     return Get1099Form200ResponseFromJSONTyped(json, false);
@@ -91,32 +91,32 @@ export function Get1099Form200ResponseFromJSONTyped(json: any, ignoreDiscriminat
     if (json == null) {
         return json;
     }
-    if (instanceOfForm1042SListItemResponse(json)) {
-        return Form1042SListItemResponseFromJSONTyped(json, true);
+    if (instanceOfForm1042S(json)) {
+        return Form1042SFromJSONTyped(json, true);
     }
-    if (instanceOfForm1095BListItemResponse(json)) {
-        return Form1095BListItemResponseFromJSONTyped(json, true);
+    if (instanceOfForm1095B(json)) {
+        return Form1095BFromJSONTyped(json, true);
     }
-    if (instanceOfForm1099BaseResponse(json)) {
-        return Form1099BaseResponseFromJSONTyped(json, true);
+    if (instanceOfForm1095C(json)) {
+        return Form1095CFromJSONTyped(json, true);
     }
-    if (instanceOfForm1099DivListItemResponse(json)) {
-        return Form1099DivListItemResponseFromJSONTyped(json, true);
+    if (instanceOfForm1099Div(json)) {
+        return Form1099DivFromJSONTyped(json, true);
     }
-    if (instanceOfForm1099IntListItemResponse(json)) {
-        return Form1099IntListItemResponseFromJSONTyped(json, true);
+    if (instanceOfForm1099Int(json)) {
+        return Form1099IntFromJSONTyped(json, true);
     }
-    if (instanceOfForm1099KListItemResponse(json)) {
-        return Form1099KListItemResponseFromJSONTyped(json, true);
+    if (instanceOfForm1099K(json)) {
+        return Form1099KFromJSONTyped(json, true);
     }
-    if (instanceOfForm1099MiscListItemResponse(json)) {
-        return Form1099MiscListItemResponseFromJSONTyped(json, true);
+    if (instanceOfForm1099Misc(json)) {
+        return Form1099MiscFromJSONTyped(json, true);
     }
-    if (instanceOfForm1099NecListItemResponse(json)) {
-        return Form1099NecListItemResponseFromJSONTyped(json, true);
+    if (instanceOfForm1099Nec(json)) {
+        return Form1099NecFromJSONTyped(json, true);
     }
-    if (instanceOfForm1099RListItemResponse(json)) {
-        return Form1099RListItemResponseFromJSONTyped(json, true);
+    if (instanceOfForm1099R(json)) {
+        return Form1099RFromJSONTyped(json, true);
     }
 }
 
@@ -125,32 +125,32 @@ export function Get1099Form200ResponseToJSON(value?: Get1099Form200Response | nu
         return value;
     }
 
-    if (instanceOfForm1042SListItemResponse(value)) {
-        return Form1042SListItemResponseToJSON(value as Form1042SListItemResponse);
+    if (instanceOfForm1042S(value)) {
+        return Form1042SToJSON(value as Form1042S);
     }
-    if (instanceOfForm1095BListItemResponse(value)) {
-        return Form1095BListItemResponseToJSON(value as Form1095BListItemResponse);
+    if (instanceOfForm1095B(value)) {
+        return Form1095BToJSON(value as Form1095B);
     }
-    if (instanceOfForm1099BaseResponse(value)) {
-        return Form1099BaseResponseToJSON(value as Form1099BaseResponse);
+    if (instanceOfForm1095C(value)) {
+        return Form1095CToJSON(value as Form1095C);
     }
-    if (instanceOfForm1099DivListItemResponse(value)) {
-        return Form1099DivListItemResponseToJSON(value as Form1099DivListItemResponse);
+    if (instanceOfForm1099Div(value)) {
+        return Form1099DivToJSON(value as Form1099Div);
     }
-    if (instanceOfForm1099IntListItemResponse(value)) {
-        return Form1099IntListItemResponseToJSON(value as Form1099IntListItemResponse);
+    if (instanceOfForm1099Int(value)) {
+        return Form1099IntToJSON(value as Form1099Int);
     }
-    if (instanceOfForm1099KListItemResponse(value)) {
-        return Form1099KListItemResponseToJSON(value as Form1099KListItemResponse);
+    if (instanceOfForm1099K(value)) {
+        return Form1099KToJSON(value as Form1099K);
     }
-    if (instanceOfForm1099MiscListItemResponse(value)) {
-        return Form1099MiscListItemResponseToJSON(value as Form1099MiscListItemResponse);
+    if (instanceOfForm1099Misc(value)) {
+        return Form1099MiscToJSON(value as Form1099Misc);
     }
-    if (instanceOfForm1099NecListItemResponse(value)) {
-        return Form1099NecListItemResponseToJSON(value as Form1099NecListItemResponse);
+    if (instanceOfForm1099Nec(value)) {
+        return Form1099NecToJSON(value as Form1099Nec);
     }
-    if (instanceOfForm1099RListItemResponse(value)) {
-        return Form1099RListItemResponseToJSON(value as Form1099RListItemResponse);
+    if (instanceOfForm1099R(value)) {
+        return Form1099RToJSON(value as Form1099R);
     }
 
     return {};
