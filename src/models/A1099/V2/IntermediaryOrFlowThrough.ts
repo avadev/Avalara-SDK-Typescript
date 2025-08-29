@@ -14,73 +14,73 @@
 
 import { exists, mapValues } from '../../../runtime';
 /**
- * 
+ * Intermediary or flow-through entity information for tax forms
  * @export
  * @interface IntermediaryOrFlowThrough
  */
 export interface IntermediaryOrFlowThrough {
     /**
-     * 
+     * EIN (Employer Identification Number) of the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     ein?: string | null;
     /**
-     * 
+     * Chapter 3 status code for the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     chap3StatusCode?: string | null;
     /**
-     * 
+     * Chapter 4 status code for the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     chap4StatusCode?: string | null;
     /**
-     * 
+     * Name of the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     name?: string | null;
     /**
-     * 
+     * GIIN (Global Intermediary Identification Number) of the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     giin?: string | null;
     /**
-     * 
+     * Country code for the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     countryCode?: string | null;
     /**
-     * 
+     * Foreign TIN of the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     foreignTin?: string | null;
     /**
-     * 
+     * Address of the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     address?: string | null;
     /**
-     * 
+     * City of the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     city?: string | null;
     /**
-     * 
+     * State of the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */
     state?: string | null;
     /**
-     * 
+     * Zip code of the intermediary or flow-through entity
      * @type {string}
      * @memberof IntermediaryOrFlowThrough
      */

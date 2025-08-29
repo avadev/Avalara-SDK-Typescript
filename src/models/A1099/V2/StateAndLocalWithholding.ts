@@ -20,49 +20,49 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface StateAndLocalWithholding {
     /**
-     * 
+     * Amount of state tax that was withheld
      * @type {number}
      * @memberof StateAndLocalWithholding
      */
     stateTaxWithheld?: number | null;
     /**
-     * 
+     * US state
      * @type {string}
      * @memberof StateAndLocalWithholding
      */
     state?: string | null;
     /**
-     * 
+     * State ID number of the entity issuing the form
      * @type {string}
      * @memberof StateAndLocalWithholding
      */
     stateIdNumber?: string | null;
     /**
-     * 
+     * Amount of state income
      * @type {number}
      * @memberof StateAndLocalWithholding
      */
     stateIncome?: number | null;
     /**
-     * 
+     * Amount of local tax that was withheld
      * @type {number}
      * @memberof StateAndLocalWithholding
      */
     localTaxWithheld?: number | null;
     /**
-     * 
+     * Locality name
      * @type {string}
      * @memberof StateAndLocalWithholding
      */
     locality?: string | null;
     /**
-     * 
+     * Locality ID number of the entity issuing the form
      * @type {string}
      * @memberof StateAndLocalWithholding
      */
     localityIdNumber?: string | null;
     /**
-     * 
+     * Amount of local income
      * @type {number}
      * @memberof StateAndLocalWithholding
      */

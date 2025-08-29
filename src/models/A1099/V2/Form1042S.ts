@@ -51,7 +51,7 @@ import {
 } from './ValidationError';
 
 /**
- * 
+ * Form 1042-S: Foreign Person's U.S. Source Income Subject to Withholding
  * @export
  * @interface Form1042S
  */
@@ -61,382 +61,875 @@ export interface Form1042S {
      * @type {string}
      * @memberof Form1042S
      */
-    uniqueFormId?: string;
+    readonly tinType?: Form1042STinTypeEnum;
     /**
-     * 
+     * Unique form identifier
+     * @type {string}
+     * @memberof Form1042S
+     */
+    uniqueFormId: string | null;
+    /**
+     * Recipient's date of birth
      * @type {Date}
      * @memberof Form1042S
      */
     recipientDateOfBirth?: Date | null;
     /**
-     * 
+     * Recipient's Global Intermediary Identification Number (GIIN). A valid GIIN looks like 'XXXXXX.XXXXX.XX.XXX'.
      * @type {string}
      * @memberof Form1042S
      */
     recipientGiin?: string | null;
     /**
-     * 
+     * Recipient's foreign TIN. Required if email is specified, must fill either this or Chap3StatusCode.
      * @type {string}
      * @memberof Form1042S
      */
     recipientForeignTin?: string | null;
     /**
-     * 
+     * Limitation on Benefits (LOB) code for tax treaty purposes.
+     * Available values:
+     * - 01: Individual (Deprecated - valid only for tax years prior to 2019)
+     * - 02: Government - contracting state/political subdivision/local authority
+     * - 03: Tax exempt pension trust/Pension fund
+     * - 04: Tax exempt/Charitable organization
+     * - 05: Publicly-traded corporation
+     * - 06: Subsidiary of publicly-traded corporation
+     * - 07: Company that meets the ownership and base erosion test
+     * - 08: Company that meets the derivative benefits test
+     * - 09: Company with an item of income that meets the active trade or business test
+     * - 10: Discretionary determination
+     * - 11: Other
+     * - 12: No LOB article in treaty
      * @type {string}
      * @memberof Form1042S
      */
-    lobCode?: string | null;
+    lobCode?: Form1042SLobCodeEnum;
     /**
+     * Income code.
+     * Available values:
      * 
+     * Interest:
+     * - 01: Interest paid by US obligors - general
+     * - 02: Interest paid on real property mortgages
+     * - 03: Interest paid to controlling foreign corporations
+     * - 04: Interest paid by foreign corporations
+     * - 05: Interest on tax-free covenant bonds
+     * - 22: Interest paid on deposit with a foreign branch of a domestic corporation or partnership
+     * - 29: Deposit interest
+     * - 30: Original issue discount (OID)
+     * - 31: Short-term OID
+     * - 33: Substitute payment - interest
+     * - 51: Interest paid on certain actively traded or publicly offered securities(1)
+     * - 54: Substitute payments - interest from certain actively traded or publicly offered securities(1)
+     * 
+     * Dividend:
+     * - 06: Dividends paid by U.S. corporations - general
+     * - 07: Dividends qualifying for direct dividend rate
+     * - 08: Dividends paid by foreign corporations
+     * - 34: Substitute payment - dividends
+     * - 40: Other dividend equivalents under IRC section 871(m) (formerly 871(l))
+     * - 52: Dividends paid on certain actively traded or publicly offered securities(1)
+     * - 53: Substitute payments - dividends from certain actively traded or publicly offered securities(1)
+     * - 56: Dividend equivalents under IRC section 871(m) as a result of applying the combined transaction rules
+     * 
+     * Other:
+     * - 09: Capital gains
+     * - 10: Industrial royalties
+     * - 11: Motion picture or television copyright royalties
+     * - 12: Other royalties (for example, copyright, software, broadcasting, endorsement payments)
+     * - 13: Royalties paid on certain publicly offered securities(1)
+     * - 14: Real property income and natural resources royalties
+     * - 15: Pensions, annuities, alimony, and/or insurance premiums
+     * - 16: Scholarship or fellowship grants
+     * - 17: Compensation for independent personal services(2)
+     * - 18: Compensation for dependent personal services(2)
+     * - 19: Compensation for teaching(2)
+     * - 20: Compensation during studying and training(2)
+     * - 23: Other income
+     * - 24: Qualified investment entity (QIE) distributions of capital gains
+     * - 25: Trust distributions subject to IRC section 1445
+     * - 26: Unsevered growing crops and timber distributions by a trust subject to IRC section 1445
+     * - 27: Publicly traded partnership distributions subject to IRC section 1446
+     * - 28: Gambling winnings(3)
+     * - 32: Notional principal contract income(4)
+     * - 35: Substitute payment - other
+     * - 36: Capital gains distributions
+     * - 37: Return of capital
+     * - 38: Eligible deferred compensation items subject to IRC section 877A(d)(1)
+     * - 39: Distributions from a nongrantor trust subject to IRC section 877A(f)(1)
+     * - 41: Guarantee of indebtedness
+     * - 42: Earnings as an artist or athlete - no central withholding agreement(5)
+     * - 43: Earnings as an artist or athlete - central withholding agreement(5)
+     * - 44: Specified Federal procurement payments
+     * - 50: Income previously reported under escrow procedure(6)
+     * - 55: Taxable death benefits on life insurance contracts
+     * - 57: Amount realized under IRC section 1446(f)
+     * - 58: Publicly traded partnership distributions-undetermined
      * @type {string}
      * @memberof Form1042S
      */
-    incomeCode?: string;
+    incomeCode: Form1042SIncomeCodeEnum;
     /**
-     * 
+     * Gross income
      * @type {number}
      * @memberof Form1042S
      */
-    grossIncome?: number;
+    grossIncome: number | null;
     /**
-     * 
+     * Withholding indicator
+     * Available values:
+     * - 3: Chapter 3
+     * - 4: Chapter 4
      * @type {string}
      * @memberof Form1042S
      */
-    withholdingIndicator?: string;
+    withholdingIndicator: Form1042SWithholdingIndicatorEnum;
     /**
-     * 
+     * Country code
      * @type {string}
      * @memberof Form1042S
      */
-    taxCountryCode?: string;
+    taxCountryCode: string | null;
     /**
-     * 
+     * Exemption code (Chapter 3). Required if WithholdingIndicator is 3 (Chapter 3). Required when using TaxRateChap3.
+     * Available values:
+     * - Empty: Tax rate is due to backup withholding
+     * - 00: Not exempt
+     * - 01: Effectively connected income
+     * - 02: Exempt under IRC (other than portfolio interest)
+     * - 03: Income is not from US sources
+     * - 04: Exempt under tax treaty
+     * - 05: Portfolio interest exempt under IRC
+     * - 06: QI that assumes primary withholding responsibility
+     * - 07: WFP or WFT
+     * - 08: U.S. branch treated as U.S. Person
+     * - 09: Territory FI treated as U.S. Person
+     * - 10: QI represents that income is exempt
+     * - 11: QSL that assumes primary withholding responsibility
+     * - 12: Payee subjected to chapter 4 withholding
+     * - 22: QDD that assumes primary withholding responsibility
+     * - 23: Exempt under section 897(l)
+     * - 24: Exempt under section 892
      * @type {string}
      * @memberof Form1042S
      */
-    exemptionCodeChap3?: string | null;
+    exemptionCodeChap3?: Form1042SExemptionCodeChap3Enum;
     /**
-     * 
+     * Exemption code (Chapter 4). Required if WithholdingIndicator is 4 (Chapter 4).
+     * Available values:
+     * - 00: Not exempt
+     * - 13: Grandfathered payment
+     * - 14: Effectively connected income
+     * - 15: Payee not subject to chapter 4 withholding
+     * - 16: Excluded nonfinancial payment
+     * - 17: Foreign Entity that assumes primary withholding responsibility
+     * - 18: U.S. Payees - of participating FFI or registered deemed - compliant FFI
+     * - 19: Exempt from withholding under IGA(6)
+     * - 20: Dormant account(7)
+     * - 21: Other - payment not subject to chapter 4 withholding
      * @type {string}
      * @memberof Form1042S
      */
-    exemptionCodeChap4?: string | null;
+    exemptionCodeChap4?: Form1042SExemptionCodeChap4Enum;
     /**
-     * 
+     * Tax rate (Chapter 3) - Required if WithholdingIndicator is 3 (Chapter 3).
+     * Available values:
+     * - 00.00: 0.00%
+     * - 02.00: 2.00%
+     * - 04.00: 4.00%
+     * - 04.90: 4.90%
+     * - 04.95: 4.95%
+     * - 05.00: 5.00%
+     * - 07.00: 7.00%
+     * - 08.00: 8.00%
+     * - 10.00: 10.00%
+     * - 12.00: 12.00%
+     * - 12.50: 12.50%
+     * - 14.00: 14.00%
+     * - 15.00: 15.00%
+     * - 17.50: 17.50%
+     * - 20.00: 20.00%
+     * - 21.00: 21.00%
+     * - 24.00: 24.00%
+     * - 25.00: 25.00%
+     * - 27.50: 27.50%
+     * - 28.00: 28.00%
+     * - 30.00: 30.00%
+     * - 37.00: 37.00%
      * @type {string}
      * @memberof Form1042S
      */
-    taxRateChap3?: string | null;
+    taxRateChap3?: Form1042STaxRateChap3Enum;
     /**
-     * 
+     * Withholding allowance
      * @type {number}
      * @memberof Form1042S
      */
     withholdingAllowance?: number | null;
     /**
-     * 
+     * Federal tax withheld
      * @type {number}
      * @memberof Form1042S
      */
     federalTaxWithheld?: number | null;
     /**
-     * 
+     * Tax not deposited indicator
      * @type {boolean}
      * @memberof Form1042S
      */
     taxNotDepositedIndicator?: boolean | null;
     /**
-     * 
+     * Academic indicator
      * @type {boolean}
      * @memberof Form1042S
      */
     academicIndicator?: boolean | null;
     /**
-     * 
+     * Tax withheld by other agents
      * @type {number}
      * @memberof Form1042S
      */
     taxWithheldOtherAgents?: number | null;
     /**
-     * 
+     * Amount repaid to recipient
      * @type {number}
      * @memberof Form1042S
      */
     amountRepaid?: number | null;
     /**
-     * 
+     * Tax paid by withholding agent
      * @type {number}
      * @memberof Form1042S
      */
     taxPaidAgent?: number | null;
     /**
-     * 
+     * Chapter 3 status code - Required if WithholdingIndicator is 3 (Chapter 3)
+     * Available values:
+     * - 01: U.S. Withholding Agent - FI (Deprecated - valid only for tax years prior to 2020)
+     * - 02: U.S. Withholding Agent - Other (Deprecated - valid only for tax years prior to 2020)
+     * - 03: Territory FI - treated as U.S. Person
+     * - 04: Territory FI - not treated as U.S. Person
+     * - 05: U.S. branch - treated as U.S. Person
+     * - 06: U.S. branch - not treated as U.S. Person
+     * - 07: U.S. branch - ECI presumption applied
+     * - 08: Partnership other than Withholding Foreign Partnership
+     * - 09: Withholding Foreign Partnership
+     * - 10: Trust other than Withholding Foreign Trust
+     * - 11: Withholding Foreign Trust
+     * - 12: Qualified Intermediary
+     * - 13: Qualified Securities Lender - Qualified Intermediary
+     * - 14: Qualified Securities Lender - Other
+     * - 15: Corporation
+     * - 16: Individual
+     * - 17: Estate
+     * - 18: Private Foundation
+     * - 19: Government or International Organization
+     * - 20: Tax Exempt Organization (Section 501(c) entities)
+     * - 21: Unknown Recipient
+     * - 22: Artist or Athlete
+     * - 23: Pension
+     * - 24: Foreign Central Bank of Issue
+     * - 25: Nonqualified Intermediary
+     * - 26: Hybrid entity making Treaty Claim
+     * - 27: Withholding Rate Pool - General
+     * - 28: Withholding Rate Pool - Exempt Organization
+     * - 29: PAI Withholding Rate Pool - General
+     * - 30: PAI Withholding Rate Pool - Exempt Organization
+     * - 31: Agency Withholding Rate Pool - General
+     * - 32: Agency Withholding Rate Pool - Exempt Organization
+     * - 34: U.S. Withholding Agent-Foreign branch of FI (Deprecated - valid only for tax years prior to 2020)
+     * - 35: Qualified Derivatives Dealer
+     * - 36: Foreign Government - Integral Part
+     * - 37: Foreign Government - Controlled Entity
+     * - 38: Publicly Traded Partnership
+     * - 39: Disclosing Qualified Intermediary
      * @type {string}
      * @memberof Form1042S
      */
-    chap3StatusCode?: string | null;
+    chap3StatusCode?: Form1042SChap3StatusCodeEnum;
     /**
-     * 
+     * Chapter 4 status code. Required if WithholdingIndicator is 4 (Chapter 4). Required if email is specified, must fill either this or RecipientForeignTin.
+     * Available values:
+     * - 01: U.S. Withholding Agent - FI
+     * - 02: U.S. Withholding Agent - Other
+     * - 03: Territory FI - not treated as U.S. Person
+     * - 04: Territory FI - treated as U.S. Person
+     * - 05: Participating FFI - Other
+     * - 06: Participating FFI - Reporting Model 2 FFI
+     * - 07: Registered Deemed - Compliant FFI-Reporting Model 1 FFI
+     * - 08: Registered Deemed - Compliant FFI-Sponsored Entity
+     * - 09: Registered Deemed - Compliant FFI-Other
+     * - 10: Certified Deemed - Compliant FFI-Other
+     * - 11: Certified Deemed - Compliant FFI-FFI with Low Value Accounts
+     * - 12: Certified Deemed - Compliant FFI-Non-Registering Local Bank
+     * - 13: Certified Deemed - Compliant FFI-Sponsored Entity
+     * - 14: Certified Deemed - Compliant FFI-Investment Advisor or Investment Manager
+     * - 15: Nonparticipating FFI
+     * - 16: Owner-Documented FFI
+     * - 17: U.S. Branch - treated as U.S. person
+     * - 18: U.S. Branch - not treated as U.S. person (reporting under section 1471)
+     * - 19: Passive NFFE identifying Substantial U.S. Owners
+     * - 20: Passive NFFE with no Substantial U.S. Owners
+     * - 21: Publicly Traded NFFE or Affiliate of Publicly Traded NFFE
+     * - 22: Active NFFE
+     * - 23: Individual
+     * - 24: Section 501(c) Entities
+     * - 25: Excepted Territory NFFE
+     * - 26: Excepted NFFE - Other
+     * - 27: Exempt Beneficial Owner
+     * - 28: Entity Wholly Owned by Exempt Beneficial Owners
+     * - 29: Unknown Recipient
+     * - 30: Recalcitrant Account Holder
+     * - 31: Nonreporting IGA FFI
+     * - 32: Direct reporting NFFE
+     * - 33: U.S. reportable account
+     * - 34: Non-consenting U.S. account
+     * - 35: Sponsored direct reporting NFFE
+     * - 36: Excepted Inter-affiliate FFI
+     * - 37: Undocumented Preexisting Obligation
+     * - 38: U.S. Branch - ECI presumption applied
+     * - 39: Account Holder of Excluded Financial Account
+     * - 40: Passive NFFE reported by FFI
+     * - 41: NFFE subject to 1472 withholding
+     * - 42: Recalcitrant Pool - No U.S. Indicia
+     * - 43: Recalcitrant Pool - U.S. Indicia
+     * - 44: Recalcitrant Pool - Dormant Account
+     * - 45: Recalcitrant Pool - U.S. Persons
+     * - 46: Recalcitrant Pool - Passive NFFEs
+     * - 47: Nonparticipating FFI Pool
+     * - 48: U.S. Payees Pool
+     * - 49: QI - Recalcitrant Pool-General
+     * - 50: U.S. Withholding Agent-Foreign branch of FI
      * @type {string}
      * @memberof Form1042S
      */
-    chap4StatusCode?: string | null;
+    chap4StatusCode?: Form1042SChap4StatusCodeEnum;
     /**
-     * 
+     * Primary withholding agent information
      * @type {PrimaryWithholdingAgent}
      * @memberof Form1042S
      */
-    primaryWithholdingAgent?: PrimaryWithholdingAgent;
+    primaryWithholdingAgent?: PrimaryWithholdingAgent | null;
     /**
-     * 
+     * Intermediary or flow-through entity information
      * @type {IntermediaryOrFlowThrough}
      * @memberof Form1042S
      */
-    intermediaryOrFlowThrough?: IntermediaryOrFlowThrough;
+    intermediaryOrFlowThrough?: IntermediaryOrFlowThrough | null;
     /**
-     * 
+     * Form type
      * @type {string}
      * @memberof Form1042S
      */
-    id?: string;
+    type: Form1042STypeEnum;
     /**
-     * 
+     * Form ID. Unique identifier set when the record is created.
      * @type {string}
      * @memberof Form1042S
      */
-    type?: string;
+    readonly id?: string | null;
     /**
-     * 
-     * @type {number}
+     * Issuer ID - only required when creating forms
+     * @type {string}
      * @memberof Form1042S
      */
-    issuerId?: number;
+    issuerId?: string | null;
     /**
-     * 
+     * Issuer Reference ID - only required when creating forms
      * @type {string}
      * @memberof Form1042S
      */
     issuerReferenceId?: string | null;
     /**
-     * 
+     * Issuer TIN - readonly
      * @type {string}
      * @memberof Form1042S
      */
     issuerTin?: string | null;
     /**
-     * 
+     * Tax Year - only required when creating forms
      * @type {number}
      * @memberof Form1042S
      */
-    taxYear?: number;
+    taxYear?: number | null;
     /**
-     * 
-     * @type {boolean}
-     * @memberof Form1042S
-     */
-    federalEfile?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1042S
-     */
-    federalEfileStatus?: Form1099StatusDetail;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1042S
-     */
-    stateEfile?: boolean;
-    /**
-     * 
-     * @type {Array<StateEfileStatusDetail>}
-     * @memberof Form1042S
-     */
-    stateEfileStatus?: Array<StateEfileStatusDetail> | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1042S
-     */
-    postalMail?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1042S
-     */
-    postalMailStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1042S
-     */
-    tinMatch?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1042S
-     */
-    tinMatchStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1042S
-     */
-    addressVerification?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1042S
-     */
-    addressVerificationStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1042S
-     */
-    eDeliveryStatus?: Form1099StatusDetail | null;
-    /**
-     * 
+     * Internal reference ID. Never shown to any agency or recipient.
      * @type {string}
      * @memberof Form1042S
      */
     referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1042S
-     */
-    email?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1042S
-     */
-    tinType?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1042S
-     */
-    fatcaFilingRequirement?: boolean | null;
-    /**
-     * 
+     * Recipient's Federal Tax Identification Number (TIN).
      * @type {string}
      * @memberof Form1042S
      */
     tin?: string | null;
     /**
-     * 
-     * @type {boolean}
-     * @memberof Form1042S
-     */
-    noTin?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1042S
-     */
-    secondTinNotice?: boolean | null;
-    /**
-     * 
+     * Recipient name
      * @type {string}
      * @memberof Form1042S
      */
-    recipientName?: string | null;
+    recipientName: string | null;
     /**
-     * 
+     * Recipient second name
      * @type {string}
      * @memberof Form1042S
      */
     recipientSecondName?: string | null;
     /**
-     * 
+     * Address.
      * @type {string}
      * @memberof Form1042S
      */
-    address?: string | null;
+    address: string | null;
     /**
-     * 
+     * Address line 2.
      * @type {string}
      * @memberof Form1042S
      */
     address2?: string | null;
     /**
-     * 
+     * City.
      * @type {string}
      * @memberof Form1042S
      */
-    city?: string | null;
+    city: string | null;
     /**
-     * 
+     * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
      * @memberof Form1042S
      */
     state?: string | null;
     /**
-     * 
+     * ZIP/postal code.
      * @type {string}
      * @memberof Form1042S
      */
     zip?: string | null;
     /**
-     * 
+     * Recipient's Contact email address.
      * @type {string}
      * @memberof Form1042S
      */
-    nonUsProvince?: string | null;
+    email?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1042S
-     */
-    countryCode?: string | null;
-    /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1042S
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1042S
      */
     officeCode?: string | null;
     /**
-     * 
-     * @type {Array<ValidationError>}
+     * Province or region for non-US/CA addresses.
+     * @type {string}
      * @memberof Form1042S
      */
-    validationErrors?: Array<ValidationError> | null;
+    nonUsProvince?: string | null;
     /**
-     * 
+     * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
+     * @type {string}
+     * @memberof Form1042S
+     */
+    countryCode: string | null;
+    /**
+     * Date when federal e-filing should be scheduled for this form
      * @type {Date}
      * @memberof Form1042S
      */
-    createdAt?: Date;
+    federalEfileDate?: Date | null;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1042S
+     */
+    postalMail?: boolean | null;
+    /**
+     * Date when state e-filing should be scheduled for this form
      * @type {Date}
      * @memberof Form1042S
      */
-    updatedAt?: Date;
+    stateEfileDate?: Date | null;
     /**
-     * 
+     * Date when recipient e-delivery should be scheduled for this form
+     * @type {Date}
+     * @memberof Form1042S
+     */
+    recipientEdeliveryDate?: Date | null;
+    /**
+     * Boolean indicating that TIN Matching should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1042S
+     */
+    tinMatch?: boolean | null;
+    /**
+     * No TIN indicator
+     * @type {boolean}
+     * @memberof Form1042S
+     */
+    noTin?: boolean | null;
+    /**
+     * Boolean indicating that address verification should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1042S
+     */
+    addressVerification?: boolean | null;
+    /**
+     * State and local withholding information
      * @type {StateAndLocalWithholding}
      * @memberof Form1042S
      */
     stateAndLocalWithholding?: StateAndLocalWithholding | null;
+    /**
+     * Second TIN notice
+     * @type {boolean}
+     * @memberof Form1042S
+     */
+    secondTinNotice?: boolean;
+    /**
+     * Federal e-file status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1042S
+     */
+    readonly federalEfileStatus?: Form1099StatusDetail | null;
+    /**
+     * State e-file status
+     * @type {Array<StateEfileStatusDetail>}
+     * @memberof Form1042S
+     */
+    readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
+    /**
+     * Postal mail to recipient status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1042S
+     */
+    readonly postalMailStatus?: Form1099StatusDetail | null;
+    /**
+     * TIN Match status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1042S
+     */
+    readonly tinMatchStatus?: Form1099StatusDetail | null;
+    /**
+     * Address verification status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1042S
+     */
+    readonly addressVerificationStatus?: Form1099StatusDetail | null;
+    /**
+     * EDelivery status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1042S
+     */
+    readonly eDeliveryStatus?: Form1099StatusDetail | null;
+    /**
+     * Validation errors
+     * @type {Array<ValidationError>}
+     * @memberof Form1042S
+     */
+    readonly validationErrors?: Array<ValidationError> | null;
+    /**
+     * Date time when the record was created.
+     * @type {Date}
+     * @memberof Form1042S
+     */
+    readonly createdAt?: Date;
+    /**
+     * Date time when the record was last updated.
+     * @type {Date}
+     * @memberof Form1042S
+     */
+    readonly updatedAt?: Date;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum Form1042STinTypeEnum {
+    Empty = 'Empty',
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042SLobCodeEnum {
+    _01 = '01',
+    _02 = '02',
+    _03 = '03',
+    _04 = '04',
+    _05 = '05',
+    _06 = '06',
+    _07 = '07',
+    _08 = '08',
+    _09 = '09',
+    _10 = '10',
+    _11 = '11',
+    _12 = '12'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042SIncomeCodeEnum {
+    _01 = '01',
+    _02 = '02',
+    _03 = '03',
+    _04 = '04',
+    _05 = '05',
+    _22 = '22',
+    _29 = '29',
+    _30 = '30',
+    _31 = '31',
+    _33 = '33',
+    _51 = '51',
+    _54 = '54',
+    _06 = '06',
+    _07 = '07',
+    _08 = '08',
+    _34 = '34',
+    _40 = '40',
+    _52 = '52',
+    _53 = '53',
+    _56 = '56',
+    _09 = '09',
+    _10 = '10',
+    _11 = '11',
+    _12 = '12',
+    _13 = '13',
+    _14 = '14',
+    _15 = '15',
+    _16 = '16',
+    _17 = '17',
+    _18 = '18',
+    _19 = '19',
+    _20 = '20',
+    _23 = '23',
+    _24 = '24',
+    _25 = '25',
+    _26 = '26',
+    _27 = '27',
+    _28 = '28',
+    _32 = '32',
+    _35 = '35',
+    _36 = '36',
+    _37 = '37',
+    _38 = '38',
+    _39 = '39',
+    _41 = '41',
+    _42 = '42',
+    _43 = '43',
+    _44 = '44',
+    _50 = '50',
+    _55 = '55',
+    _57 = '57',
+    _58 = '58'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042SWithholdingIndicatorEnum {
+    _3 = '3',
+    _4 = '4'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042SExemptionCodeChap3Enum {
+    _00 = '00',
+    _01 = '01',
+    _02 = '02',
+    _03 = '03',
+    _04 = '04',
+    _05 = '05',
+    _06 = '06',
+    _07 = '07',
+    _08 = '08',
+    _09 = '09',
+    _10 = '10',
+    _11 = '11',
+    _12 = '12',
+    _22 = '22',
+    _23 = '23',
+    _24 = '24'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042SExemptionCodeChap4Enum {
+    _00 = '00',
+    _13 = '13',
+    _14 = '14',
+    _15 = '15',
+    _16 = '16',
+    _17 = '17',
+    _18 = '18',
+    _19 = '19',
+    _20 = '20',
+    _21 = '21'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042STaxRateChap3Enum {
+    _0000 = '00.00',
+    _0200 = '02.00',
+    _0400 = '04.00',
+    _0490 = '04.90',
+    _0495 = '04.95',
+    _0500 = '05.00',
+    _0700 = '07.00',
+    _0800 = '08.00',
+    _1000 = '10.00',
+    _1200 = '12.00',
+    _1250 = '12.50',
+    _1400 = '14.00',
+    _1500 = '15.00',
+    _1750 = '17.50',
+    _2000 = '20.00',
+    _2100 = '21.00',
+    _2400 = '24.00',
+    _2500 = '25.00',
+    _2750 = '27.50',
+    _2800 = '28.00',
+    _3000 = '30.00',
+    _3700 = '37.00'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042SChap3StatusCodeEnum {
+    _01 = '01',
+    _02 = '02',
+    _34 = '34',
+    _03 = '03',
+    _04 = '04',
+    _05 = '05',
+    _06 = '06',
+    _07 = '07',
+    _08 = '08',
+    _09 = '09',
+    _10 = '10',
+    _11 = '11',
+    _12 = '12',
+    _13 = '13',
+    _14 = '14',
+    _15 = '15',
+    _16 = '16',
+    _17 = '17',
+    _18 = '18',
+    _19 = '19',
+    _20 = '20',
+    _21 = '21',
+    _22 = '22',
+    _23 = '23',
+    _24 = '24',
+    _25 = '25',
+    _26 = '26',
+    _27 = '27',
+    _28 = '28',
+    _29 = '29',
+    _30 = '30',
+    _31 = '31',
+    _32 = '32',
+    _35 = '35',
+    _36 = '36',
+    _37 = '37',
+    _38 = '38',
+    _39 = '39'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042SChap4StatusCodeEnum {
+    _01 = '01',
+    _02 = '02',
+    _03 = '03',
+    _04 = '04',
+    _05 = '05',
+    _06 = '06',
+    _07 = '07',
+    _08 = '08',
+    _09 = '09',
+    _10 = '10',
+    _11 = '11',
+    _12 = '12',
+    _13 = '13',
+    _14 = '14',
+    _15 = '15',
+    _16 = '16',
+    _17 = '17',
+    _18 = '18',
+    _19 = '19',
+    _20 = '20',
+    _21 = '21',
+    _22 = '22',
+    _23 = '23',
+    _24 = '24',
+    _25 = '25',
+    _26 = '26',
+    _27 = '27',
+    _28 = '28',
+    _29 = '29',
+    _30 = '30',
+    _31 = '31',
+    _32 = '32',
+    _33 = '33',
+    _34 = '34',
+    _35 = '35',
+    _36 = '36',
+    _37 = '37',
+    _38 = '38',
+    _39 = '39',
+    _40 = '40',
+    _41 = '41',
+    _42 = '42',
+    _43 = '43',
+    _44 = '44',
+    _45 = '45',
+    _46 = '46',
+    _47 = '47',
+    _48 = '48',
+    _49 = '49',
+    _50 = '50'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1042STypeEnum {
+    _1099Nec = '1099-NEC',
+    _1099Misc = '1099-MISC',
+    _1099Div = '1099-DIV',
+    _1099R = '1099-R',
+    _1099K = '1099-K',
+    _1095B = '1095-B',
+    _1042S = '1042-S',
+    _1095C = '1095-C',
+    _1099Int = '1099-INT'
+}
 
 /**
  * Check if a given object implements the Form1042S interface.
  */
 export function instanceOfForm1042S(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "uniqueFormId" in value;
+    isInstance = isInstance && "incomeCode" in value;
+    isInstance = isInstance && "grossIncome" in value;
+    isInstance = isInstance && "withholdingIndicator" in value;
+    isInstance = isInstance && "taxCountryCode" in value;
+    isInstance = isInstance && "type" in value;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -451,15 +944,16 @@ export function Form1042SFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
-        'uniqueFormId': !exists(json, 'uniqueFormId') ? undefined : json['uniqueFormId'],
+        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
+        'uniqueFormId': json['uniqueFormId'],
         'recipientDateOfBirth': !exists(json, 'recipientDateOfBirth') ? undefined : (json['recipientDateOfBirth'] === null ? null : new Date(json['recipientDateOfBirth'])),
         'recipientGiin': !exists(json, 'recipientGiin') ? undefined : json['recipientGiin'],
         'recipientForeignTin': !exists(json, 'recipientForeignTin') ? undefined : json['recipientForeignTin'],
         'lobCode': !exists(json, 'lobCode') ? undefined : json['lobCode'],
-        'incomeCode': !exists(json, 'incomeCode') ? undefined : json['incomeCode'],
-        'grossIncome': !exists(json, 'grossIncome') ? undefined : json['grossIncome'],
-        'withholdingIndicator': !exists(json, 'withholdingIndicator') ? undefined : json['withholdingIndicator'],
-        'taxCountryCode': !exists(json, 'taxCountryCode') ? undefined : json['taxCountryCode'],
+        'incomeCode': json['incomeCode'],
+        'grossIncome': json['grossIncome'],
+        'withholdingIndicator': json['withholdingIndicator'],
+        'taxCountryCode': json['taxCountryCode'],
         'exemptionCodeChap3': !exists(json, 'exemptionCodeChap3') ? undefined : json['exemptionCodeChap3'],
         'exemptionCodeChap4': !exists(json, 'exemptionCodeChap4') ? undefined : json['exemptionCodeChap4'],
         'taxRateChap3': !exists(json, 'taxRateChap3') ? undefined : json['taxRateChap3'],
@@ -474,45 +968,44 @@ export function Form1042SFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'chap4StatusCode': !exists(json, 'chap4StatusCode') ? undefined : json['chap4StatusCode'],
         'primaryWithholdingAgent': !exists(json, 'primaryWithholdingAgent') ? undefined : PrimaryWithholdingAgentFromJSON(json['primaryWithholdingAgent']),
         'intermediaryOrFlowThrough': !exists(json, 'intermediaryOrFlowThrough') ? undefined : IntermediaryOrFlowThroughFromJSON(json['intermediaryOrFlowThrough']),
+        'type': json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
-        'federalEfile': !exists(json, 'federalEfile') ? undefined : json['federalEfile'],
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
-        'stateEfile': !exists(json, 'stateEfile') ? undefined : json['stateEfile'],
-        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
-        'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
-        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
-        'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
-        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
-        'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
-        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
-        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
-        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
-        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
-        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
+        'recipientName': json['recipientName'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
+        'countryCode': json['countryCode'],
+        'federalEfileDate': !exists(json, 'federalEfileDate') ? undefined : (json['federalEfileDate'] === null ? null : new Date(json['federalEfileDate'])),
+        'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
+        'stateEfileDate': !exists(json, 'stateEfileDate') ? undefined : (json['stateEfileDate'] === null ? null : new Date(json['stateEfileDate'])),
+        'recipientEdeliveryDate': !exists(json, 'recipientEdeliveryDate') ? undefined : (json['recipientEdeliveryDate'] === null ? null : new Date(json['recipientEdeliveryDate'])),
+        'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
+        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
+        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
+        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
+        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -526,7 +1019,7 @@ export function Form1042SToJSON(value?: Form1042S | null): any {
     return {
         
         'uniqueFormId': value.uniqueFormId,
-        'recipientDateOfBirth': value.recipientDateOfBirth === undefined ? undefined : (value.recipientDateOfBirth === null ? null : value.recipientDateOfBirth.toISOString()),
+        'recipientDateOfBirth': value.recipientDateOfBirth === undefined ? undefined : (value.recipientDateOfBirth === null ? null : value.recipientDateOfBirth.toISOString().substr(0,10)),
         'recipientGiin': value.recipientGiin,
         'recipientForeignTin': value.recipientForeignTin,
         'lobCode': value.lobCode,
@@ -548,30 +1041,13 @@ export function Form1042SToJSON(value?: Form1042S | null): any {
         'chap4StatusCode': value.chap4StatusCode,
         'primaryWithholdingAgent': PrimaryWithholdingAgentToJSON(value.primaryWithholdingAgent),
         'intermediaryOrFlowThrough': IntermediaryOrFlowThroughToJSON(value.intermediaryOrFlowThrough),
-        'id': value.id,
         'type': value.type,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
-        'federalEfile': value.federalEfile,
-        'federalEfileStatus': Form1099StatusDetailToJSON(value.federalEfileStatus),
-        'stateEfile': value.stateEfile,
-        'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailToJSON)),
-        'postalMail': value.postalMail,
-        'postalMailStatus': Form1099StatusDetailToJSON(value.postalMailStatus),
-        'tinMatch': value.tinMatch,
-        'tinMatchStatus': Form1099StatusDetailToJSON(value.tinMatchStatus),
-        'addressVerification': value.addressVerification,
-        'addressVerificationStatus': Form1099StatusDetailToJSON(value.addressVerificationStatus),
-        'eDeliveryStatus': Form1099StatusDetailToJSON(value.eDeliveryStatus),
         'referenceId': value.referenceId,
-        'email': value.email,
-        'tinType': value.tinType,
-        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'tin': value.tin,
-        'noTin': value.noTin,
-        'secondTinNotice': value.secondTinNotice,
         'recipientName': value.recipientName,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
@@ -579,13 +1055,19 @@ export function Form1042SToJSON(value?: Form1042S | null): any {
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'nonUsProvince': value.nonUsProvince,
-        'countryCode': value.countryCode,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'validationErrors': value.validationErrors === undefined ? undefined : (value.validationErrors === null ? null : (value.validationErrors as Array<any>)?.map(ValidationErrorToJSON)),
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
+        'nonUsProvince': value.nonUsProvince,
+        'countryCode': value.countryCode,
+        'federalEfileDate': value.federalEfileDate === undefined ? undefined : (value.federalEfileDate === null ? null : value.federalEfileDate.toISOString().substr(0,10)),
+        'postalMail': value.postalMail,
+        'stateEfileDate': value.stateEfileDate === undefined ? undefined : (value.stateEfileDate === null ? null : value.stateEfileDate.toISOString().substr(0,10)),
+        'recipientEdeliveryDate': value.recipientEdeliveryDate === undefined ? undefined : (value.recipientEdeliveryDate === null ? null : value.recipientEdeliveryDate.toISOString().substr(0,10)),
+        'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
+        'secondTinNotice': value.secondTinNotice,
     };
 }

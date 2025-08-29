@@ -20,13 +20,13 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface ValidationError {
     /**
-     * 
+     * The field containing the error
      * @type {string}
      * @memberof ValidationError
      */
     field?: string | null;
     /**
-     * 
+     * The list of error messages
      * @type {Array<string>}
      * @memberof ValidationError
      */

@@ -18,15 +18,12 @@ import { RequestInit } from 'node-fetch';
 import LogObject from '../../../utils/logObject';
 
 import {
-    CompanyCreateUpdateRequestModel,
-    CompanyCreateUpdateRequestModelFromJSON,
-    CompanyCreateUpdateRequestModelToJSON,
     CompanyResponse,
     CompanyResponseFromJSON,
     CompanyResponseToJSON,
-    CompanyResponseModel,
-    CompanyResponseModelFromJSON,
-    CompanyResponseModelToJSON,
+    CreateCompanyRequest,
+    CreateCompanyRequestFromJSON,
+    CreateCompanyRequestToJSON,
     ErrorModel,
     ErrorModelFromJSON,
     ErrorModelToJSON,
@@ -38,11 +35,11 @@ import {
     PaginatedQueryResultModelCompanyResponseToJSON,
 } from '../../../packages/A1099/V2';
 
-export interface CreateCompanyInterface {
+export interface CreateCompanyOperationInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    companyCreateUpdateRequestModel?: CompanyCreateUpdateRequestModel;
+    createCompanyRequest?: CreateCompanyRequest;
 }
 
 export interface DeleteCompanyInterface {
@@ -76,14 +73,14 @@ export interface UpdateCompanyInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    companyCreateUpdateRequestModel?: CompanyCreateUpdateRequestModel;
+    createCompanyRequest?: CreateCompanyRequest;
 }
 
 /**
  * 
  */
 export class CompaniesW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.2';
+    public sdkVersion: string = '25.8.3';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -93,7 +90,7 @@ export class CompaniesW9Api extends runtime.ApiClient {
      * Create a company.
      * Create a company
      */
-    async createCompanyRaw(requestParameters: CreateCompanyInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CompanyResponseModel>, logObject: LogObject }> {
+    async createCompanyRaw(requestParameters: CreateCompanyOperationInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CompanyResponse>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling createCompany.');
@@ -124,17 +121,17 @@ export class CompaniesW9Api extends runtime.ApiClient {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CompanyCreateUpdateRequestModelToJSON(requestParameters.companyCreateUpdateRequestModel),
+            body: CreateCompanyRequestToJSON(requestParameters.createCompanyRequest),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => CompanyResponseModelFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => CompanyResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
      * Create a company.
      * Create a company
      */
-    async createCompany(requestParameters: CreateCompanyInterface, initOverrides?: RequestInit): Promise<CompanyResponseModel> {
+    async createCompany(requestParameters: CreateCompanyOperationInterface, initOverrides?: RequestInit): Promise<CompanyResponse> {
         const { response, logObject } = await this.createCompanyRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -326,7 +323,7 @@ export class CompaniesW9Api extends runtime.ApiClient {
      * Update a company.
      * Update a company
      */
-    async updateCompanyRaw(requestParameters: UpdateCompanyInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CompanyResponseModel>, logObject: LogObject }> {
+    async updateCompanyRaw(requestParameters: UpdateCompanyInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CompanyResponse>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCompany.');
@@ -361,17 +358,17 @@ export class CompaniesW9Api extends runtime.ApiClient {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: CompanyCreateUpdateRequestModelToJSON(requestParameters.companyCreateUpdateRequestModel),
+            body: CreateCompanyRequestToJSON(requestParameters.createCompanyRequest),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => CompanyResponseModelFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => CompanyResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
      * Update a company.
      * Update a company
      */
-    async updateCompany(requestParameters: UpdateCompanyInterface, initOverrides?: RequestInit): Promise<CompanyResponseModel> {
+    async updateCompany(requestParameters: UpdateCompanyInterface, initOverrides?: RequestInit): Promise<CompanyResponse> {
         const { response, logObject } = await this.updateCompanyRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

@@ -51,7 +51,7 @@ export interface ValidateTaxIdentifierInterface {
  * 
  */
 export class TaxIdentifiersApi extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.2';
+    public sdkVersion: string = '25.8.3';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);

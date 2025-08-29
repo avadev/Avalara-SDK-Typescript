@@ -1,9 +1,10 @@
 # AvalaraSdk.A1099.V2.FormsW9Api
 
-All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/avalara1099*
+All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**createAndSendW9FormEmail**](FormsW9Api.md#createandsendw9formemailoperation) | **POST** /w9/forms/$create-and-send-email | Create a minimal W9/W4/W8 form and sends the e-mail request
 [**createW9Form**](FormsW9Api.md#createw9formoperation) | **POST** /w9/forms | Create a W9/W4/W8 form
 [**deleteW9Form**](FormsW9Api.md#deletew9form) | **DELETE** /w9/forms/{id} | Delete a W9/W4/W8 form
 [**getW9Form**](FormsW9Api.md#getw9form) | **GET** /w9/forms/{id} | Retrieve a W9/W4/W8 form
@@ -12,6 +13,65 @@ Method | HTTP request | Description
 [**updateW9Form**](FormsW9Api.md#updatew9form) | **PUT** /w9/forms/{id} | Update a W9/W4/W8 form
 [**uploadW9Files**](FormsW9Api.md#uploadw9files) | **POST** /w9/forms/{id}/attachment | Replace the PDF file for a W9/W4/W8 form
 
+
+<a name="createandsendw9formemailoperation"></a>
+# **createAndSendW9FormEmail**
+> CreateW9Form201Response createAndSendW9FormEmail (string avalaraVersion, string xCorrelationId, string xAvalaraClient, CreateAndSendW9FormEmailRequest createAndSendW9FormEmailRequest)
+
+Create a minimal W9/W4/W8 form and sends the e-mail request
+
+Create a minimal W9/W4/W8 form and sends the e-mail request.
+
+### Example
+```typescript
+import * as AvalaraSdk from 'avalara-sdk';
+
+const configParams: AvalaraSdk.Runtime.ConfigurationParameters = {
+    appName: 'asv-sdk-test-app',
+    appVersion: '1.0',
+    environment: AvaTaxEnvironment.Sandbox,
+    machineName: 'test-machine',
+    timeout:3000,
+    bearerToken: 'YOUR_BEARER_TOKEN',
+    testBasePath: 'https://localhost:3000'
+};
+const config = new AvalaraSdk.Configuration(configParams);
+let client = new AvalaraSdk.Runtime.ApiClient(config);
+let api = new AvalaraSdk.A1099.V2.UserApi(client);
+const result = await api.createUser();
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **avalaraVersion** | **string**| API version | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
+ **createAndSendW9FormEmailRequest** | [**CreateAndSendW9FormEmailRequest**](CreateAndSendW9FormEmailRequest.md)| Form to be created | [optional] 
+
+### Return type
+
+[**CreateW9Form201Response**](CreateW9Form201Response.md)
+
+### Authorization
+
+[bearer](../../../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | The created W9/W4/W8 form |  -  |
+| **400** | Bad request (e.g. Unknown form type: W10\&quot;) |  -  |
+| **401** | Authentication failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 <a name="createw9formoperation"></a>
 # **createW9Form**
@@ -250,17 +310,17 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
-| **200** | List of forms |  -  |
+| **200** | list |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 <a name="sendw9formemail"></a>
 # **sendW9FormEmail**
-> IW9FormDataModelsOneOf sendW9FormEmail (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
+> CreateW9Form201Response sendW9FormEmail (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
 
-Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
+Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.   If the form is not in \'Requested\' status, it will either use an existing descendant form   in \'Requested\' status or create a new minimal form and send the email request.
 
 ### Example
 ```typescript
@@ -292,7 +352,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)
+[**CreateW9Form201Response**](CreateW9Form201Response.md)
 
 ### Authorization
 
@@ -307,7 +367,8 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | The updated W9/W4/W8 form |  -  |
+| **200** | Email sent using existing form (form was already in \&#39;Requested\&#39; status or descendant found) |  -  |
+| **201** | Email sent using newly created minimal form |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
 
@@ -370,6 +431,7 @@ Name | Type | Description  | Notes
 | **200** | The updated W9/W4/W8 form |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
+| **404** | W9/W4/W8 form not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

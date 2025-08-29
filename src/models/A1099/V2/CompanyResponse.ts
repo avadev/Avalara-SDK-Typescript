@@ -20,125 +20,125 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface CompanyResponse {
     /**
-     * 
+     * Unique identifier set when the record is created.
      * @type {string}
      * @memberof CompanyResponse
      */
     id?: string;
     /**
-     * 
+     * Date time when the record was created.
+     * @type {Date}
+     * @memberof CompanyResponse
+     */
+    createdAt?: Date;
+    /**
+     * Date time when the record was last updated.
+     * @type {Date}
+     * @memberof CompanyResponse
+     */
+    updatedAt?: Date;
+    /**
+     * Legal name. Not the DBA name.
      * @type {string}
      * @memberof CompanyResponse
      */
-    referenceId?: string | null;
+    name: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof CompanyResponse
-     */
-    groupName?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CompanyResponse
-     */
-    name?: string | null;
-    /**
-     * 
+     * Doing Business As (DBA) name or continuation of a long legal name.
      * @type {string}
      * @memberof CompanyResponse
      */
     dbaName?: string | null;
     /**
-     * 
+     * Contact email address. For inquiries by vendors/employees.
      * @type {string}
      * @memberof CompanyResponse
      */
-    address?: string | null;
+    email: string | null;
     /**
-     * 
+     * Address.
      * @type {string}
      * @memberof CompanyResponse
      */
-    city?: string | null;
+    address: string | null;
     /**
-     * 
+     * City.
+     * @type {string}
+     * @memberof CompanyResponse
+     */
+    city: string | null;
+    /**
+     * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
      * @memberof CompanyResponse
      */
     state?: string | null;
     /**
-     * 
+     * ZIP/postal code.
      * @type {string}
      * @memberof CompanyResponse
      */
-    foreignProvince?: string | null;
+    zip: string | null;
     /**
-     * 
+     * Contact phone number (must contain at least 10 digits, max 15 characters).
      * @type {string}
      * @memberof CompanyResponse
      */
-    zip?: string | null;
+    telephone: string | null;
     /**
-     * 
+     * Federal Tax Identification Number (TIN). EIN/Tax ID (required for US companies).
      * @type {string}
      * @memberof CompanyResponse
      */
-    countryCode?: string | null;
+    tin: string | null;
     /**
-     * 
+     * Internal reference ID. Never shown to any agency or recipient.
      * @type {string}
      * @memberof CompanyResponse
      */
-    email?: string | null;
+    referenceId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof CompanyResponse
-     */
-    telephone?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CompanyResponse
-     */
-    tin?: string | null;
-    /**
-     * 
+     * Indicates whether the company authorizes IRS TIN matching.
      * @type {boolean}
      * @memberof CompanyResponse
      */
     doTinMatch?: boolean | null;
     /**
-     * 
+     * Group name for organizing companies (creates or finds group by name).
+     * @type {string}
+     * @memberof CompanyResponse
+     */
+    groupName?: string | null;
+    /**
+     * Province or region for non-US/CA addresses.
+     * @type {string}
+     * @memberof CompanyResponse
+     */
+    foreignProvince?: string | null;
+    /**
+     * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
+     * @type {string}
+     * @memberof CompanyResponse
+     */
+    countryCode: string | null;
+    /**
+     * Boolean to enable automatic reminder emails (default: false).
      * @type {boolean}
      * @memberof CompanyResponse
      */
     resendRequests?: boolean | null;
     /**
-     * 
+     * Days between reminder emails (7-365, required if resendRequests is true).
      * @type {number}
      * @memberof CompanyResponse
      */
     resendIntervalDays?: number | null;
     /**
-     * 
+     * Maximum number of reminder attempts (1-52, required if resendRequests is true).
      * @type {number}
      * @memberof CompanyResponse
      */
     maxReminderAttempts?: number | null;
-    /**
-     * 
-     * @type {Date}
-     * @memberof CompanyResponse
-     */
-    createdAt?: Date | null;
-    /**
-     * 
-     * @type {Date}
-     * @memberof CompanyResponse
-     */
-    updatedAt?: Date | null;
 }
 
 
@@ -148,6 +148,14 @@ export interface CompanyResponse {
  */
 export function instanceOfCompanyResponse(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "email" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "zip" in value;
+    isInstance = isInstance && "telephone" in value;
+    isInstance = isInstance && "tin" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -163,25 +171,25 @@ export function CompanyResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'groupName': !exists(json, 'groupName') ? undefined : json['groupName'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
+        'name': json['name'],
         'dbaName': !exists(json, 'dbaName') ? undefined : json['dbaName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'email': json['email'],
+        'address': json['address'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
-        'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
-        'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'telephone': !exists(json, 'telephone') ? undefined : json['telephone'],
-        'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'zip': json['zip'],
+        'telephone': json['telephone'],
+        'tin': json['tin'],
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'doTinMatch': !exists(json, 'doTinMatch') ? undefined : json['doTinMatch'],
+        'groupName': !exists(json, 'groupName') ? undefined : json['groupName'],
+        'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
+        'countryCode': json['countryCode'],
         'resendRequests': !exists(json, 'resendRequests') ? undefined : json['resendRequests'],
         'resendIntervalDays': !exists(json, 'resendIntervalDays') ? undefined : json['resendIntervalDays'],
         'maxReminderAttempts': !exists(json, 'maxReminderAttempts') ? undefined : json['maxReminderAttempts'],
-        'createdAt': !exists(json, 'createdAt') ? undefined : (json['createdAt'] === null ? null : new Date(json['createdAt'])),
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : (json['updatedAt'] === null ? null : new Date(json['updatedAt'])),
     };
 }
 
@@ -195,24 +203,24 @@ export function CompanyResponseToJSON(value?: CompanyResponse | null): any {
     return {
         
         'id': value.id,
-        'referenceId': value.referenceId,
-        'groupName': value.groupName,
+        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
         'name': value.name,
         'dbaName': value.dbaName,
+        'email': value.email,
         'address': value.address,
         'city': value.city,
         'state': value.state,
-        'foreignProvince': value.foreignProvince,
         'zip': value.zip,
-        'countryCode': value.countryCode,
-        'email': value.email,
         'telephone': value.telephone,
         'tin': value.tin,
+        'referenceId': value.referenceId,
         'doTinMatch': value.doTinMatch,
+        'groupName': value.groupName,
+        'foreignProvince': value.foreignProvince,
+        'countryCode': value.countryCode,
         'resendRequests': value.resendRequests,
         'resendIntervalDays': value.resendIntervalDays,
         'maxReminderAttempts': value.maxReminderAttempts,
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt === null ? null : value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt === null ? null : value.updatedAt.toISOString()),
     };
 }

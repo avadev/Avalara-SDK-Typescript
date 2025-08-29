@@ -14,23 +14,23 @@
 
 import { exists, mapValues } from '../../../runtime';
 /**
- * 
+ * Primary withholding agent information for tax forms
  * @export
  * @interface PrimaryWithholdingAgent
  */
 export interface PrimaryWithholdingAgent {
     /**
-     * 
+     * Name of the primary withholding agent
      * @type {string}
      * @memberof PrimaryWithholdingAgent
      */
-    primaryWithholdingAgentName?: string | null;
+    name: string | null;
     /**
-     * 
+     * EIN (Employer Identification Number) of the primary withholding agent.
      * @type {string}
      * @memberof PrimaryWithholdingAgent
      */
-    primaryWithholdingAgentEin?: string | null;
+    ein: string | null;
 }
 
 
@@ -40,6 +40,8 @@ export interface PrimaryWithholdingAgent {
  */
 export function instanceOfPrimaryWithholdingAgent(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "ein" in value;
 
     return isInstance;
 }
@@ -54,8 +56,8 @@ export function PrimaryWithholdingAgentFromJSONTyped(json: any, ignoreDiscrimina
     }
     return {
         
-        'primaryWithholdingAgentName': !exists(json, 'primaryWithholdingAgentName') ? undefined : json['primaryWithholdingAgentName'],
-        'primaryWithholdingAgentEin': !exists(json, 'primaryWithholdingAgentEin') ? undefined : json['primaryWithholdingAgentEin'],
+        'name': json['name'],
+        'ein': json['ein'],
     };
 }
 
@@ -68,7 +70,7 @@ export function PrimaryWithholdingAgentToJSON(value?: PrimaryWithholdingAgent | 
     }
     return {
         
-        'primaryWithholdingAgentName': value.primaryWithholdingAgentName,
-        'primaryWithholdingAgentEin': value.primaryWithholdingAgentEin,
+        'name': value.name,
+        'ein': value.ein,
     };
 }

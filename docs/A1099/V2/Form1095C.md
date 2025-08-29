@@ -1,0 +1,58 @@
+# AvalaraSdk.A1099.V2.Form1095C
+Form 1095-C: Employer-Provided Health Insurance Offer and Coverage
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**employeeFirstName** | **string** | Employee\&#39;s first name | [default to undefined]
+**employeeMiddleName** | **string** | Employee\&#39;s middle name | [optional] [default to undefined]
+**employeeLastName** | **string** | Employee\&#39;s last name | [default to undefined]
+**employeeNameSuffix** | **string** | Employee\&#39;s name suffix | [optional] [default to undefined]
+**recipientDateOfBirth** | **Date** | Recipient\&#39;s date of birth | [optional] [default to undefined]
+**planStartMonth** | **string** | Plan start month.  The calendar month during which the plan year begins of the health plan in which the employee is offered coverage (or would be offered coverage if the employee were eligible to participate in the plan).  Available values:  - 00: None  - 01: January  - 02: February  - 03: March  - 04: April  - 05: May  - 06: June  - 07: July  - 08: August  - 09: September  - 10: October  - 11: November  - 12: December | [default to undefined]
+**employerProvidedSiCoverage** | **boolean** | Employer provided self-insured coverage | [optional] [default to undefined]
+**offerAndCoverages** | [**Array&lt;OfferAndCoverage&gt;**](OfferAndCoverage.md) | Offer and coverage information | [default to undefined]
+**coveredIndividuals** | [**Array&lt;CoveredIndividual&gt;**](CoveredIndividual.md) | Covered individuals information | [optional] [default to undefined]
+**type** | **string** | Form type | [default to undefined]
+**id** | **string** | Form ID. Unique identifier set when the record is created. | [optional] [readonly] [default to undefined]
+**issuerId** | **string** | Issuer ID - only required when creating forms | [optional] [default to undefined]
+**issuerReferenceId** | **string** | Issuer Reference ID - only required when creating forms | [optional] [default to undefined]
+**issuerTin** | **string** | Issuer TIN - readonly | [optional] [default to undefined]
+**taxYear** | **number** | Tax Year - only required when creating forms | [optional] [default to undefined]
+**referenceId** | **string** | Internal reference ID. Never shown to any agency or recipient. | [optional] [default to undefined]
+**tin** | **string** | Recipient\&#39;s Federal Tax Identification Number (TIN). | [optional] [default to undefined]
+**recipientName** | **string** | Recipient name | [default to undefined]
+**tinType** | **string** | Type of TIN (Tax ID Number) | [optional] [default to undefined]
+**recipientSecondName** | **string** | Recipient second name | [optional] [default to undefined]
+**address** | **string** | Address. | [default to undefined]
+**address2** | **string** | Address line 2. | [optional] [default to undefined]
+**city** | **string** | City. | [default to undefined]
+**state** | **string** | Two-letter US state or Canadian province code (required for US/CA addresses). | [optional] [default to undefined]
+**zip** | **string** | ZIP/postal code. | [optional] [default to undefined]
+**email** | **string** | Recipient\&#39;s Contact email address. | [optional] [default to undefined]
+**accountNumber** | **string** | Account number | [optional] [default to undefined]
+**officeCode** | **string** | Office code | [optional] [default to undefined]
+**nonUsProvince** | **string** | Province or region for non-US/CA addresses. | [optional] [default to undefined]
+**countryCode** | **string** | Two-letter IRS country code (e.g., \&#39;US\&#39;, \&#39;CA\&#39;), as defined at https://www.irs.gov/e-file-providers/country-codes. | [default to undefined]
+**federalEfileDate** | **Date** | Date when federal e-filing should be scheduled for this form | [optional] [default to undefined]
+**postalMail** | **boolean** | Boolean indicating that postal mailing to the recipient should be scheduled for this form | [optional] [default to undefined]
+**stateEfileDate** | **Date** | Date when state e-filing should be scheduled for this form | [optional] [default to undefined]
+**recipientEdeliveryDate** | **Date** | Date when recipient e-delivery should be scheduled for this form | [optional] [default to undefined]
+**tinMatch** | **boolean** | Boolean indicating that TIN Matching should be scheduled for this form | [optional] [default to undefined]
+**noTin** | **boolean** | No TIN indicator | [optional] [default to undefined]
+**addressVerification** | **boolean** | Boolean indicating that address verification should be scheduled for this form | [optional] [default to undefined]
+**stateAndLocalWithholding** | [**StateAndLocalWithholding**](StateAndLocalWithholding.md) | State and local withholding information | [optional] [default to undefined]
+**secondTinNotice** | **boolean** | Second TIN notice | [optional] [default to undefined]
+**federalEfileStatus** | [**Form1099StatusDetail**](Form1099StatusDetail.md) | Federal e-file status | [optional] [readonly] [default to undefined]
+**stateEfileStatus** | [**Array&lt;StateEfileStatusDetail&gt;**](StateEfileStatusDetail.md) | State e-file status | [optional] [readonly] [default to undefined]
+**postalMailStatus** | [**Form1099StatusDetail**](Form1099StatusDetail.md) | Postal mail to recipient status | [optional] [readonly] [default to undefined]
+**tinMatchStatus** | [**Form1099StatusDetail**](Form1099StatusDetail.md) | TIN Match status | [optional] [readonly] [default to undefined]
+**addressVerificationStatus** | [**Form1099StatusDetail**](Form1099StatusDetail.md) | Address verification status | [optional] [readonly] [default to undefined]
+**eDeliveryStatus** | [**Form1099StatusDetail**](Form1099StatusDetail.md) | EDelivery status | [optional] [readonly] [default to undefined]
+**validationErrors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) | Validation errors | [optional] [readonly] [default to undefined]
+**createdAt** | **Date** | Date time when the record was created. | [optional] [readonly] [default to undefined]
+**updatedAt** | **Date** | Date time when the record was last updated. | [optional] [readonly] [default to undefined]
+
+[[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
+
