@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    EntryStatusResponse,
+    EntryStatusResponseFromJSON,
+    EntryStatusResponseFromJSONTyped,
+    EntryStatusResponseToJSON,
+} from './EntryStatusResponse';
+import {
     W9FormBaseResponse,
     W9FormBaseResponseFromJSON,
     W9FormBaseResponseFromJSONTyped,

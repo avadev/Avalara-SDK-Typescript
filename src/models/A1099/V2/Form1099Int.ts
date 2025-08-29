@@ -45,332 +45,367 @@ import {
  */
 export interface Form1099Int {
     /**
-     * 
+     * Interest Income
      * @type {number}
      * @memberof Form1099Int
      */
     interestIncome?: number | null;
     /**
-     * 
+     * Early Withdrawal Penalty
      * @type {number}
      * @memberof Form1099Int
      */
     earlyWithdrawalPenalty?: number | null;
     /**
-     * 
+     * Interest on U.S. Savings Bonds and Treasury obligations
      * @type {number}
      * @memberof Form1099Int
      */
     usSavingsBondsInterest?: number | null;
     /**
-     * 
+     * Federal income tax withheld
      * @type {number}
      * @memberof Form1099Int
      */
     federalIncomeTaxWithheld?: number | null;
     /**
-     * 
+     * Investment Expenses
      * @type {number}
      * @memberof Form1099Int
      */
     investmentExpenses?: number | null;
     /**
-     * 
+     * Foreign tax paid
      * @type {number}
      * @memberof Form1099Int
      */
     foreignTaxPaid?: number | null;
     /**
-     * 
+     * Foreign country or U.S. possession
      * @type {string}
      * @memberof Form1099Int
      */
     foreignCountry?: string | null;
     /**
-     * 
+     * Tax-Exempt Interest
      * @type {number}
      * @memberof Form1099Int
      */
     taxExemptInterest?: number | null;
     /**
-     * 
+     * Specified Private activity
      * @type {number}
      * @memberof Form1099Int
      */
     specifiedPrivateActivityBondInterest?: number | null;
     /**
-     * 
+     * Market Discount
      * @type {number}
      * @memberof Form1099Int
      */
     marketDiscount?: number | null;
     /**
-     * 
+     * Bond Premium
      * @type {number}
      * @memberof Form1099Int
      */
     bondPremium?: number | null;
     /**
-     * 
+     * Bond Premium on Treasury obligations
      * @type {number}
      * @memberof Form1099Int
      */
     bondPremiumOnTreasuryObligations?: number | null;
     /**
-     * 
+     * Bond Premium on tax exempt bond
      * @type {number}
      * @memberof Form1099Int
      */
     bondPremiumOnTaxExemptBond?: number | null;
     /**
-     * 
+     * Tax exempt bond CUSIP no.
      * @type {string}
      * @memberof Form1099Int
      */
     taxExemptBondCusipNumber?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    type?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099Int
-     */
-    issuerId?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    issuerReferenceId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    issuerTin?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Form1099Int
-     */
-    taxYear?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099Int
-     */
-    federalEfile?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
-     */
-    federalEfileStatus?: Form1099StatusDetail;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099Int
-     */
-    stateEfile?: boolean;
-    /**
-     * 
-     * @type {Array<StateEfileStatusDetail>}
-     * @memberof Form1099Int
-     */
-    stateEfileStatus?: Array<StateEfileStatusDetail> | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099Int
-     */
-    postalMail?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
-     */
-    postalMailStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099Int
-     */
-    tinMatch?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
-     */
-    tinMatchStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099Int
-     */
-    addressVerification?: boolean;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
-     */
-    addressVerificationStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
-     */
-    eDeliveryStatus?: Form1099StatusDetail | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    referenceId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    email?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    tinType?: string | null;
-    /**
-     * 
+     * FATCA filing requirement
      * @type {boolean}
      * @memberof Form1099Int
      */
     fatcaFilingRequirement?: boolean | null;
     /**
-     * 
+     * Form type
+     * @type {string}
+     * @memberof Form1099Int
+     */
+    type: Form1099IntTypeEnum;
+    /**
+     * Form ID. Unique identifier set when the record is created.
+     * @type {string}
+     * @memberof Form1099Int
+     */
+    readonly id?: string | null;
+    /**
+     * Issuer ID - only required when creating forms
+     * @type {string}
+     * @memberof Form1099Int
+     */
+    issuerId?: string | null;
+    /**
+     * Issuer Reference ID - only required when creating forms
+     * @type {string}
+     * @memberof Form1099Int
+     */
+    issuerReferenceId?: string | null;
+    /**
+     * Issuer TIN - readonly
+     * @type {string}
+     * @memberof Form1099Int
+     */
+    issuerTin?: string | null;
+    /**
+     * Tax Year - only required when creating forms
+     * @type {number}
+     * @memberof Form1099Int
+     */
+    taxYear?: number | null;
+    /**
+     * Internal reference ID. Never shown to any agency or recipient.
+     * @type {string}
+     * @memberof Form1099Int
+     */
+    referenceId?: string | null;
+    /**
+     * Recipient's Federal Tax Identification Number (TIN).
      * @type {string}
      * @memberof Form1099Int
      */
     tin?: string | null;
     /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099Int
-     */
-    noTin?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Form1099Int
-     */
-    secondTinNotice?: boolean | null;
-    /**
-     * 
+     * Recipient name
      * @type {string}
      * @memberof Form1099Int
      */
-    recipientName?: string | null;
+    recipientName: string | null;
     /**
-     * 
+     * Type of TIN (Tax ID Number)
+     * @type {string}
+     * @memberof Form1099Int
+     */
+    tinType?: Form1099IntTinTypeEnum;
+    /**
+     * Recipient second name
      * @type {string}
      * @memberof Form1099Int
      */
     recipientSecondName?: string | null;
     /**
-     * 
+     * Address.
      * @type {string}
      * @memberof Form1099Int
      */
-    address?: string | null;
+    address: string | null;
     /**
-     * 
+     * Address line 2.
      * @type {string}
      * @memberof Form1099Int
      */
     address2?: string | null;
     /**
-     * 
+     * City.
      * @type {string}
      * @memberof Form1099Int
      */
-    city?: string | null;
+    city: string | null;
     /**
-     * 
+     * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
      * @memberof Form1099Int
      */
     state?: string | null;
     /**
-     * 
+     * ZIP/postal code.
      * @type {string}
      * @memberof Form1099Int
      */
     zip?: string | null;
     /**
-     * 
+     * Recipient's Contact email address.
      * @type {string}
      * @memberof Form1099Int
      */
-    nonUsProvince?: string | null;
+    email?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    countryCode?: string | null;
-    /**
-     * 
+     * Account number
      * @type {string}
      * @memberof Form1099Int
      */
     accountNumber?: string | null;
     /**
-     * 
+     * Office code
      * @type {string}
      * @memberof Form1099Int
      */
     officeCode?: string | null;
     /**
-     * 
-     * @type {Array<ValidationError>}
+     * Province or region for non-US/CA addresses.
+     * @type {string}
      * @memberof Form1099Int
      */
-    validationErrors?: Array<ValidationError> | null;
+    nonUsProvince?: string | null;
     /**
-     * 
+     * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
+     * @type {string}
+     * @memberof Form1099Int
+     */
+    countryCode: string | null;
+    /**
+     * Date when federal e-filing should be scheduled for this form
      * @type {Date}
      * @memberof Form1099Int
      */
-    createdAt?: Date;
+    federalEfileDate?: Date | null;
     /**
-     * 
+     * Boolean indicating that postal mailing to the recipient should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1099Int
+     */
+    postalMail?: boolean | null;
+    /**
+     * Date when state e-filing should be scheduled for this form
      * @type {Date}
      * @memberof Form1099Int
      */
-    updatedAt?: Date;
+    stateEfileDate?: Date | null;
     /**
-     * 
+     * Date when recipient e-delivery should be scheduled for this form
+     * @type {Date}
+     * @memberof Form1099Int
+     */
+    recipientEdeliveryDate?: Date | null;
+    /**
+     * Boolean indicating that TIN Matching should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1099Int
+     */
+    tinMatch?: boolean | null;
+    /**
+     * No TIN indicator
+     * @type {boolean}
+     * @memberof Form1099Int
+     */
+    noTin?: boolean | null;
+    /**
+     * Boolean indicating that address verification should be scheduled for this form
+     * @type {boolean}
+     * @memberof Form1099Int
+     */
+    addressVerification?: boolean | null;
+    /**
+     * State and local withholding information
      * @type {StateAndLocalWithholding}
      * @memberof Form1099Int
      */
     stateAndLocalWithholding?: StateAndLocalWithholding | null;
+    /**
+     * Second TIN notice
+     * @type {boolean}
+     * @memberof Form1099Int
+     */
+    secondTinNotice?: boolean;
+    /**
+     * Federal e-file status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099Int
+     */
+    readonly federalEfileStatus?: Form1099StatusDetail | null;
+    /**
+     * State e-file status
+     * @type {Array<StateEfileStatusDetail>}
+     * @memberof Form1099Int
+     */
+    readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
+    /**
+     * Postal mail to recipient status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099Int
+     */
+    readonly postalMailStatus?: Form1099StatusDetail | null;
+    /**
+     * TIN Match status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099Int
+     */
+    readonly tinMatchStatus?: Form1099StatusDetail | null;
+    /**
+     * Address verification status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099Int
+     */
+    readonly addressVerificationStatus?: Form1099StatusDetail | null;
+    /**
+     * EDelivery status
+     * @type {Form1099StatusDetail}
+     * @memberof Form1099Int
+     */
+    readonly eDeliveryStatus?: Form1099StatusDetail | null;
+    /**
+     * Validation errors
+     * @type {Array<ValidationError>}
+     * @memberof Form1099Int
+     */
+    readonly validationErrors?: Array<ValidationError> | null;
+    /**
+     * Date time when the record was created.
+     * @type {Date}
+     * @memberof Form1099Int
+     */
+    readonly createdAt?: Date;
+    /**
+     * Date time when the record was last updated.
+     * @type {Date}
+     * @memberof Form1099Int
+     */
+    readonly updatedAt?: Date;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum Form1099IntTypeEnum {
+    _1099Nec = '1099-NEC',
+    _1099Misc = '1099-MISC',
+    _1099Div = '1099-DIV',
+    _1099R = '1099-R',
+    _1099K = '1099-K',
+    _1095B = '1095-B',
+    _1042S = '1042-S',
+    _1095C = '1095-C',
+    _1099Int = '1099-INT'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1099IntTinTypeEnum {
+    Empty = 'Empty',
+    Ein = 'EIN',
+    Ssn = 'SSN',
+    Itin = 'ITIN',
+    Atin = 'ATIN'
+}
 
 /**
  * Check if a given object implements the Form1099Int interface.
  */
 export function instanceOfForm1099Int(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "type" in value;
+    isInstance = isInstance && "recipientName" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "countryCode" in value;
 
     return isInstance;
 }
@@ -399,45 +434,46 @@ export function Form1099IntFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'bondPremiumOnTreasuryObligations': !exists(json, 'bondPremiumOnTreasuryObligations') ? undefined : json['bondPremiumOnTreasuryObligations'],
         'bondPremiumOnTaxExemptBond': !exists(json, 'bondPremiumOnTaxExemptBond') ? undefined : json['bondPremiumOnTaxExemptBond'],
         'taxExemptBondCusipNumber': !exists(json, 'taxExemptBondCusipNumber') ? undefined : json['taxExemptBondCusipNumber'],
+        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
+        'type': json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
         'issuerReferenceId': !exists(json, 'issuerReferenceId') ? undefined : json['issuerReferenceId'],
         'issuerTin': !exists(json, 'issuerTin') ? undefined : json['issuerTin'],
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
-        'federalEfile': !exists(json, 'federalEfile') ? undefined : json['federalEfile'],
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
-        'stateEfile': !exists(json, 'stateEfile') ? undefined : json['stateEfile'],
-        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
-        'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
-        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
-        'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
-        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
-        'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
-        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
-        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
-        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
-        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
-        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
-        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
+        'recipientName': json['recipientName'],
+        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
+        'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
-        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
+        'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
+        'countryCode': json['countryCode'],
+        'federalEfileDate': !exists(json, 'federalEfileDate') ? undefined : (json['federalEfileDate'] === null ? null : new Date(json['federalEfileDate'])),
+        'postalMail': !exists(json, 'postalMail') ? undefined : json['postalMail'],
+        'stateEfileDate': !exists(json, 'stateEfileDate') ? undefined : (json['stateEfileDate'] === null ? null : new Date(json['stateEfileDate'])),
+        'recipientEdeliveryDate': !exists(json, 'recipientEdeliveryDate') ? undefined : (json['recipientEdeliveryDate'] === null ? null : new Date(json['recipientEdeliveryDate'])),
+        'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
+        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
+        'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
+        'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
+        'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
+        'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
+        'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
-        'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
     };
 }
 
@@ -464,44 +500,35 @@ export function Form1099IntToJSON(value?: Form1099Int | null): any {
         'bondPremiumOnTreasuryObligations': value.bondPremiumOnTreasuryObligations,
         'bondPremiumOnTaxExemptBond': value.bondPremiumOnTaxExemptBond,
         'taxExemptBondCusipNumber': value.taxExemptBondCusipNumber,
-        'id': value.id,
+        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'type': value.type,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
         'issuerTin': value.issuerTin,
         'taxYear': value.taxYear,
-        'federalEfile': value.federalEfile,
-        'federalEfileStatus': Form1099StatusDetailToJSON(value.federalEfileStatus),
-        'stateEfile': value.stateEfile,
-        'stateEfileStatus': value.stateEfileStatus === undefined ? undefined : (value.stateEfileStatus === null ? null : (value.stateEfileStatus as Array<any>)?.map(StateEfileStatusDetailToJSON)),
-        'postalMail': value.postalMail,
-        'postalMailStatus': Form1099StatusDetailToJSON(value.postalMailStatus),
-        'tinMatch': value.tinMatch,
-        'tinMatchStatus': Form1099StatusDetailToJSON(value.tinMatchStatus),
-        'addressVerification': value.addressVerification,
-        'addressVerificationStatus': Form1099StatusDetailToJSON(value.addressVerificationStatus),
-        'eDeliveryStatus': Form1099StatusDetailToJSON(value.eDeliveryStatus),
         'referenceId': value.referenceId,
-        'email': value.email,
-        'tinType': value.tinType,
-        'fatcaFilingRequirement': value.fatcaFilingRequirement,
         'tin': value.tin,
-        'noTin': value.noTin,
-        'secondTinNotice': value.secondTinNotice,
         'recipientName': value.recipientName,
+        'tinType': value.tinType,
         'recipientSecondName': value.recipientSecondName,
         'address': value.address,
         'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
-        'nonUsProvince': value.nonUsProvince,
-        'countryCode': value.countryCode,
+        'email': value.email,
         'accountNumber': value.accountNumber,
         'officeCode': value.officeCode,
-        'validationErrors': value.validationErrors === undefined ? undefined : (value.validationErrors === null ? null : (value.validationErrors as Array<any>)?.map(ValidationErrorToJSON)),
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
+        'nonUsProvince': value.nonUsProvince,
+        'countryCode': value.countryCode,
+        'federalEfileDate': value.federalEfileDate === undefined ? undefined : (value.federalEfileDate === null ? null : value.federalEfileDate.toISOString().substr(0,10)),
+        'postalMail': value.postalMail,
+        'stateEfileDate': value.stateEfileDate === undefined ? undefined : (value.stateEfileDate === null ? null : value.stateEfileDate.toISOString().substr(0,10)),
+        'recipientEdeliveryDate': value.recipientEdeliveryDate === undefined ? undefined : (value.recipientEdeliveryDate === null ? null : value.recipientEdeliveryDate.toISOString().substr(0,10)),
+        'tinMatch': value.tinMatch,
+        'noTin': value.noTin,
+        'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
+        'secondTinNotice': value.secondTinNotice,
     };
 }

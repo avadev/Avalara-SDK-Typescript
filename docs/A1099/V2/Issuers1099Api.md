@@ -1,19 +1,19 @@
 # AvalaraSdk.A1099.V2.Issuers1099Api
 
-All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/avalara1099*
+All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createIssuer**](Issuers1099Api.md#createissuer) | **POST** /1099/issuers | Create an issuer
+[**createIssuer**](Issuers1099Api.md#createissueroperation) | **POST** /1099/issuers | Create an issuer
 [**deleteIssuer**](Issuers1099Api.md#deleteissuer) | **DELETE** /1099/issuers/{id} | Delete an issuer
 [**getIssuer**](Issuers1099Api.md#getissuer) | **GET** /1099/issuers/{id} | Retrieve an issuer
 [**getIssuers**](Issuers1099Api.md#getissuers) | **GET** /1099/issuers | List issuers
 [**updateIssuer**](Issuers1099Api.md#updateissuer) | **PUT** /1099/issuers/{id} | Update an issuer
 
 
-<a name="createissuer"></a>
+<a name="createissueroperation"></a>
 # **createIssuer**
-> IssuerResponse createIssuer (string avalaraVersion, string xCorrelationId, string xAvalaraClient, IssuerCommand issuerCommand)
+> IssuerResponse createIssuer (string avalaraVersion, string xCorrelationId, string xAvalaraClient, CreateIssuerRequest createIssuerRequest)
 
 Create an issuer
 
@@ -45,7 +45,7 @@ Name | Type | Description  | Notes
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
- **issuerCommand** | [**IssuerCommand**](IssuerCommand.md)| The issuer to create | [optional] 
+ **createIssuerRequest** | [**CreateIssuerRequest**](CreateIssuerRequest.md)| The issuer to create | [optional] 
 
 ### Return type
 
@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 
 <a name="updateissuer"></a>
 # **updateIssuer**
-> void updateIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, IssuerCommand issuerCommand)
+> void updateIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, CreateIssuerRequest createIssuerRequest)
 
 Update an issuer
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
- **issuerCommand** | [**IssuerCommand**](IssuerCommand.md)| The issuer to update | [optional] 
+ **createIssuerRequest** | [**CreateIssuerRequest**](CreateIssuerRequest.md)| The issuer to update | [optional] 
 
 ### Return type
 

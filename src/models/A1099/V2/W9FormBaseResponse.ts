@@ -14,6 +14,13 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    EntryStatusResponse,
+    EntryStatusResponseFromJSON,
+    EntryStatusResponseFromJSONTyped,
+    EntryStatusResponseToJSON,
+} from './EntryStatusResponse';
+
+import {
      W4FormResponseFromJSONTyped,
      W8BenEFormResponseFromJSONTyped,
      W8BenFormResponseFromJSONTyped,
@@ -34,17 +41,11 @@ export interface W9FormBaseResponse {
      */
     id?: string;
     /**
-     * The form status.
-     * @type {string}
+     * The entry status information for the form.
+     * @type {EntryStatusResponse}
      * @memberof W9FormBaseResponse
      */
-    entryStatus?: string;
-    /**
-     * The timestamp for the latest status update.
-     * @type {Date}
-     * @memberof W9FormBaseResponse
-     */
-    entryStatusDate?: Date | null;
+    entryStatus?: EntryStatusResponse;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -75,6 +76,12 @@ export interface W9FormBaseResponse {
      * @memberof W9FormBaseResponse
      */
     archived?: boolean;
+    /**
+     * Form ID of previous version.
+     * @type {string}
+     * @memberof W9FormBaseResponse
+     */
+    ancestorId?: string | null;
     /**
      * The signature of the form.
      * @type {string}
@@ -152,13 +159,13 @@ export function W9FormBaseResponseFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'entryStatus': !exists(json, 'entryStatus') ? undefined : json['entryStatus'],
-        'entryStatusDate': !exists(json, 'entryStatusDate') ? undefined : (json['entryStatusDate'] === null ? null : new Date(json['entryStatusDate'])),
+        'entryStatus': !exists(json, 'entryStatus') ? undefined : EntryStatusResponseFromJSON(json['entryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'displayName': !exists(json, 'displayName') ? undefined : json['displayName'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'archived': !exists(json, 'archived') ? undefined : json['archived'],
+        'ancestorId': !exists(json, 'ancestorId') ? undefined : json['ancestorId'],
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
         'signedDate': !exists(json, 'signedDate') ? undefined : (json['signedDate'] === null ? null : new Date(json['signedDate'])),
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
@@ -178,13 +185,13 @@ export function W9FormBaseResponseToJSON(value?: W9FormBaseResponse | null): any
     return {
         
         'id': value.id,
-        'entryStatus': value.entryStatus,
-        'entryStatusDate': value.entryStatusDate === undefined ? undefined : (value.entryStatusDate === null ? null : value.entryStatusDate.toISOString()),
+        'entryStatus': EntryStatusResponseToJSON(value.entryStatus),
         'referenceId': value.referenceId,
         'companyId': value.companyId,
         'displayName': value.displayName,
         'email': value.email,
         'archived': value.archived,
+        'ancestorId': value.ancestorId,
         'signature': value.signature,
         'signedDate': value.signedDate === undefined ? undefined : (value.signedDate === null ? null : value.signedDate.toISOString()),
         'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),

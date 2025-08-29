@@ -170,11 +170,23 @@ export interface W8BenFormRequest {
      */
     signerName?: string | null;
     /**
+     * The date when e-delivery was consented.
+     * @type {Date}
+     * @memberof W8BenFormRequest
+     */
+    eDeliveryConsentedAt?: Date | null;
+    /**
+     * The signature of the form.
+     * @type {string}
+     * @memberof W8BenFormRequest
+     */
+    signature?: string | null;
+    /**
      * The ID of the associated company.
      * @type {string}
      * @memberof W8BenFormRequest
      */
-    companyId?: string;
+    companyId: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -187,18 +199,6 @@ export interface W8BenFormRequest {
      * @memberof W8BenFormRequest
      */
     email?: string | null;
-    /**
-     * The date when e-delivery was consented.
-     * @type {Date}
-     * @memberof W8BenFormRequest
-     */
-    eDeliveryConsentedAt?: Date | null;
-    /**
-     * The signature of the form.
-     * @type {string}
-     * @memberof W8BenFormRequest
-     */
-    signature?: string | null;
 }
 
 /**
@@ -218,6 +218,7 @@ export enum W8BenFormRequestTypeEnum {
  */
 export function instanceOfW8BenFormRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "companyId" in value;
 
     return isInstance;
 }
@@ -257,11 +258,11 @@ export function W8BenFormRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'withholdingRate': !exists(json, 'withholdingRate') ? undefined : json['withholdingRate'],
         'incomeType': !exists(json, 'incomeType') ? undefined : json['incomeType'],
         'signerName': !exists(json, 'signerName') ? undefined : json['signerName'],
-        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
+        'companyId': json['companyId'],
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
     };
 }
 
@@ -298,10 +299,10 @@ export function W8BenFormRequestToJSON(value?: W8BenFormRequest | null): any {
         'withholdingRate': value.withholdingRate,
         'incomeType': value.incomeType,
         'signerName': value.signerName,
+        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
+        'signature': value.signature,
         'companyId': value.companyId,
         'referenceId': value.referenceId,
         'email': value.email,
-        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
-        'signature': value.signature,
     };
 }

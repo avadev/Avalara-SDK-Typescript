@@ -140,11 +140,23 @@ export interface W4FormRequest {
      */
     officeCode?: string | null;
     /**
+     * The date when e-delivery was consented.
+     * @type {Date}
+     * @memberof W4FormRequest
+     */
+    eDeliveryConsentedAt?: Date | null;
+    /**
+     * The signature of the form.
+     * @type {string}
+     * @memberof W4FormRequest
+     */
+    signature?: string | null;
+    /**
      * The ID of the associated company.
      * @type {string}
      * @memberof W4FormRequest
      */
-    companyId?: string;
+    companyId: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -157,18 +169,6 @@ export interface W4FormRequest {
      * @memberof W4FormRequest
      */
     email?: string | null;
-    /**
-     * The date when e-delivery was consented.
-     * @type {Date}
-     * @memberof W4FormRequest
-     */
-    eDeliveryConsentedAt?: Date | null;
-    /**
-     * The signature of the form.
-     * @type {string}
-     * @memberof W4FormRequest
-     */
-    signature?: string | null;
 }
 
 /**
@@ -188,6 +188,7 @@ export enum W4FormRequestTypeEnum {
  */
 export function instanceOfW4FormRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "companyId" in value;
 
     return isInstance;
 }
@@ -222,11 +223,11 @@ export function W4FormRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
         'additionalWithheld': !exists(json, 'additionalWithheld') ? undefined : json['additionalWithheld'],
         'exemptFromWithholding': !exists(json, 'exemptFromWithholding') ? undefined : json['exemptFromWithholding'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
+        'companyId': json['companyId'],
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
     };
 }
 
@@ -258,10 +259,10 @@ export function W4FormRequestToJSON(value?: W4FormRequest | null): any {
         'additionalWithheld': value.additionalWithheld,
         'exemptFromWithholding': value.exemptFromWithholding,
         'officeCode': value.officeCode,
+        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
+        'signature': value.signature,
         'companyId': value.companyId,
         'referenceId': value.referenceId,
         'email': value.email,
-        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
-        'signature': value.signature,
     };
 }

@@ -20,6 +20,18 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface W9FormBaseRequest {
     /**
+     * The date when e-delivery was consented.
+     * @type {Date}
+     * @memberof W9FormBaseRequest
+     */
+    eDeliveryConsentedAt?: Date | null;
+    /**
+     * The signature of the form.
+     * @type {string}
+     * @memberof W9FormBaseRequest
+     */
+    signature?: string | null;
+    /**
      * The form type.
      * @type {string}
      * @memberof W9FormBaseRequest
@@ -30,7 +42,7 @@ export interface W9FormBaseRequest {
      * @type {string}
      * @memberof W9FormBaseRequest
      */
-    companyId?: string;
+    companyId: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -43,18 +55,6 @@ export interface W9FormBaseRequest {
      * @memberof W9FormBaseRequest
      */
     email?: string | null;
-    /**
-     * The date when e-delivery was consented.
-     * @type {Date}
-     * @memberof W9FormBaseRequest
-     */
-    eDeliveryConsentedAt?: Date | null;
-    /**
-     * The signature of the form.
-     * @type {string}
-     * @memberof W9FormBaseRequest
-     */
-    signature?: string | null;
 }
 
 /**
@@ -74,6 +74,7 @@ export enum W9FormBaseRequestTypeEnum {
  */
 export function instanceOfW9FormBaseRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "companyId" in value;
 
     return isInstance;
 }
@@ -88,12 +89,12 @@ export function W9FormBaseRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'type': !exists(json, 'type') ? undefined : json['type'],
-        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
+        'type': !exists(json, 'type') ? undefined : json['type'],
+        'companyId': json['companyId'],
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
     };
 }
 
@@ -106,10 +107,10 @@ export function W9FormBaseRequestToJSON(value?: W9FormBaseRequest | null): any {
     }
     return {
         
+        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
+        'signature': value.signature,
         'companyId': value.companyId,
         'referenceId': value.referenceId,
         'email': value.email,
-        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
-        'signature': value.signature,
     };
 }

@@ -636,11 +636,23 @@ export interface W8BenEFormRequest {
      */
     capacityToSignCertification?: boolean | null;
     /**
+     * The date when e-delivery was consented.
+     * @type {Date}
+     * @memberof W8BenEFormRequest
+     */
+    eDeliveryConsentedAt?: Date | null;
+    /**
+     * The signature of the form.
+     * @type {string}
+     * @memberof W8BenEFormRequest
+     */
+    signature?: string | null;
+    /**
      * The ID of the associated company.
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    companyId?: string;
+    companyId: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -653,18 +665,6 @@ export interface W8BenEFormRequest {
      * @memberof W8BenEFormRequest
      */
     email?: string | null;
-    /**
-     * The date when e-delivery was consented.
-     * @type {Date}
-     * @memberof W8BenEFormRequest
-     */
-    eDeliveryConsentedAt?: Date | null;
-    /**
-     * The signature of the form.
-     * @type {string}
-     * @memberof W8BenEFormRequest
-     */
-    signature?: string | null;
 }
 
 /**
@@ -684,6 +684,7 @@ export enum W8BenEFormRequestTypeEnum {
  */
 export function instanceOfW8BenEFormRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "companyId" in value;
 
     return isInstance;
 }
@@ -794,11 +795,11 @@ export function W8BenEFormRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         'substantialUsOwners': !exists(json, 'substantialUsOwners') ? undefined : ((json['substantialUsOwners'] as Array<any>)?.map(SubstantialUsOwnerRequestFromJSON)),
         'signerName': !exists(json, 'signerName') ? undefined : json['signerName'],
         'capacityToSignCertification': !exists(json, 'capacityToSignCertification') ? undefined : json['capacityToSignCertification'],
-        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
-        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
+        'companyId': json['companyId'],
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
     };
 }
 
@@ -906,10 +907,10 @@ export function W8BenEFormRequestToJSON(value?: W8BenEFormRequest | null): any {
         'substantialUsOwners': value.substantialUsOwners === undefined ? undefined : ((value.substantialUsOwners as Array<any>)?.map(SubstantialUsOwnerRequestToJSON)),
         'signerName': value.signerName,
         'capacityToSignCertification': value.capacityToSignCertification,
+        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
+        'signature': value.signature,
         'companyId': value.companyId,
         'referenceId': value.referenceId,
         'email': value.email,
-        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
-        'signature': value.signature,
     };
 }
