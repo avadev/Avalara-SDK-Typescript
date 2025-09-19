@@ -44,11 +44,11 @@ export interface W9FormMinimalRequest {
      */
     accountNumber?: string | null;
     /**
-     * The ID of the associated company.
+     * The ID of the associated company. Required when creating a form.
      * @type {string}
      * @memberof W9FormMinimalRequest
      */
-    companyId: string;
+    companyId?: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -76,7 +76,6 @@ export function instanceOfW9FormMinimalRequest(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "email" in value;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "companyId" in value;
 
     return isInstance;
 }
@@ -95,7 +94,7 @@ export function W9FormMinimalRequestFromJSONTyped(json: any, ignoreDiscriminator
         'email': json['email'],
         'name': json['name'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
-        'companyId': json['companyId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
     };
 }

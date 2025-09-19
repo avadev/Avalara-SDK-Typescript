@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **string** | The form type (always \&quot;W8Imy\&quot; for this model). | [optional] [readonly] [default to undefined]
 **name** | **string** | The name of the individual or entity associated with the form. | [optional] [default to undefined]
 **citizenshipCountry** | **string** | The country of citizenship. | [optional] [default to undefined]
 **disregardedEntity** | **string** | The name of the disregarded entity receiving the payment (if applicable). | [optional] [default to undefined]
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 **mailingState** | **string** | The state of the mailing address. | [optional] [default to undefined]
 **mailingZip** | **string** | The ZIP code of the mailing address. | [optional] [default to undefined]
 **mailingCountry** | **string** | The country of the mailing address. | [optional] [default to undefined]
-**tinType** | **string** | The type of TIN provided. | [optional] [default to undefined]
+**tinType** | **string** | Tax Identification Number (TIN) type. | [optional] [default to undefined]
 **tin** | **string** | The taxpayer identification number (TIN). | [optional] [default to undefined]
 **giin** | **string** | The global intermediary identification number (GIIN). | [optional] [default to undefined]
 **foreignTin** | **string** | The foreign taxpayer identification number (TIN). | [optional] [default to undefined]
@@ -115,6 +116,19 @@ Name | Type | Description | Notes
 **sponsoredDirectReportingNffeCertification** | **boolean** | Certifies that the entity is a sponsored direct reporting NFFE. | [optional] [default to undefined]
 **directReportingNffeSponsoringEntity** | **string** | The name of the entity that sponsors the direct reporting NFFE. | [optional] [default to undefined]
 **signerName** | **string** | The name of the signer. | [optional] [default to undefined]
+**id** | **string** | The unique identifier for the form. | [optional] [default to undefined]
+**entryStatus** | [**EntryStatusResponse**](EntryStatusResponse.md) | The entry status information for the form. | [optional] [default to undefined]
+**referenceId** | **string** | A reference identifier for the form. | [optional] [default to undefined]
+**companyId** | **string** | The ID of the associated company. | [optional] [default to undefined]
+**displayName** | **string** | The display name associated with the form. | [optional] [default to undefined]
+**email** | **string** | The email address of the individual associated with the form. | [optional] [default to undefined]
+**archived** | **boolean** | Indicates whether the form is archived. | [optional] [default to undefined]
+**ancestorId** | **string** | Form ID of previous version. | [optional] [default to undefined]
+**signature** | **string** | The signature of the form. | [optional] [default to undefined]
+**signedDate** | **Date** | The date the form was signed. | [optional] [default to undefined]
+**eDeliveryConsentedAt** | **Date** | The date when e-delivery was consented. | [optional] [default to undefined]
+**createdAt** | **Date** | The creation date of the form. | [optional] [default to undefined]
+**updatedAt** | **Date** | The last updated date of the form. | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

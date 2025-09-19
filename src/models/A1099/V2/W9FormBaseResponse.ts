@@ -20,20 +20,18 @@ import {
     EntryStatusResponseToJSON,
 } from './EntryStatusResponse';
 
-import {
-     W4FormResponseFromJSONTyped,
-     W8BenEFormResponseFromJSONTyped,
-     W8BenFormResponseFromJSONTyped,
-     W8ImyFormResponseFromJSONTyped,
-     W9FormResponseFromJSONTyped
-} from './';
-
 /**
  * 
  * @export
  * @interface W9FormBaseResponse
  */
 export interface W9FormBaseResponse {
+    /**
+     * The form type.
+     * @type {string}
+     * @memberof W9FormBaseResponse
+     */
+    readonly type?: W9FormBaseResponseTypeEnum;
     /**
      * The unique identifier for the form.
      * @type {string}
@@ -112,15 +110,19 @@ export interface W9FormBaseResponse {
      * @memberof W9FormBaseResponse
      */
     updatedAt?: Date;
-    /**
-     * The type of the response object.
-     * @type {string}
-     * @memberof W9FormBaseResponse
-     */
-    type?: string;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum W9FormBaseResponseTypeEnum {
+    W4 = 'W4',
+    W8Ben = 'W8Ben',
+    W8BenE = 'W8BenE',
+    W8Imy = 'W8Imy',
+    W9 = 'W9'
+}
 
 /**
  * Check if a given object implements the W9FormBaseResponse interface.
@@ -139,25 +141,9 @@ export function W9FormBaseResponseFromJSONTyped(json: any, ignoreDiscriminator: 
     if ((json === undefined) || (json === null)) {
         return json;
     }
-    if (!ignoreDiscriminator) {
-        if (json['type'] === 'W4FormResponse') {
-            return W4FormResponseFromJSONTyped(json, true);
-        }
-        if (json['type'] === 'W8BenEFormResponse') {
-            return W8BenEFormResponseFromJSONTyped(json, true);
-        }
-        if (json['type'] === 'W8BenFormResponse') {
-            return W8BenFormResponseFromJSONTyped(json, true);
-        }
-        if (json['type'] === 'W8ImyFormResponse') {
-            return W8ImyFormResponseFromJSONTyped(json, true);
-        }
-        if (json['type'] === 'W9FormResponse') {
-            return W9FormResponseFromJSONTyped(json, true);
-        }
-    }
     return {
         
+        'type': !exists(json, 'type') ? undefined : json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
         'entryStatus': !exists(json, 'entryStatus') ? undefined : EntryStatusResponseFromJSON(json['entryStatus']),
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
@@ -171,7 +157,6 @@ export function W9FormBaseResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
-        'type': !exists(json, 'type') ? undefined : json['type'],
     };
 }
 
@@ -197,6 +182,5 @@ export function W9FormBaseResponseToJSON(value?: W9FormBaseResponse | null): any
         'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
-        'type': value.type,
     };
 }

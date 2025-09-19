@@ -40,6 +40,11 @@ import {
 
 /**
  * Form 1099-R: Distributions From Pensions, Annuities, Retirement or Profit-Sharing Plans, IRAs, Insurance Contracts, etc.
+ *             
+ * *At least one of the following amounts must be provided:* 
+ * Gross distribution, Taxable amount, Capital gain, Employee contributions/Designated Roth contributions or insurance premiums,
+ * Net unrealized appreciation in employer's securities, Other amount, Total employee contributions,
+ * Traditional IRA/SEP/SIMPLE or Roth conversion amount, or Amount allocable to IRR within 5 years
  * @export
  * @interface Form1099R
  */
@@ -93,17 +98,84 @@ export interface Form1099R {
      */
     netUnrealizedAppreciationInEmployerSecurities?: number | null;
     /**
-     * Distribution code
+     * Distribution code.
+     * 
+     * Available values:
+     * - 1: Early distribution, no known exception (in most cases, under age 59½)
+     * - 2: Early distribution, exception applies (under age 59½)
+     * - 3: Disability
+     * - 4: Death
+     * - 5: Prohibited transaction
+     * - 6: Section 1035 exchange (a tax-free exchange of life insurance, annuity, qualified long-term care insurance, or endowment contracts)
+     * - 7: Normal distribution
+     * - 8: Excess contributions plus earnings/excess deferrals (and/or earnings) taxable in payment year
+     * - 9: Cost of current life insurance protection (premiums paid by a trustee or custodian for current insurance protection)
+     * - A: May be eligible for 10-year tax option
+     * - B: Designated Roth account distribution
+     * - C: Reportable Death Benefits Under Section 6050Y(c)
+     * - D: Annuity payments from nonqualified annuity payments and distributions from life insurance contracts that may be subject to tax under section 1411
+     * - E: Distribution under Employee Plans Compliance Resolution System (EPCRS)
+     * - F: Charitable gift annuity
+     * - G: Direct rollover and rollover contribution
+     * - H: Direct rollover of distribution from a designated Roth account to a Roth IRA
+     * - J: Early distribution from a Roth IRA (This code may be used with a Code 8 or P)
+     * - K: Distribution of IRA Assets Not Having A Readily Available FMV
+     * - L: Loans treated as deemed distributions under section 72(p)
+     * - M: Qualified Plan Loan Offsets
+     * - N: Recharacterized IRA contribution made for year following payment year
+     * - P: Excess contributions plus earnings/excess deferrals taxable for year prior to payment year
+     * - Q: Qualified distribution from a Roth IRA (Distribution from a Roth IRA when the 5-year holding period has been met, and the recipient has reached 59½, has died, or is disabled)
+     * - R: Recharacterized IRA contribution made for year prior to payment year
+     * - S: Early distribution from a SIMPLE IRA in first 2 years no known exceptions
+     * - T: Roth IRA distribution exception applies because participant has reached 59½, died or is disabled, but it is unknown if the 5-year period has been met
+     * - U: Distribution from ESOP under Section 404(k)
+     * - W: Charges or payments for purchasing qualified long-term care insurance contracts under combined arrangements
      * @type {string}
      * @memberof Form1099R
      */
-    distributionCode?: string | null;
+    distributionCode: Form1099RDistributionCodeEnum;
     /**
-     * Second distribution code
+     * Second distribution code. Must be a valid combination with the first distribution code.
+     * See DistributionCode property documentation for code descriptions.
+     * 
+     * Valid combinations based on first distribution code:
+     * - 1: _, 8, B, D, K, L, M, P
+     * - 2: _, 8, B, D, K, L, M, P
+     * - 3: _, D
+     * - 4: _, 8, A, B, D, G, H, K, L, M, P
+     * - 5: _
+     * - 6: _, W
+     * - 7: _, A, B, D, K, L, M
+     * - 8: _, 1, 2, 4, B, J, K
+     * - 9: _
+     * - A: 4, 7
+     * - B: _, 1, 2, 4, 7, 8, G, L, M, P, U
+     * - C: _, D
+     * - D: 1, 2, 3, 4, 7, C
+     * - E: _
+     * - F: _
+     * - G: _, 4, B, K
+     * - H: _, 4
+     * - J: _, 8, P
+     * - K: 1, 2, 4, 7, 8, G
+     * - L: _, 1, 2, 4, 7, B
+     * - M: _, 1, 2, 4, 7, B
+     * - N: _
+     * - P: _, 1, 2, 4, B, J
+     * - Q: _
+     * - R: _
+     * - S: _
+     * - T: _
+     * - U: _, B
+     * - W: _, 6
+     *             
+     * (_ indicates no second distribution code)
+     * 
+     * (format: firstDistributionCode: availableSecondDistributionCodes)
      * @type {string}
      * @memberof Form1099R
      */
-    secondDistributionCode?: string | null;
+    secondDistributionCode?: Form1099RSecondDistributionCodeEnum;
     /**
      * IRA/SEP/SIMPLE
      * @type {boolean}
@@ -159,13 +231,13 @@ export interface Form1099R {
      */
     dateOfPayment?: Date | null;
     /**
-     * FATCA filing requirement
+     * FATCA filing requirement.
      * @type {boolean}
      * @memberof Form1099R
      */
     fatcaFilingRequirement?: boolean | null;
     /**
-     * Form type
+     * Form type.
      * @type {string}
      * @memberof Form1099R
      */
@@ -183,7 +255,7 @@ export interface Form1099R {
      */
     issuerId?: string | null;
     /**
-     * Issuer Reference ID - only required when creating forms
+     * Issuer Reference ID - only required when creating forms via $bulk-upsert
      * @type {string}
      * @memberof Form1099R
      */
@@ -195,7 +267,7 @@ export interface Form1099R {
      */
     issuerTin?: string | null;
     /**
-     * Tax Year - only required when creating forms
+     * Tax Year - only required when creating forms via $bulk-upsert
      * @type {number}
      * @memberof Form1099R
      */
@@ -219,7 +291,13 @@ export interface Form1099R {
      */
     recipientName: string | null;
     /**
-     * Type of TIN (Tax ID Number)
+     * Tax Identification Number (TIN) type.
+     * 
+     * Available values:
+     * - EIN: Employer Identification Number
+     * - SSN: Social Security Number
+     * - ITIN: Individual Taxpayer Identification Number
+     * - ATIN: Adoption Taxpayer Identification Number
      * @type {string}
      * @memberof Form1099R
      */
@@ -291,7 +369,7 @@ export interface Form1099R {
      */
     countryCode: string | null;
     /**
-     * Date when federal e-filing should be scheduled for this form
+     * Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099R
      */
@@ -303,13 +381,13 @@ export interface Form1099R {
      */
     postalMail?: boolean | null;
     /**
-     * Date when state e-filing should be scheduled for this form
+     * Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099R
      */
     stateEfileDate?: Date | null;
     /**
-     * Date when recipient e-delivery should be scheduled for this form
+     * Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099R
      */
@@ -343,39 +421,93 @@ export interface Form1099R {
      * @type {boolean}
      * @memberof Form1099R
      */
-    secondTinNotice?: boolean;
+    secondTinNotice?: boolean | null;
     /**
-     * Federal e-file status
+     * Federal e-file status.
+     * Available values:
+     * - unscheduled: Form has not been scheduled for federal e-filing
+     * - scheduled: Form is scheduled for federal e-filing
+     * - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)
+     * - sent: Form has been sent to the IRS
+     * - accepted: Form was accepted by the IRS
+     * - corrected_scheduled: Correction is scheduled to be sent
+     * - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)
+     * - corrected: A correction has been sent to the IRS
+     * - corrected_accepted: Correction was accepted by the IRS
+     * - rejected: Form was rejected by the IRS
+     * - corrected_rejected: Correction was rejected by the IRS
+     * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
      * @type {Form1099StatusDetail}
      * @memberof Form1099R
      */
     readonly federalEfileStatus?: Form1099StatusDetail | null;
     /**
-     * State e-file status
+     * State e-file status.
+     * Available values:
+     * - unscheduled: Form has not been scheduled for state e-filing
+     * - scheduled: Form is scheduled for state e-filing
+     * - airlocked: Form is in process of being uploaded to the state
+     * - sent: Form has been sent to the state
+     * - rejected: Form was rejected by the state
+     * - accepted: Form was accepted by the state
+     * - corrected_scheduled: Correction is scheduled to be sent
+     * - corrected_airlocked: Correction is in process of being uploaded to the state
+     * - corrected_sent: Correction has been sent to the state
+     * - corrected_rejected: Correction was rejected by the state
+     * - corrected_accepted: Correction was accepted by the state
      * @type {Array<StateEfileStatusDetail>}
      * @memberof Form1099R
      */
     readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
     /**
-     * Postal mail to recipient status
+     * Postal mail to recipient status.
+     * Available values:
+     * - unscheduled: Postal mail has not been scheduled
+     * - pending: Postal mail is pending to be sent
+     * - sent: Postal mail has been sent
+     * - delivered: Postal mail has been delivered
      * @type {Form1099StatusDetail}
      * @memberof Form1099R
      */
     readonly postalMailStatus?: Form1099StatusDetail | null;
     /**
-     * TIN Match status
+     * TIN Match status.
+     * Available values:
+     * - none: TIN matching has not been performed
+     * - pending: TIN matching request is pending
+     * - matched: Name/TIN combination matches IRS records
+     * - unknown: TIN is missing, invalid, or request contains errors
+     * - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
      * @type {Form1099StatusDetail}
      * @memberof Form1099R
      */
     readonly tinMatchStatus?: Form1099StatusDetail | null;
     /**
-     * Address verification status
+     * Address verification status.
+     * Available values:
+     * - unknown: Address verification has not been checked
+     * - pending: Address verification is in progress
+     * - failed: Address verification failed
+     * - incomplete: Address verification is incomplete
+     * - unchanged: User declined address changes
+     * - verified: Address has been verified and accepted
      * @type {Form1099StatusDetail}
      * @memberof Form1099R
      */
     readonly addressVerificationStatus?: Form1099StatusDetail | null;
     /**
-     * EDelivery status
+     * EDelivery status.
+     * Available values:
+     * - unscheduled: E-delivery has not been scheduled
+     * - scheduled: E-delivery is scheduled to be sent
+     * - sent: E-delivery has been sent to recipient
+     * - bounced: E-delivery bounced back (invalid email)
+     * - refused: E-delivery was refused by recipient
+     * - bad_verify: E-delivery failed verification
+     * - accepted: E-delivery was accepted by recipient
+     * - bad_verify_limit: E-delivery failed verification limit reached
+     * - second_delivery: Second e-delivery attempt
+     * - undelivered: E-delivery is undelivered (temporary state allowing resend)
      * @type {Form1099StatusDetail}
      * @memberof Form1099R
      */
@@ -404,22 +536,89 @@ export interface Form1099R {
 * @export
 * @enum {string}
 */
+export enum Form1099RDistributionCodeEnum {
+    _1 = '1',
+    _2 = '2',
+    _3 = '3',
+    _4 = '4',
+    _5 = '5',
+    _6 = '6',
+    _7 = '7',
+    _8 = '8',
+    _9 = '9',
+    A = 'A',
+    B = 'B',
+    C = 'C',
+    D = 'D',
+    E = 'E',
+    F = 'F',
+    G = 'G',
+    H = 'H',
+    J = 'J',
+    K = 'K',
+    L = 'L',
+    M = 'M',
+    N = 'N',
+    P = 'P',
+    Q = 'Q',
+    R = 'R',
+    S = 'S',
+    T = 'T',
+    U = 'U',
+    W = 'W'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1099RSecondDistributionCodeEnum {
+    _1 = '1',
+    _2 = '2',
+    _3 = '3',
+    _4 = '4',
+    _5 = '5',
+    _6 = '6',
+    _7 = '7',
+    _8 = '8',
+    _9 = '9',
+    A = 'A',
+    B = 'B',
+    C = 'C',
+    D = 'D',
+    E = 'E',
+    F = 'F',
+    G = 'G',
+    H = 'H',
+    J = 'J',
+    K = 'K',
+    L = 'L',
+    M = 'M',
+    N = 'N',
+    P = 'P',
+    Q = 'Q',
+    R = 'R',
+    S = 'S',
+    T = 'T',
+    U = 'U',
+    W = 'W'
+}/**
+* @export
+* @enum {string}
+*/
 export enum Form1099RTypeEnum {
-    _1099Nec = '1099-NEC',
-    _1099Misc = '1099-MISC',
-    _1099Div = '1099-DIV',
-    _1099R = '1099-R',
-    _1099K = '1099-K',
-    _1095B = '1095-B',
-    _1042S = '1042-S',
-    _1095C = '1095-C',
-    _1099Int = '1099-INT'
+    Form1099Nec = 'Form1099Nec',
+    Form1099Misc = 'Form1099Misc',
+    Form1099Div = 'Form1099Div',
+    Form1099R = 'Form1099R',
+    Form1099K = 'Form1099K',
+    Form1095B = 'Form1095B',
+    Form1042S = 'Form1042S',
+    Form1095C = 'Form1095C',
+    Form1099Int = 'Form1099Int'
 }/**
 * @export
 * @enum {string}
 */
 export enum Form1099RTinTypeEnum {
-    Empty = 'Empty',
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',
@@ -431,6 +630,7 @@ export enum Form1099RTinTypeEnum {
  */
 export function instanceOfForm1099R(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "distributionCode" in value;
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "recipientName" in value;
     isInstance = isInstance && "address" in value;
@@ -458,7 +658,7 @@ export function Form1099RFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
         'employeeContributionsOrDesignatedRothOrInsurancePremiums': !exists(json, 'employeeContributionsOrDesignatedRothOrInsurancePremiums') ? undefined : json['employeeContributionsOrDesignatedRothOrInsurancePremiums'],
         'netUnrealizedAppreciationInEmployerSecurities': !exists(json, 'netUnrealizedAppreciationInEmployerSecurities') ? undefined : json['netUnrealizedAppreciationInEmployerSecurities'],
-        'distributionCode': !exists(json, 'distributionCode') ? undefined : json['distributionCode'],
+        'distributionCode': json['distributionCode'],
         'secondDistributionCode': !exists(json, 'secondDistributionCode') ? undefined : json['secondDistributionCode'],
         'iraSepSimple': !exists(json, 'iraSepSimple') ? undefined : json['iraSepSimple'],
         'traditionalIraSepSimpleOrRothConversionAmount': !exists(json, 'traditionalIraSepSimpleOrRothConversionAmount') ? undefined : json['traditionalIraSepSimpleOrRothConversionAmount'],

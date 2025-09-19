@@ -166,7 +166,7 @@ Class | Method | HTTP request | Description
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CompaniesW9Api* | [**createCompany**](docs/A1099/V2/CompaniesW9Api.md#createcompanyoperation) | **POST** /w9/companies | Create a company
+*CompaniesW9Api* | [**createCompany**](docs/A1099/V2/CompaniesW9Api.md#createcompany) | **POST** /w9/companies | Create a company
 *CompaniesW9Api* | [**deleteCompany**](docs/A1099/V2/CompaniesW9Api.md#deletecompany) | **DELETE** /w9/companies/{id} | Delete a company
 *CompaniesW9Api* | [**getCompanies**](docs/A1099/V2/CompaniesW9Api.md#getcompanies) | **GET** /w9/companies | List companies
 *CompaniesW9Api* | [**getCompany**](docs/A1099/V2/CompaniesW9Api.md#getcompany) | **GET** /w9/companies/{id} | Retrieve a company
@@ -186,7 +186,7 @@ Class | Method | HTTP request | Description
 *FormsW9Api* | [**sendW9FormEmail**](docs/A1099/V2/FormsW9Api.md#sendw9formemail) | **POST** /w9/forms/{id}/$send-email | Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
 *FormsW9Api* | [**updateW9Form**](docs/A1099/V2/FormsW9Api.md#updatew9form) | **PUT** /w9/forms/{id} | Update a W9/W4/W8 form
 *FormsW9Api* | [**uploadW9Files**](docs/A1099/V2/FormsW9Api.md#uploadw9files) | **POST** /w9/forms/{id}/attachment | Replace the PDF file for a W9/W4/W8 form
-*Issuers1099Api* | [**createIssuer**](docs/A1099/V2/Issuers1099Api.md#createissueroperation) | **POST** /1099/issuers | Create an issuer
+*Issuers1099Api* | [**createIssuer**](docs/A1099/V2/Issuers1099Api.md#createissuer) | **POST** /1099/issuers | Create an issuer
 *Issuers1099Api* | [**deleteIssuer**](docs/A1099/V2/Issuers1099Api.md#deleteissuer) | **DELETE** /1099/issuers/{id} | Delete an issuer
 *Issuers1099Api* | [**getIssuer**](docs/A1099/V2/Issuers1099Api.md#getissuer) | **GET** /1099/issuers/{id} | Retrieve an issuer
 *Issuers1099Api* | [**getIssuers**](docs/A1099/V2/Issuers1099Api.md#getissuers) | **GET** /1099/issuers | List issuers
@@ -278,18 +278,14 @@ Class | Method | HTTP request | Description
 <a name="documentation-for-A1099-V2-models"></a>
 ### A1099 V2 Model Documentation
 
- - [A1099.V2.AuthorizedApiRequestModel](docs/A1099/V2/AuthorizedApiRequestModel.md)
- - [A1099.V2.AuthorizedApiRequestV2DataModel](docs/A1099/V2/AuthorizedApiRequestV2DataModel.md)
- - [A1099.V2.CompanyCreateUpdateRequestModel](docs/A1099/V2/CompanyCreateUpdateRequestModel.md)
+ - [A1099.V2.CompanyBase](docs/A1099/V2/CompanyBase.md)
+ - [A1099.V2.CompanyRequest](docs/A1099/V2/CompanyRequest.md)
  - [A1099.V2.CompanyResponse](docs/A1099/V2/CompanyResponse.md)
  - [A1099.V2.CoveredIndividual](docs/A1099/V2/CoveredIndividual.md)
  - [A1099.V2.CreateAndSendW9FormEmailRequest](docs/A1099/V2/CreateAndSendW9FormEmailRequest.md)
- - [A1099.V2.CreateCompanyRequest](docs/A1099/V2/CreateCompanyRequest.md)
- - [A1099.V2.CreateIssuerRequest](docs/A1099/V2/CreateIssuerRequest.md)
  - [A1099.V2.CreateW9Form201Response](docs/A1099/V2/CreateW9Form201Response.md)
  - [A1099.V2.CreateW9FormRequest](docs/A1099/V2/CreateW9FormRequest.md)
  - [A1099.V2.EntryStatusResponse](docs/A1099/V2/EntryStatusResponse.md)
- - [A1099.V2.ErrorModel](docs/A1099/V2/ErrorModel.md)
  - [A1099.V2.ErrorResponse](docs/A1099/V2/ErrorResponse.md)
  - [A1099.V2.ErrorResponseItem](docs/A1099/V2/ErrorResponseItem.md)
  - [A1099.V2.Form1042S](docs/A1099/V2/Form1042S.md)
@@ -305,10 +301,10 @@ Class | Method | HTTP request | Description
  - [A1099.V2.Form1099R](docs/A1099/V2/Form1099R.md)
  - [A1099.V2.Form1099StatusDetail](docs/A1099/V2/Form1099StatusDetail.md)
  - [A1099.V2.Get1099Form200Response](docs/A1099/V2/Get1099Form200Response.md)
- - [A1099.V2.IW9FormDataModelsOneOf](docs/A1099/V2/IW9FormDataModelsOneOf.md)
  - [A1099.V2.IntermediaryOrFlowThrough](docs/A1099/V2/IntermediaryOrFlowThrough.md)
  - [A1099.V2.IrsResponse](docs/A1099/V2/IrsResponse.md)
- - [A1099.V2.IssuerCommand](docs/A1099/V2/IssuerCommand.md)
+ - [A1099.V2.IssuerBase](docs/A1099/V2/IssuerBase.md)
+ - [A1099.V2.IssuerRequest](docs/A1099/V2/IssuerRequest.md)
  - [A1099.V2.IssuerResponse](docs/A1099/V2/IssuerResponse.md)
  - [A1099.V2.JobResponse](docs/A1099/V2/JobResponse.md)
  - [A1099.V2.OfferAndCoverage](docs/A1099/V2/OfferAndCoverage.md)
@@ -323,27 +319,21 @@ Class | Method | HTTP request | Description
  - [A1099.V2.SubstantialUsOwnerResponse](docs/A1099/V2/SubstantialUsOwnerResponse.md)
  - [A1099.V2.TinMatchStatusResponse](docs/A1099/V2/TinMatchStatusResponse.md)
  - [A1099.V2.ValidationError](docs/A1099/V2/ValidationError.md)
- - [A1099.V2.W4FormDataModel](docs/A1099/V2/W4FormDataModel.md)
  - [A1099.V2.W4FormMinimalRequest](docs/A1099/V2/W4FormMinimalRequest.md)
  - [A1099.V2.W4FormRequest](docs/A1099/V2/W4FormRequest.md)
  - [A1099.V2.W4FormResponse](docs/A1099/V2/W4FormResponse.md)
  - [A1099.V2.W8BenEFormMinimalRequest](docs/A1099/V2/W8BenEFormMinimalRequest.md)
  - [A1099.V2.W8BenEFormRequest](docs/A1099/V2/W8BenEFormRequest.md)
  - [A1099.V2.W8BenEFormResponse](docs/A1099/V2/W8BenEFormResponse.md)
- - [A1099.V2.W8BenESubstantialUsOwnerDataModel](docs/A1099/V2/W8BenESubstantialUsOwnerDataModel.md)
- - [A1099.V2.W8BenFormDataModel](docs/A1099/V2/W8BenFormDataModel.md)
  - [A1099.V2.W8BenFormMinimalRequest](docs/A1099/V2/W8BenFormMinimalRequest.md)
  - [A1099.V2.W8BenFormRequest](docs/A1099/V2/W8BenFormRequest.md)
  - [A1099.V2.W8BenFormResponse](docs/A1099/V2/W8BenFormResponse.md)
- - [A1099.V2.W8BeneFormDataModel](docs/A1099/V2/W8BeneFormDataModel.md)
- - [A1099.V2.W8ImyFormDataModel](docs/A1099/V2/W8ImyFormDataModel.md)
  - [A1099.V2.W8ImyFormMinimalRequest](docs/A1099/V2/W8ImyFormMinimalRequest.md)
  - [A1099.V2.W8ImyFormRequest](docs/A1099/V2/W8ImyFormRequest.md)
  - [A1099.V2.W8ImyFormResponse](docs/A1099/V2/W8ImyFormResponse.md)
  - [A1099.V2.W9FormBaseMinimalRequest](docs/A1099/V2/W9FormBaseMinimalRequest.md)
  - [A1099.V2.W9FormBaseRequest](docs/A1099/V2/W9FormBaseRequest.md)
  - [A1099.V2.W9FormBaseResponse](docs/A1099/V2/W9FormBaseResponse.md)
- - [A1099.V2.W9FormDataModel](docs/A1099/V2/W9FormDataModel.md)
  - [A1099.V2.W9FormMinimalRequest](docs/A1099/V2/W9FormMinimalRequest.md)
  - [A1099.V2.W9FormRequest](docs/A1099/V2/W9FormRequest.md)
  - [A1099.V2.W9FormResponse](docs/A1099/V2/W9FormResponse.md)

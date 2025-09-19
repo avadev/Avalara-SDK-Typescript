@@ -39,7 +39,10 @@ import {
 } from './ValidationError';
 
 /**
- * 
+ * Form 1099-INT: Interest Imcome
+ *             
+ * *At least one of the following amounts must be provided:* 
+ * Interest Income, Interest on U.S. Savings Bonds and Treasury obligations, or Tax-Exempt Interest.
  * @export
  * @interface Form1099Int
  */
@@ -123,19 +126,20 @@ export interface Form1099Int {
      */
     bondPremiumOnTaxExemptBond?: number | null;
     /**
-     * Tax exempt bond CUSIP no.
+     * Tax exempt bond CUSIP no. 
+     * Enter VARIOUS if the tax-exempt interest is reported in the aggregate for multiple bonds or accounts.
      * @type {string}
      * @memberof Form1099Int
      */
     taxExemptBondCusipNumber?: string | null;
     /**
-     * FATCA filing requirement
+     * FATCA filing requirement.
      * @type {boolean}
      * @memberof Form1099Int
      */
     fatcaFilingRequirement?: boolean | null;
     /**
-     * Form type
+     * Form type.
      * @type {string}
      * @memberof Form1099Int
      */
@@ -153,7 +157,7 @@ export interface Form1099Int {
      */
     issuerId?: string | null;
     /**
-     * Issuer Reference ID - only required when creating forms
+     * Issuer Reference ID - only required when creating forms via $bulk-upsert
      * @type {string}
      * @memberof Form1099Int
      */
@@ -165,7 +169,7 @@ export interface Form1099Int {
      */
     issuerTin?: string | null;
     /**
-     * Tax Year - only required when creating forms
+     * Tax Year - only required when creating forms via $bulk-upsert
      * @type {number}
      * @memberof Form1099Int
      */
@@ -189,7 +193,13 @@ export interface Form1099Int {
      */
     recipientName: string | null;
     /**
-     * Type of TIN (Tax ID Number)
+     * Tax Identification Number (TIN) type.
+     * 
+     * Available values:
+     * - EIN: Employer Identification Number
+     * - SSN: Social Security Number
+     * - ITIN: Individual Taxpayer Identification Number
+     * - ATIN: Adoption Taxpayer Identification Number
      * @type {string}
      * @memberof Form1099Int
      */
@@ -261,7 +271,7 @@ export interface Form1099Int {
      */
     countryCode: string | null;
     /**
-     * Date when federal e-filing should be scheduled for this form
+     * Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099Int
      */
@@ -273,13 +283,13 @@ export interface Form1099Int {
      */
     postalMail?: boolean | null;
     /**
-     * Date when state e-filing should be scheduled for this form
+     * Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099Int
      */
     stateEfileDate?: Date | null;
     /**
-     * Date when recipient e-delivery should be scheduled for this form
+     * Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099Int
      */
@@ -313,39 +323,93 @@ export interface Form1099Int {
      * @type {boolean}
      * @memberof Form1099Int
      */
-    secondTinNotice?: boolean;
+    secondTinNotice?: boolean | null;
     /**
-     * Federal e-file status
+     * Federal e-file status.
+     * Available values:
+     * - unscheduled: Form has not been scheduled for federal e-filing
+     * - scheduled: Form is scheduled for federal e-filing
+     * - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)
+     * - sent: Form has been sent to the IRS
+     * - accepted: Form was accepted by the IRS
+     * - corrected_scheduled: Correction is scheduled to be sent
+     * - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)
+     * - corrected: A correction has been sent to the IRS
+     * - corrected_accepted: Correction was accepted by the IRS
+     * - rejected: Form was rejected by the IRS
+     * - corrected_rejected: Correction was rejected by the IRS
+     * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
      * @type {Form1099StatusDetail}
      * @memberof Form1099Int
      */
     readonly federalEfileStatus?: Form1099StatusDetail | null;
     /**
-     * State e-file status
+     * State e-file status.
+     * Available values:
+     * - unscheduled: Form has not been scheduled for state e-filing
+     * - scheduled: Form is scheduled for state e-filing
+     * - airlocked: Form is in process of being uploaded to the state
+     * - sent: Form has been sent to the state
+     * - rejected: Form was rejected by the state
+     * - accepted: Form was accepted by the state
+     * - corrected_scheduled: Correction is scheduled to be sent
+     * - corrected_airlocked: Correction is in process of being uploaded to the state
+     * - corrected_sent: Correction has been sent to the state
+     * - corrected_rejected: Correction was rejected by the state
+     * - corrected_accepted: Correction was accepted by the state
      * @type {Array<StateEfileStatusDetail>}
      * @memberof Form1099Int
      */
     readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
     /**
-     * Postal mail to recipient status
+     * Postal mail to recipient status.
+     * Available values:
+     * - unscheduled: Postal mail has not been scheduled
+     * - pending: Postal mail is pending to be sent
+     * - sent: Postal mail has been sent
+     * - delivered: Postal mail has been delivered
      * @type {Form1099StatusDetail}
      * @memberof Form1099Int
      */
     readonly postalMailStatus?: Form1099StatusDetail | null;
     /**
-     * TIN Match status
+     * TIN Match status.
+     * Available values:
+     * - none: TIN matching has not been performed
+     * - pending: TIN matching request is pending
+     * - matched: Name/TIN combination matches IRS records
+     * - unknown: TIN is missing, invalid, or request contains errors
+     * - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
      * @type {Form1099StatusDetail}
      * @memberof Form1099Int
      */
     readonly tinMatchStatus?: Form1099StatusDetail | null;
     /**
-     * Address verification status
+     * Address verification status.
+     * Available values:
+     * - unknown: Address verification has not been checked
+     * - pending: Address verification is in progress
+     * - failed: Address verification failed
+     * - incomplete: Address verification is incomplete
+     * - unchanged: User declined address changes
+     * - verified: Address has been verified and accepted
      * @type {Form1099StatusDetail}
      * @memberof Form1099Int
      */
     readonly addressVerificationStatus?: Form1099StatusDetail | null;
     /**
-     * EDelivery status
+     * EDelivery status.
+     * Available values:
+     * - unscheduled: E-delivery has not been scheduled
+     * - scheduled: E-delivery is scheduled to be sent
+     * - sent: E-delivery has been sent to recipient
+     * - bounced: E-delivery bounced back (invalid email)
+     * - refused: E-delivery was refused by recipient
+     * - bad_verify: E-delivery failed verification
+     * - accepted: E-delivery was accepted by recipient
+     * - bad_verify_limit: E-delivery failed verification limit reached
+     * - second_delivery: Second e-delivery attempt
+     * - undelivered: E-delivery is undelivered (temporary state allowing resend)
      * @type {Form1099StatusDetail}
      * @memberof Form1099Int
      */
@@ -375,21 +439,20 @@ export interface Form1099Int {
 * @enum {string}
 */
 export enum Form1099IntTypeEnum {
-    _1099Nec = '1099-NEC',
-    _1099Misc = '1099-MISC',
-    _1099Div = '1099-DIV',
-    _1099R = '1099-R',
-    _1099K = '1099-K',
-    _1095B = '1095-B',
-    _1042S = '1042-S',
-    _1095C = '1095-C',
-    _1099Int = '1099-INT'
+    Form1099Nec = 'Form1099Nec',
+    Form1099Misc = 'Form1099Misc',
+    Form1099Div = 'Form1099Div',
+    Form1099R = 'Form1099R',
+    Form1099K = 'Form1099K',
+    Form1095B = 'Form1095B',
+    Form1042S = 'Form1042S',
+    Form1095C = 'Form1095C',
+    Form1099Int = 'Form1099Int'
 }/**
 * @export
 * @enum {string}
 */
 export enum Form1099IntTinTypeEnum {
-    Empty = 'Empty',
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',

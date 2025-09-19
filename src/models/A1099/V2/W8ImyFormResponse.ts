@@ -19,19 +19,19 @@ import {
     EntryStatusResponseFromJSONTyped,
     EntryStatusResponseToJSON,
 } from './EntryStatusResponse';
-import {
-    W9FormBaseResponse,
-    W9FormBaseResponseFromJSON,
-    W9FormBaseResponseFromJSONTyped,
-    W9FormBaseResponseToJSON,
-} from './W9FormBaseResponse';
 
 /**
  * 
  * @export
  * @interface W8ImyFormResponse
  */
-export interface W8ImyFormResponse extends W9FormBaseResponse {
+export interface W8ImyFormResponse {
+    /**
+     * The form type (always "W8Imy" for this model).
+     * @type {string}
+     * @memberof W8ImyFormResponse
+     */
+    readonly type?: W8ImyFormResponseTypeEnum;
     /**
      * The name of the individual or entity associated with the form.
      * @type {string}
@@ -129,7 +129,7 @@ export interface W8ImyFormResponse extends W9FormBaseResponse {
      */
     mailingCountry?: string | null;
     /**
-     * The type of TIN provided.
+     * Tax Identification Number (TIN) type.
      * @type {string}
      * @memberof W8ImyFormResponse
      */
@@ -764,9 +764,97 @@ export interface W8ImyFormResponse extends W9FormBaseResponse {
      * @memberof W8ImyFormResponse
      */
     signerName?: string | null;
+    /**
+     * The unique identifier for the form.
+     * @type {string}
+     * @memberof W8ImyFormResponse
+     */
+    id?: string;
+    /**
+     * The entry status information for the form.
+     * @type {EntryStatusResponse}
+     * @memberof W8ImyFormResponse
+     */
+    entryStatus?: EntryStatusResponse;
+    /**
+     * A reference identifier for the form.
+     * @type {string}
+     * @memberof W8ImyFormResponse
+     */
+    referenceId?: string | null;
+    /**
+     * The ID of the associated company.
+     * @type {string}
+     * @memberof W8ImyFormResponse
+     */
+    companyId?: string;
+    /**
+     * The display name associated with the form.
+     * @type {string}
+     * @memberof W8ImyFormResponse
+     */
+    displayName?: string;
+    /**
+     * The email address of the individual associated with the form.
+     * @type {string}
+     * @memberof W8ImyFormResponse
+     */
+    email?: string | null;
+    /**
+     * Indicates whether the form is archived.
+     * @type {boolean}
+     * @memberof W8ImyFormResponse
+     */
+    archived?: boolean;
+    /**
+     * Form ID of previous version.
+     * @type {string}
+     * @memberof W8ImyFormResponse
+     */
+    ancestorId?: string | null;
+    /**
+     * The signature of the form.
+     * @type {string}
+     * @memberof W8ImyFormResponse
+     */
+    signature?: string | null;
+    /**
+     * The date the form was signed.
+     * @type {Date}
+     * @memberof W8ImyFormResponse
+     */
+    signedDate?: Date | null;
+    /**
+     * The date when e-delivery was consented.
+     * @type {Date}
+     * @memberof W8ImyFormResponse
+     */
+    eDeliveryConsentedAt?: Date | null;
+    /**
+     * The creation date of the form.
+     * @type {Date}
+     * @memberof W8ImyFormResponse
+     */
+    createdAt?: Date;
+    /**
+     * The last updated date of the form.
+     * @type {Date}
+     * @memberof W8ImyFormResponse
+     */
+    updatedAt?: Date;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum W8ImyFormResponseTypeEnum {
+    W4 = 'W4',
+    W8Ben = 'W8Ben',
+    W8BenE = 'W8BenE',
+    W8Imy = 'W8Imy',
+    W9 = 'W9'
+}
 
 /**
  * Check if a given object implements the W8ImyFormResponse interface.
@@ -786,7 +874,8 @@ export function W8ImyFormResponseFromJSONTyped(json: any, ignoreDiscriminator: b
         return json;
     }
     return {
-        ...W9FormBaseResponseFromJSONTyped(json, ignoreDiscriminator),
+        
+        'type': !exists(json, 'type') ? undefined : json['type'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'citizenshipCountry': !exists(json, 'citizenshipCountry') ? undefined : json['citizenshipCountry'],
         'disregardedEntity': !exists(json, 'disregardedEntity') ? undefined : json['disregardedEntity'],
@@ -898,6 +987,19 @@ export function W8ImyFormResponseFromJSONTyped(json: any, ignoreDiscriminator: b
         'sponsoredDirectReportingNffeCertification': !exists(json, 'sponsoredDirectReportingNffeCertification') ? undefined : json['sponsoredDirectReportingNffeCertification'],
         'directReportingNffeSponsoringEntity': !exists(json, 'directReportingNffeSponsoringEntity') ? undefined : json['directReportingNffeSponsoringEntity'],
         'signerName': !exists(json, 'signerName') ? undefined : json['signerName'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'entryStatus': !exists(json, 'entryStatus') ? undefined : EntryStatusResponseFromJSON(json['entryStatus']),
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
+        'displayName': !exists(json, 'displayName') ? undefined : json['displayName'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+        'archived': !exists(json, 'archived') ? undefined : json['archived'],
+        'ancestorId': !exists(json, 'ancestorId') ? undefined : json['ancestorId'],
+        'signature': !exists(json, 'signature') ? undefined : json['signature'],
+        'signedDate': !exists(json, 'signedDate') ? undefined : (json['signedDate'] === null ? null : new Date(json['signedDate'])),
+        'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
+        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
 }
 
@@ -909,7 +1011,7 @@ export function W8ImyFormResponseToJSON(value?: W8ImyFormResponse | null): any {
         return null;
     }
     return {
-        ...W9FormBaseResponseToJSON(value),
+        
         'name': value.name,
         'citizenshipCountry': value.citizenshipCountry,
         'disregardedEntity': value.disregardedEntity,
@@ -1021,5 +1123,18 @@ export function W8ImyFormResponseToJSON(value?: W8ImyFormResponse | null): any {
         'sponsoredDirectReportingNffeCertification': value.sponsoredDirectReportingNffeCertification,
         'directReportingNffeSponsoringEntity': value.directReportingNffeSponsoringEntity,
         'signerName': value.signerName,
+        'id': value.id,
+        'entryStatus': EntryStatusResponseToJSON(value.entryStatus),
+        'referenceId': value.referenceId,
+        'companyId': value.companyId,
+        'displayName': value.displayName,
+        'email': value.email,
+        'archived': value.archived,
+        'ancestorId': value.ancestorId,
+        'signature': value.signature,
+        'signedDate': value.signedDate === undefined ? undefined : (value.signedDate === null ? null : value.signedDate.toISOString()),
+        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
+        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
     };
 }

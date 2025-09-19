@@ -30,13 +30,13 @@ export interface W8BenFormRequest {
      * @type {string}
      * @memberof W8BenFormRequest
      */
-    name?: string;
+    name: string;
     /**
      * The country of citizenship.
      * @type {string}
      * @memberof W8BenFormRequest
      */
-    citizenshipCountry?: string;
+    citizenshipCountry: string;
     /**
      * The residential address of the individual or entity.
      * @type {string}
@@ -66,7 +66,7 @@ export interface W8BenFormRequest {
      * @type {string}
      * @memberof W8BenFormRequest
      */
-    residenceCountry?: string;
+    residenceCountry: string;
     /**
      * Indicates whether the residence address is the mailing address.
      * @type {boolean}
@@ -102,7 +102,7 @@ export interface W8BenFormRequest {
      * @type {string}
      * @memberof W8BenFormRequest
      */
-    mailingCountry?: string | null;
+    mailingCountry: string | null;
     /**
      * The taxpayer identification number (TIN).
      * @type {string}
@@ -182,11 +182,11 @@ export interface W8BenFormRequest {
      */
     signature?: string | null;
     /**
-     * The ID of the associated company.
+     * The ID of the associated company. Required when creating a form.
      * @type {string}
      * @memberof W8BenFormRequest
      */
-    companyId: string;
+    companyId?: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -218,7 +218,10 @@ export enum W8BenFormRequestTypeEnum {
  */
 export function instanceOfW8BenFormRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "companyId" in value;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "citizenshipCountry" in value;
+    isInstance = isInstance && "residenceCountry" in value;
+    isInstance = isInstance && "mailingCountry" in value;
 
     return isInstance;
 }
@@ -234,19 +237,19 @@ export function W8BenFormRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'citizenshipCountry': !exists(json, 'citizenshipCountry') ? undefined : json['citizenshipCountry'],
+        'name': json['name'],
+        'citizenshipCountry': json['citizenshipCountry'],
         'residenceAddress': !exists(json, 'residenceAddress') ? undefined : json['residenceAddress'],
         'residenceCity': !exists(json, 'residenceCity') ? undefined : json['residenceCity'],
         'residenceState': !exists(json, 'residenceState') ? undefined : json['residenceState'],
         'residenceZip': !exists(json, 'residenceZip') ? undefined : json['residenceZip'],
-        'residenceCountry': !exists(json, 'residenceCountry') ? undefined : json['residenceCountry'],
+        'residenceCountry': json['residenceCountry'],
         'residenceIsMailing': !exists(json, 'residenceIsMailing') ? undefined : json['residenceIsMailing'],
         'mailingAddress': !exists(json, 'mailingAddress') ? undefined : json['mailingAddress'],
         'mailingCity': !exists(json, 'mailingCity') ? undefined : json['mailingCity'],
         'mailingState': !exists(json, 'mailingState') ? undefined : json['mailingState'],
         'mailingZip': !exists(json, 'mailingZip') ? undefined : json['mailingZip'],
-        'mailingCountry': !exists(json, 'mailingCountry') ? undefined : json['mailingCountry'],
+        'mailingCountry': json['mailingCountry'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
         'foreignTinNotRequired': !exists(json, 'foreignTinNotRequired') ? undefined : json['foreignTinNotRequired'],
         'foreignTin': !exists(json, 'foreignTin') ? undefined : json['foreignTin'],
@@ -260,7 +263,7 @@ export function W8BenFormRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'signerName': !exists(json, 'signerName') ? undefined : json['signerName'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
-        'companyId': json['companyId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
     };

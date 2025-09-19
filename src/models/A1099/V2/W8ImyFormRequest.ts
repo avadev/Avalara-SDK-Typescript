@@ -30,13 +30,13 @@ export interface W8ImyFormRequest {
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    name?: string;
+    name: string;
     /**
      * The country of citizenship.
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    citizenshipCountry?: string;
+    citizenshipCountry: string;
     /**
      * The name of the disregarded entity receiving the payment (if applicable).
      * @type {string}
@@ -45,12 +45,49 @@ export interface W8ImyFormRequest {
     disregardedEntity?: string | null;
     /**
      * The entity type.
+     * Available values:
+     * - 1: QI (including a QDD). Complete Part III.
+     * - 2: Nonqualified intermediary. Complete Part IV.
+     * - 3: Territory financial institution. Complete Part V.
+     * - 4: U.S. branch. Complete Part VI.
+     * - 5: Withholding foreign partnership. Complete Part VII.
+     * - 6: Withholding foreign trust. Complete Part VII.
+     * - 7: Nonwithholding foreign partnership. Complete Part VIII.
+     * - 8: Nonwithholding foreign simple trust. Complete Part VIII.
+     * - 9: Nonwithholding foreign grantor trust. Complete Part VIII.
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    entityType?: string;
+    entityType: string;
     /**
      * The FATCA status.
+     * Available values:
+     * - 1: Nonparticipating foreign financial institution (FFI) (including an FFI related to a Reporting IGA FFI other than a deemed-compliant FFI, participating FFI, or exempt beneficial owner). Complete Part IX (if applicable).
+     * - 2: Participating FFI.
+     * - 3: Reporting Model 1 FFI.
+     * - 4: Reporting Model 2 FFI.
+     * - 5: Registered deemed-compliant FFI (other than a reporting Model 1 FFI, sponsored FFI, or nonreporting IGA FFI covered in Part XIX).
+     * - 6: Territory financial institution. Complete Part V.
+     * - 7: Sponsored FFI (other than a certified deemed-compliant sponsored, closely held investment vehicle). Complete Part X.
+     * - 8: Certified deemed-compliant nonregistering local bank. Complete Part XII.
+     * - 9: Certified deemed-compliant FFI with only low-value accounts. Complete Part XIII.
+     * - 10: Certified deemed-compliant sponsored, closely held investment vehicle. Complete Part XIV.
+     * - 11: Certified deemed-compliant limited life debt investment entity. Complete Part XV.
+     * - 12: Certain investment entities that do not maintain financial accounts. Complete Part XVI.
+     * - 13: Owner-documented FFI. Complete Part XI.
+     * - 14: Restricted distributor. Complete Part XVII.
+     * - 15: Foreign central bank of issue. Complete Part XVIII.
+     * - 16: Nonreporting IGA FFI. Complete Part XIX.
+     * - 17: Exempt retirement plans. Complete Part XX.
+     * - 18: Excepted nonfinancial group entity. Complete Part XXI.
+     * - 19: Excepted nonfinancial start-up company. Complete Part XXII.
+     * - 20: Excepted nonfinancial entity in liquidation or bankruptcy. Complete Part XXIII.
+     * - 21: Publicly traded NFFE or NFFE affiliate of a publicly traded corporation. Complete Part XXIV.
+     * - 22: Excepted territory NFFE. Complete Part XXV.
+     * - 23: Active NFFE. Complete Part XXVI.
+     * - 24: Passive NFFE. Complete Part XXVII.
+     * - 25: Direct reporting NFFE.
+     * - 26: Sponsored direct reporting NFFE. Complete Part XXVIII.
      * @type {string}
      * @memberof W8ImyFormRequest
      */
@@ -84,7 +121,7 @@ export interface W8ImyFormRequest {
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    residenceCountry?: string;
+    residenceCountry: string;
     /**
      * Indicates whether the residence address is also the mailing address.
      * @type {boolean}
@@ -122,7 +159,13 @@ export interface W8ImyFormRequest {
      */
     mailingCountry?: string | null;
     /**
-     * The type of TIN provided.
+     * Tax Identification Number (TIN) type.
+     * 
+     * Available values:
+     * - QI-EIN: Qualified Intermediary EIN
+     * - WP-EIN: Withholding Partnership EIN
+     * - WT-EIN: Withholding Trust EIN
+     * - EIN: Employer Identification Number
      * @type {string}
      * @memberof W8ImyFormRequest
      */
@@ -153,6 +196,12 @@ export interface W8ImyFormRequest {
     referenceNumber?: string | null;
     /**
      * The FATCA status of disregarded entity or branch receiving payment.
+     * Available values:
+     * - 1: Branch treated as nonparticipating FFI.
+     * - 2: Participating FFI.
+     * - 3: Reporting Model 1 FFI.
+     * - 4: Reporting Model 2 FFI.
+     * - 5: U.S. Branch
      * @type {string}
      * @memberof W8ImyFormRequest
      */
@@ -589,6 +638,9 @@ export interface W8ImyFormRequest {
     igaCountry?: string | null;
     /**
      * The applicable IGA model.
+     * Available values:
+     * - 1: Model 1 IGA
+     * - 2: Model 2 IGA
      * @type {string}
      * @memberof W8ImyFormRequest
      */
@@ -770,11 +822,11 @@ export interface W8ImyFormRequest {
      */
     signature?: string | null;
     /**
-     * The ID of the associated company.
+     * The ID of the associated company. Required when creating a form.
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    companyId: string;
+    companyId?: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -806,7 +858,10 @@ export enum W8ImyFormRequestTypeEnum {
  */
 export function instanceOfW8ImyFormRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "companyId" in value;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "citizenshipCountry" in value;
+    isInstance = isInstance && "entityType" in value;
+    isInstance = isInstance && "residenceCountry" in value;
 
     return isInstance;
 }
@@ -822,16 +877,16 @@ export function W8ImyFormRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'citizenshipCountry': !exists(json, 'citizenshipCountry') ? undefined : json['citizenshipCountry'],
+        'name': json['name'],
+        'citizenshipCountry': json['citizenshipCountry'],
         'disregardedEntity': !exists(json, 'disregardedEntity') ? undefined : json['disregardedEntity'],
-        'entityType': !exists(json, 'entityType') ? undefined : json['entityType'],
+        'entityType': json['entityType'],
         'fatcaStatus': !exists(json, 'fatcaStatus') ? undefined : json['fatcaStatus'],
         'residenceAddress': !exists(json, 'residenceAddress') ? undefined : json['residenceAddress'],
         'residenceCity': !exists(json, 'residenceCity') ? undefined : json['residenceCity'],
         'residenceState': !exists(json, 'residenceState') ? undefined : json['residenceState'],
         'residenceZip': !exists(json, 'residenceZip') ? undefined : json['residenceZip'],
-        'residenceCountry': !exists(json, 'residenceCountry') ? undefined : json['residenceCountry'],
+        'residenceCountry': json['residenceCountry'],
         'residenceIsMailing': !exists(json, 'residenceIsMailing') ? undefined : json['residenceIsMailing'],
         'mailingAddress': !exists(json, 'mailingAddress') ? undefined : json['mailingAddress'],
         'mailingCity': !exists(json, 'mailingCity') ? undefined : json['mailingCity'],
@@ -935,7 +990,7 @@ export function W8ImyFormRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'signerName': !exists(json, 'signerName') ? undefined : json['signerName'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
-        'companyId': json['companyId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
     };

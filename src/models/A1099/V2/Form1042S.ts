@@ -57,7 +57,13 @@ import {
  */
 export interface Form1042S {
     /**
+     * Tax Identification Number (TIN) type.
      * 
+     * Available values:
+     * - EIN: Employer Identification Number
+     * - SSN: Social Security Number
+     * - ITIN: Individual Taxpayer Identification Number
+     * - ATIN: Adoption Taxpayer Identification Number
      * @type {string}
      * @memberof Form1042S
      */
@@ -304,8 +310,7 @@ export interface Form1042S {
      */
     taxPaidAgent?: number | null;
     /**
-     * Chapter 3 status code - Required if WithholdingIndicator is 3 (Chapter 3)
-     * Available values:
+     * Chapter 3 status code - Required if WithholdingIndicator is 3 (Chapter 3). Available values:
      * - 01: U.S. Withholding Agent - FI (Deprecated - valid only for tax years prior to 2020)
      * - 02: U.S. Withholding Agent - Other (Deprecated - valid only for tax years prior to 2020)
      * - 03: Territory FI - treated as U.S. Person
@@ -349,8 +354,7 @@ export interface Form1042S {
      */
     chap3StatusCode?: Form1042SChap3StatusCodeEnum;
     /**
-     * Chapter 4 status code. Required if WithholdingIndicator is 4 (Chapter 4). Required if email is specified, must fill either this or RecipientForeignTin.
-     * Available values:
+     * Chapter 4 status code. Required if WithholdingIndicator is 4 (Chapter 4). Required if email is specified, must fill either this or RecipientForeignTin. Available values:
      * - 01: U.S. Withholding Agent - FI
      * - 02: U.S. Withholding Agent - Other
      * - 03: Territory FI - not treated as U.S. Person
@@ -418,7 +422,7 @@ export interface Form1042S {
      */
     intermediaryOrFlowThrough?: IntermediaryOrFlowThrough | null;
     /**
-     * Form type
+     * Form type.
      * @type {string}
      * @memberof Form1042S
      */
@@ -436,7 +440,7 @@ export interface Form1042S {
      */
     issuerId?: string | null;
     /**
-     * Issuer Reference ID - only required when creating forms
+     * Issuer Reference ID - only required when creating forms via $bulk-upsert
      * @type {string}
      * @memberof Form1042S
      */
@@ -448,7 +452,7 @@ export interface Form1042S {
      */
     issuerTin?: string | null;
     /**
-     * Tax Year - only required when creating forms
+     * Tax Year - only required when creating forms via $bulk-upsert
      * @type {number}
      * @memberof Form1042S
      */
@@ -538,7 +542,7 @@ export interface Form1042S {
      */
     countryCode: string | null;
     /**
-     * Date when federal e-filing should be scheduled for this form
+     * Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1042S
      */
@@ -550,13 +554,13 @@ export interface Form1042S {
      */
     postalMail?: boolean | null;
     /**
-     * Date when state e-filing should be scheduled for this form
+     * Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1042S
      */
     stateEfileDate?: Date | null;
     /**
-     * Date when recipient e-delivery should be scheduled for this form
+     * Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1042S
      */
@@ -590,39 +594,93 @@ export interface Form1042S {
      * @type {boolean}
      * @memberof Form1042S
      */
-    secondTinNotice?: boolean;
+    secondTinNotice?: boolean | null;
     /**
-     * Federal e-file status
+     * Federal e-file status.
+     * Available values:
+     * - unscheduled: Form has not been scheduled for federal e-filing
+     * - scheduled: Form is scheduled for federal e-filing
+     * - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)
+     * - sent: Form has been sent to the IRS
+     * - accepted: Form was accepted by the IRS
+     * - corrected_scheduled: Correction is scheduled to be sent
+     * - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)
+     * - corrected: A correction has been sent to the IRS
+     * - corrected_accepted: Correction was accepted by the IRS
+     * - rejected: Form was rejected by the IRS
+     * - corrected_rejected: Correction was rejected by the IRS
+     * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
      * @type {Form1099StatusDetail}
      * @memberof Form1042S
      */
     readonly federalEfileStatus?: Form1099StatusDetail | null;
     /**
-     * State e-file status
+     * State e-file status.
+     * Available values:
+     * - unscheduled: Form has not been scheduled for state e-filing
+     * - scheduled: Form is scheduled for state e-filing
+     * - airlocked: Form is in process of being uploaded to the state
+     * - sent: Form has been sent to the state
+     * - rejected: Form was rejected by the state
+     * - accepted: Form was accepted by the state
+     * - corrected_scheduled: Correction is scheduled to be sent
+     * - corrected_airlocked: Correction is in process of being uploaded to the state
+     * - corrected_sent: Correction has been sent to the state
+     * - corrected_rejected: Correction was rejected by the state
+     * - corrected_accepted: Correction was accepted by the state
      * @type {Array<StateEfileStatusDetail>}
      * @memberof Form1042S
      */
     readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
     /**
-     * Postal mail to recipient status
+     * Postal mail to recipient status.
+     * Available values:
+     * - unscheduled: Postal mail has not been scheduled
+     * - pending: Postal mail is pending to be sent
+     * - sent: Postal mail has been sent
+     * - delivered: Postal mail has been delivered
      * @type {Form1099StatusDetail}
      * @memberof Form1042S
      */
     readonly postalMailStatus?: Form1099StatusDetail | null;
     /**
-     * TIN Match status
+     * TIN Match status.
+     * Available values:
+     * - none: TIN matching has not been performed
+     * - pending: TIN matching request is pending
+     * - matched: Name/TIN combination matches IRS records
+     * - unknown: TIN is missing, invalid, or request contains errors
+     * - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
      * @type {Form1099StatusDetail}
      * @memberof Form1042S
      */
     readonly tinMatchStatus?: Form1099StatusDetail | null;
     /**
-     * Address verification status
+     * Address verification status.
+     * Available values:
+     * - unknown: Address verification has not been checked
+     * - pending: Address verification is in progress
+     * - failed: Address verification failed
+     * - incomplete: Address verification is incomplete
+     * - unchanged: User declined address changes
+     * - verified: Address has been verified and accepted
      * @type {Form1099StatusDetail}
      * @memberof Form1042S
      */
     readonly addressVerificationStatus?: Form1099StatusDetail | null;
     /**
-     * EDelivery status
+     * EDelivery status.
+     * Available values:
+     * - unscheduled: E-delivery has not been scheduled
+     * - scheduled: E-delivery is scheduled to be sent
+     * - sent: E-delivery has been sent to recipient
+     * - bounced: E-delivery bounced back (invalid email)
+     * - refused: E-delivery was refused by recipient
+     * - bad_verify: E-delivery failed verification
+     * - accepted: E-delivery was accepted by recipient
+     * - bad_verify_limit: E-delivery failed verification limit reached
+     * - second_delivery: Second e-delivery attempt
+     * - undelivered: E-delivery is undelivered (temporary state allowing resend)
      * @type {Form1099StatusDetail}
      * @memberof Form1042S
      */
@@ -652,7 +710,6 @@ export interface Form1042S {
 * @enum {string}
 */
 export enum Form1042STinTypeEnum {
-    Empty = 'Empty',
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',
@@ -904,15 +961,15 @@ export enum Form1042SChap4StatusCodeEnum {
 * @enum {string}
 */
 export enum Form1042STypeEnum {
-    _1099Nec = '1099-NEC',
-    _1099Misc = '1099-MISC',
-    _1099Div = '1099-DIV',
-    _1099R = '1099-R',
-    _1099K = '1099-K',
-    _1095B = '1095-B',
-    _1042S = '1042-S',
-    _1095C = '1095-C',
-    _1099Int = '1099-INT'
+    Form1099Nec = 'Form1099Nec',
+    Form1099Misc = 'Form1099Misc',
+    Form1099Div = 'Form1099Div',
+    Form1099R = 'Form1099R',
+    Form1099K = 'Form1099K',
+    Form1095B = 'Form1095B',
+    Form1042S = 'Form1042S',
+    Form1095C = 'Form1095C',
+    Form1099Int = 'Form1099Int'
 }
 
 /**
