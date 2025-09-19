@@ -37,13 +37,13 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    name?: string;
+    name: string;
     /**
      * The country of citizenship.
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    citizenshipCountry?: string;
+    citizenshipCountry: string;
     /**
      * The name of the disregarded entity receiving the payment (if applicable).
      * @type {string}
@@ -52,10 +52,24 @@ export interface W8BenEFormRequest {
     disregardedEntity?: string | null;
     /**
      * The entity type.
+     * Available values:
+     * - 1: Corporation
+     * - 2: Disregarded entity
+     * - 3: Partnership
+     * - 4: Simple trust
+     * - 5: Grantor trust
+     * - 6: Complex trust
+     * - 7: Estate
+     * - 8: Foreign Government - Controlled Entity
+     * - 9: Central Bank of Issue
+     * - 10: Tax-exempt organization
+     * - 11: Private foundation
+     * - 12: International organization
+     * - 13: Foreign Government - Controlled Integral Part
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    entityType?: string;
+    entityType: string;
     /**
      * Indicates whether the entity is making a treaty claim.
      * @type {boolean}
@@ -64,10 +78,43 @@ export interface W8BenEFormRequest {
     makingTreatyClaim?: boolean | null;
     /**
      * The FATCA status.
+     * Available values:
+     * - 1: Nonparticipating FFI (including a limited FFI or an FFI related to a Reporting IGA FFI other than a deemed-compliant FFI, participating FFI, or exempt beneficial owner)
+     * - 2: Participating FFI
+     * - 3: Reporting Model 1 FFI
+     * - 4: Reporting Model 2 FFI
+     * - 5: Registered deemed-compliant FFI (other than a reporting Model 1 FFI, sponsored FFI, or nonreporting IGA FFI covered in Part XII)
+     * - 6: Sponsored FFI that has not obtained a GIIN
+     * - 7: Certified deemed-compliant nonregistering local bank
+     * - 8: Certified deemed-compliant FFI with only low-value accounts
+     * - 9: Certified deemed-compliant sponsored, closely held investment vehicle
+     * - 10: Certified deemed-compliant limited life debt investment entity
+     * - 11: Certified deemed-compliant investment advisors and investment managers
+     * - 12: Owner-documented FFI
+     * - 13: Restricted distributor
+     * - 14: Nonreporting IGA FFI
+     * - 15: Foreign government, government of a U.S. possession, or foreign central bank of issue
+     * - 16: International organization
+     * - 17: Exempt retirement plans
+     * - 18: Entity wholly owned by exempt beneficial owners
+     * - 19: Territory financial institution
+     * - 20: Nonfinancial group entity
+     * - 21: Excepted nonfinancial start-up company
+     * - 22: Excepted nonfinancial entity in liquidation or bankruptcy
+     * - 23: 501(c) organization
+     * - 24: Nonprofit organization
+     * - 25: Publicly traded NFFE or NFFE affiliate of a publicly traded corporation
+     * - 26: Excepted territory NFFE
+     * - 27: Active NFFE
+     * - 28: Passive NFFE
+     * - 29: Excepted inter-affiliate FFI
+     * - 30: Direct reporting NFFE
+     * - 31: Sponsored direct reporting NFFE
+     * - 32: Account that is not a financial account
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    fatcaStatus?: string;
+    fatcaStatus: string;
     /**
      * The residential address of the individual or entity.
      * @type {string}
@@ -97,7 +144,7 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    residenceCountry?: string;
+    residenceCountry: string;
     /**
      * Indicates whether the residence address is also the mailing address.
      * @type {boolean}
@@ -166,6 +213,12 @@ export interface W8BenEFormRequest {
     referenceNumber?: string | null;
     /**
      * The FATCA status of disregarded entity or branch receiving payment.
+     * Available values:
+     * - 1: Limited Branch
+     * - 2: U.S. Branch
+     * - 3: Participating FFI
+     * - 4: Reporting Model 1 FFI
+     * - 5: Reporting Model 2 FFI
      * @type {string}
      * @memberof W8BenEFormRequest
      */
@@ -226,6 +279,17 @@ export interface W8BenEFormRequest {
     benefitLimitationCertification?: boolean | null;
     /**
      * The benefit limitation for tax treaty claims.
+     * Available values:
+     * - 1: Government
+     * - 2: Tax exempt pension trust or pension fund
+     * - 3: Other tax exempt organization
+     * - 4: Publicly traded corporation
+     * - 5: Subsidiary of a publicly traded corporation
+     * - 6: Company that meets the ownership and base erosion test
+     * - 7: Company that meets the derivative benefits test
+     * - 8: Company with an item of income that meets active trade or business test
+     * - 9: Favorable discretionary determination by the U.S. competent authority received
+     * - 10: Other
      * @type {string}
      * @memberof W8BenEFormRequest
      */
@@ -382,6 +446,9 @@ export interface W8BenEFormRequest {
     igaCountry?: string | null;
     /**
      * The applicable IGA model.
+     * Available values:
+     * - 1: Model 1 IGA
+     * - 2: Model 2 IGA
      * @type {string}
      * @memberof W8BenEFormRequest
      */
@@ -648,11 +715,11 @@ export interface W8BenEFormRequest {
      */
     signature?: string | null;
     /**
-     * The ID of the associated company.
+     * The ID of the associated company. Required when creating a form.
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    companyId: string;
+    companyId?: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -684,7 +751,11 @@ export enum W8BenEFormRequestTypeEnum {
  */
 export function instanceOfW8BenEFormRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "companyId" in value;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "citizenshipCountry" in value;
+    isInstance = isInstance && "entityType" in value;
+    isInstance = isInstance && "fatcaStatus" in value;
+    isInstance = isInstance && "residenceCountry" in value;
 
     return isInstance;
 }
@@ -700,17 +771,17 @@ export function W8BenEFormRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     return {
         
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'citizenshipCountry': !exists(json, 'citizenshipCountry') ? undefined : json['citizenshipCountry'],
+        'name': json['name'],
+        'citizenshipCountry': json['citizenshipCountry'],
         'disregardedEntity': !exists(json, 'disregardedEntity') ? undefined : json['disregardedEntity'],
-        'entityType': !exists(json, 'entityType') ? undefined : json['entityType'],
+        'entityType': json['entityType'],
         'makingTreatyClaim': !exists(json, 'makingTreatyClaim') ? undefined : json['makingTreatyClaim'],
-        'fatcaStatus': !exists(json, 'fatcaStatus') ? undefined : json['fatcaStatus'],
+        'fatcaStatus': json['fatcaStatus'],
         'residenceAddress': !exists(json, 'residenceAddress') ? undefined : json['residenceAddress'],
         'residenceCity': !exists(json, 'residenceCity') ? undefined : json['residenceCity'],
         'residenceState': !exists(json, 'residenceState') ? undefined : json['residenceState'],
         'residenceZip': !exists(json, 'residenceZip') ? undefined : json['residenceZip'],
-        'residenceCountry': !exists(json, 'residenceCountry') ? undefined : json['residenceCountry'],
+        'residenceCountry': json['residenceCountry'],
         'residenceIsMailing': !exists(json, 'residenceIsMailing') ? undefined : json['residenceIsMailing'],
         'mailingAddress': !exists(json, 'mailingAddress') ? undefined : json['mailingAddress'],
         'mailingCity': !exists(json, 'mailingCity') ? undefined : json['mailingCity'],
@@ -797,7 +868,7 @@ export function W8BenEFormRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         'capacityToSignCertification': !exists(json, 'capacityToSignCertification') ? undefined : json['capacityToSignCertification'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
-        'companyId': json['companyId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
     };

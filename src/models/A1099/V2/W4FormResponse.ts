@@ -19,19 +19,19 @@ import {
     EntryStatusResponseFromJSONTyped,
     EntryStatusResponseToJSON,
 } from './EntryStatusResponse';
-import {
-    W9FormBaseResponse,
-    W9FormBaseResponseFromJSON,
-    W9FormBaseResponseFromJSONTyped,
-    W9FormBaseResponseToJSON,
-} from './W9FormBaseResponse';
 
 /**
  * 
  * @export
  * @interface W4FormResponse
  */
-export interface W4FormResponse extends W9FormBaseResponse {
+export interface W4FormResponse {
+    /**
+     * The form type (always "W4" for this model).
+     * @type {string}
+     * @memberof W4FormResponse
+     */
+    readonly type?: W4FormResponseTypeEnum;
     /**
      * The first name of the employee.
      * @type {string}
@@ -57,7 +57,7 @@ export interface W4FormResponse extends W9FormBaseResponse {
      */
     employeeNameSuffix?: string | null;
     /**
-     * The type of TIN provided.
+     * Tax Identification Number (TIN) type.
      * @type {string}
      * @memberof W4FormResponse
      */
@@ -146,9 +146,97 @@ export interface W4FormResponse extends W9FormBaseResponse {
      * @memberof W4FormResponse
      */
     officeCode?: string | null;
+    /**
+     * The unique identifier for the form.
+     * @type {string}
+     * @memberof W4FormResponse
+     */
+    id?: string;
+    /**
+     * The entry status information for the form.
+     * @type {EntryStatusResponse}
+     * @memberof W4FormResponse
+     */
+    entryStatus?: EntryStatusResponse;
+    /**
+     * A reference identifier for the form.
+     * @type {string}
+     * @memberof W4FormResponse
+     */
+    referenceId?: string | null;
+    /**
+     * The ID of the associated company.
+     * @type {string}
+     * @memberof W4FormResponse
+     */
+    companyId?: string;
+    /**
+     * The display name associated with the form.
+     * @type {string}
+     * @memberof W4FormResponse
+     */
+    displayName?: string;
+    /**
+     * The email address of the individual associated with the form.
+     * @type {string}
+     * @memberof W4FormResponse
+     */
+    email?: string | null;
+    /**
+     * Indicates whether the form is archived.
+     * @type {boolean}
+     * @memberof W4FormResponse
+     */
+    archived?: boolean;
+    /**
+     * Form ID of previous version.
+     * @type {string}
+     * @memberof W4FormResponse
+     */
+    ancestorId?: string | null;
+    /**
+     * The signature of the form.
+     * @type {string}
+     * @memberof W4FormResponse
+     */
+    signature?: string | null;
+    /**
+     * The date the form was signed.
+     * @type {Date}
+     * @memberof W4FormResponse
+     */
+    signedDate?: Date | null;
+    /**
+     * The date when e-delivery was consented.
+     * @type {Date}
+     * @memberof W4FormResponse
+     */
+    eDeliveryConsentedAt?: Date | null;
+    /**
+     * The creation date of the form.
+     * @type {Date}
+     * @memberof W4FormResponse
+     */
+    createdAt?: Date;
+    /**
+     * The last updated date of the form.
+     * @type {Date}
+     * @memberof W4FormResponse
+     */
+    updatedAt?: Date;
 }
 
-
+/**
+* @export
+* @enum {string}
+*/
+export enum W4FormResponseTypeEnum {
+    W4 = 'W4',
+    W8Ben = 'W8Ben',
+    W8BenE = 'W8BenE',
+    W8Imy = 'W8Imy',
+    W9 = 'W9'
+}
 
 /**
  * Check if a given object implements the W4FormResponse interface.
@@ -168,7 +256,8 @@ export function W4FormResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         return json;
     }
     return {
-        ...W9FormBaseResponseFromJSONTyped(json, ignoreDiscriminator),
+        
+        'type': !exists(json, 'type') ? undefined : json['type'],
         'employeeFirstName': !exists(json, 'employeeFirstName') ? undefined : json['employeeFirstName'],
         'employeeMiddleName': !exists(json, 'employeeMiddleName') ? undefined : json['employeeMiddleName'],
         'employeeLastName': !exists(json, 'employeeLastName') ? undefined : json['employeeLastName'],
@@ -188,6 +277,19 @@ export function W4FormResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         'additionalWithheld': !exists(json, 'additionalWithheld') ? undefined : json['additionalWithheld'],
         'exemptFromWithholding': !exists(json, 'exemptFromWithholding') ? undefined : json['exemptFromWithholding'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'entryStatus': !exists(json, 'entryStatus') ? undefined : EntryStatusResponseFromJSON(json['entryStatus']),
+        'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
+        'displayName': !exists(json, 'displayName') ? undefined : json['displayName'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+        'archived': !exists(json, 'archived') ? undefined : json['archived'],
+        'ancestorId': !exists(json, 'ancestorId') ? undefined : json['ancestorId'],
+        'signature': !exists(json, 'signature') ? undefined : json['signature'],
+        'signedDate': !exists(json, 'signedDate') ? undefined : (json['signedDate'] === null ? null : new Date(json['signedDate'])),
+        'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
+        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
 }
 
@@ -199,7 +301,7 @@ export function W4FormResponseToJSON(value?: W4FormResponse | null): any {
         return null;
     }
     return {
-        ...W9FormBaseResponseToJSON(value),
+        
         'employeeFirstName': value.employeeFirstName,
         'employeeMiddleName': value.employeeMiddleName,
         'employeeLastName': value.employeeLastName,
@@ -219,5 +321,18 @@ export function W4FormResponseToJSON(value?: W4FormResponse | null): any {
         'additionalWithheld': value.additionalWithheld,
         'exemptFromWithholding': value.exemptFromWithholding,
         'officeCode': value.officeCode,
+        'id': value.id,
+        'entryStatus': EntryStatusResponseToJSON(value.entryStatus),
+        'referenceId': value.referenceId,
+        'companyId': value.companyId,
+        'displayName': value.displayName,
+        'email': value.email,
+        'archived': value.archived,
+        'ancestorId': value.ancestorId,
+        'signature': value.signature,
+        'signedDate': value.signedDate === undefined ? undefined : (value.signedDate === null ? null : value.signedDate.toISOString()),
+        'eDeliveryConsentedAt': value.eDeliveryConsentedAt === undefined ? undefined : (value.eDeliveryConsentedAt === null ? null : value.eDeliveryConsentedAt.toISOString()),
+        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
     };
 }

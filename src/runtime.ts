@@ -270,9 +270,15 @@ export class ApiClient {
       context.headers
     );
     const { appName, appVersion, machineName } = this.configuration;
-    headers[
-      "X-Avalara-Client"
-    ] = `${appName}; ${appVersion}; JavascriptSdk; ${this.sdkVersion}; ${machineName}`;
+    const sdkClientHeader = `${appName}; ${appVersion}; JavascriptSdk; ${this.sdkVersion}; ${machineName}`;
+    
+    // Always set X-Avalara-SDK-Client to SDK info
+    headers["X-Avalara-SDK-Client"] = sdkClientHeader;
+    
+    // If X-Avalara-Client is null/empty, set it to SDK info as well
+    if (!headers["X-Avalara-Client"] || headers["X-Avalara-Client"].trim() === "") {
+      headers["X-Avalara-Client"] = sdkClientHeader;
+    }
     const init: RequestInit = {
       method: context.method,
       headers,

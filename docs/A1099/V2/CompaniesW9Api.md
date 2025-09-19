@@ -4,16 +4,16 @@ All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createCompany**](CompaniesW9Api.md#createcompanyoperation) | **POST** /w9/companies | Create a company
+[**createCompany**](CompaniesW9Api.md#createcompany) | **POST** /w9/companies | Create a company
 [**deleteCompany**](CompaniesW9Api.md#deletecompany) | **DELETE** /w9/companies/{id} | Delete a company
 [**getCompanies**](CompaniesW9Api.md#getcompanies) | **GET** /w9/companies | List companies
 [**getCompany**](CompaniesW9Api.md#getcompany) | **GET** /w9/companies/{id} | Retrieve a company
 [**updateCompany**](CompaniesW9Api.md#updatecompany) | **PUT** /w9/companies/{id} | Update a company
 
 
-<a name="createcompanyoperation"></a>
+<a name="createcompany"></a>
 # **createCompany**
-> CompanyResponse createCompany (string avalaraVersion, string xCorrelationId, string xAvalaraClient, CreateCompanyRequest createCompanyRequest)
+> CompanyResponse createCompany (string avalaraVersion, string xCorrelationId, string xAvalaraClient, CompanyRequest companyRequest)
 
 Create a company
 
@@ -45,7 +45,7 @@ Name | Type | Description  | Notes
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
- **createCompanyRequest** | [**CreateCompanyRequest**](CreateCompanyRequest.md)| The company to create | [optional] 
+ **companyRequest** | [**CompanyRequest**](CompanyRequest.md)| The company to create | [optional] 
 
 ### Return type
 
@@ -260,7 +260,7 @@ Name | Type | Description  | Notes
 
 <a name="updatecompany"></a>
 # **updateCompany**
-> CompanyResponse updateCompany (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, CreateCompanyRequest createCompanyRequest)
+> CompanyResponse updateCompany (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, CompanyRequest companyRequest)
 
 Update a company
 
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
- **createCompanyRequest** | [**CreateCompanyRequest**](CreateCompanyRequest.md)| The updated company data | [optional] 
+ **companyRequest** | [**CompanyRequest**](CompanyRequest.md)| The updated company data | [optional] 
 
 ### Return type
 

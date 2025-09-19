@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **string** | The form type. | [optional] [readonly] [default to undefined]
 **id** | **string** | The unique identifier for the form. | [optional] [default to undefined]
 **entryStatus** | [**EntryStatusResponse**](EntryStatusResponse.md) | The entry status information for the form. | [optional] [default to undefined]
 **referenceId** | **string** | A reference identifier for the form. | [optional] [default to undefined]
@@ -17,7 +18,6 @@ Name | Type | Description | Notes
 **eDeliveryConsentedAt** | **Date** | The date when e-delivery was consented. | [optional] [default to undefined]
 **createdAt** | **Date** | The creation date of the form. | [optional] [default to undefined]
 **updatedAt** | **Date** | The last updated date of the form. | [optional] [default to undefined]
-**type** | **string** | The type of the response object. | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

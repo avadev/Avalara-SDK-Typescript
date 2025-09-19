@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **employeeFirstName** | **string** | The first name of the employee. | [default to undefined]
 **employeeLastName** | **string** | The last name of the employee. | [default to undefined]
 **officeCode** | **string** | The office code associated with the form. | [optional] [default to undefined]
-**companyId** | **string** | The ID of the associated company. | [default to undefined]
+**companyId** | **string** | The ID of the associated company. Required when creating a form. | [optional] [default to undefined]
 **referenceId** | **string** | A reference identifier for the form. | [optional] [default to undefined]
 **name** | **string** | The name of the individual or entity associated with the form. | [default to undefined]
 **referenceNumber** | **string** | A reference number for the form. | [optional] [default to undefined]

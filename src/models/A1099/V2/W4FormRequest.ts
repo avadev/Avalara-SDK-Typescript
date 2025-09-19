@@ -30,7 +30,7 @@ export interface W4FormRequest {
      * @type {string}
      * @memberof W4FormRequest
      */
-    employeeFirstName?: string;
+    employeeFirstName: string;
     /**
      * The middle name of the employee.
      * @type {string}
@@ -42,7 +42,7 @@ export interface W4FormRequest {
      * @type {string}
      * @memberof W4FormRequest
      */
-    employeeLastName?: string;
+    employeeLastName: string;
     /**
      * The name suffix of the employee.
      * @type {string}
@@ -50,43 +50,47 @@ export interface W4FormRequest {
      */
     employeeNameSuffix?: string | null;
     /**
-     * The type of TIN provided.
+     * Tax Identification Number (TIN) type.
      * @type {string}
      * @memberof W4FormRequest
      */
-    tinType?: string;
+    tinType: string;
     /**
      * The taxpayer identification number (TIN).
      * @type {string}
      * @memberof W4FormRequest
      */
-    tin?: string;
+    tin: string;
     /**
-     * The address of the employee.
+     * The address of the employee. Required unless exempt.
      * @type {string}
      * @memberof W4FormRequest
      */
     address?: string | null;
     /**
-     * The city of residence of the employee.
+     * The city of residence of the employee. Required unless exempt.
      * @type {string}
      * @memberof W4FormRequest
      */
     city?: string | null;
     /**
-     * The state of residence of the employee.
+     * The state of residence of the employee. Required unless exempt.
      * @type {string}
      * @memberof W4FormRequest
      */
     state?: string | null;
     /**
-     * The ZIP code of residence of the employee.
+     * The ZIP code of residence of the employee. Required unless exempt.
      * @type {string}
      * @memberof W4FormRequest
      */
     zip?: string | null;
     /**
-     * The marital status of the employee.
+     * The marital status of the employee. Required unless exempt.
+     * Available values:
+     * - Single: Single or Married filing separately
+     * - Married: Married filing jointly or qualifying surviving spouse
+     * - MarriedBut: Head of household. Check only if you're unmarried and pay more than half the costs of keeping up a home for yourself and a qualifying individual.
      * @type {string}
      * @memberof W4FormRequest
      */
@@ -152,11 +156,11 @@ export interface W4FormRequest {
      */
     signature?: string | null;
     /**
-     * The ID of the associated company.
+     * The ID of the associated company. Required when creating a form.
      * @type {string}
      * @memberof W4FormRequest
      */
-    companyId: string;
+    companyId?: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -188,7 +192,10 @@ export enum W4FormRequestTypeEnum {
  */
 export function instanceOfW4FormRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "companyId" in value;
+    isInstance = isInstance && "employeeFirstName" in value;
+    isInstance = isInstance && "employeeLastName" in value;
+    isInstance = isInstance && "tinType" in value;
+    isInstance = isInstance && "tin" in value;
 
     return isInstance;
 }
@@ -204,12 +211,12 @@ export function W4FormRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'employeeFirstName': !exists(json, 'employeeFirstName') ? undefined : json['employeeFirstName'],
+        'employeeFirstName': json['employeeFirstName'],
         'employeeMiddleName': !exists(json, 'employeeMiddleName') ? undefined : json['employeeMiddleName'],
-        'employeeLastName': !exists(json, 'employeeLastName') ? undefined : json['employeeLastName'],
+        'employeeLastName': json['employeeLastName'],
         'employeeNameSuffix': !exists(json, 'employeeNameSuffix') ? undefined : json['employeeNameSuffix'],
-        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
-        'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'tinType': json['tinType'],
+        'tin': json['tin'],
         'address': !exists(json, 'address') ? undefined : json['address'],
         'city': !exists(json, 'city') ? undefined : json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
@@ -225,7 +232,7 @@ export function W4FormRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
-        'companyId': json['companyId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
     };

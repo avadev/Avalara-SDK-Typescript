@@ -1,6 +1,6 @@
 {
   "name": "avalara-sdk",
-  "version": "25.8.3",
+  "version": "25.9.0",
   "description": "OpenAPI client for avalara-sdk",
   "author": "OpenAPI-Generator",
   "main": "./dist/index.js",

@@ -18,15 +18,12 @@ import { RequestInit } from 'node-fetch';
 import LogObject from '../../../utils/logObject';
 
 import {
+    CompanyRequest,
+    CompanyRequestFromJSON,
+    CompanyRequestToJSON,
     CompanyResponse,
     CompanyResponseFromJSON,
     CompanyResponseToJSON,
-    CreateCompanyRequest,
-    CreateCompanyRequestFromJSON,
-    CreateCompanyRequestToJSON,
-    ErrorModel,
-    ErrorModelFromJSON,
-    ErrorModelToJSON,
     ErrorResponse,
     ErrorResponseFromJSON,
     ErrorResponseToJSON,
@@ -35,11 +32,11 @@ import {
     PaginatedQueryResultModelCompanyResponseToJSON,
 } from '../../../packages/A1099/V2';
 
-export interface CreateCompanyOperationInterface {
+export interface CreateCompanyInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    createCompanyRequest?: CreateCompanyRequest;
+    companyRequest?: CompanyRequest;
 }
 
 export interface DeleteCompanyInterface {
@@ -73,14 +70,14 @@ export interface UpdateCompanyInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    createCompanyRequest?: CreateCompanyRequest;
+    companyRequest?: CompanyRequest;
 }
 
 /**
  * 
  */
 export class CompaniesW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.3';
+    public sdkVersion: string = '25.9.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -90,7 +87,7 @@ export class CompaniesW9Api extends runtime.ApiClient {
      * Create a company.
      * Create a company
      */
-    async createCompanyRaw(requestParameters: CreateCompanyOperationInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CompanyResponse>, logObject: LogObject }> {
+    async createCompanyRaw(requestParameters: CreateCompanyInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<CompanyResponse>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling createCompany.');
@@ -121,7 +118,7 @@ export class CompaniesW9Api extends runtime.ApiClient {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateCompanyRequestToJSON(requestParameters.createCompanyRequest),
+            body: CompanyRequestToJSON(requestParameters.companyRequest),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
         return { response: new runtime.JSONApiResponse(response, (jsonValue) => CompanyResponseFromJSON(jsonValue)), logObject };
@@ -131,7 +128,7 @@ export class CompaniesW9Api extends runtime.ApiClient {
      * Create a company.
      * Create a company
      */
-    async createCompany(requestParameters: CreateCompanyOperationInterface, initOverrides?: RequestInit): Promise<CompanyResponse> {
+    async createCompany(requestParameters: CreateCompanyInterface, initOverrides?: RequestInit): Promise<CompanyResponse> {
         const { response, logObject } = await this.createCompanyRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -358,7 +355,7 @@ export class CompaniesW9Api extends runtime.ApiClient {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateCompanyRequestToJSON(requestParameters.createCompanyRequest),
+            body: CompanyRequestToJSON(requestParameters.companyRequest),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
         return { response: new runtime.JSONApiResponse(response, (jsonValue) => CompanyResponseFromJSON(jsonValue)), logObject };

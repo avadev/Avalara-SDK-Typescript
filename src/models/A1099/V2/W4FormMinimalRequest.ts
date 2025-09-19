@@ -50,11 +50,11 @@ export interface W4FormMinimalRequest {
      */
     officeCode?: string | null;
     /**
-     * The ID of the associated company.
+     * The ID of the associated company. Required when creating a form.
      * @type {string}
      * @memberof W4FormMinimalRequest
      */
-    companyId: string;
+    companyId?: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -83,7 +83,6 @@ export function instanceOfW4FormMinimalRequest(value: object): boolean {
     isInstance = isInstance && "email" in value;
     isInstance = isInstance && "employeeFirstName" in value;
     isInstance = isInstance && "employeeLastName" in value;
-    isInstance = isInstance && "companyId" in value;
 
     return isInstance;
 }
@@ -103,7 +102,7 @@ export function W4FormMinimalRequestFromJSONTyped(json: any, ignoreDiscriminator
         'employeeFirstName': json['employeeFirstName'],
         'employeeLastName': json['employeeLastName'],
         'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
-        'companyId': json['companyId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
     };
 }

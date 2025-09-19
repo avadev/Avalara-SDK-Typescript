@@ -45,29 +45,35 @@ import {
  */
 export interface Form1099K {
     /**
-     * Filer type (PSE or EPF)
+     * Filer type for tax reporting purposes.
+     * Available values:
+     * - PSE: Payment Settlement Entity
+     * - EPF: Electronic Payment Facilitator or other third party
      * @type {string}
      * @memberof Form1099K
      */
-    filerType?: Form1099KFilerTypeEnum;
+    filerType: Form1099KFilerTypeEnum;
     /**
-     * Payment type (payment card or third party network)
+     * Payment type for transaction classification.
+     * Available values:
+     * - PaymentCard: Payment card transactions
+     * - ThirdPartyNetwork: Third party network transactions
      * @type {string}
      * @memberof Form1099K
      */
-    paymentType?: Form1099KPaymentTypeEnum;
+    paymentType: Form1099KPaymentTypeEnum;
     /**
-     * Payment settlement entity name and phone number
+     * Payment settlement entity name and phone number, if different from Filer's
      * @type {string}
      * @memberof Form1099K
      */
     paymentSettlementEntityNamePhoneNumber?: string | null;
     /**
-     * Gross amount of payment card/third party network transactions
+     * Gross amount of payment card/third party network transactions. This value must equal the total of all monthly payment amounts (January through December).
      * @type {number}
      * @memberof Form1099K
      */
-    grossAmountPaymentCard?: number | null;
+    grossAmountPaymentCard: number | null;
     /**
      * Card not present transactions
      * @type {number}
@@ -75,7 +81,7 @@ export interface Form1099K {
      */
     cardNotPresentTransactions?: number | null;
     /**
-     * Merchant category code
+     * Merchant category code (4 numbers)
      * @type {string}
      * @memberof Form1099K
      */
@@ -85,7 +91,7 @@ export interface Form1099K {
      * @type {number}
      * @memberof Form1099K
      */
-    paymentTransactionNumber?: number | null;
+    paymentTransactionNumber: number | null;
     /**
      * Federal income tax withheld
      * @type {number}
@@ -165,7 +171,7 @@ export interface Form1099K {
      */
     december?: number | null;
     /**
-     * Form type
+     * Form type.
      * @type {string}
      * @memberof Form1099K
      */
@@ -183,7 +189,7 @@ export interface Form1099K {
      */
     issuerId?: string | null;
     /**
-     * Issuer Reference ID - only required when creating forms
+     * Issuer Reference ID - only required when creating forms via $bulk-upsert
      * @type {string}
      * @memberof Form1099K
      */
@@ -195,7 +201,7 @@ export interface Form1099K {
      */
     issuerTin?: string | null;
     /**
-     * Tax Year - only required when creating forms
+     * Tax Year - only required when creating forms via $bulk-upsert
      * @type {number}
      * @memberof Form1099K
      */
@@ -219,7 +225,13 @@ export interface Form1099K {
      */
     recipientName: string | null;
     /**
-     * Type of TIN (Tax ID Number)
+     * Tax Identification Number (TIN) type.
+     * 
+     * Available values:
+     * - EIN: Employer Identification Number
+     * - SSN: Social Security Number
+     * - ITIN: Individual Taxpayer Identification Number
+     * - ATIN: Adoption Taxpayer Identification Number
      * @type {string}
      * @memberof Form1099K
      */
@@ -291,7 +303,7 @@ export interface Form1099K {
      */
     countryCode: string | null;
     /**
-     * Date when federal e-filing should be scheduled for this form
+     * Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099K
      */
@@ -303,13 +315,13 @@ export interface Form1099K {
      */
     postalMail?: boolean | null;
     /**
-     * Date when state e-filing should be scheduled for this form
+     * Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099K
      */
     stateEfileDate?: Date | null;
     /**
-     * Date when recipient e-delivery should be scheduled for this form
+     * Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
      * @memberof Form1099K
      */
@@ -343,39 +355,93 @@ export interface Form1099K {
      * @type {boolean}
      * @memberof Form1099K
      */
-    secondTinNotice?: boolean;
+    secondTinNotice?: boolean | null;
     /**
-     * Federal e-file status
+     * Federal e-file status.
+     * Available values:
+     * - unscheduled: Form has not been scheduled for federal e-filing
+     * - scheduled: Form is scheduled for federal e-filing
+     * - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)
+     * - sent: Form has been sent to the IRS
+     * - accepted: Form was accepted by the IRS
+     * - corrected_scheduled: Correction is scheduled to be sent
+     * - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)
+     * - corrected: A correction has been sent to the IRS
+     * - corrected_accepted: Correction was accepted by the IRS
+     * - rejected: Form was rejected by the IRS
+     * - corrected_rejected: Correction was rejected by the IRS
+     * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
      * @type {Form1099StatusDetail}
      * @memberof Form1099K
      */
     readonly federalEfileStatus?: Form1099StatusDetail | null;
     /**
-     * State e-file status
+     * State e-file status.
+     * Available values:
+     * - unscheduled: Form has not been scheduled for state e-filing
+     * - scheduled: Form is scheduled for state e-filing
+     * - airlocked: Form is in process of being uploaded to the state
+     * - sent: Form has been sent to the state
+     * - rejected: Form was rejected by the state
+     * - accepted: Form was accepted by the state
+     * - corrected_scheduled: Correction is scheduled to be sent
+     * - corrected_airlocked: Correction is in process of being uploaded to the state
+     * - corrected_sent: Correction has been sent to the state
+     * - corrected_rejected: Correction was rejected by the state
+     * - corrected_accepted: Correction was accepted by the state
      * @type {Array<StateEfileStatusDetail>}
      * @memberof Form1099K
      */
     readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
     /**
-     * Postal mail to recipient status
+     * Postal mail to recipient status.
+     * Available values:
+     * - unscheduled: Postal mail has not been scheduled
+     * - pending: Postal mail is pending to be sent
+     * - sent: Postal mail has been sent
+     * - delivered: Postal mail has been delivered
      * @type {Form1099StatusDetail}
      * @memberof Form1099K
      */
     readonly postalMailStatus?: Form1099StatusDetail | null;
     /**
-     * TIN Match status
+     * TIN Match status.
+     * Available values:
+     * - none: TIN matching has not been performed
+     * - pending: TIN matching request is pending
+     * - matched: Name/TIN combination matches IRS records
+     * - unknown: TIN is missing, invalid, or request contains errors
+     * - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
      * @type {Form1099StatusDetail}
      * @memberof Form1099K
      */
     readonly tinMatchStatus?: Form1099StatusDetail | null;
     /**
-     * Address verification status
+     * Address verification status.
+     * Available values:
+     * - unknown: Address verification has not been checked
+     * - pending: Address verification is in progress
+     * - failed: Address verification failed
+     * - incomplete: Address verification is incomplete
+     * - unchanged: User declined address changes
+     * - verified: Address has been verified and accepted
      * @type {Form1099StatusDetail}
      * @memberof Form1099K
      */
     readonly addressVerificationStatus?: Form1099StatusDetail | null;
     /**
-     * EDelivery status
+     * EDelivery status.
+     * Available values:
+     * - unscheduled: E-delivery has not been scheduled
+     * - scheduled: E-delivery is scheduled to be sent
+     * - sent: E-delivery has been sent to recipient
+     * - bounced: E-delivery bounced back (invalid email)
+     * - refused: E-delivery was refused by recipient
+     * - bad_verify: E-delivery failed verification
+     * - accepted: E-delivery was accepted by recipient
+     * - bad_verify_limit: E-delivery failed verification limit reached
+     * - second_delivery: Second e-delivery attempt
+     * - undelivered: E-delivery is undelivered (temporary state allowing resend)
      * @type {Form1099StatusDetail}
      * @memberof Form1099K
      */
@@ -406,35 +472,33 @@ export interface Form1099K {
 */
 export enum Form1099KFilerTypeEnum {
     Pse = 'PSE',
-    Epf = 'EPF',
-    Other = 'Other'
+    Epf = 'EPF'
 }/**
 * @export
 * @enum {string}
 */
 export enum Form1099KPaymentTypeEnum {
-    MerchantPaymentCard = 'MerchantPaymentCard',
+    PaymentCard = 'PaymentCard',
     ThirdPartyNetwork = 'ThirdPartyNetwork'
 }/**
 * @export
 * @enum {string}
 */
 export enum Form1099KTypeEnum {
-    _1099Nec = '1099-NEC',
-    _1099Misc = '1099-MISC',
-    _1099Div = '1099-DIV',
-    _1099R = '1099-R',
-    _1099K = '1099-K',
-    _1095B = '1095-B',
-    _1042S = '1042-S',
-    _1095C = '1095-C',
-    _1099Int = '1099-INT'
+    Form1099Nec = 'Form1099Nec',
+    Form1099Misc = 'Form1099Misc',
+    Form1099Div = 'Form1099Div',
+    Form1099R = 'Form1099R',
+    Form1099K = 'Form1099K',
+    Form1095B = 'Form1095B',
+    Form1042S = 'Form1042S',
+    Form1095C = 'Form1095C',
+    Form1099Int = 'Form1099Int'
 }/**
 * @export
 * @enum {string}
 */
 export enum Form1099KTinTypeEnum {
-    Empty = 'Empty',
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',
@@ -446,6 +510,10 @@ export enum Form1099KTinTypeEnum {
  */
 export function instanceOfForm1099K(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "filerType" in value;
+    isInstance = isInstance && "paymentType" in value;
+    isInstance = isInstance && "grossAmountPaymentCard" in value;
+    isInstance = isInstance && "paymentTransactionNumber" in value;
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "recipientName" in value;
     isInstance = isInstance && "address" in value;
@@ -465,13 +533,13 @@ export function Form1099KFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
-        'filerType': !exists(json, 'filerType') ? undefined : json['filerType'],
-        'paymentType': !exists(json, 'paymentType') ? undefined : json['paymentType'],
+        'filerType': json['filerType'],
+        'paymentType': json['paymentType'],
         'paymentSettlementEntityNamePhoneNumber': !exists(json, 'paymentSettlementEntityNamePhoneNumber') ? undefined : json['paymentSettlementEntityNamePhoneNumber'],
-        'grossAmountPaymentCard': !exists(json, 'grossAmountPaymentCard') ? undefined : json['grossAmountPaymentCard'],
+        'grossAmountPaymentCard': json['grossAmountPaymentCard'],
         'cardNotPresentTransactions': !exists(json, 'cardNotPresentTransactions') ? undefined : json['cardNotPresentTransactions'],
         'merchantCategoryCode': !exists(json, 'merchantCategoryCode') ? undefined : json['merchantCategoryCode'],
-        'paymentTransactionNumber': !exists(json, 'paymentTransactionNumber') ? undefined : json['paymentTransactionNumber'],
+        'paymentTransactionNumber': json['paymentTransactionNumber'],
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
         'january': !exists(json, 'january') ? undefined : json['january'],
         'february': !exists(json, 'february') ? undefined : json['february'],

@@ -30,7 +30,7 @@ export interface W9FormRequest {
      * @type {string}
      * @memberof W9FormRequest
      */
-    name?: string;
+    name: string;
     /**
      * The name of the business associated with the form.
      * @type {string}
@@ -39,10 +39,20 @@ export interface W9FormRequest {
     businessName?: string | null;
     /**
      * The classification of the business.
+     * Available values:
+     * - Individual: Individual/sole proprietor
+     * - C Corporation: C Corporation
+     * - S Corporation: S Corporation
+     * - Partnership: Partnership
+     * - Trust/estate: Trust/estate
+     * - LLC-C: Limited liability company (C Corporation)
+     * - LLC-S: Limited liability company (S Corporation)
+     * - LLC-P: Limited liability company (Partnership)
+     * - Other: Other (requires BusinessOther field to be populated)
      * @type {string}
      * @memberof W9FormRequest
      */
-    businessClassification?: string;
+    businessClassification: string;
     /**
      * The classification description when "businessClassification" is "Other".
      * @type {string}
@@ -78,7 +88,7 @@ export interface W9FormRequest {
      * @type {string}
      * @memberof W9FormRequest
      */
-    address?: string;
+    address: string;
     /**
      * The foreign address of the individual or entity.
      * @type {string}
@@ -90,19 +100,19 @@ export interface W9FormRequest {
      * @type {string}
      * @memberof W9FormRequest
      */
-    city?: string | null;
+    city: string | null;
     /**
      * The state of the address.
      * @type {string}
      * @memberof W9FormRequest
      */
-    state?: string | null;
+    state: string | null;
     /**
      * The ZIP code of the address.
      * @type {string}
      * @memberof W9FormRequest
      */
-    zip?: string | null;
+    zip: string | null;
     /**
      * The account number associated with the form.
      * @type {string}
@@ -110,17 +120,17 @@ export interface W9FormRequest {
      */
     accountNumber?: string | null;
     /**
-     * The type of TIN provided.
+     * Tax Identification Number (TIN) type. SSN/ITIN (for individuals) and EIN (for businesses).
      * @type {string}
      * @memberof W9FormRequest
      */
-    tinType?: string;
+    tinType: string;
     /**
      * The taxpayer identification number (TIN).
      * @type {string}
      * @memberof W9FormRequest
      */
-    tin?: string;
+    tin: string;
     /**
      * Indicates whether backup withholding applies.
      * @type {boolean}
@@ -146,11 +156,11 @@ export interface W9FormRequest {
      */
     signature?: string | null;
     /**
-     * The ID of the associated company.
+     * The ID of the associated company. Required when creating a form.
      * @type {string}
      * @memberof W9FormRequest
      */
-    companyId: string;
+    companyId?: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -182,7 +192,14 @@ export enum W9FormRequestTypeEnum {
  */
 export function instanceOfW9FormRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "companyId" in value;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "businessClassification" in value;
+    isInstance = isInstance && "address" in value;
+    isInstance = isInstance && "city" in value;
+    isInstance = isInstance && "state" in value;
+    isInstance = isInstance && "zip" in value;
+    isInstance = isInstance && "tinType" in value;
+    isInstance = isInstance && "tin" in value;
 
     return isInstance;
 }
@@ -198,27 +215,27 @@ export function W9FormRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'name': json['name'],
         'businessName': !exists(json, 'businessName') ? undefined : json['businessName'],
-        'businessClassification': !exists(json, 'businessClassification') ? undefined : json['businessClassification'],
+        'businessClassification': json['businessClassification'],
         'businessOther': !exists(json, 'businessOther') ? undefined : json['businessOther'],
         'foreignPartnerOwnerOrBeneficiary': !exists(json, 'foreignPartnerOwnerOrBeneficiary') ? undefined : json['foreignPartnerOwnerOrBeneficiary'],
         'exemptPayeeCode': !exists(json, 'exemptPayeeCode') ? undefined : json['exemptPayeeCode'],
         'exemptFatcaCode': !exists(json, 'exemptFatcaCode') ? undefined : json['exemptFatcaCode'],
         'foreignCountryIndicator': !exists(json, 'foreignCountryIndicator') ? undefined : json['foreignCountryIndicator'],
-        'address': !exists(json, 'address') ? undefined : json['address'],
+        'address': json['address'],
         'foreignAddress': !exists(json, 'foreignAddress') ? undefined : json['foreignAddress'],
-        'city': !exists(json, 'city') ? undefined : json['city'],
-        'state': !exists(json, 'state') ? undefined : json['state'],
-        'zip': !exists(json, 'zip') ? undefined : json['zip'],
+        'city': json['city'],
+        'state': json['state'],
+        'zip': json['zip'],
         'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
-        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
-        'tin': !exists(json, 'tin') ? undefined : json['tin'],
+        'tinType': json['tinType'],
+        'tin': json['tin'],
         'backupWithholding': !exists(json, 'backupWithholding') ? undefined : json['backupWithholding'],
         'is1099able': !exists(json, 'is1099able') ? undefined : json['is1099able'],
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
-        'companyId': json['companyId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
     };

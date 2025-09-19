@@ -18,12 +18,12 @@ import { RequestInit } from 'node-fetch';
 import LogObject from '../../../utils/logObject';
 
 import {
-    CreateIssuerRequest,
-    CreateIssuerRequestFromJSON,
-    CreateIssuerRequestToJSON,
     ErrorResponse,
     ErrorResponseFromJSON,
     ErrorResponseToJSON,
+    IssuerRequest,
+    IssuerRequestFromJSON,
+    IssuerRequestToJSON,
     IssuerResponse,
     IssuerResponseFromJSON,
     IssuerResponseToJSON,
@@ -32,11 +32,11 @@ import {
     PaginatedQueryResultModelIssuerResponseToJSON,
 } from '../../../packages/A1099/V2';
 
-export interface CreateIssuerOperationInterface {
+export interface CreateIssuerInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    createIssuerRequest?: CreateIssuerRequest;
+    issuerRequest?: IssuerRequest;
 }
 
 export interface DeleteIssuerInterface {
@@ -70,14 +70,14 @@ export interface UpdateIssuerInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
     xAvalaraClient?: string;
-    createIssuerRequest?: CreateIssuerRequest;
+    issuerRequest?: IssuerRequest;
 }
 
 /**
  * 
  */
 export class Issuers1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.3';
+    public sdkVersion: string = '25.9.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -87,7 +87,7 @@ export class Issuers1099Api extends runtime.ApiClient {
      * Create an issuer (also known as a Payer).
      * Create an issuer
      */
-    async createIssuerRaw(requestParameters: CreateIssuerOperationInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IssuerResponse>, logObject: LogObject }> {
+    async createIssuerRaw(requestParameters: CreateIssuerInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IssuerResponse>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
             throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling createIssuer.');
@@ -118,7 +118,7 @@ export class Issuers1099Api extends runtime.ApiClient {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateIssuerRequestToJSON(requestParameters.createIssuerRequest),
+            body: IssuerRequestToJSON(requestParameters.issuerRequest),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
         return { response: new runtime.JSONApiResponse(response, (jsonValue) => IssuerResponseFromJSON(jsonValue)), logObject };
@@ -128,7 +128,7 @@ export class Issuers1099Api extends runtime.ApiClient {
      * Create an issuer (also known as a Payer).
      * Create an issuer
      */
-    async createIssuer(requestParameters: CreateIssuerOperationInterface, initOverrides?: RequestInit): Promise<IssuerResponse> {
+    async createIssuer(requestParameters: CreateIssuerInterface, initOverrides?: RequestInit): Promise<IssuerResponse> {
         const { response, logObject } = await this.createIssuerRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
@@ -355,7 +355,7 @@ export class Issuers1099Api extends runtime.ApiClient {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateIssuerRequestToJSON(requestParameters.createIssuerRequest),
+            body: IssuerRequestToJSON(requestParameters.issuerRequest),
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
         return { response: new runtime.VoidApiResponse(response), logObject };

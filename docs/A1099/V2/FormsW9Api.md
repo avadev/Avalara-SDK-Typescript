@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | The created W9/W4/W8 form |  -  |
-| **400** | Bad request (e.g., invalid sort key) |  -  |
+| **400** | Bad request (e.g., missing required field) |  -  |
 | **401** | Authentication failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
@@ -186,8 +186,8 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Empty response |  -  |
-| **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
+| **404** | W9/W4/W8 form not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -308,9 +308,9 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **200** | list |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
-| **200** | list |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -320,7 +320,7 @@ Name | Type | Description  | Notes
 
 Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
 
-Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.   If the form is not in \'Requested\' status, it will either use an existing descendant form   in \'Requested\' status or create a new minimal form and send the email request.
+Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.  If the form is not in \'Requested\' status, it will either use an existing descendant form  in \'Requested\' status or create a new minimal form and send the email request.
 
 ### Example
 ```typescript
@@ -369,14 +369,15 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 | **200** | Email sent using existing form (form was already in \&#39;Requested\&#39; status or descendant found) |  -  |
 | **201** | Email sent using newly created minimal form |  -  |
-| **400** | Bad request (e.g., invalid sort key) |  -  |
+| **400** | Bad request (e.g., missing vendor e-mail) |  -  |
 | **401** | Authentication failed |  -  |
+| **404** | W9/W4/W8 form not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 <a name="updatew9form"></a>
 # **updateW9Form**
-> IW9FormDataModelsOneOf updateW9Form (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, IW9FormDataModelsOneOf iW9FormDataModelsOneOf)
+> CreateW9Form201Response updateW9Form (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, CreateW9FormRequest createW9FormRequest)
 
 Update a W9/W4/W8 form
 
@@ -409,11 +410,11 @@ Name | Type | Description  | Notes
  **avalaraVersion** | **string**| API version | [default to undefined]
  **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
  **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
- **iW9FormDataModelsOneOf** | [**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)| Form to be updated | [optional] 
+ **createW9FormRequest** | [**CreateW9FormRequest**](CreateW9FormRequest.md)| Form to be updated | [optional] 
 
 ### Return type
 
-[**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)
+[**CreateW9Form201Response**](CreateW9Form201Response.md)
 
 ### Authorization
 
@@ -429,7 +430,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The updated W9/W4/W8 form |  -  |
-| **400** | Bad request (e.g., invalid sort key) |  -  |
+| **400** | Bad request (e.g., missing required field) |  -  |
 | **401** | Authentication failed |  -  |
 | **404** | W9/W4/W8 form not found |  -  |
 
@@ -490,9 +491,9 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Bad request (e.g., Only .pdf files are allowed.) |  -  |
+| **400** | Bad request (e.g., only .pdf files are allowed.) |  -  |
 | **401** | Authentication failed |  -  |
-| **404** | Not Found |  -  |
+| **404** | W9/W4/W8 form not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

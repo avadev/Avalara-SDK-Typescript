@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **string** | The form type (always \&quot;W9\&quot; for this model). | [optional] [readonly] [default to undefined]
 **name** | **string** | The name of the individual or entity associated with the form. | [optional] [default to undefined]
 **businessName** | **string** | The name of the business associated with the form. | [optional] [default to undefined]
 **businessClassification** | **string** | The classification of the business. | [optional] [default to undefined]
@@ -18,11 +19,24 @@ Name | Type | Description | Notes
 **state** | **string** | The state of the address. | [optional] [default to undefined]
 **zip** | **string** | The ZIP code of the address. | [optional] [default to undefined]
 **accountNumber** | **string** | The account number associated with the form. | [optional] [default to undefined]
-**tinType** | **string** | The type of TIN provided. | [optional] [default to undefined]
+**tinType** | **string** | Tax Identification Number (TIN) type. | [optional] [default to undefined]
 **tin** | **string** | The taxpayer identification number (TIN). | [optional] [default to undefined]
 **backupWithholding** | **boolean** | Indicates whether backup withholding applies. | [optional] [default to undefined]
 **is1099able** | **boolean** | Indicates whether the individual or entity should be issued a 1099 form. | [optional] [default to undefined]
 **tinMatchStatus** | [**TinMatchStatusResponse**](TinMatchStatusResponse.md) | The TIN Match status from IRS. | [optional] [default to undefined]
+**id** | **string** | The unique identifier for the form. | [optional] [default to undefined]
+**entryStatus** | [**EntryStatusResponse**](EntryStatusResponse.md) | The entry status information for the form. | [optional] [default to undefined]
+**referenceId** | **string** | A reference identifier for the form. | [optional] [default to undefined]
+**companyId** | **string** | The ID of the associated company. | [optional] [default to undefined]
+**displayName** | **string** | The display name associated with the form. | [optional] [default to undefined]
+**email** | **string** | The email address of the individual associated with the form. | [optional] [default to undefined]
+**archived** | **boolean** | Indicates whether the form is archived. | [optional] [default to undefined]
+**ancestorId** | **string** | Form ID of previous version. | [optional] [default to undefined]
+**signature** | **string** | The signature of the form. | [optional] [default to undefined]
+**signedDate** | **Date** | The date the form was signed. | [optional] [default to undefined]
+**eDeliveryConsentedAt** | **Date** | The date when e-delivery was consented. | [optional] [default to undefined]
+**createdAt** | **Date** | The creation date of the form. | [optional] [default to undefined]
+**updatedAt** | **Date** | The last updated date of the form. | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

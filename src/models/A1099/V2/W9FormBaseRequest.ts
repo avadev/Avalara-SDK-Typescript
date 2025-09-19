@@ -38,11 +38,11 @@ export interface W9FormBaseRequest {
      */
     readonly type?: W9FormBaseRequestTypeEnum;
     /**
-     * The ID of the associated company.
+     * The ID of the associated company. Required when creating a form.
      * @type {string}
      * @memberof W9FormBaseRequest
      */
-    companyId: string;
+    companyId?: string;
     /**
      * A reference identifier for the form.
      * @type {string}
@@ -74,7 +74,6 @@ export enum W9FormBaseRequestTypeEnum {
  */
 export function instanceOfW9FormBaseRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "companyId" in value;
 
     return isInstance;
 }
@@ -92,7 +91,7 @@ export function W9FormBaseRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         'eDeliveryConsentedAt': !exists(json, 'eDeliveryConsentedAt') ? undefined : (json['eDeliveryConsentedAt'] === null ? null : new Date(json['eDeliveryConsentedAt'])),
         'signature': !exists(json, 'signature') ? undefined : json['signature'],
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'companyId': json['companyId'],
+        'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'email': !exists(json, 'email') ? undefined : json['email'],
     };

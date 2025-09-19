@@ -96,14 +96,14 @@ export interface Update1099FormInterface {
  * 
  */
 export class Forms1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.8.3';
+    public sdkVersion: string = '25.9.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
     }
 
     /**
-     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.
+     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
      * Create or update multiple 1099/1095/W2/1042S forms
      */
     async bulkUpsert1099FormsRaw(requestParameters: BulkUpsert1099FormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<JobResponse>, logObject: LogObject }> {
@@ -148,7 +148,7 @@ export class Forms1099Api extends runtime.ApiClient {
     }
 
     /**
-     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.
+     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
      * Create or update multiple 1099/1095/W2/1042S forms
      */
     async bulkUpsert1099Forms(requestParameters: BulkUpsert1099FormsInterface, initOverrides?: RequestInit): Promise<JobResponse> {
@@ -160,7 +160,7 @@ export class Forms1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Create a 1099/1095/W2/1042S form.
+     * Create a 1099/1095/W2/1042S form.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
      * Create a 1099/1095/W2/1042S form
      */
     async create1099FormRaw(requestParameters: Create1099FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Get1099Form200Response>, logObject: LogObject }> {
@@ -201,7 +201,7 @@ export class Forms1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Create a 1099/1095/W2/1042S form.
+     * Create a 1099/1095/W2/1042S form.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
      * Create a 1099/1095/W2/1042S form
      */
     async create1099Form(requestParameters: Create1099FormInterface, initOverrides?: RequestInit): Promise<Get1099Form200Response> {
@@ -451,7 +451,7 @@ export class Forms1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Update a 1099/1095/W2/1042S form.
+     * Update a 1099/1095/W2/1042S form.    **Date Update Rules:**    Possible to update scheduled dates (same validation rules apply).  Cannot change from scheduled to unscheduled status - must delete form and create new one.  If dates are between current date and blackout period, scheduled to that date.  If dates are in past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.
      * Update a 1099/1095/W2/1042S form
      */
     async update1099FormRaw(requestParameters: Update1099FormInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Get1099Form200Response>, logObject: LogObject }> {
@@ -496,7 +496,7 @@ export class Forms1099Api extends runtime.ApiClient {
     }
 
     /**
-     * Update a 1099/1095/W2/1042S form.
+     * Update a 1099/1095/W2/1042S form.    **Date Update Rules:**    Possible to update scheduled dates (same validation rules apply).  Cannot change from scheduled to unscheduled status - must delete form and create new one.  If dates are between current date and blackout period, scheduled to that date.  If dates are in past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.
      * Update a 1099/1095/W2/1042S form
      */
     async update1099Form(requestParameters: Update1099FormInterface, initOverrides?: RequestInit): Promise<Get1099Form200Response> {
