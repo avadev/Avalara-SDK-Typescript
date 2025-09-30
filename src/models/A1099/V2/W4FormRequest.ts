@@ -78,7 +78,7 @@ export interface W4FormRequest {
      * @type {string}
      * @memberof W4FormRequest
      */
-    state?: string | null;
+    state?: W4FormRequestStateEnum;
     /**
      * The ZIP code of residence of the employee. Required unless exempt.
      * @type {string}
@@ -94,7 +94,7 @@ export interface W4FormRequest {
      * @type {string}
      * @memberof W4FormRequest
      */
-    maritalStatus?: string | null;
+    maritalStatus?: W4FormRequestMaritalStatusEnum;
     /**
      * Indicates whether the last name differs from prior records.
      * @type {boolean}
@@ -185,6 +185,81 @@ export enum W4FormRequestTypeEnum {
     W8BenE = 'W8BenE',
     W8Imy = 'W8Imy',
     W9 = 'W9'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W4FormRequestStateEnum {
+    Aa = 'AA',
+    Ae = 'AE',
+    Ak = 'AK',
+    Al = 'AL',
+    Ap = 'AP',
+    Ar = 'AR',
+    As = 'AS',
+    Az = 'AZ',
+    Ca = 'CA',
+    Co = 'CO',
+    Ct = 'CT',
+    Dc = 'DC',
+    De = 'DE',
+    Fl = 'FL',
+    Fm = 'FM',
+    Ga = 'GA',
+    Gu = 'GU',
+    Hi = 'HI',
+    Ia = 'IA',
+    Id = 'ID',
+    Il = 'IL',
+    In = 'IN',
+    Ks = 'KS',
+    Ky = 'KY',
+    La = 'LA',
+    Ma = 'MA',
+    Md = 'MD',
+    Me = 'ME',
+    Mh = 'MH',
+    Mi = 'MI',
+    Mn = 'MN',
+    Mo = 'MO',
+    Mp = 'MP',
+    Ms = 'MS',
+    Mt = 'MT',
+    Nc = 'NC',
+    Nd = 'ND',
+    Ne = 'NE',
+    Nh = 'NH',
+    Nj = 'NJ',
+    Nm = 'NM',
+    Nv = 'NV',
+    Ny = 'NY',
+    Oh = 'OH',
+    Ok = 'OK',
+    Or = 'OR',
+    Pa = 'PA',
+    Pr = 'PR',
+    Pw = 'PW',
+    Ri = 'RI',
+    Sc = 'SC',
+    Sd = 'SD',
+    Tn = 'TN',
+    Tx = 'TX',
+    Ut = 'UT',
+    Va = 'VA',
+    Vi = 'VI',
+    Vt = 'VT',
+    Wa = 'WA',
+    Wi = 'WI',
+    Wv = 'WV',
+    Wy = 'WY'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W4FormRequestMaritalStatusEnum {
+    Single = 'Single',
+    Married = 'Married',
+    MarriedBut = 'MarriedBut'
 }
 
 /**

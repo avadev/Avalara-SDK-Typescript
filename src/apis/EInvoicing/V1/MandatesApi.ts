@@ -60,7 +60,7 @@ export interface GetMandatesInterface {
  * 
  */
 export class MandatesApi extends runtime.ApiClient {
-    public sdkVersion: string = '25.9.0';
+    public sdkVersion: string = '25.10.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
