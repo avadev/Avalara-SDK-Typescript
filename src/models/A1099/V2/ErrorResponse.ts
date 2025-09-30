@@ -27,13 +27,13 @@ import {
  */
 export interface ErrorResponse {
     /**
-     * 
+     * A summary of the problem type.
      * @type {string}
      * @memberof ErrorResponse
      */
     title?: string | null;
     /**
-     * 
+     * A list of errors detailing the problem type.
      * @type {Array<ErrorResponseItem>}
      * @memberof ErrorResponse
      */

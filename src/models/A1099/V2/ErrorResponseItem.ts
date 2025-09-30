@@ -20,13 +20,15 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface ErrorResponseItem {
     /**
-     * 
+     * An identifier for this occurrence of the problem.
+     * It is the name of a request's field when specific to that field.
+     * Otherwise, for other types of errors, its value is empty.
      * @type {string}
      * @memberof ErrorResponseItem
      */
     type?: string | null;
     /**
-     * 
+     * An explanation specific to this occurrence of the problem.
      * @type {string}
      * @memberof ErrorResponseItem
      */

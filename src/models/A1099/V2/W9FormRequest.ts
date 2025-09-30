@@ -52,7 +52,7 @@ export interface W9FormRequest {
      * @type {string}
      * @memberof W9FormRequest
      */
-    businessClassification: string;
+    businessClassification: W9FormRequestBusinessClassificationEnum;
     /**
      * The classification description when "businessClassification" is "Other".
      * @type {string}
@@ -66,13 +66,39 @@ export interface W9FormRequest {
      */
     foreignPartnerOwnerOrBeneficiary?: boolean;
     /**
-     * The exempt payee code.
+     * The exempt payee code. Allowed values (1–13):
+     * - 1 — Organization exempt under §501(a) or IRA; custodial account under §403(b)(7)
+     * - 2 — U.S. government or its agencies/instrumentalities
+     * - 3 — U.S. state, DC, U.S. territory/possession, or their political subdivisions/agencies/instrumentalities
+     * - 4 — Foreign government or its political subdivisions/agencies/instrumentalities
+     * - 5 — Corporation
+     * - 6 — Dealer in securities or commodities required to register in the U.S., DC, or U.S. territory/possession
+     * - 7 — Futures commission merchant registered with the CFTC
+     * - 8 — Real estate investment trust (REIT)
+     * - 9 — Entity registered at all times during the tax year under the Investment Company Act of 1940
+     * - 10 — Common trust fund operated by a bank under §584(a)
+     * - 11 — Financial institution (see §581)
+     * - 12 — Broker (nominee/custodian)
+     * - 13 — Trust exempt under §664 or described in §4947
      * @type {string}
      * @memberof W9FormRequest
      */
     exemptPayeeCode?: string | null;
     /**
-     * The exemption from FATCA reporting code.
+     * The exemption from FATCA reporting code. Allowed values (A–M):
+     * - A — Tax‑exempt organization under §501(a) or IRA (§7701(a)(37))
+     * - B — U.S. government or any of its agencies/instrumentalities
+     * - C — U.S. state, DC, territory/possession, or their political subdivisions/instrumentalities
+     * - D — Corporation whose stock is regularly traded on an established securities market
+     * - E — Corporation that is a member of the same expanded affiliated group as a D corporation
+     * - F — Registered dealer in securities/commodities/derivatives
+     * - G — REIT (Real Estate Investment Trust)
+     * - H — Regulated investment company (§851) or entity registered all year under the Investment Company Act of 1940
+     * - I — Common trust fund (§584(a))
+     * - J — Bank (§581)
+     * - K — Broker
+     * - L — Charitable remainder trust (§664) or trust described in §4947(a)(1)
+     * - M — Trust under §403(b) plan or §457(g) plan
      * @type {string}
      * @memberof W9FormRequest
      */
@@ -106,7 +132,7 @@ export interface W9FormRequest {
      * @type {string}
      * @memberof W9FormRequest
      */
-    state: string | null;
+    state: W9FormRequestStateEnum;
     /**
      * The ZIP code of the address.
      * @type {string}
@@ -185,6 +211,87 @@ export enum W9FormRequestTypeEnum {
     W8BenE = 'W8BenE',
     W8Imy = 'W8Imy',
     W9 = 'W9'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W9FormRequestBusinessClassificationEnum {
+    Individual = 'Individual',
+    CCorporation = 'CCorporation',
+    SCorporation = 'SCorporation',
+    Partnership = 'Partnership',
+    TrustEstate = 'TrustEstate',
+    LlcC = 'LlcC',
+    LlcS = 'LlcS',
+    LlcP = 'LlcP',
+    Other = 'Other'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W9FormRequestStateEnum {
+    Aa = 'AA',
+    Ae = 'AE',
+    Ak = 'AK',
+    Al = 'AL',
+    Ap = 'AP',
+    Ar = 'AR',
+    As = 'AS',
+    Az = 'AZ',
+    Ca = 'CA',
+    Co = 'CO',
+    Ct = 'CT',
+    Dc = 'DC',
+    De = 'DE',
+    Fl = 'FL',
+    Fm = 'FM',
+    Ga = 'GA',
+    Gu = 'GU',
+    Hi = 'HI',
+    Ia = 'IA',
+    Id = 'ID',
+    Il = 'IL',
+    In = 'IN',
+    Ks = 'KS',
+    Ky = 'KY',
+    La = 'LA',
+    Ma = 'MA',
+    Md = 'MD',
+    Me = 'ME',
+    Mh = 'MH',
+    Mi = 'MI',
+    Mn = 'MN',
+    Mo = 'MO',
+    Mp = 'MP',
+    Ms = 'MS',
+    Mt = 'MT',
+    Nc = 'NC',
+    Nd = 'ND',
+    Ne = 'NE',
+    Nh = 'NH',
+    Nj = 'NJ',
+    Nm = 'NM',
+    Nv = 'NV',
+    Ny = 'NY',
+    Oh = 'OH',
+    Ok = 'OK',
+    Or = 'OR',
+    Pa = 'PA',
+    Pr = 'PR',
+    Pw = 'PW',
+    Ri = 'RI',
+    Sc = 'SC',
+    Sd = 'SD',
+    Tn = 'TN',
+    Tx = 'TX',
+    Ut = 'UT',
+    Va = 'VA',
+    Vi = 'VI',
+    Vt = 'VT',
+    Wa = 'WA',
+    Wi = 'WI',
+    Wv = 'WV',
+    Wy = 'WY'
 }
 
 /**

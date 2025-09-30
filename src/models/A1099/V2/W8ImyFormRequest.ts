@@ -44,54 +44,19 @@ export interface W8ImyFormRequest {
      */
     disregardedEntity?: string | null;
     /**
-     * The entity type.
-     * Available values:
-     * - 1: QI (including a QDD). Complete Part III.
-     * - 2: Nonqualified intermediary. Complete Part IV.
-     * - 3: Territory financial institution. Complete Part V.
-     * - 4: U.S. branch. Complete Part VI.
-     * - 5: Withholding foreign partnership. Complete Part VII.
-     * - 6: Withholding foreign trust. Complete Part VII.
-     * - 7: Nonwithholding foreign partnership. Complete Part VIII.
-     * - 8: Nonwithholding foreign simple trust. Complete Part VIII.
-     * - 9: Nonwithholding foreign grantor trust. Complete Part VIII.
+     * Represents the entity type for W-8IMY tax forms.
+     * W-8IMY forms only accept entity types 1-9, which is a subset of the full EntityType enum.
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    entityType: string;
+    entityType: W8ImyFormRequestEntityTypeEnum;
     /**
-     * The FATCA status.
-     * Available values:
-     * - 1: Nonparticipating foreign financial institution (FFI) (including an FFI related to a Reporting IGA FFI other than a deemed-compliant FFI, participating FFI, or exempt beneficial owner). Complete Part IX (if applicable).
-     * - 2: Participating FFI.
-     * - 3: Reporting Model 1 FFI.
-     * - 4: Reporting Model 2 FFI.
-     * - 5: Registered deemed-compliant FFI (other than a reporting Model 1 FFI, sponsored FFI, or nonreporting IGA FFI covered in Part XIX).
-     * - 6: Territory financial institution. Complete Part V.
-     * - 7: Sponsored FFI (other than a certified deemed-compliant sponsored, closely held investment vehicle). Complete Part X.
-     * - 8: Certified deemed-compliant nonregistering local bank. Complete Part XII.
-     * - 9: Certified deemed-compliant FFI with only low-value accounts. Complete Part XIII.
-     * - 10: Certified deemed-compliant sponsored, closely held investment vehicle. Complete Part XIV.
-     * - 11: Certified deemed-compliant limited life debt investment entity. Complete Part XV.
-     * - 12: Certain investment entities that do not maintain financial accounts. Complete Part XVI.
-     * - 13: Owner-documented FFI. Complete Part XI.
-     * - 14: Restricted distributor. Complete Part XVII.
-     * - 15: Foreign central bank of issue. Complete Part XVIII.
-     * - 16: Nonreporting IGA FFI. Complete Part XIX.
-     * - 17: Exempt retirement plans. Complete Part XX.
-     * - 18: Excepted nonfinancial group entity. Complete Part XXI.
-     * - 19: Excepted nonfinancial start-up company. Complete Part XXII.
-     * - 20: Excepted nonfinancial entity in liquidation or bankruptcy. Complete Part XXIII.
-     * - 21: Publicly traded NFFE or NFFE affiliate of a publicly traded corporation. Complete Part XXIV.
-     * - 22: Excepted territory NFFE. Complete Part XXV.
-     * - 23: Active NFFE. Complete Part XXVI.
-     * - 24: Passive NFFE. Complete Part XXVII.
-     * - 25: Direct reporting NFFE.
-     * - 26: Sponsored direct reporting NFFE. Complete Part XXVIII.
+     * Represents the FATCA status types specifically for W8-IMY forms.
+     * This is a subset of the full FatcaStatus enum, restricted to values 1-26 for W8-IMY forms.
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    fatcaStatus?: string;
+    fatcaStatus?: W8ImyFormRequestFatcaStatusEnum;
     /**
      * The residential address of the individual or entity.
      * @type {string}
@@ -205,7 +170,7 @@ export interface W8ImyFormRequest {
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    disregardedEntityFatcaStatus?: string | null;
+    disregardedEntityFatcaStatus?: W8ImyFormRequestDisregardedEntityFatcaStatusEnum;
     /**
      * The address for disregarded entities.
      * @type {string}
@@ -644,7 +609,7 @@ export interface W8ImyFormRequest {
      * @type {string}
      * @memberof W8ImyFormRequest
      */
-    igaModel?: string | null;
+    igaModel?: W8ImyFormRequestIgaModelEnum;
     /**
      * Specifies how the applicable IGA is treated under the IGA provisions or Treasury regulations.
      * @type {string}
@@ -851,6 +816,68 @@ export enum W8ImyFormRequestTypeEnum {
     W8BenE = 'W8BenE',
     W8Imy = 'W8Imy',
     W9 = 'W9'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8ImyFormRequestEntityTypeEnum {
+    Qi = 'QI',
+    NonqualifiedIntermediary = 'NonqualifiedIntermediary',
+    TerritoryFinancialInstitution = 'TerritoryFinancialInstitution',
+    UsBranch = 'USBranch',
+    WithholdingForeignPartnership = 'WithholdingForeignPartnership',
+    WithholdingForeignTrust = 'WithholdingForeignTrust',
+    NonwithholdingForeignPartnership = 'NonwithholdingForeignPartnership',
+    NonwithholdingForeignSimpleTrust = 'NonwithholdingForeignSimpleTrust',
+    NonwithholdingForeignGrantorTrust = 'NonwithholdingForeignGrantorTrust'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8ImyFormRequestFatcaStatusEnum {
+    NonparticipatingFfi = 'NonparticipatingFFI',
+    ParticipatingFfi = 'ParticipatingFFI',
+    ReportingModel1Ffi = 'ReportingModel1FFI',
+    ReportingModel2Ffi = 'ReportingModel2FFI',
+    RegisteredDeemedCompliantFfi = 'RegisteredDeemedCompliantFFI',
+    TerritoryFinancialInstitution = 'TerritoryFinancialInstitution',
+    SponsoredFfi = 'SponsoredFFI',
+    CertifiedDeemedCompliantNonregisteringLocalBank = 'CertifiedDeemedCompliantNonregisteringLocalBank',
+    CertifiedDeemedCompliantFfiWithLowValueAccounts = 'CertifiedDeemedCompliantFFIWithLowValueAccounts',
+    CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle = 'CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle',
+    CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity = 'CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity',
+    CertainInvestmentEntitiesWithoutFinancialAccounts = 'CertainInvestmentEntitiesWithoutFinancialAccounts',
+    OwnerDocumentedFfi = 'OwnerDocumentedFFI',
+    RestrictedDistributor = 'RestrictedDistributor',
+    ForeignCentralBankOfIssue = 'ForeignCentralBankOfIssue',
+    NonreportingIgaffi = 'NonreportingIGAFFI',
+    ExemptRetirementPlans = 'ExemptRetirementPlans',
+    ExceptedNonfinancialGroupEntity = 'ExceptedNonfinancialGroupEntity',
+    ExceptedNonfinancialStartUpCompany = 'ExceptedNonfinancialStartUpCompany',
+    ExceptedNonfinancialEntityInLiquidationOrBankruptcy = 'ExceptedNonfinancialEntityInLiquidationOrBankruptcy',
+    PubliclyTradedNffeorAffiliateOfPubliclyTradedCorporation = 'PubliclyTradedNFFEOrAffiliateOfPubliclyTradedCorporation',
+    ExceptedTerritoryNffe = 'ExceptedTerritoryNFFE',
+    ActiveNffe = 'ActiveNFFE',
+    PassiveNffe = 'PassiveNFFE',
+    DirectReportingNffe = 'DirectReportingNFFE',
+    SponsoredDirectReportingNffe = 'SponsoredDirectReportingNFFE'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8ImyFormRequestDisregardedEntityFatcaStatusEnum {
+    _1 = '1',
+    _2 = '2',
+    _3 = '3',
+    _4 = '4',
+    _5 = '5'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8ImyFormRequestIgaModelEnum {
+    _1 = '1',
+    _2 = '2'
 }
 
 /**
