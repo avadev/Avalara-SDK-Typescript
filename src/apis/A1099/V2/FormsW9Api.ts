@@ -63,6 +63,13 @@ export interface GetW9FormInterface {
     xAvalaraClient?: string;
 }
 
+export interface GetW9FormPdfInterface {
+    id: string;
+    avalaraVersion?: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
+}
+
 export interface ListW9FormsInterface {
     avalaraVersion?: string;
     $filter?: string;
@@ -102,7 +109,7 @@ export interface UploadW9FilesInterface {
  * 
  */
 export class FormsW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.10.0';
+    public sdkVersion: string = '25.10.1';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -318,6 +325,58 @@ export class FormsW9Api extends runtime.ApiClient {
         logObject.populateResponseBody(value);
         this.createLogEntry(logObject);
         return value;
+    }
+
+    /**
+     * Returns the PDF file for a W9/W4/W8 form.
+     * Download the PDF for a W9/W4/W8 form.
+     */
+    async getW9FormPdfRaw(requestParameters: GetW9FormPdfInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getW9FormPdf.');
+        }
+
+        if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
+            throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getW9FormPdf.');
+        }
+
+        const queryParameters: any = {};
+        const requiredScopes = "";
+        const authNames: string[] = ['http'];
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
+            headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
+        }
+
+        if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
+            headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
+        }
+
+        await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
+        const { response, logObject } = await this.request({
+            path: `/w9/forms/{id}/pdf`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
+        logObject.populateResponseInfo(response);
+        return { response: new runtime.VoidApiResponse(response), logObject };
+    }
+
+    /**
+     * Returns the PDF file for a W9/W4/W8 form.
+     * Download the PDF for a W9/W4/W8 form.
+     */
+    async getW9FormPdf(requestParameters: GetW9FormPdfInterface, initOverrides?: RequestInit): Promise<void> {
+        const { logObject } = await this.getW9FormPdfRaw(requestParameters, initOverrides);
+        logObject.populateResponseBody(null);
+        this.createLogEntry(logObject);
     }
 
     /**

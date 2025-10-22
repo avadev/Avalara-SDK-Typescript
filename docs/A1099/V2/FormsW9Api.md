@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**createW9Form**](FormsW9Api.md#createw9formoperation) | **POST** /w9/forms | Create a W9/W4/W8 form
 [**deleteW9Form**](FormsW9Api.md#deletew9form) | **DELETE** /w9/forms/{id} | Delete a W9/W4/W8 form
 [**getW9Form**](FormsW9Api.md#getw9form) | **GET** /w9/forms/{id} | Retrieve a W9/W4/W8 form
+[**getW9FormPdf**](FormsW9Api.md#getw9formpdf) | **GET** /w9/forms/{id}/pdf | Download the PDF for a W9/W4/W8 form.
 [**listW9Forms**](FormsW9Api.md#listw9forms) | **GET** /w9/forms | List W9/W4/W8 forms
 [**sendW9FormEmail**](FormsW9Api.md#sendw9formemail) | **POST** /w9/forms/{id}/$send-email | Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
 [**updateW9Form**](FormsW9Api.md#updatew9form) | **PUT** /w9/forms/{id} | Update a W9/W4/W8 form
@@ -245,6 +246,66 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | W9/W4/W8 form with id |  -  |
+| **401** | Authentication failed |  -  |
+| **404** | W9/W4/W8 form not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
+
+<a name="getw9formpdf"></a>
+# **getW9FormPdf**
+> void getW9FormPdf (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
+
+Download the PDF for a W9/W4/W8 form.
+
+Returns the PDF file for a W9/W4/W8 form.
+
+### Example
+```typescript
+import * as AvalaraSdk from 'avalara-sdk';
+
+const configParams: AvalaraSdk.Runtime.ConfigurationParameters = {
+    appName: 'asv-sdk-test-app',
+    appVersion: '1.0',
+    environment: AvaTaxEnvironment.Sandbox,
+    machineName: 'test-machine',
+    timeout:3000,
+    bearerToken: 'YOUR_BEARER_TOKEN',
+    testBasePath: 'https://localhost:3000'
+};
+const config = new AvalaraSdk.Configuration(configParams);
+let client = new AvalaraSdk.Runtime.ApiClient(config);
+let api = new AvalaraSdk.A1099.V2.UserApi(client);
+const result = await api.createUser();
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **string**| Id of the form | [default to undefined]
+ **avalaraVersion** | **string**| API version | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearer](../../../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/pdf, application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | PDF stream |  -  |
+| **400** | Bad request (e.g., invalid id) |  -  |
 | **401** | Authentication failed |  -  |
 | **404** | W9/W4/W8 form not found |  -  |
 

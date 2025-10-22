@@ -51,8 +51,8 @@ export interface W8BenEFormRequest {
      */
     disregardedEntity?: string | null;
     /**
-     * The entity type.
-     * Available values:
+     * Represents the entity type for tax forms.
+     * Each value corresponds to a specific entity classification.
      * - 1: Corporation
      * - 2: Disregarded entity
      * - 3: Partnership
@@ -69,7 +69,7 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    entityType: string;
+    entityType: W8BenEFormRequestEntityTypeEnum;
     /**
      * Indicates whether the entity is making a treaty claim.
      * @type {boolean}
@@ -77,8 +77,9 @@ export interface W8BenEFormRequest {
      */
     makingTreatyClaim?: boolean | null;
     /**
-     * The FATCA status.
-     * Available values:
+     * Represents the FATCA status types for tax forms.
+     * Used for W8-BEN-E forms and FATCA compliance validations.
+     * Values correspond to numeric identifiers used in forms.
      * - 1: Nonparticipating FFI (including a limited FFI or an FFI related to a Reporting IGA FFI other than a deemed-compliant FFI, participating FFI, or exempt beneficial owner)
      * - 2: Participating FFI
      * - 3: Reporting Model 1 FFI
@@ -114,7 +115,7 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    fatcaStatus: string;
+    fatcaStatus: W8BenEFormRequestFatcaStatusEnum;
     /**
      * The residential address of the individual or entity.
      * @type {string}
@@ -132,7 +133,7 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    residenceState?: string | null;
+    residenceState?: W8BenEFormRequestResidenceStateEnum;
     /**
      * The ZIP code of the residence.
      * @type {string}
@@ -168,7 +169,7 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    mailingState?: string | null;
+    mailingState?: W8BenEFormRequestMailingStateEnum;
     /**
      * The ZIP code of the mailing address.
      * @type {string}
@@ -214,7 +215,7 @@ export interface W8BenEFormRequest {
     /**
      * The FATCA status of disregarded entity or branch receiving payment.
      * Available values:
-     * - 1: Limited Branch
+     * - 1: Branch treated as nonparticipating FFI
      * - 2: U.S. Branch
      * - 3: Participating FFI
      * - 4: Reporting Model 1 FFI
@@ -222,7 +223,7 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    disregardedEntityFatcaStatus?: string | null;
+    disregardedEntityFatcaStatus?: W8BenEFormRequestDisregardedEntityFatcaStatusEnum;
     /**
      * The address for disregarded entities.
      * @type {string}
@@ -240,7 +241,7 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    disregardedState?: string | null;
+    disregardedState?: W8BenEFormRequestDisregardedStateEnum;
     /**
      * The ZIP code for disregarded entities.
      * @type {string}
@@ -290,10 +291,11 @@ export interface W8BenEFormRequest {
      * - 8: Company with an item of income that meets active trade or business test
      * - 9: Favorable discretionary determination by the U.S. competent authority received
      * - 10: Other
+     * - 11: No LOB article in treaty
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    benefitLimitation?: string | null;
+    benefitLimitation?: W8BenEFormRequestBenefitLimitationEnum;
     /**
      * Certifies that the beneficial owner claims treaty benefits and meets the qualified resident status for specific U.S. source income.
      * @type {boolean}
@@ -452,7 +454,7 @@ export interface W8BenEFormRequest {
      * @type {string}
      * @memberof W8BenEFormRequest
      */
-    igaModel?: string | null;
+    igaModel?: W8BenEFormRequestIgaModelEnum;
     /**
      * Specifies how the applicable IGA is treated under the IGA provisions or Treasury regulations.
      * @type {string}
@@ -744,6 +746,295 @@ export enum W8BenEFormRequestTypeEnum {
     W8BenE = 'W8BenE',
     W8Imy = 'W8Imy',
     W9 = 'W9'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8BenEFormRequestEntityTypeEnum {
+    Corporation = 'Corporation',
+    DisregardedEntity = 'DisregardedEntity',
+    Partnership = 'Partnership',
+    SimpleTrust = 'SimpleTrust',
+    GrantorTrust = 'GrantorTrust',
+    ComplexTrust = 'ComplexTrust',
+    Estate = 'Estate',
+    ForeignGovernmentControlledEntity = 'ForeignGovernmentControlledEntity',
+    CentralBankOfIssue = 'CentralBankOfIssue',
+    TaxExemptOrganization = 'TaxExemptOrganization',
+    PrivateFoundation = 'PrivateFoundation',
+    InternationalOrganization = 'InternationalOrganization',
+    ForeignGovernmentControlledIntegralPart = 'ForeignGovernmentControlledIntegralPart'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8BenEFormRequestFatcaStatusEnum {
+    NonparticipatingFfi = 'NonparticipatingFFI',
+    ParticipatingFfi = 'ParticipatingFFI',
+    ReportingModel1Ffi = 'ReportingModel1FFI',
+    ReportingModel2Ffi = 'ReportingModel2FFI',
+    RegisteredDeemedCompliantFfi = 'RegisteredDeemedCompliantFFI',
+    SponsoredFfiWithoutGiin = 'SponsoredFFIWithoutGIIN',
+    CertifiedDeemedCompliantNonregisteringLocalBank = 'CertifiedDeemedCompliantNonregisteringLocalBank',
+    CertifiedDeemedCompliantFfiWithLowValueAccounts = 'CertifiedDeemedCompliantFFIWithLowValueAccounts',
+    CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle = 'CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle',
+    CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity = 'CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity',
+    CertainInvestmentEntitiesWithoutFinancialAccounts = 'CertainInvestmentEntitiesWithoutFinancialAccounts',
+    OwnerDocumentedFfi = 'OwnerDocumentedFFI',
+    RestrictedDistributor = 'RestrictedDistributor',
+    NonreportingIgaffi = 'NonreportingIGAFFI',
+    ForeignGovernmentOrUsPossessionOrForeignCentralBank = 'ForeignGovernmentOrUSPossessionOrForeignCentralBank',
+    InternationalOrganization = 'InternationalOrganization',
+    ExemptRetirementPlans = 'ExemptRetirementPlans',
+    EntityWhollyOwnedByExemptBeneficialOwners = 'EntityWhollyOwnedByExemptBeneficialOwners',
+    TerritoryFinancialInstitution = 'TerritoryFinancialInstitution',
+    NonfinancialGroupEntity = 'NonfinancialGroupEntity',
+    ExceptedNonfinancialStartUpCompany = 'ExceptedNonfinancialStartUpCompany',
+    ExceptedNonfinancialEntityInLiquidationOrBankruptcy = 'ExceptedNonfinancialEntityInLiquidationOrBankruptcy',
+    Organization501c = 'Organization501c',
+    NonprofitOrganization = 'NonprofitOrganization',
+    PubliclyTradedNffeorAffiliateOfPubliclyTradedCorporation = 'PubliclyTradedNFFEOrAffiliateOfPubliclyTradedCorporation',
+    ExceptedTerritoryNffe = 'ExceptedTerritoryNFFE',
+    ActiveNffe = 'ActiveNFFE',
+    PassiveNffe = 'PassiveNFFE',
+    ExceptedInterAffiliateFfi = 'ExceptedInterAffiliateFFI',
+    DirectReportingNffe = 'DirectReportingNFFE',
+    SponsoredDirectReportingNffe = 'SponsoredDirectReportingNFFE',
+    AccountThatIsNotFinancialAccount = 'AccountThatIsNotFinancialAccount'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8BenEFormRequestResidenceStateEnum {
+    Aa = 'AA',
+    Ae = 'AE',
+    Ak = 'AK',
+    Al = 'AL',
+    Ap = 'AP',
+    Ar = 'AR',
+    As = 'AS',
+    Az = 'AZ',
+    Ca = 'CA',
+    Co = 'CO',
+    Ct = 'CT',
+    Dc = 'DC',
+    De = 'DE',
+    Fl = 'FL',
+    Fm = 'FM',
+    Ga = 'GA',
+    Gu = 'GU',
+    Hi = 'HI',
+    Ia = 'IA',
+    Id = 'ID',
+    Il = 'IL',
+    In = 'IN',
+    Ks = 'KS',
+    Ky = 'KY',
+    La = 'LA',
+    Ma = 'MA',
+    Md = 'MD',
+    Me = 'ME',
+    Mh = 'MH',
+    Mi = 'MI',
+    Mn = 'MN',
+    Mo = 'MO',
+    Mp = 'MP',
+    Ms = 'MS',
+    Mt = 'MT',
+    Nc = 'NC',
+    Nd = 'ND',
+    Ne = 'NE',
+    Nh = 'NH',
+    Nj = 'NJ',
+    Nm = 'NM',
+    Nv = 'NV',
+    Ny = 'NY',
+    Oh = 'OH',
+    Ok = 'OK',
+    Or = 'OR',
+    Pa = 'PA',
+    Pr = 'PR',
+    Pw = 'PW',
+    Ri = 'RI',
+    Sc = 'SC',
+    Sd = 'SD',
+    Tn = 'TN',
+    Tx = 'TX',
+    Ut = 'UT',
+    Va = 'VA',
+    Vi = 'VI',
+    Vt = 'VT',
+    Wa = 'WA',
+    Wi = 'WI',
+    Wv = 'WV',
+    Wy = 'WY'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8BenEFormRequestMailingStateEnum {
+    Aa = 'AA',
+    Ae = 'AE',
+    Ak = 'AK',
+    Al = 'AL',
+    Ap = 'AP',
+    Ar = 'AR',
+    As = 'AS',
+    Az = 'AZ',
+    Ca = 'CA',
+    Co = 'CO',
+    Ct = 'CT',
+    Dc = 'DC',
+    De = 'DE',
+    Fl = 'FL',
+    Fm = 'FM',
+    Ga = 'GA',
+    Gu = 'GU',
+    Hi = 'HI',
+    Ia = 'IA',
+    Id = 'ID',
+    Il = 'IL',
+    In = 'IN',
+    Ks = 'KS',
+    Ky = 'KY',
+    La = 'LA',
+    Ma = 'MA',
+    Md = 'MD',
+    Me = 'ME',
+    Mh = 'MH',
+    Mi = 'MI',
+    Mn = 'MN',
+    Mo = 'MO',
+    Mp = 'MP',
+    Ms = 'MS',
+    Mt = 'MT',
+    Nc = 'NC',
+    Nd = 'ND',
+    Ne = 'NE',
+    Nh = 'NH',
+    Nj = 'NJ',
+    Nm = 'NM',
+    Nv = 'NV',
+    Ny = 'NY',
+    Oh = 'OH',
+    Ok = 'OK',
+    Or = 'OR',
+    Pa = 'PA',
+    Pr = 'PR',
+    Pw = 'PW',
+    Ri = 'RI',
+    Sc = 'SC',
+    Sd = 'SD',
+    Tn = 'TN',
+    Tx = 'TX',
+    Ut = 'UT',
+    Va = 'VA',
+    Vi = 'VI',
+    Vt = 'VT',
+    Wa = 'WA',
+    Wi = 'WI',
+    Wv = 'WV',
+    Wy = 'WY'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8BenEFormRequestDisregardedEntityFatcaStatusEnum {
+    BranchTreatedAsNonparticipatingFfi = 'BranchTreatedAsNonparticipatingFFI',
+    UsBranch = 'USBranch',
+    ParticipatingFfi = 'ParticipatingFFI',
+    ReportingModel1Ffi = 'ReportingModel1FFI',
+    ReportingModel2Ffi = 'ReportingModel2FFI'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8BenEFormRequestDisregardedStateEnum {
+    Aa = 'AA',
+    Ae = 'AE',
+    Ak = 'AK',
+    Al = 'AL',
+    Ap = 'AP',
+    Ar = 'AR',
+    As = 'AS',
+    Az = 'AZ',
+    Ca = 'CA',
+    Co = 'CO',
+    Ct = 'CT',
+    Dc = 'DC',
+    De = 'DE',
+    Fl = 'FL',
+    Fm = 'FM',
+    Ga = 'GA',
+    Gu = 'GU',
+    Hi = 'HI',
+    Ia = 'IA',
+    Id = 'ID',
+    Il = 'IL',
+    In = 'IN',
+    Ks = 'KS',
+    Ky = 'KY',
+    La = 'LA',
+    Ma = 'MA',
+    Md = 'MD',
+    Me = 'ME',
+    Mh = 'MH',
+    Mi = 'MI',
+    Mn = 'MN',
+    Mo = 'MO',
+    Mp = 'MP',
+    Ms = 'MS',
+    Mt = 'MT',
+    Nc = 'NC',
+    Nd = 'ND',
+    Ne = 'NE',
+    Nh = 'NH',
+    Nj = 'NJ',
+    Nm = 'NM',
+    Nv = 'NV',
+    Ny = 'NY',
+    Oh = 'OH',
+    Ok = 'OK',
+    Or = 'OR',
+    Pa = 'PA',
+    Pr = 'PR',
+    Pw = 'PW',
+    Ri = 'RI',
+    Sc = 'SC',
+    Sd = 'SD',
+    Tn = 'TN',
+    Tx = 'TX',
+    Ut = 'UT',
+    Va = 'VA',
+    Vi = 'VI',
+    Vt = 'VT',
+    Wa = 'WA',
+    Wi = 'WI',
+    Wv = 'WV',
+    Wy = 'WY'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8BenEFormRequestBenefitLimitationEnum {
+    Government = 'Government',
+    TaxExemptPensionTrustOrPensionFund = 'TaxExemptPensionTrustOrPensionFund',
+    OtherTaxExemptOrganization = 'OtherTaxExemptOrganization',
+    PubliclyTradedCorporation = 'PubliclyTradedCorporation',
+    SubsidiaryOfPubliclyTradedCorporation = 'SubsidiaryOfPubliclyTradedCorporation',
+    CompanyThatMeetsOwnershipAndBaseErosionTest = 'CompanyThatMeetsOwnershipAndBaseErosionTest',
+    CompanyThatMeetsDerivativeBenefitsTest = 'CompanyThatMeetsDerivativeBenefitsTest',
+    CompanyWithItemOfIncomeThatMeetsActiveTradeOrBusinessTest = 'CompanyWithItemOfIncomeThatMeetsActiveTradeOrBusinessTest',
+    FavorableDiscretionaryDeterminationByUsCompetentAuthorityReceived = 'FavorableDiscretionaryDeterminationByUSCompetentAuthorityReceived',
+    Other = 'Other',
+    NoLobArticleInTreaty = 'NoLOBArticleInTreaty'
+}/**
+* @export
+* @enum {string}
+*/
+export enum W8BenEFormRequestIgaModelEnum {
+    Model1Iga = 'Model1IGA',
+    Model2Iga = 'Model2IGA'
 }
 
 /**
