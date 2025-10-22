@@ -77,7 +77,7 @@ export interface UpdateIssuerInterface {
  * 
  */
 export class Issuers1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.10.0';
+    public sdkVersion: string = '25.10.1';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);

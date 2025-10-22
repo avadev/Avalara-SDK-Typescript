@@ -129,7 +129,7 @@ export interface UpdateTradingPartnerInterface {
  * 
  */
 export class TradingPartnersApi extends runtime.ApiClient {
-    public sdkVersion: string = '25.10.0';
+    public sdkVersion: string = '25.10.1';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
