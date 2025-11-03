@@ -123,7 +123,7 @@ export interface Form1099Misc {
      */
     section409ADeferrals?: number | null;
     /**
-     * (Legacy field) Excess golden parachute payments
+     * Excess golden parachute payments - Available only for tax year 2024 and earlier
      * @type {number}
      * @memberof Form1099Misc
      */

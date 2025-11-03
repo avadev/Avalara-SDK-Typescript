@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nonemployeeCompensation** | **number** | Nonemployee compensation. Required if DirectSalesIndicator is false. | [default to undefined]
 **directSalesIndicator** | **boolean** | Payer made direct sales totaling $5,000 or more of consumer products to recipient for resale. Should be true if Nonemployee compensation is not provided. | [optional] [default to undefined]
+**excessGoldenParachutePayments** | **number** | Excess golden parachute payments - Available only for tax year 2025 and later | [optional] [default to undefined]
 **federalIncomeTaxWithheld** | **number** | Federal income tax withheld. | [optional] [default to undefined]
 **type** | **string** | Form type. | [default to undefined]
 **id** | **string** | Form ID. Unique identifier set when the record is created. | [optional] [readonly] [default to undefined]
