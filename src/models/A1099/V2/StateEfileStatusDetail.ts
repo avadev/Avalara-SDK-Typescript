@@ -37,6 +37,12 @@ export interface StateEfileStatusDetail {
      * @memberof StateEfileStatusDetail
      */
     jurisdiction?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof StateEfileStatusDetail
+     */
+    rejectedReason?: string | null;
 }
 
 
@@ -63,6 +69,7 @@ export function StateEfileStatusDetailFromJSONTyped(json: any, ignoreDiscriminat
         'status': !exists(json, 'status') ? undefined : json['status'],
         'time': !exists(json, 'time') ? undefined : json['time'],
         'jurisdiction': !exists(json, 'jurisdiction') ? undefined : json['jurisdiction'],
+        'rejectedReason': !exists(json, 'rejectedReason') ? undefined : json['rejectedReason'],
     };
 }
 
@@ -78,5 +85,6 @@ export function StateEfileStatusDetailToJSON(value?: StateEfileStatusDetail | nu
         'status': value.status,
         'time': value.time,
         'jurisdiction': value.jurisdiction,
+        'rejectedReason': value.rejectedReason,
     };
 }

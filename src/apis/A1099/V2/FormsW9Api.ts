@@ -109,7 +109,7 @@ export interface UploadW9FilesInterface {
  * 
  */
 export class FormsW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.10.1';
+    public sdkVersion: string = '25.11.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -331,7 +331,7 @@ export class FormsW9Api extends runtime.ApiClient {
      * Returns the PDF file for a W9/W4/W8 form.
      * Download the PDF for a W9/W4/W8 form.
      */
-    async getW9FormPdfRaw(requestParameters: GetW9FormPdfInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<void>, logObject: LogObject }> {
+    async getW9FormPdfRaw(requestParameters: GetW9FormPdfInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<Blob>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getW9FormPdf.');
@@ -366,17 +366,19 @@ export class FormsW9Api extends runtime.ApiClient {
             query: queryParameters,
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.VoidApiResponse(response), logObject };
+        return { response: new runtime.BlobApiResponse(response), logObject };
     }
 
     /**
      * Returns the PDF file for a W9/W4/W8 form.
      * Download the PDF for a W9/W4/W8 form.
      */
-    async getW9FormPdf(requestParameters: GetW9FormPdfInterface, initOverrides?: RequestInit): Promise<void> {
-        const { logObject } = await this.getW9FormPdfRaw(requestParameters, initOverrides);
-        logObject.populateResponseBody(null);
+    async getW9FormPdf(requestParameters: GetW9FormPdfInterface, initOverrides?: RequestInit): Promise<Blob> {
+        const { response, logObject } = await this.getW9FormPdfRaw(requestParameters, initOverrides);
+        const value = await response.value();
+        logObject.populateResponseBody(value);
         this.createLogEntry(logObject);
+        return value;
     }
 
     /**

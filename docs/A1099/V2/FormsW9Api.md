@@ -253,7 +253,7 @@ Name | Type | Description  | Notes
 
 <a name="getw9formpdf"></a>
 # **getW9FormPdf**
-> void getW9FormPdf (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
+> Blob getW9FormPdf (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Download the PDF for a W9/W4/W8 form.
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**Blob**
 
 ### Authorization
 
@@ -304,10 +304,10 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | PDF stream |  -  |
-| **400** | Bad request (e.g., invalid id) |  -  |
-| **401** | Authentication failed |  -  |
-| **404** | W9/W4/W8 form not found |  -  |
+| **200** | Success |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

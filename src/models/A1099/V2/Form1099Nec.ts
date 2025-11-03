@@ -57,6 +57,12 @@ export interface Form1099Nec {
      */
     directSalesIndicator?: boolean | null;
     /**
+     * Excess golden parachute payments - Available only for tax year 2025 and later
+     * @type {number}
+     * @memberof Form1099Nec
+     */
+    excessGoldenParachutePayments?: number | null;
+    /**
      * Federal income tax withheld.
      * @type {number}
      * @memberof Form1099Nec
@@ -410,6 +416,7 @@ export function Form1099NecFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'nonemployeeCompensation': json['nonemployeeCompensation'],
         'directSalesIndicator': !exists(json, 'directSalesIndicator') ? undefined : json['directSalesIndicator'],
+        'excessGoldenParachutePayments': !exists(json, 'excessGoldenParachutePayments') ? undefined : json['excessGoldenParachutePayments'],
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
         'type': json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
@@ -464,6 +471,7 @@ export function Form1099NecToJSON(value?: Form1099Nec | null): any {
         
         'nonemployeeCompensation': value.nonemployeeCompensation,
         'directSalesIndicator': value.directSalesIndicator,
+        'excessGoldenParachutePayments': value.excessGoldenParachutePayments,
         'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
         'type': value.type,
         'issuerId': value.issuerId,
