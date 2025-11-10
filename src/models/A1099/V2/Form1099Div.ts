@@ -463,15 +463,15 @@ export interface Form1099Div {
 * @enum {string}
 */
 export enum Form1099DivTypeEnum {
-    Form1099Nec = 'Form1099Nec',
-    Form1099Misc = 'Form1099Misc',
-    Form1099Div = 'Form1099Div',
-    Form1099R = 'Form1099R',
-    Form1099K = 'Form1099K',
-    Form1095B = 'Form1095B',
-    Form1042S = 'Form1042S',
-    Form1095C = 'Form1095C',
-    Form1099Int = 'Form1099Int'
+    _1042S = '1042-S',
+    _1095B = '1095-B',
+    _1095C = '1095-C',
+    _1099Div = '1099-DIV',
+    _1099Int = '1099-INT',
+    _1099K = '1099-K',
+    _1099Misc = '1099-MISC',
+    _1099Nec = '1099-NEC',
+    _1099R = '1099-R'
 }/**
 * @export
 * @enum {string}

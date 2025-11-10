@@ -37,7 +37,7 @@ export interface GetJobInterface {
  * 
  */
 export class JobsApi extends runtime.ApiClient {
-    public sdkVersion: string = '25.11.0';
+    public sdkVersion: string = '25.11.1';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
