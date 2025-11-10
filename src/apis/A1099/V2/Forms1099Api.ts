@@ -96,7 +96,7 @@ export interface Update1099FormInterface {
  * 
  */
 export class Forms1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.11.0';
+    public sdkVersion: string = '25.11.1';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);

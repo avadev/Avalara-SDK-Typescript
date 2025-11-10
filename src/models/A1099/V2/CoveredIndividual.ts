@@ -62,12 +62,6 @@ export interface CoveredIndividual {
      */
     birthDate?: Date | null;
     /**
-     * Coverage indicator for all 12 months
-     * @type {boolean}
-     * @memberof CoveredIndividual
-     */
-    coveredAllMonths?: boolean | null;
-    /**
      * Coverage indicator for January
      * @type {boolean}
      * @memberof CoveredIndividual
@@ -171,7 +165,6 @@ export function CoveredIndividualFromJSONTyped(json: any, ignoreDiscriminator: b
         'nameSuffix': !exists(json, 'nameSuffix') ? undefined : json['nameSuffix'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
         'birthDate': !exists(json, 'birthDate') ? undefined : (json['birthDate'] === null ? null : new Date(json['birthDate'])),
-        'coveredAllMonths': !exists(json, 'coveredAllMonths') ? undefined : json['coveredAllMonths'],
         'coveredJanuary': !exists(json, 'coveredJanuary') ? undefined : json['coveredJanuary'],
         'coveredFebruary': !exists(json, 'coveredFebruary') ? undefined : json['coveredFebruary'],
         'coveredMarch': !exists(json, 'coveredMarch') ? undefined : json['coveredMarch'],
@@ -202,7 +195,6 @@ export function CoveredIndividualToJSON(value?: CoveredIndividual | null): any {
         'nameSuffix': value.nameSuffix,
         'tin': value.tin,
         'birthDate': value.birthDate === undefined ? undefined : (value.birthDate === null ? null : value.birthDate.toISOString().substr(0,10)),
-        'coveredAllMonths': value.coveredAllMonths,
         'coveredJanuary': value.coveredJanuary,
         'coveredFebruary': value.coveredFebruary,
         'coveredMarch': value.coveredMarch,

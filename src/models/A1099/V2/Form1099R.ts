@@ -130,6 +130,7 @@ export interface Form1099R {
      * - T: Roth IRA distribution exception applies because participant has reached 59½, died or is disabled, but it is unknown if the 5-year period has been met
      * - U: Distribution from ESOP under Section 404(k)
      * - W: Charges or payments for purchasing qualified long-term care insurance contracts under combined arrangements
+     * - Y: Qualified charitable distribution (QCD) claimed under section 408(d)(8) (Available for 2025 on)
      * @type {string}
      * @memberof Form1099R
      */
@@ -168,6 +169,7 @@ export interface Form1099R {
      * - T: _
      * - U: _, B
      * - W: _, 6
+     * - Y: 4, 7, K
      *             
      * (_ indicates no second distribution code)
      * 
@@ -565,7 +567,8 @@ export enum Form1099RDistributionCodeEnum {
     S = 'S',
     T = 'T',
     U = 'U',
-    W = 'W'
+    W = 'W',
+    Y = 'Y'
 }/**
 * @export
 * @enum {string}
@@ -605,15 +608,15 @@ export enum Form1099RSecondDistributionCodeEnum {
 * @enum {string}
 */
 export enum Form1099RTypeEnum {
-    Form1099Nec = 'Form1099Nec',
-    Form1099Misc = 'Form1099Misc',
-    Form1099Div = 'Form1099Div',
-    Form1099R = 'Form1099R',
-    Form1099K = 'Form1099K',
-    Form1095B = 'Form1095B',
-    Form1042S = 'Form1042S',
-    Form1095C = 'Form1095C',
-    Form1099Int = 'Form1099Int'
+    _1042S = '1042-S',
+    _1095B = '1095-B',
+    _1095C = '1095-C',
+    _1099Div = '1099-DIV',
+    _1099Int = '1099-INT',
+    _1099K = '1099-K',
+    _1099Misc = '1099-MISC',
+    _1099Nec = '1099-NEC',
+    _1099R = '1099-R'
 }/**
 * @export
 * @enum {string}
