@@ -68,7 +68,7 @@ export interface IssuerResponse {
      */
     telephone: string | null;
     /**
-     * Tax year for which the forms are being filed (e.g., 2024). Must be within current tax year and current tax year - 4.
+     * Tax year for which the forms are being filed (e.g., 2024). Must be within current tax year and current tax year - 4. It's only required on creation, and cannot be modified on update.
      * @type {number}
      * @memberof IssuerResponse
      */
@@ -78,13 +78,13 @@ export interface IssuerResponse {
      * @type {string}
      * @memberof IssuerResponse
      */
-    countryCode?: string | null;
+    countryCode: string | null;
     /**
-     * Contact email address. For recipient inquiries.
+     * Contact email address. For recipient inquiries. Phone will be used on communications if you don't specify an email
      * @type {string}
      * @memberof IssuerResponse
      */
-    email: string | null;
+    email?: string | null;
     /**
      * Address.
      * @type {string}
@@ -139,7 +139,7 @@ export function instanceOfIssuerResponse(value: object): boolean {
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "telephone" in value;
     isInstance = isInstance && "taxYear" in value;
-    isInstance = isInstance && "email" in value;
+    isInstance = isInstance && "countryCode" in value;
     isInstance = isInstance && "address" in value;
     isInstance = isInstance && "city" in value;
     isInstance = isInstance && "state" in value;
@@ -168,8 +168,8 @@ export function IssuerResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'telephone': json['telephone'],
         'taxYear': json['taxYear'],
-        'countryCode': !exists(json, 'countryCode') ? undefined : json['countryCode'],
-        'email': json['email'],
+        'countryCode': json['countryCode'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'address': json['address'],
         'city': json['city'],
         'state': json['state'],

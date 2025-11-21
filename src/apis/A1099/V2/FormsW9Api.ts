@@ -109,7 +109,7 @@ export interface UploadW9FilesInterface {
  * 
  */
 export class FormsW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '25.11.1';
+    public sdkVersion: string = '25.11.2';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
