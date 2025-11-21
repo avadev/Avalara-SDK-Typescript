@@ -32,11 +32,11 @@ export interface StateAndLocalWithholding {
      */
     state?: string | null;
     /**
-     * State ID number of the entity issuing the form
+     * State ID of the entity issuing the form
      * @type {string}
      * @memberof StateAndLocalWithholding
      */
-    stateIdNumber?: string | null;
+    stateId?: string | null;
     /**
      * Amount of state income
      * @type {number}
@@ -56,11 +56,11 @@ export interface StateAndLocalWithholding {
      */
     locality?: string | null;
     /**
-     * Locality ID number of the entity issuing the form
+     * Locality ID of the entity issuing the form
      * @type {string}
      * @memberof StateAndLocalWithholding
      */
-    localityIdNumber?: string | null;
+    localityId?: string | null;
     /**
      * Amount of local income
      * @type {number}
@@ -92,11 +92,11 @@ export function StateAndLocalWithholdingFromJSONTyped(json: any, ignoreDiscrimin
         
         'stateTaxWithheld': !exists(json, 'stateTaxWithheld') ? undefined : json['stateTaxWithheld'],
         'state': !exists(json, 'state') ? undefined : json['state'],
-        'stateIdNumber': !exists(json, 'stateIdNumber') ? undefined : json['stateIdNumber'],
+        'stateId': !exists(json, 'stateId') ? undefined : json['stateId'],
         'stateIncome': !exists(json, 'stateIncome') ? undefined : json['stateIncome'],
         'localTaxWithheld': !exists(json, 'localTaxWithheld') ? undefined : json['localTaxWithheld'],
         'locality': !exists(json, 'locality') ? undefined : json['locality'],
-        'localityIdNumber': !exists(json, 'localityIdNumber') ? undefined : json['localityIdNumber'],
+        'localityId': !exists(json, 'localityId') ? undefined : json['localityId'],
         'localIncome': !exists(json, 'localIncome') ? undefined : json['localIncome'],
     };
 }
@@ -112,11 +112,11 @@ export function StateAndLocalWithholdingToJSON(value?: StateAndLocalWithholding 
         
         'stateTaxWithheld': value.stateTaxWithheld,
         'state': value.state,
-        'stateIdNumber': value.stateIdNumber,
+        'stateId': value.stateId,
         'stateIncome': value.stateIncome,
         'localTaxWithheld': value.localTaxWithheld,
         'locality': value.locality,
-        'localityIdNumber': value.localityIdNumber,
+        'localityId': value.localityId,
         'localIncome': value.localIncome,
     };
 }

@@ -31,6 +31,12 @@ export interface ValidationError {
      * @memberof ValidationError
      */
     errors?: Array<string> | null;
+    /**
+     * The list of error codes (only present when api_error_codes flag is enabled)
+     * @type {Array<string>}
+     * @memberof ValidationError
+     */
+    errorCodes?: Array<string> | null;
 }
 
 
@@ -56,6 +62,7 @@ export function ValidationErrorFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'field': !exists(json, 'field') ? undefined : json['field'],
         'errors': !exists(json, 'errors') ? undefined : json['errors'],
+        'errorCodes': !exists(json, 'errorCodes') ? undefined : json['errorCodes'],
     };
 }
 
@@ -70,5 +77,6 @@ export function ValidationErrorToJSON(value?: ValidationError | null): any {
         
         'field': value.field,
         'errors': value.errors,
+        'errorCodes': value.errorCodes,
     };
 }
