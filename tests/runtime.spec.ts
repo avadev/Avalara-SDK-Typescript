@@ -1,4 +1,4 @@
-import "fetch-mock-jest";
+import fetchMock from "@fetch-mock/jest";
 import fetch from "node-fetch";
 
 import { Runtime } from "../src/index";
@@ -8,8 +8,12 @@ import {
   FALLBACK_TOKEN_URL,
 } from "../src/runtime";
 
-jest.mock("node-fetch", () => require("fetch-mock-jest").sandbox());
-const fetchMock = fetch as any;
+jest.mock("node-fetch", () => ({
+  default: fetchMock.fetchHandler,
+  Response: jest.fn(),
+  RequestInfo: jest.fn(),
+  RequestInit: jest.fn()
+}));
 
 describe("Runtime client: ", () => {
   const qaConfig: Runtime.ConfigurationParameters = {
@@ -28,7 +32,7 @@ describe("Runtime client: ", () => {
   };
 
   describe("Runtime class", () => {
-    beforeEach(() => fetchMock.reset());
+    beforeEach(() => fetchMock.mockReset());
 
     it("should be able to applyAuthToRequest for cached token", () => {
       const config = new Configuration(qaConfig);
@@ -96,7 +100,7 @@ describe("Runtime client: ", () => {
   });
 
   describe("Configuration class", () => {
-    beforeEach(() => fetchMock.reset());
+    beforeEach(() => fetchMock.mockReset());
 
     it("should be able to getTokenUrl", async () => {
       fetchMock.get(
