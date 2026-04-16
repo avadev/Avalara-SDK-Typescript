@@ -54,7 +54,7 @@ import {
     SubmitDocumentMetadata,
     SubmitDocumentMetadataFromJSON,
     SubmitDocumentMetadataToJSON,
-} from '[[modelPath]]';
+} from '../../../packages/EInvoicing/V1';
 
 export interface DownloadDocumentInterface {
     avalaraVersion?: string;

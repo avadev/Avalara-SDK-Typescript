@@ -33,7 +33,7 @@ import {
     WebhooksErrorResponse,
     WebhooksErrorResponseFromJSON,
     WebhooksErrorResponseToJSON,
-} from '[[modelPath]]';
+} from '../../../packages/EInvoicing/V1';
 
 export interface CreateWebhookSubscriptionInterface {
     avalaraVersion?: string;

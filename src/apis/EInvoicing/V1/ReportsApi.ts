@@ -36,7 +36,7 @@ import {
     ReportListResponse,
     ReportListResponseFromJSON,
     ReportListResponseToJSON,
-} from '[[modelPath]]';
+} from '../../../packages/EInvoicing/V1';
 
 export interface DownloadReportInterface {
     avalaraVersion?: string;

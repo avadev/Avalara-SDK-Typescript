@@ -30,7 +30,7 @@ import {
     TaxIdentifierSchemaByCountry200Response,
     TaxIdentifierSchemaByCountry200ResponseFromJSON,
     TaxIdentifierSchemaByCountry200ResponseToJSON,
-} from '[[modelPath]]';
+} from '../../../packages/EInvoicing/V1';
 
 export interface TaxIdentifierSchemaByCountryInterface {
     avalaraVersion?: string;

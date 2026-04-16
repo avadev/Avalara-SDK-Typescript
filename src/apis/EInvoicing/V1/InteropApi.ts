@@ -24,7 +24,7 @@ import {
     SubmitInteropDocument202Response,
     SubmitInteropDocument202ResponseFromJSON,
     SubmitInteropDocument202ResponseToJSON,
-} from '[[modelPath]]';
+} from '../../../packages/EInvoicing/V1';
 
 export interface SubmitInteropDocumentInterface {
     documentType: SubmitInteropDocumentDocumentTypeEnum;

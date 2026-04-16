@@ -48,7 +48,7 @@ import {
     UpdateTradingPartner200Response,
     UpdateTradingPartner200ResponseFromJSON,
     UpdateTradingPartner200ResponseToJSON,
-} from '[[modelPath]]';
+} from '../../../packages/EInvoicing/V1';
 
 export interface BatchSearchParticipantsInterface {
     avalaraVersion?: string;

@@ -36,7 +36,7 @@ import {
     NotFoundError,
     NotFoundErrorFromJSON,
     NotFoundErrorToJSON,
-} from '[[modelPath]]';
+} from '../../../packages/EInvoicing/V1';
 
 export interface GetMandateDataInputFieldsInterface {
     avalaraVersion?: string;
