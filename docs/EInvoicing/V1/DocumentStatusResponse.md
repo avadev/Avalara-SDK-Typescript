@@ -6,7 +6,8 @@ Returns the current document ID and status
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The unique ID for this document | [optional] [default to undefined]
-**status** | **string** | Status of the document | [optional] [default to undefined]
+**status** | **string** | Document status. See the &#x60;supportedDocumentStatuses&#x60; field in the GET /mandates response for full status definitions. | [optional] [default to undefined]
+**businessStatus** | **string** | Represents the document\&#39;s business lifecycle state based on responses from external actors (Tax Authority, PDP, or ERP), such as acceptance, rejection, or validation. | [optional] [default to undefined]
 **events** | [**Array&lt;StatusEvent&gt;**](StatusEvent.md) |  | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)

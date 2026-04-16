@@ -198,9 +198,9 @@ export interface Form1042S {
      */
     taxCountryCode: string | null;
     /**
-     * Exemption code (Chapter 3). Required if WithholdingIndicator is 3 (Chapter 3). Required when using TaxRateChap3.
+     * Exemption code (Chapter 3). Required if WithholdingIndicator is 3 (Chapter 3) and FederalTaxWithheld is 0. Required when using TaxRateChap3.
+     * Can be left empty if FederalTaxWithheld is greater than 0.
      * Available values:
-     * - Empty: Tax rate is due to backup withholding
      * - 00: Not exempt
      * - 01: Effectively connected income
      * - 02: Exempt under IRC (other than portfolio interest)

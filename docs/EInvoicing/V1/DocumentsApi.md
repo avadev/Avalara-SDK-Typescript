@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Returns a copy of the document
 
-When the document is available, use this endpoint to download it as text, XML, or PDF. The output format needs to be specified in the Accept header, and it will vary depending on the mandate. If the file has not yet been created, then status code 404 (not found) is returned.
+Downloads the document when it is available. Specify the output format in the Accept header. Returns 404 if the file has not been created.
 
 ### Example
 ```typescript
@@ -42,10 +42,10 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
- **accept** | **string**| This header indicates the MIME type of the document | [default to undefined]
- **documentId** | **string**| The unique ID for this document that was returned in the POST /einvoicing/document response body | [default to undefined]
- **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
+ **avalaraVersion** | **string**| Header that specifies the API version to use (for example \&quot;1.6\&quot;). | [default to undefined]
+ **accept** | **string**| Header that specifies the MIME type of the returned document. | [default to undefined]
+ **documentId** | **string**| The unique documentId returned in the POST /documents response body. | [default to undefined]
+ **xAvalaraClient** | **string**| Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] [default to undefined]
 
 ### Return type
 
@@ -64,11 +64,11 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | OK |  * Content-type -  <br>  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **200** | Returns the document content in the format specified by the Accept header. |  * Content-type -  <br>  |
+| **401** | Unauthorized. |  -  |
+| **403** | Forbidden. |  -  |
 | **404** | A document for the specified ID was not found. |  -  |
-| **406** | Unsupported document format was requested in the Accept header |  -  |
+| **406** | Unsupported document format was requested in the Accept header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 Fetch the inbound document from a tax authority
 
-This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
+Retrieves an inbound document. Provide key-value pairs as request parameters. Supported parameters vary by tax authority and country.
 
 ### Example
 ```typescript
@@ -103,9 +103,9 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
+ **avalaraVersion** | **string**| Header that specifies the API version to use (for example \&quot;1.6\&quot;). | [default to undefined]
  **fetchDocumentsRequest** | [**FetchDocumentsRequest**](FetchDocumentsRequest.md)|  | 
- **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] [default to undefined]
 
 ### Return type
 
@@ -124,20 +124,20 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Accepted DocumentFetch Request |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **500** | Internal Server Error |  -  |
+| **200** | Response from the inbound document fetch endpoint. Contains the platform documentId for status checks and downloads, the returned status (e.g. Accepted), and eventDateTime when the document was accepted. |  -  |
+| **401** | Unauthorized. |  -  |
+| **403** | Forbidden. |  -  |
+| **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 <a name="getdocumentlist"></a>
 # **getDocumentList**
-> DocumentListResponse getDocumentList (string avalaraVersion, string xAvalaraClient, Date startDate, Date endDate, string flow, string $count, string $countOnly, string $filter, number $top, number $skip)
+> DocumentListResponse getDocumentList (string avalaraVersion, string xAvalaraClient, Date startDate, Date endDate, string flow, string $count, string $countOnly, string $filter, string $include, number $top, number $skip)
 
 Returns a summary of documents for a date range
 
-Get a list of documents on the Avalara E-Invoicing platform that have a processing date within the specified date range.
+Returns a list of document summaries with a processing date within the specified date range.
 
 ### Example
 ```typescript
@@ -162,14 +162,15 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
- **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
- **startDate** | **Date**| Start date of documents to return. This defaults to the previous month. | [optional] [default to undefined]
- **endDate** | **Date**| End date of documents to return. This defaults to the current date. | [optional] [default to undefined]
- **flow** | **string**| Optionally filter by document direction, where issued &#x3D; &#x60;out&#x60; and received &#x3D; &#x60;in&#x60; | [optional] [default to undefined]
- **$count** | **string**| When set to true, the count of the collection is also returned in the response body | [optional] [default to undefined]
- **$countOnly** | **string**| When set to true, only the count of the collection is returned | [optional] [default to undefined]
- **$filter** | **string**| Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed. | [optional] [default to undefined]
+ **avalaraVersion** | **string**| Header that specifies the API version to use (for example \&quot;1.6\&quot;). | [default to undefined]
+ **xAvalaraClient** | **string**| Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] [default to undefined]
+ **startDate** | **Date**| Start date for documents to return. Defaults to the previous month. Format: \&quot;YYYY-MM-DDThh:mm:ss\&quot;. | [optional] [default to undefined]
+ **endDate** | **Date**| End date for documents to return. Defaults to the current date. Format: \&quot;YYYY-MM-DDThh:mm:ss\&quot;. | [optional] [default to undefined]
+ **flow** | **string**| Optional filter for document direction: issued uses \&quot;out\&quot; and received uses \&quot;in\&quot;. | [optional] [default to undefined]
+ **$count** | **string**| When set to true, the response body also includes the count of items in the collection. | [optional] [default to undefined]
+ **$countOnly** | **string**| When set to true, the response returns only the count of items in the collection. | [optional] [default to undefined]
+ **$filter** | **string**| Filter by field name and value. This filter supports only eq. For more information, refer to the Avalara filtering guide. | [optional] [default to undefined]
+ **$include** | **string**| When set to &#x60;events&#x60;, each document in the response includes its events array. Omit this parameter or use any other value to exclude events from the response. | [optional] [default to undefined]
  **$top** | **number**| The number of items to include in the result. | [optional] [default to undefined]
  **$skip** | **number**| The number of items to skip in the result. | [optional] [default to undefined]
 
@@ -190,10 +191,10 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **400** | Bad request |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **200** | Returns a collection of document summaries for the specified date range. |  -  |
+| **400** | Bad request. |  -  |
+| **401** | Unauthorized. |  -  |
+| **403** | Forbidden. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -203,7 +204,7 @@ Name | Type | Description  | Notes
 
 Checks the status of a document
 
-Using the unique ID from POST /einvoicing/documents response body, request the current status of a document.
+Uses the documentId from the POST /documents response body to return the current status of a document.
 
 ### Example
 ```typescript
@@ -228,9 +229,9 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
- **documentId** | **string**| The unique ID for this document that was returned in the POST /einvoicing/documents response body | [default to undefined]
- **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
+ **avalaraVersion** | **string**| Header that specifies the API version to use (for example \&quot;1.6\&quot;). | [default to undefined]
+ **documentId** | **string**| The unique documentId returned in the POST /documents response body. | [default to undefined]
+ **xAvalaraClient** | **string**| Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] [default to undefined]
 
 ### Return type
 
@@ -249,9 +250,9 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **200** | Returns the current status for the specified documentId. |  -  |
+| **401** | Unauthorized. |  -  |
+| **403** | Forbidden. |  -  |
 | **404** | A document for the specified ID was not found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
@@ -287,10 +288,10 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
+ **avalaraVersion** | **string**| Header that specifies the API version to use (for example \&quot;1.6\&quot;). | [default to undefined]
  **metadata** | [**SubmitDocumentMetadata**](SubmitDocumentMetadata.md)|  | [default to undefined]
  **data** | [**object**](object.md)| The document to be submitted, as indicated by the metadata fields \\\&#39;dataFormat\\\&#39; and \\\&#39;dataFormatVersion\\\&#39; | [default to undefined]
- **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] [default to undefined]
 
 ### Return type
 
@@ -309,10 +310,10 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Created |  -  |
-| **400** | Bad request |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **201** | Returns a unique documentId for the submitted document. |  -  |
+| **400** | Bad request. |  -  |
+| **401** | Unauthorized. |  -  |
+| **403** | Forbidden. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
