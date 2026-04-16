@@ -39,11 +39,11 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
- **mandateId** | **string**| The unique ID for the mandate that was returned in the GET /einvoicing/mandates response body | [default to undefined]
+ **avalaraVersion** | **string**| Header that specifies the API version to use (for example \&quot;1.6\&quot;). | [default to undefined]
+ **mandateId** | **string**| Unique identifier of the mandate returned by the GET /mandates endpoint. | [default to undefined]
  **documentType** | **string**| Select the documentType for which you wish to view the data-input-fields (You may obtain the supported documentTypes from the GET /mandates endpoint) | [default to undefined]
  **documentVersion** | **string**| Select the document version of the documentType (You may obtain the supported documentVersion from the GET /mandates endpoint) | [default to undefined]
- **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] [default to undefined]
 
 ### Return type
 
@@ -62,10 +62,10 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **400** | Bad Request |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **200** | Returns a MandateDataInputFieldsResponse object containing the input fields and their optionality for the specified mandate, document type, and document version. |  -  |
+| **400** | Bad request. |  -  |
+| **401** | Unauthorized. |  -  |
+| **403** | Forbidden. |  -  |
 | **404** | Resource not found |  -  |
 | **500** | Internal Server Error |  -  |
 
@@ -102,13 +102,13 @@ const result = await api.createUser();
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **avalaraVersion** | **string**| The HTTP Header meant to specify the version of the API intended to be used | [default to undefined]
- **xAvalaraClient** | **string**| You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] [default to undefined]
+ **avalaraVersion** | **string**| Header that specifies the API version to use (for example \&quot;1.6\&quot;). | [default to undefined]
+ **xAvalaraClient** | **string**| Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] [default to undefined]
  **$filter** | **string**| Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. | [optional] [default to undefined]
  **$top** | **number**| The number of items to include in the result. | [optional] [default to undefined]
  **$skip** | **number**| The number of items to skip in the result. | [optional] [default to undefined]
  **$count** | **boolean**| When set to true, the count of the collection is also returned in the response body. | [optional] [default to undefined]
- **$countOnly** | **boolean**| When set to true, only the count of the collection is returned | [optional] [default to undefined]
+ **$countOnly** | **boolean**| When set to true, only the count of the collection is returned. | [optional] [default to undefined]
 
 ### Return type
 
@@ -127,11 +127,11 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
+| **200** | Returns a MandatesResponse object containing the supported country mandates. |  -  |
+| **401** | Unauthorized. |  -  |
+| **403** | Forbidden. |  -  |
 | **404** | Resource not found |  -  |
-| **500** | Internal Server Error |  -  |
+| **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
