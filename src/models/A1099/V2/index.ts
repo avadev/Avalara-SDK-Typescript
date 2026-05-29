@@ -22,6 +22,7 @@ export * from './Form1099Misc';
 export * from './Form1099Nec';
 export * from './Form1099R';
 export * from './Form1099StatusDetail';
+export * from './Form1099W2';
 export * from './Get1099Form200Response';
 export * from './IntermediaryOrFlowThrough';
 export * from './IrsResponse';

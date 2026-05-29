@@ -315,6 +315,7 @@ Class | Method | HTTP request | Description
  - [A1099.V2.Form1099Nec](docs/A1099/V2/Form1099Nec.md)
  - [A1099.V2.Form1099R](docs/A1099/V2/Form1099R.md)
  - [A1099.V2.Form1099StatusDetail](docs/A1099/V2/Form1099StatusDetail.md)
+ - [A1099.V2.Form1099W2](docs/A1099/V2/Form1099W2.md)
  - [A1099.V2.Get1099Form200Response](docs/A1099/V2/Get1099Form200Response.md)
  - [A1099.V2.IntermediaryOrFlowThrough](docs/A1099/V2/IntermediaryOrFlowThrough.md)
  - [A1099.V2.IrsResponse](docs/A1099/V2/IrsResponse.md)

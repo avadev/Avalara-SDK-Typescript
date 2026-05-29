@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -78,7 +78,7 @@ export interface W4FormRequest {
      * @type {string}
      * @memberof W4FormRequest
      */
-    state?: W4FormRequestStateEnum;
+    state?: string | null;
     /**
      * The ZIP code of residence of the employee. Required unless exempt.
      * @type {string}
@@ -185,73 +185,6 @@ export enum W4FormRequestTypeEnum {
     W8BenE = 'W8BenE',
     W8Imy = 'W8Imy',
     W9 = 'W9'
-}/**
-* @export
-* @enum {string}
-*/
-export enum W4FormRequestStateEnum {
-    Aa = 'AA',
-    Ae = 'AE',
-    Ak = 'AK',
-    Al = 'AL',
-    Ap = 'AP',
-    Ar = 'AR',
-    As = 'AS',
-    Az = 'AZ',
-    Ca = 'CA',
-    Co = 'CO',
-    Ct = 'CT',
-    Dc = 'DC',
-    De = 'DE',
-    Fl = 'FL',
-    Fm = 'FM',
-    Ga = 'GA',
-    Gu = 'GU',
-    Hi = 'HI',
-    Ia = 'IA',
-    Id = 'ID',
-    Il = 'IL',
-    In = 'IN',
-    Ks = 'KS',
-    Ky = 'KY',
-    La = 'LA',
-    Ma = 'MA',
-    Md = 'MD',
-    Me = 'ME',
-    Mh = 'MH',
-    Mi = 'MI',
-    Mn = 'MN',
-    Mo = 'MO',
-    Mp = 'MP',
-    Ms = 'MS',
-    Mt = 'MT',
-    Nc = 'NC',
-    Nd = 'ND',
-    Ne = 'NE',
-    Nh = 'NH',
-    Nj = 'NJ',
-    Nm = 'NM',
-    Nv = 'NV',
-    Ny = 'NY',
-    Oh = 'OH',
-    Ok = 'OK',
-    Or = 'OR',
-    Pa = 'PA',
-    Pr = 'PR',
-    Pw = 'PW',
-    Ri = 'RI',
-    Sc = 'SC',
-    Sd = 'SD',
-    Tn = 'TN',
-    Tx = 'TX',
-    Ut = 'UT',
-    Va = 'VA',
-    Vi = 'VI',
-    Vt = 'VT',
-    Wa = 'WA',
-    Wi = 'WI',
-    Wv = 'WV',
-    Wy = 'WY'
 }/**
 * @export
 * @enum {string}
