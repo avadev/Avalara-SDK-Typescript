@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -56,6 +56,7 @@ import {
  * @interface Form1042S
  */
 export interface Form1042S {
+    [key: string]: any | any;
     /**
      * Tax Identification Number (TIN) type.
      * 
@@ -172,6 +173,9 @@ export interface Form1042S {
      * - 55: Taxable death benefits on life insurance contracts
      * - 57: Amount realized under IRC section 1446(f)
      * - 58: Publicly traded partnership distributions-undetermined
+     * - 59: Consent fees
+     * - 60: Loan syndication fees
+     * - 61: Settlement payments
      * @type {string}
      * @memberof Form1042S
      */
@@ -292,6 +296,12 @@ export interface Form1042S {
      */
     academicIndicator?: boolean | null;
     /**
+     * Box 7d withholding rate pool indicator
+     * @type {boolean}
+     * @memberof Form1042S
+     */
+    withholdingRatePoolIndicator?: boolean | null;
+    /**
      * Tax withheld by other agents
      * @type {number}
      * @memberof Form1042S
@@ -349,6 +359,8 @@ export interface Form1042S {
      * - 37: Foreign Government - Controlled Entity
      * - 38: Publicly Traded Partnership
      * - 39: Disclosing Qualified Intermediary
+     * - 40: Partnership QDD
+     * - 41: U.S. government entity or tax exempt entity (other than section 501(c) entities)
      * @type {string}
      * @memberof Form1042S
      */
@@ -787,7 +799,10 @@ export enum Form1042SIncomeCodeEnum {
     _50 = '50',
     _55 = '55',
     _57 = '57',
-    _58 = '58'
+    _58 = '58',
+    _59 = '59',
+    _60 = '60',
+    _61 = '61'
 }/**
 * @export
 * @enum {string}
@@ -900,7 +915,9 @@ export enum Form1042SChap3StatusCodeEnum {
     _36 = '36',
     _37 = '37',
     _38 = '38',
-    _39 = '39'
+    _39 = '39',
+    _40 = '40',
+    _41 = '41'
 }/**
 * @export
 * @enum {string}
@@ -969,7 +986,8 @@ export enum Form1042STypeEnum {
     _1099K = '1099-K',
     _1099Misc = '1099-MISC',
     _1099Nec = '1099-NEC',
-    _1099R = '1099-R'
+    _1099R = '1099-R',
+    W2 = 'W-2'
 }
 
 /**
@@ -1001,6 +1019,7 @@ export function Form1042SFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
+            ...json,
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'uniqueFormId': json['uniqueFormId'],
         'recipientDateOfBirth': !exists(json, 'recipientDateOfBirth') ? undefined : (json['recipientDateOfBirth'] === null ? null : new Date(json['recipientDateOfBirth'])),
@@ -1018,6 +1037,7 @@ export function Form1042SFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'federalTaxWithheld': !exists(json, 'federalTaxWithheld') ? undefined : json['federalTaxWithheld'],
         'taxNotDepositedIndicator': !exists(json, 'taxNotDepositedIndicator') ? undefined : json['taxNotDepositedIndicator'],
         'academicIndicator': !exists(json, 'academicIndicator') ? undefined : json['academicIndicator'],
+        'withholdingRatePoolIndicator': !exists(json, 'withholdingRatePoolIndicator') ? undefined : json['withholdingRatePoolIndicator'],
         'taxWithheldOtherAgents': !exists(json, 'taxWithheldOtherAgents') ? undefined : json['taxWithheldOtherAgents'],
         'amountRepaid': !exists(json, 'amountRepaid') ? undefined : json['amountRepaid'],
         'taxPaidAgent': !exists(json, 'taxPaidAgent') ? undefined : json['taxPaidAgent'],
@@ -1075,6 +1095,7 @@ export function Form1042SToJSON(value?: Form1042S | null): any {
     }
     return {
         
+            ...value,
         'uniqueFormId': value.uniqueFormId,
         'recipientDateOfBirth': value.recipientDateOfBirth === undefined ? undefined : (value.recipientDateOfBirth === null ? null : value.recipientDateOfBirth.toISOString().substr(0,10)),
         'recipientGiin': value.recipientGiin,
@@ -1091,6 +1112,7 @@ export function Form1042SToJSON(value?: Form1042S | null): any {
         'federalTaxWithheld': value.federalTaxWithheld,
         'taxNotDepositedIndicator': value.taxNotDepositedIndicator,
         'academicIndicator': value.academicIndicator,
+        'withholdingRatePoolIndicator': value.withholdingRatePoolIndicator,
         'taxWithheldOtherAgents': value.taxWithheldOtherAgents,
         'amountRepaid': value.amountRepaid,
         'taxPaidAgent': value.taxPaidAgent,

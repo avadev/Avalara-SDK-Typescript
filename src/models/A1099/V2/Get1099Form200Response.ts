@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+ * ## Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -75,13 +75,20 @@ import {
     Form1099RFromJSONTyped,
     Form1099RToJSON,
 } from './Form1099R';
+import type { Form1099W2 } from './Form1099W2';
+import {
+    instanceOfForm1099W2,
+    Form1099W2FromJSON,
+    Form1099W2FromJSONTyped,
+    Form1099W2ToJSON,
+} from './Form1099W2';
 
 /**
  * @type Get1099Form200Response
  * 
  * @export
  */
-export type Get1099Form200Response = Form1042S | Form1095B | Form1095C | Form1099Div | Form1099Int | Form1099K | Form1099Misc | Form1099Nec | Form1099R;
+export type Get1099Form200Response = { type: '1042-S' } & Form1042S | { type: '1095-B' } & Form1095B | { type: '1095-C' } & Form1095C | { type: '1099-DIV' } & Form1099Div | { type: '1099-INT' } & Form1099Int | { type: '1099-K' } & Form1099K | { type: '1099-MISC' } & Form1099Misc | { type: '1099-NEC' } & Form1099Nec | { type: '1099-R' } & Form1099R | { type: 'W-2' } & Form1099W2;
 
 export function Get1099Form200ResponseFromJSON(json: any): Get1099Form200Response {
     return Get1099Form200ResponseFromJSONTyped(json, false);
@@ -91,32 +98,29 @@ export function Get1099Form200ResponseFromJSONTyped(json: any, ignoreDiscriminat
     if (json == null) {
         return json;
     }
-    if (instanceOfForm1042S(json)) {
-        return Form1042SFromJSONTyped(json, true);
-    }
-    if (instanceOfForm1095B(json)) {
-        return Form1095BFromJSONTyped(json, true);
-    }
-    if (instanceOfForm1095C(json)) {
-        return Form1095CFromJSONTyped(json, true);
-    }
-    if (instanceOfForm1099Div(json)) {
-        return Form1099DivFromJSONTyped(json, true);
-    }
-    if (instanceOfForm1099Int(json)) {
-        return Form1099IntFromJSONTyped(json, true);
-    }
-    if (instanceOfForm1099K(json)) {
-        return Form1099KFromJSONTyped(json, true);
-    }
-    if (instanceOfForm1099Misc(json)) {
-        return Form1099MiscFromJSONTyped(json, true);
-    }
-    if (instanceOfForm1099Nec(json)) {
-        return Form1099NecFromJSONTyped(json, true);
-    }
-    if (instanceOfForm1099R(json)) {
-        return Form1099RFromJSONTyped(json, true);
+    switch (json['type']) {
+        case '1042-S':
+            return Object.assign({}, Form1042SFromJSONTyped(json, true), { type: '1042-S' } as const);
+        case '1095-B':
+            return Object.assign({}, Form1095BFromJSONTyped(json, true), { type: '1095-B' } as const);
+        case '1095-C':
+            return Object.assign({}, Form1095CFromJSONTyped(json, true), { type: '1095-C' } as const);
+        case '1099-DIV':
+            return Object.assign({}, Form1099DivFromJSONTyped(json, true), { type: '1099-DIV' } as const);
+        case '1099-INT':
+            return Object.assign({}, Form1099IntFromJSONTyped(json, true), { type: '1099-INT' } as const);
+        case '1099-K':
+            return Object.assign({}, Form1099KFromJSONTyped(json, true), { type: '1099-K' } as const);
+        case '1099-MISC':
+            return Object.assign({}, Form1099MiscFromJSONTyped(json, true), { type: '1099-MISC' } as const);
+        case '1099-NEC':
+            return Object.assign({}, Form1099NecFromJSONTyped(json, true), { type: '1099-NEC' } as const);
+        case '1099-R':
+            return Object.assign({}, Form1099RFromJSONTyped(json, true), { type: '1099-R' } as const);
+        case 'W-2':
+            return Object.assign({}, Form1099W2FromJSONTyped(json, true), { type: 'W-2' } as const);
+        default:
+            throw new Error(`No variant of Get1099Form200Response exists with 'type=${json['type']}'`);
     }
 }
 
@@ -124,35 +128,30 @@ export function Get1099Form200ResponseToJSON(value?: Get1099Form200Response | nu
     if (value == null) {
         return value;
     }
-
-    if (instanceOfForm1042S(value)) {
-        return Form1042SToJSON(value as Form1042S);
-    }
-    if (instanceOfForm1095B(value)) {
-        return Form1095BToJSON(value as Form1095B);
-    }
-    if (instanceOfForm1095C(value)) {
-        return Form1095CToJSON(value as Form1095C);
-    }
-    if (instanceOfForm1099Div(value)) {
-        return Form1099DivToJSON(value as Form1099Div);
-    }
-    if (instanceOfForm1099Int(value)) {
-        return Form1099IntToJSON(value as Form1099Int);
-    }
-    if (instanceOfForm1099K(value)) {
-        return Form1099KToJSON(value as Form1099K);
-    }
-    if (instanceOfForm1099Misc(value)) {
-        return Form1099MiscToJSON(value as Form1099Misc);
-    }
-    if (instanceOfForm1099Nec(value)) {
-        return Form1099NecToJSON(value as Form1099Nec);
-    }
-    if (instanceOfForm1099R(value)) {
-        return Form1099RToJSON(value as Form1099R);
+    switch (value['type']) {
+        case '1042-S':
+            return Form1042SToJSON(value);
+        case '1095-B':
+            return Form1095BToJSON(value);
+        case '1095-C':
+            return Form1095CToJSON(value);
+        case '1099-DIV':
+            return Form1099DivToJSON(value);
+        case '1099-INT':
+            return Form1099IntToJSON(value);
+        case '1099-K':
+            return Form1099KToJSON(value);
+        case '1099-MISC':
+            return Form1099MiscToJSON(value);
+        case '1099-NEC':
+            return Form1099NecToJSON(value);
+        case '1099-R':
+            return Form1099RToJSON(value);
+        case 'W-2':
+            return Form1099W2ToJSON(value);
+        default:
+            throw new Error(`No variant of Get1099Form200Response exists with 'type=${value['type']}'`);
     }
 
-    return {};
 }
 

@@ -43,7 +43,7 @@ export interface GetDataInputFieldsInterface {
  * 
  */
 export class DataInputFieldsApi extends runtime.ApiClient {
-    public sdkVersion: string = '26.4.0';
+    public sdkVersion: string = '26.5.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);

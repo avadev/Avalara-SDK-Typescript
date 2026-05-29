@@ -49,7 +49,7 @@ Name | Type | Description | Notes
 **disregardedEntityFatcaStatus** | **string** | The FATCA status of disregarded entity or branch receiving payment.  Available values:  - 1: Branch treated as nonparticipating FFI  - 2: U.S. Branch  - 3: Participating FFI  - 4: Reporting Model 1 FFI  - 5: Reporting Model 2 FFI | [optional] [default to undefined]
 **disregardedAddress** | **string** | The address for disregarded entities. | [optional] [default to undefined]
 **disregardedCity** | **string** | The city for disregarded entities. | [optional] [default to undefined]
-**disregardedState** | **string** | The state for disregarded entities. | [optional] [default to undefined]
+**disregardedState** | **string** | The state for disregarded entities.. Allowed values: AA, AE, AK, AL, AP, AR, AS, AZ, CA, CO (and 65 more) | [optional] [default to undefined]
 **disregardedZip** | **string** | The ZIP code for disregarded entities. | [optional] [default to undefined]
 **disregardedCountry** | **string** | The country for disregarded entities. | [optional] [default to undefined]
 **disregardedEntityGiin** | **string** | The GIIN for disregarded entities. | [optional] [default to undefined]

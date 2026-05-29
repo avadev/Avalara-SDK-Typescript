@@ -39,182 +39,251 @@ import {
 } from './ValidationError';
 
 /**
- * Form 1099-DIV: Dividends and Distributions
- *             
- * *At least one of the following dividend or distribution amounts must be provided:* 
- * Total ordinary dividends, Total capital gain distributions, Nondividend distributions, 
- * Cash liquidation distributions, Noncash liquidation distributions, or Exempt-interest dividends.
+ * Form W-2: Wage and Tax Statement.
  * @export
- * @interface Form1099Div
+ * @interface Form1099W2
  */
-export interface Form1099Div {
+export interface Form1099W2 {
     [key: string]: any | any;
     /**
-     * Total ordinary dividends
-     * @type {number}
-     * @memberof Form1099Div
+     * Employee first name (max 15 chars).
+     * @type {string}
+     * @memberof Form1099W2
      */
-    totalOrdinaryDividends?: number | null;
+    employeeFirstName?: string | null;
     /**
-     * Qualified dividends
-     * @type {number}
-     * @memberof Form1099Div
+     * Employee middle name (max 15 chars, optional).
+     * @type {string}
+     * @memberof Form1099W2
      */
-    qualifiedDividends?: number | null;
+    employeeMiddleName?: string | null;
     /**
-     * Total capital gain distributions
-     * @type {number}
-     * @memberof Form1099Div
+     * Employee last name (max 20 chars).
+     * @type {string}
+     * @memberof Form1099W2
      */
-    totalCapitalGainDistributions?: number | null;
+    employeeLastName?: string | null;
     /**
-     * Unrecaptured Section 1250 gain
-     * @type {number}
-     * @memberof Form1099Div
+     * Employee name suffix (Jr, Sr, III, etc — max 4 chars, optional).
+     * @type {string}
+     * @memberof Form1099W2
      */
-    unrecapturedSection1250Gain?: number | null;
+    employeeNameSuffix?: string | null;
     /**
-     * Section 1202 gain
+     * Wages, tips, other compensation.
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    section1202Gain?: number | null;
+    wages?: number | null;
     /**
-     * Collectibles (28%) gain
+     * Federal income tax withheld.
      * @type {number}
-     * @memberof Form1099Div
-     */
-    collectiblesGain?: number | null;
-    /**
-     * Section 897 ordinary dividends
-     * @type {number}
-     * @memberof Form1099Div
-     */
-    section897OrdinaryDividends?: number | null;
-    /**
-     * Section 897 capital gain
-     * @type {number}
-     * @memberof Form1099Div
-     */
-    section897CapitalGain?: number | null;
-    /**
-     * Nondividend distributions
-     * @type {number}
-     * @memberof Form1099Div
-     */
-    nondividendDistributions?: number | null;
-    /**
-     * Federal income tax withheld
-     * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     federalIncomeTaxWithheld?: number | null;
     /**
-     * Section 199A dividends
+     * Social security wages.
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    section199ADividends?: number | null;
+    socialSecurityWages?: number | null;
     /**
-     * Investment expenses
+     * Social security tax withheld.
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    investmentExpenses?: number | null;
+    socialSecurityTaxWithheld?: number | null;
     /**
-     * Foreign tax paid
+     * Medicare wages and tips.
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    foreignTaxPaid?: number | null;
+    medicareWages?: number | null;
     /**
-     * Foreign country or U.S. possession
+     * Medicare tax withheld.
+     * @type {number}
+     * @memberof Form1099W2
+     */
+    medicareTaxWithheld?: number | null;
+    /**
+     * Social security tips.
+     * @type {number}
+     * @memberof Form1099W2
+     */
+    socialSecurityTips?: number | null;
+    /**
+     * Allocated tips.
+     * @type {number}
+     * @memberof Form1099W2
+     */
+    allocatedTips?: number | null;
+    /**
+     * Dependent care benefits.
+     * @type {number}
+     * @memberof Form1099W2
+     */
+    dependentCareBenefits?: number | null;
+    /**
+     * Non-qualified plan Section 457 distributions or contributions.
+     * @type {number}
+     * @memberof Form1099W2
+     */
+    nonqualifiedPlansSection457?: number | null;
+    /**
+     * Non-qualified plan NOT Section 457 distributions or contributions.
+     * @type {number}
+     * @memberof Form1099W2
+     */
+    nonqualifiedPlansNotSection457?: number | null;
+    /**
+     * Letter code (A-Z, AA, BB, etc) for slot a.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    foreignCountryOrUSPossession?: string | null;
+    code12a?: string | null;
     /**
-     * Cash liquidation distributions
+     * Amount for slot a.
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    cashLiquidationDistributions?: number | null;
+    amount12a?: number | null;
     /**
-     * Noncash liquidation distributions
+     * Letter code for slot b.
+     * @type {string}
+     * @memberof Form1099W2
+     */
+    code12b?: string | null;
+    /**
+     * Amount for slot b.
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    noncashLiquidationDistributions?: number | null;
+    amount12b?: number | null;
     /**
-     * Exempt-interest dividends
+     * Letter code for slot c.
+     * @type {string}
+     * @memberof Form1099W2
+     */
+    code12c?: string | null;
+    /**
+     * Amount for slot c.
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    exemptInterestDividends?: number | null;
+    amount12c?: number | null;
     /**
-     * Specified private activity bond interest dividends
+     * Letter code for slot d.
+     * @type {string}
+     * @memberof Form1099W2
+     */
+    code12d?: string | null;
+    /**
+     * Amount for slot d.
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    specifiedPrivateActivityBondInterestDividends?: number | null;
+    amount12d?: number | null;
     /**
-     * FATCA filing requirement.
+     * Statutory employee indicator.
      * @type {boolean}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    fatcaFilingRequirement?: boolean | null;
+    statutoryEmployeeIndicator?: boolean | null;
+    /**
+     * Retirement plan indicator.
+     * @type {boolean}
+     * @memberof Form1099W2
+     */
+    retirementPlanIndicator?: boolean | null;
+    /**
+     * Third-party sick pay indicator.
+     * @type {boolean}
+     * @memberof Form1099W2
+     */
+    thirdPartySickPayIndicator?: boolean | null;
+    /**
+     * Third-party sick pay federal income tax withheld
+     * (only effective when Avalara1099.Application.Forms1099.Models.Form1099W2.ThirdPartySickPayIndicator is true).
+     * @type {number}
+     * @memberof Form1099W2
+     */
+    thirdPartySickPayWithholding?: number | null;
+    /**
+     * Other (max 30 chars) for slot a.
+     * @type {string}
+     * @memberof Form1099W2
+     */
+    other14a?: string | null;
+    /**
+     * Other (max 30 chars) for slot b.
+     * @type {string}
+     * @memberof Form1099W2
+     */
+    other14b?: string | null;
+    /**
+     * Other (max 30 chars) for slot c.
+     * @type {string}
+     * @memberof Form1099W2
+     */
+    other14c?: string | null;
+    /**
+     * Secondary state and local withholding slot.
+     * @type {StateAndLocalWithholding}
+     * @memberof Form1099W2
+     */
+    stateAndLocalWithholdingSecondary?: StateAndLocalWithholding | null;
     /**
      * Form type.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    type: Form1099DivTypeEnum;
+    type: Form1099W2TypeEnum;
     /**
      * Form ID. Unique identifier set when the record is created.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly id?: string | null;
     /**
      * Issuer ID - only required when creating forms
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     issuerId?: string | null;
     /**
      * Issuer Reference ID - only required when creating forms via $bulk-upsert
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     issuerReferenceId?: string | null;
     /**
      * Issuer TIN - readonly
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     issuerTin?: string | null;
     /**
      * Tax Year - only required when creating forms via $bulk-upsert
      * @type {number}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     taxYear?: number | null;
     /**
      * Internal reference ID. Never shown to any agency or recipient.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     referenceId?: string | null;
     /**
      * Recipient's Federal Tax Identification Number (TIN).
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     tin?: string | null;
     /**
      * Recipient name
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     recipientName: string | null;
     /**
@@ -226,127 +295,127 @@ export interface Form1099Div {
      * - ITIN: Individual Taxpayer Identification Number
      * - ATIN: Adoption Taxpayer Identification Number
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
-    tinType?: Form1099DivTinTypeEnum;
+    tinType?: Form1099W2TinTypeEnum;
     /**
      * Recipient second name
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     recipientSecondName?: string | null;
     /**
      * Address.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     address: string | null;
     /**
      * Address line 2.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     address2?: string | null;
     /**
      * City.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     city: string | null;
     /**
      * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     state?: string | null;
     /**
      * ZIP/postal code.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     zip?: string | null;
     /**
      * Recipient's Contact email address.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     email?: string | null;
     /**
      * Account number
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     accountNumber?: string | null;
     /**
      * Office code
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     officeCode?: string | null;
     /**
      * Province or region for non-US/CA addresses.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     nonUsProvince?: string | null;
     /**
      * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
      * @type {string}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     countryCode: string | null;
     /**
      * Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     federalEfileDate?: Date | null;
     /**
      * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     postalMail?: boolean | null;
     /**
      * Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     stateEfileDate?: Date | null;
     /**
      * Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     recipientEdeliveryDate?: Date | null;
     /**
      * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     tinMatch?: boolean | null;
     /**
      * No TIN indicator
      * @type {boolean}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     noTin?: boolean | null;
     /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     addressVerification?: boolean | null;
     /**
      * State and local withholding information
      * @type {StateAndLocalWithholding}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     stateAndLocalWithholding?: StateAndLocalWithholding | null;
     /**
      * Second TIN notice
      * @type {boolean}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     secondTinNotice?: boolean | null;
     /**
@@ -365,7 +434,7 @@ export interface Form1099Div {
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly federalEfileStatus?: Form1099StatusDetail | null;
     /**
@@ -383,7 +452,7 @@ export interface Form1099Div {
      * - corrected_rejected: Correction was rejected by the state
      * - corrected_accepted: Correction was accepted by the state
      * @type {Array<StateEfileStatusDetail>}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
     /**
@@ -394,7 +463,7 @@ export interface Form1099Div {
      * - sent: Postal mail has been sent
      * - delivered: Postal mail has been delivered
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly postalMailStatus?: Form1099StatusDetail | null;
     /**
@@ -406,7 +475,7 @@ export interface Form1099Div {
      * - unknown: TIN is missing, invalid, or request contains errors
      * - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly tinMatchStatus?: Form1099StatusDetail | null;
     /**
@@ -419,7 +488,7 @@ export interface Form1099Div {
      * - unchanged: User declined address changes
      * - verified: Address has been verified and accepted
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly addressVerificationStatus?: Form1099StatusDetail | null;
     /**
@@ -436,25 +505,25 @@ export interface Form1099Div {
      * - second_delivery: Second e-delivery attempt
      * - undelivered: E-delivery is undelivered (temporary state allowing resend)
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly eDeliveryStatus?: Form1099StatusDetail | null;
     /**
      * Validation errors
      * @type {Array<ValidationError>}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly validationErrors?: Array<ValidationError> | null;
     /**
      * Date time when the record was created.
      * @type {Date}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly createdAt?: Date;
     /**
      * Date time when the record was last updated.
      * @type {Date}
-     * @memberof Form1099Div
+     * @memberof Form1099W2
      */
     readonly updatedAt?: Date;
 }
@@ -463,7 +532,7 @@ export interface Form1099Div {
 * @export
 * @enum {string}
 */
-export enum Form1099DivTypeEnum {
+export enum Form1099W2TypeEnum {
     _1042S = '1042-S',
     _1095B = '1095-B',
     _1095C = '1095-C',
@@ -478,7 +547,7 @@ export enum Form1099DivTypeEnum {
 * @export
 * @enum {string}
 */
-export enum Form1099DivTinTypeEnum {
+export enum Form1099W2TinTypeEnum {
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',
@@ -486,9 +555,9 @@ export enum Form1099DivTinTypeEnum {
 }
 
 /**
- * Check if a given object implements the Form1099Div interface.
+ * Check if a given object implements the Form1099W2 interface.
  */
-export function instanceOfForm1099Div(value: object): boolean {
+export function instanceOfForm1099W2(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "recipientName" in value;
@@ -499,36 +568,48 @@ export function instanceOfForm1099Div(value: object): boolean {
     return isInstance;
 }
 
-export function Form1099DivFromJSON(json: any): Form1099Div {
-    return Form1099DivFromJSONTyped(json, false);
+export function Form1099W2FromJSON(json: any): Form1099W2 {
+    return Form1099W2FromJSONTyped(json, false);
 }
 
-export function Form1099DivFromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1099Div {
+export function Form1099W2FromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1099W2 {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
             ...json,
-        'totalOrdinaryDividends': !exists(json, 'totalOrdinaryDividends') ? undefined : json['totalOrdinaryDividends'],
-        'qualifiedDividends': !exists(json, 'qualifiedDividends') ? undefined : json['qualifiedDividends'],
-        'totalCapitalGainDistributions': !exists(json, 'totalCapitalGainDistributions') ? undefined : json['totalCapitalGainDistributions'],
-        'unrecapturedSection1250Gain': !exists(json, 'unrecapturedSection1250Gain') ? undefined : json['unrecapturedSection1250Gain'],
-        'section1202Gain': !exists(json, 'section1202Gain') ? undefined : json['section1202Gain'],
-        'collectiblesGain': !exists(json, 'collectiblesGain') ? undefined : json['collectiblesGain'],
-        'section897OrdinaryDividends': !exists(json, 'section897OrdinaryDividends') ? undefined : json['section897OrdinaryDividends'],
-        'section897CapitalGain': !exists(json, 'section897CapitalGain') ? undefined : json['section897CapitalGain'],
-        'nondividendDistributions': !exists(json, 'nondividendDistributions') ? undefined : json['nondividendDistributions'],
+        'employeeFirstName': !exists(json, 'employeeFirstName') ? undefined : json['employeeFirstName'],
+        'employeeMiddleName': !exists(json, 'employeeMiddleName') ? undefined : json['employeeMiddleName'],
+        'employeeLastName': !exists(json, 'employeeLastName') ? undefined : json['employeeLastName'],
+        'employeeNameSuffix': !exists(json, 'employeeNameSuffix') ? undefined : json['employeeNameSuffix'],
+        'wages': !exists(json, 'wages') ? undefined : json['wages'],
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
-        'section199ADividends': !exists(json, 'section199ADividends') ? undefined : json['section199ADividends'],
-        'investmentExpenses': !exists(json, 'investmentExpenses') ? undefined : json['investmentExpenses'],
-        'foreignTaxPaid': !exists(json, 'foreignTaxPaid') ? undefined : json['foreignTaxPaid'],
-        'foreignCountryOrUSPossession': !exists(json, 'foreignCountryOrUSPossession') ? undefined : json['foreignCountryOrUSPossession'],
-        'cashLiquidationDistributions': !exists(json, 'cashLiquidationDistributions') ? undefined : json['cashLiquidationDistributions'],
-        'noncashLiquidationDistributions': !exists(json, 'noncashLiquidationDistributions') ? undefined : json['noncashLiquidationDistributions'],
-        'exemptInterestDividends': !exists(json, 'exemptInterestDividends') ? undefined : json['exemptInterestDividends'],
-        'specifiedPrivateActivityBondInterestDividends': !exists(json, 'specifiedPrivateActivityBondInterestDividends') ? undefined : json['specifiedPrivateActivityBondInterestDividends'],
-        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
+        'socialSecurityWages': !exists(json, 'socialSecurityWages') ? undefined : json['socialSecurityWages'],
+        'socialSecurityTaxWithheld': !exists(json, 'socialSecurityTaxWithheld') ? undefined : json['socialSecurityTaxWithheld'],
+        'medicareWages': !exists(json, 'medicareWages') ? undefined : json['medicareWages'],
+        'medicareTaxWithheld': !exists(json, 'medicareTaxWithheld') ? undefined : json['medicareTaxWithheld'],
+        'socialSecurityTips': !exists(json, 'socialSecurityTips') ? undefined : json['socialSecurityTips'],
+        'allocatedTips': !exists(json, 'allocatedTips') ? undefined : json['allocatedTips'],
+        'dependentCareBenefits': !exists(json, 'dependentCareBenefits') ? undefined : json['dependentCareBenefits'],
+        'nonqualifiedPlansSection457': !exists(json, 'nonqualifiedPlansSection457') ? undefined : json['nonqualifiedPlansSection457'],
+        'nonqualifiedPlansNotSection457': !exists(json, 'nonqualifiedPlansNotSection457') ? undefined : json['nonqualifiedPlansNotSection457'],
+        'code12a': !exists(json, 'code12a') ? undefined : json['code12a'],
+        'amount12a': !exists(json, 'amount12a') ? undefined : json['amount12a'],
+        'code12b': !exists(json, 'code12b') ? undefined : json['code12b'],
+        'amount12b': !exists(json, 'amount12b') ? undefined : json['amount12b'],
+        'code12c': !exists(json, 'code12c') ? undefined : json['code12c'],
+        'amount12c': !exists(json, 'amount12c') ? undefined : json['amount12c'],
+        'code12d': !exists(json, 'code12d') ? undefined : json['code12d'],
+        'amount12d': !exists(json, 'amount12d') ? undefined : json['amount12d'],
+        'statutoryEmployeeIndicator': !exists(json, 'statutoryEmployeeIndicator') ? undefined : json['statutoryEmployeeIndicator'],
+        'retirementPlanIndicator': !exists(json, 'retirementPlanIndicator') ? undefined : json['retirementPlanIndicator'],
+        'thirdPartySickPayIndicator': !exists(json, 'thirdPartySickPayIndicator') ? undefined : json['thirdPartySickPayIndicator'],
+        'thirdPartySickPayWithholding': !exists(json, 'thirdPartySickPayWithholding') ? undefined : json['thirdPartySickPayWithholding'],
+        'other14a': !exists(json, 'other14a') ? undefined : json['other14a'],
+        'other14b': !exists(json, 'other14b') ? undefined : json['other14b'],
+        'other14c': !exists(json, 'other14c') ? undefined : json['other14c'],
+        'stateAndLocalWithholdingSecondary': !exists(json, 'stateAndLocalWithholdingSecondary') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholdingSecondary']),
         'type': json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
@@ -571,7 +652,7 @@ export function Form1099DivFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function Form1099DivToJSON(value?: Form1099Div | null): any {
+export function Form1099W2ToJSON(value?: Form1099W2 | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -581,25 +662,37 @@ export function Form1099DivToJSON(value?: Form1099Div | null): any {
     return {
         
             ...value,
-        'totalOrdinaryDividends': value.totalOrdinaryDividends,
-        'qualifiedDividends': value.qualifiedDividends,
-        'totalCapitalGainDistributions': value.totalCapitalGainDistributions,
-        'unrecapturedSection1250Gain': value.unrecapturedSection1250Gain,
-        'section1202Gain': value.section1202Gain,
-        'collectiblesGain': value.collectiblesGain,
-        'section897OrdinaryDividends': value.section897OrdinaryDividends,
-        'section897CapitalGain': value.section897CapitalGain,
-        'nondividendDistributions': value.nondividendDistributions,
+        'employeeFirstName': value.employeeFirstName,
+        'employeeMiddleName': value.employeeMiddleName,
+        'employeeLastName': value.employeeLastName,
+        'employeeNameSuffix': value.employeeNameSuffix,
+        'wages': value.wages,
         'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
-        'section199ADividends': value.section199ADividends,
-        'investmentExpenses': value.investmentExpenses,
-        'foreignTaxPaid': value.foreignTaxPaid,
-        'foreignCountryOrUSPossession': value.foreignCountryOrUSPossession,
-        'cashLiquidationDistributions': value.cashLiquidationDistributions,
-        'noncashLiquidationDistributions': value.noncashLiquidationDistributions,
-        'exemptInterestDividends': value.exemptInterestDividends,
-        'specifiedPrivateActivityBondInterestDividends': value.specifiedPrivateActivityBondInterestDividends,
-        'fatcaFilingRequirement': value.fatcaFilingRequirement,
+        'socialSecurityWages': value.socialSecurityWages,
+        'socialSecurityTaxWithheld': value.socialSecurityTaxWithheld,
+        'medicareWages': value.medicareWages,
+        'medicareTaxWithheld': value.medicareTaxWithheld,
+        'socialSecurityTips': value.socialSecurityTips,
+        'allocatedTips': value.allocatedTips,
+        'dependentCareBenefits': value.dependentCareBenefits,
+        'nonqualifiedPlansSection457': value.nonqualifiedPlansSection457,
+        'nonqualifiedPlansNotSection457': value.nonqualifiedPlansNotSection457,
+        'code12a': value.code12a,
+        'amount12a': value.amount12a,
+        'code12b': value.code12b,
+        'amount12b': value.amount12b,
+        'code12c': value.code12c,
+        'amount12c': value.amount12c,
+        'code12d': value.code12d,
+        'amount12d': value.amount12d,
+        'statutoryEmployeeIndicator': value.statutoryEmployeeIndicator,
+        'retirementPlanIndicator': value.retirementPlanIndicator,
+        'thirdPartySickPayIndicator': value.thirdPartySickPayIndicator,
+        'thirdPartySickPayWithholding': value.thirdPartySickPayWithholding,
+        'other14a': value.other14a,
+        'other14b': value.other14b,
+        'other14c': value.other14c,
+        'stateAndLocalWithholdingSecondary': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholdingSecondary),
         'type': value.type,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,
