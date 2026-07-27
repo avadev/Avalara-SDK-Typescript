@@ -6,7 +6,7 @@ Generic paginated model to wrap query response data
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **recordsetCount** | **number** |  | [optional] [default to undefined]
-**value** | [**Array&lt;IssuerResponse&gt;**](IssuerResponse.md) |  | [optional] [default to undefined]
+**value** | [**Array&lt;GetIssuer200Response&gt;**](GetIssuer200Response.md) |  | [optional] [default to undefined]
 **nextLink** | **string** |  | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)

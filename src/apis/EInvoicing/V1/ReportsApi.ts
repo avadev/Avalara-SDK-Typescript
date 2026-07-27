@@ -68,7 +68,7 @@ export interface GetReportsInterface {
  * 
  */
 export class ReportsApi extends runtime.ApiClient {
-    public sdkVersion: string = '26.5.0';
+    public sdkVersion: string = '26.7.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);

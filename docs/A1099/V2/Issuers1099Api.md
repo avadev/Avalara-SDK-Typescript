@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="createissuer"></a>
 # **createIssuer**
-> IssuerResponse createIssuer (string avalaraVersion, string xCorrelationId, string xAvalaraClient, IssuerRequest issuerRequest)
+> IssuerWriteResponse createIssuer (string avalaraVersion, string xCorrelationId, string xAvalaraClient, IssuerRequest issuerRequest)
 
 Create an issuer
 
@@ -49,7 +49,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IssuerResponse**](IssuerResponse.md)
+[**IssuerWriteResponse**](IssuerWriteResponse.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ void (empty response body)
 
 <a name="getissuer"></a>
 # **getIssuer**
-> IssuerResponse getIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
+> GetIssuer200Response getIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Retrieve an issuer
 
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IssuerResponse**](IssuerResponse.md)
+[**GetIssuer200Response**](GetIssuer200Response.md)
 
 ### Authorization
 
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
 
 List issuers
 
-List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
+List issuers (also known as Payers). Filterable fields are businessName, businessName2, referenceId, taxYear, firstName, and lastName.
 
 ### Example
 ```typescript
@@ -256,11 +256,11 @@ Name | Type | Description  | Notes
 
 <a name="updateissuer"></a>
 # **updateIssuer**
-> void updateIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, IssuerRequest issuerRequest)
+> IssuerWriteResponse updateIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient, IssuerRequest issuerRequest)
 
 Update an issuer
 
-Update an issuer (also known as a Payer).
+Update an issuer (also known as a Payer). When the payload violates field-level business rules, the issuer is still persisted and the response body includes a `validationErrors[]` array describing each violation.
 
 ### Example
 ```typescript
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**IssuerWriteResponse**](IssuerWriteResponse.md)
 
 ### Authorization
 
@@ -308,10 +308,11 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Issuer updated |  -  |
-| **400** | Bad request (e.g., invalid sort key) |  -  |
+| **200** | Issuer updated. Body may contain &#x60;validationErrors[]&#x60; when business rules failed. |  -  |
+| **400** | Invalid id format, malformed JSON, or identity change rejected for an issuer with scheduled Forms 1099 (TIN, TIN type, or name are immutable in that case). |  -  |
 | **401** | Unauthorized |  -  |
-| **404** | Resource Not Found |  -  |
+| **403** | Caller does not have access to this issuer. |  -  |
+| **404** | Issuer not found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

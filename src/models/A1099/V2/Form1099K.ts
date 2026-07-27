@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Avalara 1099 & W-9 API Definition
- * ## Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
+ * > **Note:** You must have an active Avalara 1099 & W-9 subscription to authenticate and use these APIs. If you don\'t have a subscription, please contact our [Sales team](https://www.avalara.com/us/en/products/1099/request-a-demo.html).  ## Authentication  The Avalara 1099 & W-9 API uses **Bearer Token Authentication**. To authenticate, acquire a bearer token using a **Client ID** and **Client Secret** that you generate in the Avalara 1099 & W-9 web application.  The sample cURL commands below use **production** URLs. For **sandbox**, replace them with the sandbox URLs listed in the Sandbox Environment table.  ### Option 1 — Client ID and Client Secret (recommended)  **Step 1: Create API credentials in the Avalara 1099 & W-9 web app**  For a full walkthrough, see the [Avalara 1099 & W-9 integration guide](https://developer.avalara.com/products/avalara-1099-and-w9/integration-guides/1099-and-w-9/siu2796410674799/).  > **Note:** To enable credential creation you must first enter a valid company address in **Account Settings > Account** and enable two-factor authentication in **Account Settings > Security**.  1. In Avalara 1099 & W-9, open **Account Settings** (gear icon, top-right of any page) and select **API**. 2. Click **Create new credentials** (a valid company address and 2FA are required). 3. Copy your **Client Id** and **Client Secret** securely — they will not be shown again after you leave the screen.  **Step 2: Request a bearer token**  ```bash curl -X POST \'https://identity.avalara.com/connect/token\' \\   --header \'Content-Type: application/x-www-form-urlencoded\' \\   --data-urlencode \'grant_type=client_credentials\' \\   --data-urlencode \'client_id={{client_id}}\' \\   --data-urlencode \'client_secret={{client_secret}}\' ```  ### Option 2 — Account ID and License Key  If your organization already uses other Avalara products (AvaTax, CertCapture) and has access to the logged-in area of Avalara.com, you can generate the bearer token using your **Account ID** and **License Key**.  > **Note:** If you already have a license key for other Avalara products you can reuse it. Generating a new key will reset any previously created key.  1. Log in to Avalara.com. 2. Go to **Settings → License and API Keys**. 3. Click **Generate New Key**. 4. Note your **Account ID** from the Account menu.  ```bash curl -X POST \'https://identity.avalara.com/connect/token\' \\   --header \'Content-Type: application/x-www-form-urlencoded\' \\   --data-urlencode \'grant_type=client_credentials\' \\   --data-urlencode \'client_id={{accountId}}\' \\   --data-urlencode \'client_secret={{licenseKey}}\' ```  ### Using and renewing the bearer token  Include the token in the `Authorization` header on every request:  ```http Authorization: Bearer {access_token} ```  Tokens expire after the number of seconds in the `expires_in` field of the token response. Your integration must renew the token before it expires.  **Example token response**  ```json {   \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\",   \"scope\": \"avatax_api iam-ds\" } ```  ### Sandbox Environment  Use the same steps as production, replacing the base URLs:  | Purpose | Production | Sandbox | | --- | --- | --- | | Account & License Key management (web) | `https://www.avalara.com` | `https://sandbox.admin.avalara.com` | | Account & License Key management (API) | `https://rest.avatax.com` | `https://sandbox-rest.avatax.com` | | Token generation | `https://identity.avalara.com` | `https://ai-sbx.avlr.sh` |  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
  *
  * The version of the OpenAPI document: 2.0
  * Contact: support@avalara.com
@@ -220,29 +220,11 @@ export interface Form1099K {
      */
     tin?: string | null;
     /**
-     * Recipient name
+     * DEPRECATED: Use `businessName` for businesses; use `firstName`, `middleName`, `lastName`, and `suffixName` for individuals.
      * @type {string}
      * @memberof Form1099K
      */
-    recipientName: string | null;
-    /**
-     * Tax Identification Number (TIN) type.
-     * 
-     * Available values:
-     * - EIN: Employer Identification Number
-     * - SSN: Social Security Number
-     * - ITIN: Individual Taxpayer Identification Number
-     * - ATIN: Adoption Taxpayer Identification Number
-     * @type {string}
-     * @memberof Form1099K
-     */
-    tinType?: Form1099KTinTypeEnum;
-    /**
-     * Recipient second name
-     * @type {string}
-     * @memberof Form1099K
-     */
-    recipientSecondName?: string | null;
+    recipientName?: string | null;
     /**
      * Address.
      * @type {string}
@@ -279,18 +261,6 @@ export interface Form1099K {
      * @memberof Form1099K
      */
     email?: string | null;
-    /**
-     * Account number
-     * @type {string}
-     * @memberof Form1099K
-     */
-    accountNumber?: string | null;
-    /**
-     * Office code
-     * @type {string}
-     * @memberof Form1099K
-     */
-    officeCode?: string | null;
     /**
      * Province or region for non-US/CA addresses.
      * @type {string}
@@ -334,12 +304,6 @@ export interface Form1099K {
      */
     tinMatch?: boolean | null;
     /**
-     * No TIN indicator
-     * @type {boolean}
-     * @memberof Form1099K
-     */
-    noTin?: boolean | null;
-    /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
      * @memberof Form1099K
@@ -351,12 +315,6 @@ export interface Form1099K {
      * @memberof Form1099K
      */
     stateAndLocalWithholding?: StateAndLocalWithholding | null;
-    /**
-     * Second TIN notice
-     * @type {boolean}
-     * @memberof Form1099K
-     */
-    secondTinNotice?: boolean | null;
     /**
      * Federal e-file status.
      * Available values:
@@ -465,6 +423,89 @@ export interface Form1099K {
      * @memberof Form1099K
      */
     readonly updatedAt?: Date;
+    /**
+     * Recipient classification.
+     * 
+     * The platform is transitioning from tax identifier classifications to recipient entity classifications. New values represent recipient entity types and should be preferred. Deprecated values represent identifier formats and remain supported for backward compatibility only.
+     * 
+     * Available values:
+     * - INDIVIDUAL: Recipient is an individual
+     * - BUSINESS: Recipient is a business
+     * - UNKNOWN: Recipient classification is unknown
+     * - EIN: (Deprecated - use BUSINESS) Employer Identification Number
+     * - SSN: (Deprecated - use INDIVIDUAL) Social Security Number
+     * - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number
+     * - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number
+     * @type {string}
+     * @memberof Form1099K
+     */
+    tinType?: Form1099KTinTypeEnum;
+    /**
+     * Business name. Required when the recipient of the form is a business; should only be used for businesses.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    businessName?: string | null;
+    /**
+     * Business name line 2. Should only be used for businesses.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    businessName2?: string | null;
+    /**
+     * First name. Required when the recipient of the form is an individual; should only be used for individuals.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    firstName?: string | null;
+    /**
+     * Middle name. Should only be used for individuals.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    middleName?: string | null;
+    /**
+     * Last name. Required when the recipient of the form is an individual; should only be used for individuals.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    lastName?: string | null;
+    /**
+     * Suffix name. Should only be used for individuals.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    suffixName?: string | null;
+    /**
+     * DEPRECATED: Use `businessName2` instead.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    recipientSecondName?: string | null;
+    /**
+     * Account number
+     * @type {string}
+     * @memberof Form1099K
+     */
+    accountNumber?: string | null;
+    /**
+     * Office code
+     * @type {string}
+     * @memberof Form1099K
+     */
+    officeCode?: string | null;
+    /**
+     * No TIN indicator
+     * @type {boolean}
+     * @memberof Form1099K
+     */
+    noTin?: boolean | null;
+    /**
+     * Second TIN notice
+     * @type {boolean}
+     * @memberof Form1099K
+     */
+    secondTinNotice?: boolean | null;
 }
 
 /**
@@ -504,7 +545,10 @@ export enum Form1099KTinTypeEnum {
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',
-    Atin = 'ATIN'
+    Atin = 'ATIN',
+    Individual = 'INDIVIDUAL',
+    Business = 'BUSINESS',
+    Unknown = 'UNKNOWN'
 }
 
 /**
@@ -517,7 +561,6 @@ export function instanceOfForm1099K(value: object): boolean {
     isInstance = isInstance && "grossAmountPaymentCard" in value;
     isInstance = isInstance && "paymentTransactionNumber" in value;
     isInstance = isInstance && "type" in value;
-    isInstance = isInstance && "recipientName" in value;
     isInstance = isInstance && "address" in value;
     isInstance = isInstance && "city" in value;
     isInstance = isInstance && "countryCode" in value;
@@ -564,17 +607,13 @@ export function Form1099KFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'taxYear': !exists(json, 'taxYear') ? undefined : json['taxYear'],
         'referenceId': !exists(json, 'referenceId') ? undefined : json['referenceId'],
         'tin': !exists(json, 'tin') ? undefined : json['tin'],
-        'recipientName': json['recipientName'],
-        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
-        'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
+        'recipientName': !exists(json, 'recipientName') ? undefined : json['recipientName'],
         'address': json['address'],
         'address2': !exists(json, 'address2') ? undefined : json['address2'],
         'city': json['city'],
         'state': !exists(json, 'state') ? undefined : json['state'],
         'zip': !exists(json, 'zip') ? undefined : json['zip'],
         'email': !exists(json, 'email') ? undefined : json['email'],
-        'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
-        'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
         'nonUsProvince': !exists(json, 'nonUsProvince') ? undefined : json['nonUsProvince'],
         'countryCode': json['countryCode'],
         'federalEfileDate': !exists(json, 'federalEfileDate') ? undefined : (json['federalEfileDate'] === null ? null : new Date(json['federalEfileDate'])),
@@ -582,10 +621,8 @@ export function Form1099KFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'stateEfileDate': !exists(json, 'stateEfileDate') ? undefined : (json['stateEfileDate'] === null ? null : new Date(json['stateEfileDate'])),
         'recipientEdeliveryDate': !exists(json, 'recipientEdeliveryDate') ? undefined : (json['recipientEdeliveryDate'] === null ? null : new Date(json['recipientEdeliveryDate'])),
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
-        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
-        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
         'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
@@ -595,6 +632,18 @@ export function Form1099KFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
+        'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
+        'businessName': !exists(json, 'businessName') ? undefined : json['businessName'],
+        'businessName2': !exists(json, 'businessName2') ? undefined : json['businessName2'],
+        'firstName': !exists(json, 'firstName') ? undefined : json['firstName'],
+        'middleName': !exists(json, 'middleName') ? undefined : json['middleName'],
+        'lastName': !exists(json, 'lastName') ? undefined : json['lastName'],
+        'suffixName': !exists(json, 'suffixName') ? undefined : json['suffixName'],
+        'recipientSecondName': !exists(json, 'recipientSecondName') ? undefined : json['recipientSecondName'],
+        'accountNumber': !exists(json, 'accountNumber') ? undefined : json['accountNumber'],
+        'officeCode': !exists(json, 'officeCode') ? undefined : json['officeCode'],
+        'noTin': !exists(json, 'noTin') ? undefined : json['noTin'],
+        'secondTinNotice': !exists(json, 'secondTinNotice') ? undefined : json['secondTinNotice'],
     };
 }
 
@@ -636,16 +685,12 @@ export function Form1099KToJSON(value?: Form1099K | null): any {
         'referenceId': value.referenceId,
         'tin': value.tin,
         'recipientName': value.recipientName,
-        'tinType': value.tinType,
-        'recipientSecondName': value.recipientSecondName,
         'address': value.address,
         'address2': value.address2,
         'city': value.city,
         'state': value.state,
         'zip': value.zip,
         'email': value.email,
-        'accountNumber': value.accountNumber,
-        'officeCode': value.officeCode,
         'nonUsProvince': value.nonUsProvince,
         'countryCode': value.countryCode,
         'federalEfileDate': value.federalEfileDate === undefined ? undefined : (value.federalEfileDate === null ? null : value.federalEfileDate.toISOString().substr(0,10)),
@@ -653,9 +698,19 @@ export function Form1099KToJSON(value?: Form1099K | null): any {
         'stateEfileDate': value.stateEfileDate === undefined ? undefined : (value.stateEfileDate === null ? null : value.stateEfileDate.toISOString().substr(0,10)),
         'recipientEdeliveryDate': value.recipientEdeliveryDate === undefined ? undefined : (value.recipientEdeliveryDate === null ? null : value.recipientEdeliveryDate.toISOString().substr(0,10)),
         'tinMatch': value.tinMatch,
-        'noTin': value.noTin,
         'addressVerification': value.addressVerification,
         'stateAndLocalWithholding': StateAndLocalWithholdingToJSON(value.stateAndLocalWithholding),
+        'tinType': value.tinType,
+        'businessName': value.businessName,
+        'businessName2': value.businessName2,
+        'firstName': value.firstName,
+        'middleName': value.middleName,
+        'lastName': value.lastName,
+        'suffixName': value.suffixName,
+        'recipientSecondName': value.recipientSecondName,
+        'accountNumber': value.accountNumber,
+        'officeCode': value.officeCode,
+        'noTin': value.noTin,
         'secondTinNotice': value.secondTinNotice,
     };
 }
