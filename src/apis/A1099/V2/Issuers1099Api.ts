@@ -21,12 +21,12 @@ import {
     ErrorResponse,
     ErrorResponseFromJSON,
     ErrorResponseToJSON,
-    GetIssuer200Response,
-    GetIssuer200ResponseFromJSON,
-    GetIssuer200ResponseToJSON,
     IssuerRequest,
     IssuerRequestFromJSON,
     IssuerRequestToJSON,
+    IssuerResponse,
+    IssuerResponseFromJSON,
+    IssuerResponseToJSON,
     IssuerWriteResponse,
     IssuerWriteResponseFromJSON,
     IssuerWriteResponseToJSON,
@@ -195,7 +195,7 @@ export class Issuers1099Api extends runtime.ApiClient {
      * Retrieve an issuer (also known as a Payer).
      * Retrieve an issuer
      */
-    async getIssuerRaw(requestParameters: GetIssuerInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<GetIssuer200Response>, logObject: LogObject }> {
+    async getIssuerRaw(requestParameters: GetIssuerInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<IssuerResponse>, logObject: LogObject }> {
         requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIssuer.');
@@ -230,14 +230,14 @@ export class Issuers1099Api extends runtime.ApiClient {
             query: queryParameters,
         }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
         logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => GetIssuer200ResponseFromJSON(jsonValue)), logObject };
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => IssuerResponseFromJSON(jsonValue)), logObject };
     }
 
     /**
      * Retrieve an issuer (also known as a Payer).
      * Retrieve an issuer
      */
-    async getIssuer(requestParameters: GetIssuerInterface, initOverrides?: RequestInit): Promise<GetIssuer200Response> {
+    async getIssuer(requestParameters: GetIssuerInterface, initOverrides?: RequestInit): Promise<IssuerResponse> {
         const { response, logObject } = await this.getIssuerRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);

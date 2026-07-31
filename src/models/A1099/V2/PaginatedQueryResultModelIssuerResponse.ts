@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
-    GetIssuer200Response,
-    GetIssuer200ResponseFromJSON,
-    GetIssuer200ResponseFromJSONTyped,
-    GetIssuer200ResponseToJSON,
-} from './GetIssuer200Response';
+    IssuerResponse,
+    IssuerResponseFromJSON,
+    IssuerResponseFromJSONTyped,
+    IssuerResponseToJSON,
+} from './IssuerResponse';
 
 /**
  * Generic paginated model to wrap query response data
@@ -34,10 +34,10 @@ export interface PaginatedQueryResultModelIssuerResponse {
     recordsetCount?: number | null;
     /**
      * 
-     * @type {Array<GetIssuer200Response>}
+     * @type {Array<IssuerResponse>}
      * @memberof PaginatedQueryResultModelIssuerResponse
      */
-    value?: Array<GetIssuer200Response> | null;
+    value?: Array<IssuerResponse> | null;
     /**
      * 
      * @type {string}
@@ -68,7 +68,7 @@ export function PaginatedQueryResultModelIssuerResponseFromJSONTyped(json: any, 
     return {
         
         'recordsetCount': !exists(json, '@recordsetCount') ? undefined : json['@recordsetCount'],
-        'value': !exists(json, 'value') ? undefined : (json['value'] === null ? null : (json['value'] as Array<any>)?.map(GetIssuer200ResponseFromJSON)),
+        'value': !exists(json, 'value') ? undefined : (json['value'] === null ? null : (json['value'] as Array<any>)?.map(IssuerResponseFromJSON)),
         'nextLink': !exists(json, '@nextLink') ? undefined : json['@nextLink'],
     };
 }
@@ -83,7 +83,7 @@ export function PaginatedQueryResultModelIssuerResponseToJSON(value?: PaginatedQ
     return {
         
         '@recordsetCount': value.recordsetCount,
-        'value': value.value === undefined ? undefined : (value.value === null ? null : (value.value as Array<any>)?.map(GetIssuer200ResponseToJSON)),
+        'value': value.value === undefined ? undefined : (value.value === null ? null : (value.value as Array<any>)?.map(IssuerResponseToJSON)),
         '@nextLink': value.nextLink,
     };
 }

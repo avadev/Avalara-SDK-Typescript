@@ -27,32 +27,6 @@ import {
  */
 export interface IssuerWriteResponse {
     /**
-     * Field-level validation errors. Populated when a POST or PUT request violated business rules
-     * but the issuer was still persisted. Each entry identifies the affected field and the issue.
-     * Empty array when the payload was fully valid.
-     * @type {Array<ValidationError>}
-     * @memberof IssuerWriteResponse
-     */
-    readonly validationErrors?: Array<ValidationError> | null;
-    /**
-     * Unique identifier set when the record is created.
-     * @type {string}
-     * @memberof IssuerWriteResponse
-     */
-    id?: string;
-    /**
-     * Date time when the record was created.
-     * @type {Date}
-     * @memberof IssuerWriteResponse
-     */
-    createdAt?: Date;
-    /**
-     * Date time when the record was last updated.
-     * @type {Date}
-     * @memberof IssuerWriteResponse
-     */
-    updatedAt?: Date;
-    /**
      * Business name. Required when the recipient of the form is a business; should only be used for businesses.
      * @type {string}
      * @memberof IssuerWriteResponse
@@ -195,6 +169,32 @@ export interface IssuerWriteResponse {
      * @memberof IssuerWriteResponse
      */
     lastFiling: boolean | null;
+    /**
+     * Unique identifier set when the record is created.
+     * @type {string}
+     * @memberof IssuerWriteResponse
+     */
+    id?: string;
+    /**
+     * Date time when the record was created.
+     * @type {Date}
+     * @memberof IssuerWriteResponse
+     */
+    createdAt?: Date;
+    /**
+     * Date time when the record was last updated.
+     * @type {Date}
+     * @memberof IssuerWriteResponse
+     */
+    updatedAt?: Date;
+    /**
+     * Field-level validation errors. Populated when a POST or PUT request violated business rules
+     * but the issuer was still persisted. Each entry identifies the affected field and the issue.
+     * Empty array when the payload was fully valid.
+     * @type {Array<ValidationError>}
+     * @memberof IssuerWriteResponse
+     */
+    readonly validationErrors?: Array<ValidationError> | null;
 }
 
 /**
@@ -235,10 +235,6 @@ export function IssuerWriteResponseFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
         'businessName': json['businessName'],
         'businessName2': !exists(json, 'businessName2') ? undefined : json['businessName2'],
         'name': !exists(json, 'name') ? undefined : json['name'],
@@ -261,6 +257,10 @@ export function IssuerWriteResponseFromJSONTyped(json: any, ignoreDiscriminator:
         'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
         'transferAgentName': !exists(json, 'transferAgentName') ? undefined : json['transferAgentName'],
         'lastFiling': json['lastFiling'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
+        'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
     };
 }
 
@@ -273,9 +273,6 @@ export function IssuerWriteResponseToJSON(value?: IssuerWriteResponse | null): a
     }
     return {
         
-        'id': value.id,
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
         'businessName': value.businessName,
         'businessName2': value.businessName2,
         'name': value.name,
@@ -298,5 +295,8 @@ export function IssuerWriteResponseToJSON(value?: IssuerWriteResponse | null): a
         'foreignProvince': value.foreignProvince,
         'transferAgentName': value.transferAgentName,
         'lastFiling': value.lastFiling,
+        'id': value.id,
+        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
     };
 }

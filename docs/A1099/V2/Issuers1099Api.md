@@ -1,6 +1,6 @@
 # AvalaraSdk.A1099.V2.Issuers1099Api
 
-All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
+All URIs are relative to *https://api-ava1099.edge.qa.us-east-1.aws.avalara.io/avalara1099*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -131,7 +131,7 @@ void (empty response body)
 
 <a name="getissuer"></a>
 # **getIssuer**
-> GetIssuer200Response getIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
+> IssuerResponse getIssuer (string id, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
 
 Retrieve an issuer
 
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetIssuer200Response**](GetIssuer200Response.md)
+[**IssuerResponse**](IssuerResponse.md)
 
 ### Authorization
 

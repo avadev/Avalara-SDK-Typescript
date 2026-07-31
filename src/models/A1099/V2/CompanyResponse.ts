@@ -20,24 +20,6 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface CompanyResponse {
     /**
-     * Unique identifier set when the record is created.
-     * @type {string}
-     * @memberof CompanyResponse
-     */
-    id?: string;
-    /**
-     * Date time when the record was created.
-     * @type {Date}
-     * @memberof CompanyResponse
-     */
-    createdAt?: Date;
-    /**
-     * Date time when the record was last updated.
-     * @type {Date}
-     * @memberof CompanyResponse
-     */
-    updatedAt?: Date;
-    /**
      * Legal name. Not the DBA name.
      * @type {string}
      * @memberof CompanyResponse
@@ -139,6 +121,24 @@ export interface CompanyResponse {
      * @memberof CompanyResponse
      */
     maxReminderAttempts?: number | null;
+    /**
+     * Unique identifier set when the record is created.
+     * @type {string}
+     * @memberof CompanyResponse
+     */
+    id?: string;
+    /**
+     * Date time when the record was created.
+     * @type {Date}
+     * @memberof CompanyResponse
+     */
+    createdAt?: Date;
+    /**
+     * Date time when the record was last updated.
+     * @type {Date}
+     * @memberof CompanyResponse
+     */
+    updatedAt?: Date;
 }
 
 
@@ -170,9 +170,6 @@ export function CompanyResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
         'name': json['name'],
         'dbaName': !exists(json, 'dbaName') ? undefined : json['dbaName'],
         'email': json['email'],
@@ -190,6 +187,9 @@ export function CompanyResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
         'resendRequests': !exists(json, 'resendRequests') ? undefined : json['resendRequests'],
         'resendIntervalDays': !exists(json, 'resendIntervalDays') ? undefined : json['resendIntervalDays'],
         'maxReminderAttempts': !exists(json, 'maxReminderAttempts') ? undefined : json['maxReminderAttempts'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
 }
 
@@ -202,9 +202,6 @@ export function CompanyResponseToJSON(value?: CompanyResponse | null): any {
     }
     return {
         
-        'id': value.id,
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
         'name': value.name,
         'dbaName': value.dbaName,
         'email': value.email,
@@ -222,5 +219,8 @@ export function CompanyResponseToJSON(value?: CompanyResponse | null): any {
         'resendRequests': value.resendRequests,
         'resendIntervalDays': value.resendIntervalDays,
         'maxReminderAttempts': value.maxReminderAttempts,
+        'id': value.id,
+        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
     };
 }

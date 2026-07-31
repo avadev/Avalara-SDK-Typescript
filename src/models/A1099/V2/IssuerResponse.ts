@@ -20,24 +20,6 @@ import { exists, mapValues } from '../../../runtime';
  */
 export interface IssuerResponse {
     /**
-     * Unique identifier set when the record is created.
-     * @type {string}
-     * @memberof IssuerResponse
-     */
-    id?: string;
-    /**
-     * Date time when the record was created.
-     * @type {Date}
-     * @memberof IssuerResponse
-     */
-    createdAt?: Date;
-    /**
-     * Date time when the record was last updated.
-     * @type {Date}
-     * @memberof IssuerResponse
-     */
-    updatedAt?: Date;
-    /**
      * Business name. Required when the recipient of the form is a business; should only be used for businesses.
      * @type {string}
      * @memberof IssuerResponse
@@ -180,6 +162,24 @@ export interface IssuerResponse {
      * @memberof IssuerResponse
      */
     lastFiling: boolean | null;
+    /**
+     * Unique identifier set when the record is created.
+     * @type {string}
+     * @memberof IssuerResponse
+     */
+    id?: string;
+    /**
+     * Date time when the record was created.
+     * @type {Date}
+     * @memberof IssuerResponse
+     */
+    createdAt?: Date;
+    /**
+     * Date time when the record was last updated.
+     * @type {Date}
+     * @memberof IssuerResponse
+     */
+    updatedAt?: Date;
 }
 
 /**
@@ -220,9 +220,6 @@ export function IssuerResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
         'businessName': json['businessName'],
         'businessName2': !exists(json, 'businessName2') ? undefined : json['businessName2'],
         'name': !exists(json, 'name') ? undefined : json['name'],
@@ -245,6 +242,9 @@ export function IssuerResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         'foreignProvince': !exists(json, 'foreignProvince') ? undefined : json['foreignProvince'],
         'transferAgentName': !exists(json, 'transferAgentName') ? undefined : json['transferAgentName'],
         'lastFiling': json['lastFiling'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
 }
 
@@ -257,9 +257,6 @@ export function IssuerResponseToJSON(value?: IssuerResponse | null): any {
     }
     return {
         
-        'id': value.id,
-        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
-        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
         'businessName': value.businessName,
         'businessName2': value.businessName2,
         'name': value.name,
@@ -282,5 +279,8 @@ export function IssuerResponseToJSON(value?: IssuerResponse | null): any {
         'foreignProvince': value.foreignProvince,
         'transferAgentName': value.transferAgentName,
         'lastFiling': value.lastFiling,
+        'id': value.id,
+        'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),
     };
 }

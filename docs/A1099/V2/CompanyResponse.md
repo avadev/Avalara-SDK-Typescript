@@ -4,9 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Unique identifier set when the record is created. | [optional] [default to undefined]
-**createdAt** | **Date** | Date time when the record was created. | [optional] [default to undefined]
-**updatedAt** | **Date** | Date time when the record was last updated. | [optional] [default to undefined]
 **name** | **string** | Legal name. Not the DBA name. | [default to undefined]
 **dbaName** | **string** | Doing Business As (DBA) name or continuation of a long legal name. | [optional] [default to undefined]
 **email** | **string** | Contact email address. For inquiries by vendors/employees. | [default to undefined]
@@ -24,6 +21,9 @@ Name | Type | Description | Notes
 **resendRequests** | **boolean** | Boolean to enable automatic reminder emails (default: false). | [optional] [default to undefined]
 **resendIntervalDays** | **number** | Days between reminder emails (7-365, required if resendRequests is true). | [optional] [default to undefined]
 **maxReminderAttempts** | **number** | Maximum number of reminder attempts (1-52, required if resendRequests is true). | [optional] [default to undefined]
+**id** | **string** | Unique identifier set when the record is created. | [optional] [default to undefined]
+**createdAt** | **Date** | Date time when the record was created. | [optional] [default to undefined]
+**updatedAt** | **Date** | Date time when the record was last updated. | [optional] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

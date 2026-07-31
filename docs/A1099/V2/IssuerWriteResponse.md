@@ -4,10 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**validationErrors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) | Field-level validation errors. Populated when a POST or PUT request violated business rules  but the issuer was still persisted. Each entry identifies the affected field and the issue.  Empty array when the payload was fully valid. | [optional] [readonly] [default to undefined]
-**id** | **string** | Unique identifier set when the record is created. | [optional] [default to undefined]
-**createdAt** | **Date** | Date time when the record was created. | [optional] [default to undefined]
-**updatedAt** | **Date** | Date time when the record was last updated. | [optional] [default to undefined]
 **businessName** | **string** | Business name. Required when the recipient of the form is a business; should only be used for businesses. | [default to undefined]
 **businessName2** | **string** | Business name line 2. Should only be used for businesses. Use either this or \&#39;transferAgentName\&#39;. | [optional] [default to undefined]
 **name** | **string** | Legal name. Not the DBA name. Deprecated alias for \&#39;businessName\&#39;. | [optional] [default to undefined]
@@ -30,6 +26,10 @@ Name | Type | Description | Notes
 **foreignProvince** | **string** | Province or region for non-US/CA addresses. | [optional] [default to undefined]
 **transferAgentName** | **string** | Name of the transfer agent, if applicable — optional; use either this or \&#39;dbaName\&#39;. | [optional] [default to undefined]
 **lastFiling** | **boolean** | Indicates if this is the issuer\&#39;s final year filing. | [default to undefined]
+**id** | **string** | Unique identifier set when the record is created. | [optional] [default to undefined]
+**createdAt** | **Date** | Date time when the record was created. | [optional] [default to undefined]
+**updatedAt** | **Date** | Date time when the record was last updated. | [optional] [default to undefined]
+**validationErrors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) | Field-level validation errors. Populated when a POST or PUT request violated business rules  but the issuer was still persisted. Each entry identifies the affected field and the issue.  Empty array when the payload was fully valid. | [optional] [readonly] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

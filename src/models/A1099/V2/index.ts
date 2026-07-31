@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export * from './CompanyBase';
 export * from './CompanyRequest';
 export * from './CompanyResponse';
 export * from './CoveredIndividual';
@@ -24,11 +23,9 @@ export * from './Form1099R';
 export * from './Form1099StatusDetail';
 export * from './Form1099W2';
 export * from './Get1099Form200Response';
-export * from './GetIssuer200Response';
 export * from './IntermediaryOrFlowThrough';
 export * from './IrisFormBase';
 export * from './IrsResponse';
-export * from './IssuerBase';
 export * from './IssuerRequest';
 export * from './IssuerResponse';
 export * from './IssuerWriteResponse';
