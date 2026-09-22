@@ -68,6 +68,13 @@ import {
     Form1099NecFromJSONTyped,
     Form1099NecToJSON,
 } from './Form1099Nec';
+import type { Form1099Patr } from './Form1099Patr';
+import {
+    instanceOfForm1099Patr,
+    Form1099PatrFromJSON,
+    Form1099PatrFromJSONTyped,
+    Form1099PatrToJSON,
+} from './Form1099Patr';
 import type { Form1099R } from './Form1099R';
 import {
     instanceOfForm1099R,
@@ -88,7 +95,7 @@ import {
  * 
  * @export
  */
-export type Get1099Form200Response = { type: '1042-S' } & Form1042S | { type: '1095-B' } & Form1095B | { type: '1095-C' } & Form1095C | { type: '1099-DIV' } & Form1099Div | { type: '1099-INT' } & Form1099Int | { type: '1099-K' } & Form1099K | { type: '1099-MISC' } & Form1099Misc | { type: '1099-NEC' } & Form1099Nec | { type: '1099-R' } & Form1099R | { type: 'W-2' } & Form1099W2;
+export type Get1099Form200Response = { type: '1042-S' } & Form1042S | { type: '1095-B' } & Form1095B | { type: '1095-C' } & Form1095C | { type: '1099-DIV' } & Form1099Div | { type: '1099-INT' } & Form1099Int | { type: '1099-K' } & Form1099K | { type: '1099-MISC' } & Form1099Misc | { type: '1099-NEC' } & Form1099Nec | { type: '1099-PATR' } & Form1099Patr | { type: '1099-R' } & Form1099R | { type: 'W-2' } & Form1099W2;
 
 export function Get1099Form200ResponseFromJSON(json: any): Get1099Form200Response {
     return Get1099Form200ResponseFromJSONTyped(json, false);
@@ -115,6 +122,8 @@ export function Get1099Form200ResponseFromJSONTyped(json: any, ignoreDiscriminat
             return Object.assign({}, Form1099MiscFromJSONTyped(json, true), { type: '1099-MISC' } as const);
         case '1099-NEC':
             return Object.assign({}, Form1099NecFromJSONTyped(json, true), { type: '1099-NEC' } as const);
+        case '1099-PATR':
+            return Object.assign({}, Form1099PatrFromJSONTyped(json, true), { type: '1099-PATR' } as const);
         case '1099-R':
             return Object.assign({}, Form1099RFromJSONTyped(json, true), { type: '1099-R' } as const);
         case 'W-2':
@@ -145,6 +154,8 @@ export function Get1099Form200ResponseToJSON(value?: Get1099Form200Response | nu
             return Form1099MiscToJSON(value);
         case '1099-NEC':
             return Form1099NecToJSON(value);
+        case '1099-PATR':
+            return Form1099PatrToJSON(value);
         case '1099-R':
             return Form1099RToJSON(value);
         case 'W-2':

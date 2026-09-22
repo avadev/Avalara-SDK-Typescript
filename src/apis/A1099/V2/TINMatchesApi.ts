@@ -40,7 +40,7 @@ export interface PerformRealTimeTinMatchInterface {
  * 
  */
 export class TINMatchesApi extends runtime.ApiClient {
-    public sdkVersion: string = '26.7.0';
+    public sdkVersion: string = '26.9.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);

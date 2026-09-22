@@ -19,6 +19,7 @@ export * from './Form1099K';
 export * from './Form1099ListRequest';
 export * from './Form1099Misc';
 export * from './Form1099Nec';
+export * from './Form1099Patr';
 export * from './Form1099R';
 export * from './Form1099StatusDetail';
 export * from './Form1099W2';
