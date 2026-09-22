@@ -39,248 +39,244 @@ import {
 } from './ValidationError';
 
 /**
- * Form 1099-INT: Interest Imcome
+ * Form 1099-PATR: Taxable Distributions Received From Cooperatives
  *             
- * *At least one of the following amounts must be provided:* 
- * Interest Income, Interest on U.S. Savings Bonds and Treasury obligations, or Tax-Exempt Interest.
+ * *At least one of the following amounts must be greater than zero:*
+ * Patronage Dividends, Nonpatronage Distributions, Per-Unit Retain Allocations, or Redeemed Nonqualified Notices.
+ *             
+ * Federal Income Tax Withheld, when provided, must be less than the total of those four amounts.
+ *             
+ * Specified Cooperative may only be set when at least one of Qualified Payments,
+ * Section 199A(a) Qualified Items, or Section 199A(a) SSTB Items is provided.
+ *             
+ * Form 1099-PATR has no state or local withholding boxes. `stateAndLocalWithholding` is not supported for this
+ * form type on any endpoint: a supplied value is discarded rather than stored, and the field always reads back
+ * as `null`.
  * @export
- * @interface Form1099Int
+ * @interface Form1099Patr
  */
-export interface Form1099Int {
+export interface Form1099Patr {
     [key: string]: any | any;
     /**
-     * Interest Income
+     * Patronage dividends
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    interestIncome?: number | null;
+    patronageDividends?: number | null;
     /**
-     * Early Withdrawal Penalty
+     * Nonpatronage distributions
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    earlyWithdrawalPenalty?: number | null;
+    nonpatronageDistributions?: number | null;
     /**
-     * Interest on U.S. Savings Bonds and Treasury obligations
+     * Per-unit retain allocations
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    usSavingsBondsInterest?: number | null;
+    perUnitRetainAllocations?: number | null;
     /**
      * Federal income tax withheld
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     federalIncomeTaxWithheld?: number | null;
     /**
-     * Investment Expenses
+     * Redeemed nonqualified notices
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    investmentExpenses?: number | null;
+    redeemedNonqualifiedNotices?: number | null;
     /**
-     * Foreign tax paid
+     * Section 199A(g) deduction
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    foreignTaxPaid?: number | null;
+    section199AgDeduction?: number | null;
     /**
-     * Foreign country or U.S. possession
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    foreignCountry?: string | null;
-    /**
-     * Tax-Exempt Interest
+     * Qualified payments (Section 199A(b)(7))
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    taxExemptInterest?: number | null;
+    qualifiedPayments?: number | null;
     /**
-     * Specified Private activity
+     * Section 199A(a) qualified items
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    specifiedPrivateActivityBondInterest?: number | null;
+    section199AaQualifiedItems?: number | null;
     /**
-     * Market Discount
+     * Section 199A(a) SSTB items
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    marketDiscount?: number | null;
+    section199AaSstbItems?: number | null;
     /**
-     * Bond Premium
+     * Investment credit
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    bondPremium?: number | null;
+    investmentCredit?: number | null;
     /**
-     * Bond Premium on Treasury obligations
+     * Work opportunity credit
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    bondPremiumOnTreasuryObligations?: number | null;
+    workOpportunityCredit?: number | null;
     /**
-     * Bond Premium on tax exempt bond
+     * Other credits and deductions
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    bondPremiumOnTaxExemptBond?: number | null;
+    otherCreditsAndDeductions?: number | null;
     /**
-     * Tax exempt bond CUSIP no. 
-     * Enter VARIOUS if the tax-exempt interest is reported in the aggregate for multiple bonds or accounts.
-     * @type {string}
-     * @memberof Form1099Int
-     */
-    taxExemptBondCusipNumber?: string | null;
-    /**
-     * FATCA filing requirement.
+     * Indicates the payer is a specified agricultural or horticultural cooperative
      * @type {boolean}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    fatcaFilingRequirement?: boolean | null;
+    specifiedCooperativeIndicator?: boolean | null;
     /**
      * Form type.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    type: Form1099IntTypeEnum;
+    type: Form1099PatrTypeEnum;
     /**
      * Form ID. Unique identifier set when the record is created.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly id?: string | null;
     /**
      * Issuer ID - only required when creating forms
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     issuerId?: string | null;
     /**
      * Issuer Reference ID - only required when creating forms via $bulk-upsert
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     issuerReferenceId?: string | null;
     /**
      * Issuer TIN - readonly
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     issuerTin?: string | null;
     /**
      * Tax Year - only required when creating forms via $bulk-upsert
      * @type {number}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     taxYear?: number | null;
     /**
      * Internal reference ID. Never shown to any agency or recipient.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     referenceId?: string | null;
     /**
      * Recipient's Federal Tax Identification Number (TIN).
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     tin?: string | null;
     /**
      * DEPRECATED: Use `businessName` for businesses; use `firstName`, `middleName`, `lastName`, and `suffixName` for individuals.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     recipientName?: string | null;
     /**
      * Address.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     address: string | null;
     /**
      * Address line 2.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     address2?: string | null;
     /**
      * City.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     city: string | null;
     /**
      * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     state?: string | null;
     /**
      * ZIP/postal code.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     zip?: string | null;
     /**
      * Recipient's Contact email address.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     email?: string | null;
     /**
      * Province or region for non-US/CA addresses.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     nonUsProvince?: string | null;
     /**
      * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     countryCode: string | null;
     /**
      * Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     federalEfileDate?: Date | null;
     /**
      * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     postalMail?: boolean | null;
     /**
      * Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     stateEfileDate?: Date | null;
     /**
      * Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     recipientEdeliveryDate?: Date | null;
     /**
      * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     tinMatch?: boolean | null;
     /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     addressVerification?: boolean | null;
     /**
      * State and local withholding information
      * @type {StateAndLocalWithholding}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     stateAndLocalWithholding?: StateAndLocalWithholding | null;
     /**
@@ -299,7 +295,7 @@ export interface Form1099Int {
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly federalEfileStatus?: Form1099StatusDetail | null;
     /**
@@ -317,7 +313,7 @@ export interface Form1099Int {
      * - corrected_rejected: Correction was rejected by the state
      * - corrected_accepted: Correction was accepted by the state
      * @type {Array<StateEfileStatusDetail>}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
     /**
@@ -328,7 +324,7 @@ export interface Form1099Int {
      * - sent: Postal mail has been sent
      * - delivered: Postal mail has been delivered
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly postalMailStatus?: Form1099StatusDetail | null;
     /**
@@ -340,7 +336,7 @@ export interface Form1099Int {
      * - unknown: TIN is missing, invalid, or request contains errors
      * - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly tinMatchStatus?: Form1099StatusDetail | null;
     /**
@@ -353,7 +349,7 @@ export interface Form1099Int {
      * - unchanged: User declined address changes
      * - verified: Address has been verified and accepted
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly addressVerificationStatus?: Form1099StatusDetail | null;
     /**
@@ -370,25 +366,25 @@ export interface Form1099Int {
      * - second_delivery: Second e-delivery attempt
      * - undelivered: E-delivery is undelivered (temporary state allowing resend)
      * @type {Form1099StatusDetail}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly eDeliveryStatus?: Form1099StatusDetail | null;
     /**
      * Validation errors
      * @type {Array<ValidationError>}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly validationErrors?: Array<ValidationError> | null;
     /**
      * Date time when the record was created.
      * @type {Date}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly createdAt?: Date;
     /**
      * Date time when the record was last updated.
      * @type {Date}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     readonly updatedAt?: Date;
     /**
@@ -405,73 +401,73 @@ export interface Form1099Int {
      * - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number
      * - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
-    tinType?: Form1099IntTinTypeEnum;
+    tinType?: Form1099PatrTinTypeEnum;
     /**
      * Business name. Required when the recipient of the form is a business; should only be used for businesses.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     businessName?: string | null;
     /**
      * Business name line 2. Should only be used for businesses.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     businessName2?: string | null;
     /**
      * First name. Required when the recipient of the form is an individual; should only be used for individuals.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     firstName?: string | null;
     /**
      * Middle name. Should only be used for individuals.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     middleName?: string | null;
     /**
      * Last name. Required when the recipient of the form is an individual; should only be used for individuals.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     lastName?: string | null;
     /**
      * Suffix name. Should only be used for individuals.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     suffixName?: string | null;
     /**
      * DEPRECATED: Use `businessName2` instead.
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     recipientSecondName?: string | null;
     /**
      * Account number
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     accountNumber?: string | null;
     /**
      * Office code
      * @type {string}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     officeCode?: string | null;
     /**
      * No TIN indicator
      * @type {boolean}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     noTin?: boolean | null;
     /**
      * Second TIN notice
      * @type {boolean}
-     * @memberof Form1099Int
+     * @memberof Form1099Patr
      */
     secondTinNotice?: boolean | null;
 }
@@ -480,7 +476,7 @@ export interface Form1099Int {
 * @export
 * @enum {string}
 */
-export enum Form1099IntTypeEnum {
+export enum Form1099PatrTypeEnum {
     _1042S = '1042-S',
     _1095B = '1095-B',
     _1095C = '1095-C',
@@ -496,7 +492,7 @@ export enum Form1099IntTypeEnum {
 * @export
 * @enum {string}
 */
-export enum Form1099IntTinTypeEnum {
+export enum Form1099PatrTinTypeEnum {
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',
@@ -507,9 +503,9 @@ export enum Form1099IntTinTypeEnum {
 }
 
 /**
- * Check if a given object implements the Form1099Int interface.
+ * Check if a given object implements the Form1099Patr interface.
  */
-export function instanceOfForm1099Int(value: object): boolean {
+export function instanceOfForm1099Patr(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "address" in value;
@@ -519,32 +515,30 @@ export function instanceOfForm1099Int(value: object): boolean {
     return isInstance;
 }
 
-export function Form1099IntFromJSON(json: any): Form1099Int {
-    return Form1099IntFromJSONTyped(json, false);
+export function Form1099PatrFromJSON(json: any): Form1099Patr {
+    return Form1099PatrFromJSONTyped(json, false);
 }
 
-export function Form1099IntFromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1099Int {
+export function Form1099PatrFromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1099Patr {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
             ...json,
-        'interestIncome': !exists(json, 'interestIncome') ? undefined : json['interestIncome'],
-        'earlyWithdrawalPenalty': !exists(json, 'earlyWithdrawalPenalty') ? undefined : json['earlyWithdrawalPenalty'],
-        'usSavingsBondsInterest': !exists(json, 'usSavingsBondsInterest') ? undefined : json['usSavingsBondsInterest'],
+        'patronageDividends': !exists(json, 'patronageDividends') ? undefined : json['patronageDividends'],
+        'nonpatronageDistributions': !exists(json, 'nonpatronageDistributions') ? undefined : json['nonpatronageDistributions'],
+        'perUnitRetainAllocations': !exists(json, 'perUnitRetainAllocations') ? undefined : json['perUnitRetainAllocations'],
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
-        'investmentExpenses': !exists(json, 'investmentExpenses') ? undefined : json['investmentExpenses'],
-        'foreignTaxPaid': !exists(json, 'foreignTaxPaid') ? undefined : json['foreignTaxPaid'],
-        'foreignCountry': !exists(json, 'foreignCountry') ? undefined : json['foreignCountry'],
-        'taxExemptInterest': !exists(json, 'taxExemptInterest') ? undefined : json['taxExemptInterest'],
-        'specifiedPrivateActivityBondInterest': !exists(json, 'specifiedPrivateActivityBondInterest') ? undefined : json['specifiedPrivateActivityBondInterest'],
-        'marketDiscount': !exists(json, 'marketDiscount') ? undefined : json['marketDiscount'],
-        'bondPremium': !exists(json, 'bondPremium') ? undefined : json['bondPremium'],
-        'bondPremiumOnTreasuryObligations': !exists(json, 'bondPremiumOnTreasuryObligations') ? undefined : json['bondPremiumOnTreasuryObligations'],
-        'bondPremiumOnTaxExemptBond': !exists(json, 'bondPremiumOnTaxExemptBond') ? undefined : json['bondPremiumOnTaxExemptBond'],
-        'taxExemptBondCusipNumber': !exists(json, 'taxExemptBondCusipNumber') ? undefined : json['taxExemptBondCusipNumber'],
-        'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
+        'redeemedNonqualifiedNotices': !exists(json, 'redeemedNonqualifiedNotices') ? undefined : json['redeemedNonqualifiedNotices'],
+        'section199AgDeduction': !exists(json, 'section199AgDeduction') ? undefined : json['section199AgDeduction'],
+        'qualifiedPayments': !exists(json, 'qualifiedPayments') ? undefined : json['qualifiedPayments'],
+        'section199AaQualifiedItems': !exists(json, 'section199AaQualifiedItems') ? undefined : json['section199AaQualifiedItems'],
+        'section199AaSstbItems': !exists(json, 'section199AaSstbItems') ? undefined : json['section199AaSstbItems'],
+        'investmentCredit': !exists(json, 'investmentCredit') ? undefined : json['investmentCredit'],
+        'workOpportunityCredit': !exists(json, 'workOpportunityCredit') ? undefined : json['workOpportunityCredit'],
+        'otherCreditsAndDeductions': !exists(json, 'otherCreditsAndDeductions') ? undefined : json['otherCreditsAndDeductions'],
+        'specifiedCooperativeIndicator': !exists(json, 'specifiedCooperativeIndicator') ? undefined : json['specifiedCooperativeIndicator'],
         'type': json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
@@ -593,7 +587,7 @@ export function Form1099IntFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function Form1099IntToJSON(value?: Form1099Int | null): any {
+export function Form1099PatrToJSON(value?: Form1099Patr | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -603,21 +597,19 @@ export function Form1099IntToJSON(value?: Form1099Int | null): any {
     return {
         
             ...value,
-        'interestIncome': value.interestIncome,
-        'earlyWithdrawalPenalty': value.earlyWithdrawalPenalty,
-        'usSavingsBondsInterest': value.usSavingsBondsInterest,
+        'patronageDividends': value.patronageDividends,
+        'nonpatronageDistributions': value.nonpatronageDistributions,
+        'perUnitRetainAllocations': value.perUnitRetainAllocations,
         'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,
-        'investmentExpenses': value.investmentExpenses,
-        'foreignTaxPaid': value.foreignTaxPaid,
-        'foreignCountry': value.foreignCountry,
-        'taxExemptInterest': value.taxExemptInterest,
-        'specifiedPrivateActivityBondInterest': value.specifiedPrivateActivityBondInterest,
-        'marketDiscount': value.marketDiscount,
-        'bondPremium': value.bondPremium,
-        'bondPremiumOnTreasuryObligations': value.bondPremiumOnTreasuryObligations,
-        'bondPremiumOnTaxExemptBond': value.bondPremiumOnTaxExemptBond,
-        'taxExemptBondCusipNumber': value.taxExemptBondCusipNumber,
-        'fatcaFilingRequirement': value.fatcaFilingRequirement,
+        'redeemedNonqualifiedNotices': value.redeemedNonqualifiedNotices,
+        'section199AgDeduction': value.section199AgDeduction,
+        'qualifiedPayments': value.qualifiedPayments,
+        'section199AaQualifiedItems': value.section199AaQualifiedItems,
+        'section199AaSstbItems': value.section199AaSstbItems,
+        'investmentCredit': value.investmentCredit,
+        'workOpportunityCredit': value.workOpportunityCredit,
+        'otherCreditsAndDeductions': value.otherCreditsAndDeductions,
+        'specifiedCooperativeIndicator': value.specifiedCooperativeIndicator,
         'type': value.type,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,

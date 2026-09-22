@@ -36,6 +36,7 @@ export interface Form1099ListRequest {
      * * `1099-K`
      * * `1099-MISC`
      * * `1099-NEC`
+     * * `1099-PATR`
      * * `1099-R`
      * * `W-2`
      * 
@@ -64,6 +65,7 @@ export enum Form1099ListRequestTypeEnum {
     _1099K = '1099-K',
     _1099Misc = '1099-MISC',
     _1099Nec = '1099-NEC',
+    _1099Patr = '1099-PATR',
     _1099R = '1099-R',
     W2 = 'W-2'
 }

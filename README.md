@@ -313,6 +313,7 @@ Class | Method | HTTP request | Description
  - [A1099.V2.Form1099ListRequest](docs/A1099/V2/Form1099ListRequest.md)
  - [A1099.V2.Form1099Misc](docs/A1099/V2/Form1099Misc.md)
  - [A1099.V2.Form1099Nec](docs/A1099/V2/Form1099Nec.md)
+ - [A1099.V2.Form1099Patr](docs/A1099/V2/Form1099Patr.md)
  - [A1099.V2.Form1099R](docs/A1099/V2/Form1099R.md)
  - [A1099.V2.Form1099StatusDetail](docs/A1099/V2/Form1099StatusDetail.md)
  - [A1099.V2.Form1099W2](docs/A1099/V2/Form1099W2.md)
