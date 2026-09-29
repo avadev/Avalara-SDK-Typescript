@@ -1,5 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
+export * from './BulkTinMatchAcceptedResponse';
+export * from './BulkTinMatchIrsResponse';
+export * from './BulkTinMatchRequest';
+export * from './BulkTinMatchRequestItem';
+export * from './BulkTinMatchResponse';
+export * from './BulkTinMatchResultItemResponse';
 export * from './CompanyRequest';
 export * from './CompanyResponse';
 export * from './CoveredIndividual';
@@ -12,7 +18,9 @@ export * from './ErrorResponseItem';
 export * from './Form1042S';
 export * from './Form1095B';
 export * from './Form1095C';
+export * from './Form1098';
 export * from './Form1099Base';
+export * from './Form1099C';
 export * from './Form1099Div';
 export * from './Form1099Int';
 export * from './Form1099K';
@@ -21,6 +29,7 @@ export * from './Form1099Misc';
 export * from './Form1099Nec';
 export * from './Form1099Patr';
 export * from './Form1099R';
+export * from './Form1099S';
 export * from './Form1099StatusDetail';
 export * from './Form1099W2';
 export * from './Get1099Form200Response';
@@ -32,6 +41,7 @@ export * from './IssuerResponse';
 export * from './IssuerWriteResponse';
 export * from './JobResponse';
 export * from './OfferAndCoverage';
+export * from './PaginatedQueryResultModelBulkTinMatchResultItemResponse';
 export * from './PaginatedQueryResultModelCompanyResponse';
 export * from './PaginatedQueryResultModelForm1099Base';
 export * from './PaginatedQueryResultModelIssuerResponse';

@@ -18,9 +18,21 @@ import { RequestInit } from 'node-fetch';
 import LogObject from '../../../utils/logObject';
 
 import {
+    BulkTinMatchAcceptedResponse,
+    BulkTinMatchAcceptedResponseFromJSON,
+    BulkTinMatchAcceptedResponseToJSON,
+    BulkTinMatchRequest,
+    BulkTinMatchRequestFromJSON,
+    BulkTinMatchRequestToJSON,
+    BulkTinMatchResponse,
+    BulkTinMatchResponseFromJSON,
+    BulkTinMatchResponseToJSON,
     ErrorResponse,
     ErrorResponseFromJSON,
     ErrorResponseToJSON,
+    PaginatedQueryResultModelBulkTinMatchResultItemResponse,
+    PaginatedQueryResultModelBulkTinMatchResultItemResponseFromJSON,
+    PaginatedQueryResultModelBulkTinMatchResultItemResponseToJSON,
     RealTimeTinMatchRequest,
     RealTimeTinMatchRequestFromJSON,
     RealTimeTinMatchRequestToJSON,
@@ -29,6 +41,26 @@ import {
     RealTimeTinMatchResponseToJSON,
 } from '../../../packages/A1099/V2';
 
+export interface GetBulkTinMatchInterface {
+    id: string;
+    avalaraVersion?: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
+}
+
+export interface GetBulkTinMatchResultsInterface {
+    id: string;
+    avalaraVersion?: string;
+    $filter?: string;
+    $top?: number;
+    $skip?: number;
+    $orderBy?: string;
+    count?: boolean;
+    countOnly?: boolean;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
+}
+
 export interface PerformRealTimeTinMatchInterface {
     avalaraVersion?: string;
     xCorrelationId?: string;
@@ -36,14 +68,149 @@ export interface PerformRealTimeTinMatchInterface {
     realTimeTinMatchRequest?: RealTimeTinMatchRequest;
 }
 
+export interface SubmitBulkTinMatchInterface {
+    avalaraVersion?: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
+    bulkTinMatchRequest?: BulkTinMatchRequest;
+}
+
 /**
  * 
  */
 export class TINMatchesApi extends runtime.ApiClient {
-    public sdkVersion: string = '26.9.0';
+    public sdkVersion: string = '26.9.1';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
+    }
+
+    /**
+     * Get bulk TIN match details
+     */
+    async getBulkTinMatchRaw(requestParameters: GetBulkTinMatchInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<BulkTinMatchResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getBulkTinMatch.');
+        }
+
+        if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
+            throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getBulkTinMatch.');
+        }
+
+        const queryParameters: any = {};
+        const requiredScopes = "";
+        const authNames: string[] = ['http'];
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
+            headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
+        }
+
+        if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
+            headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
+        }
+
+        await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
+        const { response, logObject } = await this.request({
+            path: `/tin-matches/$bulk/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
+        logObject.populateResponseInfo(response);
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => BulkTinMatchResponseFromJSON(jsonValue)), logObject };
+    }
+
+    /**
+     * Get bulk TIN match details
+     */
+    async getBulkTinMatch(requestParameters: GetBulkTinMatchInterface, initOverrides?: RequestInit): Promise<BulkTinMatchResponse> {
+        const { response, logObject } = await this.getBulkTinMatchRaw(requestParameters, initOverrides);
+        const value = await response.value();
+        logObject.populateResponseBody(value);
+        this.createLogEntry(logObject);
+        return value;
+    }
+
+    /**
+     * List bulk TIN match results
+     */
+    async getBulkTinMatchResultsRaw(requestParameters: GetBulkTinMatchResultsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<PaginatedQueryResultModelBulkTinMatchResultItemResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getBulkTinMatchResults.');
+        }
+
+        if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
+            throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getBulkTinMatchResults.');
+        }
+
+        const queryParameters: any = {};
+        const requiredScopes = "";
+        const authNames: string[] = ['http'];
+        if (requestParameters.$filter !== undefined) {
+            queryParameters['$filter'] = requestParameters.$filter;
+        }
+
+        if (requestParameters.$top !== undefined) {
+            queryParameters['$top'] = requestParameters.$top;
+        }
+
+        if (requestParameters.$skip !== undefined) {
+            queryParameters['$skip'] = requestParameters.$skip;
+        }
+
+        if (requestParameters.$orderBy !== undefined) {
+            queryParameters['$orderBy'] = requestParameters.$orderBy;
+        }
+
+        if (requestParameters.count !== undefined) {
+            queryParameters['count'] = requestParameters.count;
+        }
+
+        if (requestParameters.countOnly !== undefined) {
+            queryParameters['countOnly'] = requestParameters.countOnly;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
+            headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
+        }
+
+        if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
+            headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
+        }
+
+        await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
+        const { response, logObject } = await this.request({
+            path: `/tin-matches/$bulk/{id}/results`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
+        logObject.populateResponseInfo(response);
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => PaginatedQueryResultModelBulkTinMatchResultItemResponseFromJSON(jsonValue)), logObject };
+    }
+
+    /**
+     * List bulk TIN match results
+     */
+    async getBulkTinMatchResults(requestParameters: GetBulkTinMatchResultsInterface, initOverrides?: RequestInit): Promise<PaginatedQueryResultModelBulkTinMatchResultItemResponse> {
+        const { response, logObject } = await this.getBulkTinMatchResultsRaw(requestParameters, initOverrides);
+        const value = await response.value();
+        logObject.populateResponseBody(value);
+        this.createLogEntry(logObject);
+        return value;
     }
 
     /**
@@ -93,6 +260,57 @@ export class TINMatchesApi extends runtime.ApiClient {
      */
     async performRealTimeTinMatch(requestParameters: PerformRealTimeTinMatchInterface, initOverrides?: RequestInit): Promise<RealTimeTinMatchResponse> {
         const { response, logObject } = await this.performRealTimeTinMatchRaw(requestParameters, initOverrides);
+        const value = await response.value();
+        logObject.populateResponseBody(value);
+        this.createLogEntry(logObject);
+        return value;
+    }
+
+    /**
+     * Submit bulk TIN match
+     */
+    async submitBulkTinMatchRaw(requestParameters: SubmitBulkTinMatchInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<BulkTinMatchAcceptedResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
+        if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
+            throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling submitBulkTinMatch.');
+        }
+
+        const queryParameters: any = {};
+        const requiredScopes = "";
+        const authNames: string[] = ['http'];
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
+            headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
+        }
+
+        if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
+            headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
+        }
+
+        await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
+        const { response, logObject } = await this.request({
+            path: `/tin-matches/$bulk`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: BulkTinMatchRequestToJSON(requestParameters.bulkTinMatchRequest),
+        }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
+        logObject.populateResponseInfo(response);
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => BulkTinMatchAcceptedResponseFromJSON(jsonValue)), logObject };
+    }
+
+    /**
+     * Submit bulk TIN match
+     */
+    async submitBulkTinMatch(requestParameters: SubmitBulkTinMatchInterface, initOverrides?: RequestInit): Promise<BulkTinMatchAcceptedResponse> {
+        const { response, logObject } = await this.submitBulkTinMatchRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
         this.createLogEntry(logObject);

@@ -414,6 +414,8 @@ export enum Form1099NecTypeEnum {
     _1042S = '1042-S',
     _1095B = '1095-B',
     _1095C = '1095-C',
+    _1098 = '1098',
+    _1099C = '1099-C',
     _1099Div = '1099-DIV',
     _1099Int = '1099-INT',
     _1099K = '1099-K',
@@ -421,6 +423,7 @@ export enum Form1099NecTypeEnum {
     _1099Nec = '1099-NEC',
     _1099Patr = '1099-PATR',
     _1099R = '1099-R',
+    _1099S = '1099-S',
     W2 = 'W-2'
 }/**
 * @export
