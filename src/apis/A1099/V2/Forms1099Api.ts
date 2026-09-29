@@ -96,14 +96,14 @@ export interface Update1099FormInterface {
  * 
  */
 export class Forms1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '26.9.0';
+    public sdkVersion: string = '26.9.1';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
     }
 
     /**
-     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
+     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**                If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.                **Recipient Name Splitting:**                When the account\'s \"Split individual recipient names\" opt-in setting is enabled (Account Settings page), this only applies to the deprecated identifier-format tinType values (SSN/ITIN/ATIN/EIN):  - For the deprecated individual-type values (SSN/ITIN/ATIN) where only the legacy `recipientName` is provided, the API automatically splits `recipientName` into `firstName`, `middleName`, `lastName`, and `suffixName` before persisting.  - For the deprecated `EIN` value, `recipientName` is not split and is routed directly to `businessName`.                To enable or disable this behavior, the account owner can toggle \"Split individual recipient names on API submissions\" on the Account Settings page.
      * Create or update multiple 1099/1095/W2/1042S forms
      */
     async bulkUpsert1099FormsRaw(requestParameters: BulkUpsert1099FormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<JobResponse>, logObject: LogObject }> {
@@ -148,7 +148,7 @@ export class Forms1099Api extends runtime.ApiClient {
     }
 
     /**
-     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
+     * This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**                If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.                **Recipient Name Splitting:**                When the account\'s \"Split individual recipient names\" opt-in setting is enabled (Account Settings page), this only applies to the deprecated identifier-format tinType values (SSN/ITIN/ATIN/EIN):  - For the deprecated individual-type values (SSN/ITIN/ATIN) where only the legacy `recipientName` is provided, the API automatically splits `recipientName` into `firstName`, `middleName`, `lastName`, and `suffixName` before persisting.  - For the deprecated `EIN` value, `recipientName` is not split and is routed directly to `businessName`.                To enable or disable this behavior, the account owner can toggle \"Split individual recipient names on API submissions\" on the Account Settings page.
      * Create or update multiple 1099/1095/W2/1042S forms
      */
     async bulkUpsert1099Forms(requestParameters: BulkUpsert1099FormsInterface, initOverrides?: RequestInit): Promise<JobResponse> {
