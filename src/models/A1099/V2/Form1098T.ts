@@ -39,230 +39,210 @@ import {
 } from './ValidationError';
 
 /**
- * Form 1098: Mortgage Interest Statement
+ * Form 1098-T: Tuition Statement
  *             
- * The recipient is the borrower and the issuer is the lender, with one form per mortgage.
+ * The recipient is the student and the issuer is the filer (eligible educational institution or insurer).
  *             
- * *Required:* Mortgage Interest Received unless Other is given (otherwise at least one amount must be above zero), and
- * exactly one of Address or Description of Property and the same-address indicator.
+ * *Required:* at least one amount above zero (Boxes 1, 4, 5, 6 or 10). Amounts can't be negative; Boxes 4 and 6 are
+ * reductions of prior-year amounts, entered as positive numbers. Boxes 2 and 3 are reserved by the IRS.
  *             
- * Limits: Address or Description of Property and Other, 39 characters each; Mortgage Origination Date, at most 45 years
- * before the tax year; Mortgage Acquisition Date, within the tax year; Number of Properties, 2 to 9999 (empty for one).
- *             
- * Form 1098 has no state or local boxes, so `stateAndLocalWithholding` is discarded and reads back as `null`.
+ * Form 1098-T has no state or local boxes, so `stateAndLocalWithholding` is discarded and reads back as `null`.
  * @export
- * @interface Form1098
+ * @interface Form1098T
  */
-export interface Form1098 {
+export interface Form1098T {
     [key: string]: any | any;
     /**
-     * Mortgage interest received from payer(s)/borrower(s)
+     * Payments received for qualified tuition and related expenses
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
-    mortgageInterestReceived?: number | null;
+    paymentsReceivedForQualifiedTuitionAndRelatedExpenses?: number | null;
     /**
-     * Outstanding mortgage principal
+     * Adjustments made for a prior year
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
-    outstandingMortgagePrincipal?: number | null;
+    adjustmentsMadeForPriorYear?: number | null;
     /**
-     * Mortgage origination date
-     * @type {Date}
-     * @memberof Form1098
-     */
-    mortgageOriginationDate?: Date | null;
-    /**
-     * Refund of overpaid interest
+     * Scholarships or grants
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
-    refundOfOverpaidInterest?: number | null;
+    scholarshipsOrGrants?: number | null;
     /**
-     * Mortgage insurance premiums
+     * Adjustments to scholarships or grants for a prior year
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
-    mortgageInsurancePremiums?: number | null;
+    adjustmentsToScholarshipsOrGrantsForPriorYear?: number | null;
     /**
-     * Points paid on purchase of principal residence
-     * @type {number}
-     * @memberof Form1098
-     */
-    pointsPaidOnPurchaseOfPrincipalResidence?: number | null;
-    /**
-     * If checked, the property securing the mortgage is at the borrower's address
+     * If checked, the amount in Box 1 includes amounts for an academic period beginning January through March of the
+     * next year
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
-    propertyAddressSameAsBorrowerIndicator?: boolean | null;
+    includesAmountsForAcademicPeriodBeginningNextYearIndicator?: boolean | null;
     /**
-     * Address or description of property securing mortgage (up to 39 characters)
-     * @type {string}
-     * @memberof Form1098
+     * If checked, the student was at least a half-time student during any academic period that began in the tax year
+     * @type {boolean}
+     * @memberof Form1098T
      */
-    propertyAddressOrDescription?: string | null;
+    atLeastHalfTimeStudentIndicator?: boolean | null;
     /**
-     * Number of properties securing the mortgage, if more than one
+     * If checked, the student was enrolled in a program leading to a graduate degree, certificate or credential
+     * @type {boolean}
+     * @memberof Form1098T
+     */
+    graduateStudentIndicator?: boolean | null;
+    /**
+     * Insurance contract reimbursements or refunds (insurers only)
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
-    numberOfPropertiesSecuringMortgage?: number | null;
-    /**
-     * Other (up to 39 characters), such as real estate taxes or insurance paid from escrow
-     * @type {string}
-     * @memberof Form1098
-     */
-    otherInformation?: string | null;
-    /**
-     * Mortgage acquisition date, if the mortgage was acquired during the tax year
-     * @type {Date}
-     * @memberof Form1098
-     */
-    mortgageAcquisitionDate?: Date | null;
+    insuranceContractReimbursementsOrRefunds?: number | null;
     /**
      * Form type.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
-    type: Form1098TypeEnum;
+    type: Form1098TTypeEnum;
     /**
      * Form ID. Unique identifier set when the record is created.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly id?: string | null;
     /**
      * Issuer ID - only required when creating forms
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     issuerId?: string | null;
     /**
      * Issuer Reference ID - only required when creating forms via $bulk-upsert
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     issuerReferenceId?: string | null;
     /**
      * Issuer TIN - readonly
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     issuerTin?: string | null;
     /**
      * Tax Year - only required when creating forms via $bulk-upsert
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     taxYear?: number | null;
     /**
      * Internal reference ID. Never shown to any agency or recipient.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     referenceId?: string | null;
     /**
      * Recipient's Federal Tax Identification Number (TIN).
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     tin?: string | null;
     /**
      * DEPRECATED: Use `businessName` for businesses; use `firstName`, `middleName`, `lastName`, and `suffixName` for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     recipientName?: string | null;
     /**
      * Address.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     address: string | null;
     /**
      * Address line 2.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     address2?: string | null;
     /**
      * City.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     city: string | null;
     /**
      * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     state?: string | null;
     /**
      * ZIP/postal code.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     zip?: string | null;
     /**
      * Recipient's Contact email address.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     email?: string | null;
     /**
      * Province or region for non-US/CA addresses.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     nonUsProvince?: string | null;
     /**
      * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     countryCode: string | null;
     /**
      * Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     federalEfileDate?: Date | null;
     /**
      * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     postalMail?: boolean | null;
     /**
      * Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     stateEfileDate?: Date | null;
     /**
      * Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     recipientEdeliveryDate?: Date | null;
     /**
      * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     tinMatch?: boolean | null;
     /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     addressVerification?: boolean | null;
     /**
      * State and local withholding information
      * @type {StateAndLocalWithholding}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     stateAndLocalWithholding?: StateAndLocalWithholding | null;
     /**
@@ -281,7 +261,7 @@ export interface Form1098 {
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly federalEfileStatus?: Form1099StatusDetail | null;
     /**
@@ -299,7 +279,7 @@ export interface Form1098 {
      * - corrected_rejected: Correction was rejected by the state
      * - corrected_accepted: Correction was accepted by the state
      * @type {Array<StateEfileStatusDetail>}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
     /**
@@ -310,7 +290,7 @@ export interface Form1098 {
      * - sent: Postal mail has been sent
      * - delivered: Postal mail has been delivered
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly postalMailStatus?: Form1099StatusDetail | null;
     /**
@@ -322,7 +302,7 @@ export interface Form1098 {
      * - unknown: TIN is missing, invalid, or request contains errors
      * - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly tinMatchStatus?: Form1099StatusDetail | null;
     /**
@@ -335,7 +315,7 @@ export interface Form1098 {
      * - unchanged: User declined address changes
      * - verified: Address has been verified and accepted
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly addressVerificationStatus?: Form1099StatusDetail | null;
     /**
@@ -352,25 +332,25 @@ export interface Form1098 {
      * - second_delivery: Second e-delivery attempt
      * - undelivered: E-delivery is undelivered (temporary state allowing resend)
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly eDeliveryStatus?: Form1099StatusDetail | null;
     /**
      * Validation errors
      * @type {Array<ValidationError>}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly validationErrors?: Array<ValidationError> | null;
     /**
      * Date time when the record was created.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly createdAt?: Date | null;
     /**
      * Date time when the record was last updated.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     readonly updatedAt?: Date | null;
     /**
@@ -387,73 +367,73 @@ export interface Form1098 {
      * - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number
      * - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
-    tinType?: Form1098TinTypeEnum;
+    tinType?: Form1098TTinTypeEnum;
     /**
      * Business name. Required when the recipient of the form is a business; should only be used for businesses.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     businessName?: string | null;
     /**
      * Business name line 2. Should only be used for businesses.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     businessName2?: string | null;
     /**
      * First name. Required when the recipient of the form is an individual; should only be used for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     firstName?: string | null;
     /**
      * Middle name. Should only be used for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     middleName?: string | null;
     /**
      * Last name. Required when the recipient of the form is an individual; should only be used for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     lastName?: string | null;
     /**
      * Suffix name. Should only be used for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     suffixName?: string | null;
     /**
      * DEPRECATED: Use `businessName2` instead.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     recipientSecondName?: string | null;
     /**
      * Account number
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     accountNumber?: string | null;
     /**
      * Office code
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     officeCode?: string | null;
     /**
      * No TIN indicator
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     noTin?: boolean | null;
     /**
      * Second TIN notice
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1098T
      */
     secondTinNotice?: boolean | null;
 }
@@ -462,7 +442,7 @@ export interface Form1098 {
 * @export
 * @enum {string}
 */
-export enum Form1098TypeEnum {
+export enum Form1098TTypeEnum {
     _1042S = '1042-S',
     _1095B = '1095-B',
     _1095C = '1095-C',
@@ -483,7 +463,7 @@ export enum Form1098TypeEnum {
 * @export
 * @enum {string}
 */
-export enum Form1098TinTypeEnum {
+export enum Form1098TTinTypeEnum {
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',
@@ -494,9 +474,9 @@ export enum Form1098TinTypeEnum {
 }
 
 /**
- * Check if a given object implements the Form1098 interface.
+ * Check if a given object implements the Form1098T interface.
  */
-export function instanceOfForm1098(value: object): boolean {
+export function instanceOfForm1098T(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "address" in value;
@@ -506,28 +486,25 @@ export function instanceOfForm1098(value: object): boolean {
     return isInstance;
 }
 
-export function Form1098FromJSON(json: any): Form1098 {
-    return Form1098FromJSONTyped(json, false);
+export function Form1098TFromJSON(json: any): Form1098T {
+    return Form1098TFromJSONTyped(json, false);
 }
 
-export function Form1098FromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1098 {
+export function Form1098TFromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1098T {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
             ...json,
-        'mortgageInterestReceived': !exists(json, 'mortgageInterestReceived') ? undefined : json['mortgageInterestReceived'],
-        'outstandingMortgagePrincipal': !exists(json, 'outstandingMortgagePrincipal') ? undefined : json['outstandingMortgagePrincipal'],
-        'mortgageOriginationDate': !exists(json, 'mortgageOriginationDate') ? undefined : (json['mortgageOriginationDate'] === null ? null : new Date(json['mortgageOriginationDate'])),
-        'refundOfOverpaidInterest': !exists(json, 'refundOfOverpaidInterest') ? undefined : json['refundOfOverpaidInterest'],
-        'mortgageInsurancePremiums': !exists(json, 'mortgageInsurancePremiums') ? undefined : json['mortgageInsurancePremiums'],
-        'pointsPaidOnPurchaseOfPrincipalResidence': !exists(json, 'pointsPaidOnPurchaseOfPrincipalResidence') ? undefined : json['pointsPaidOnPurchaseOfPrincipalResidence'],
-        'propertyAddressSameAsBorrowerIndicator': !exists(json, 'propertyAddressSameAsBorrowerIndicator') ? undefined : json['propertyAddressSameAsBorrowerIndicator'],
-        'propertyAddressOrDescription': !exists(json, 'propertyAddressOrDescription') ? undefined : json['propertyAddressOrDescription'],
-        'numberOfPropertiesSecuringMortgage': !exists(json, 'numberOfPropertiesSecuringMortgage') ? undefined : json['numberOfPropertiesSecuringMortgage'],
-        'otherInformation': !exists(json, 'otherInformation') ? undefined : json['otherInformation'],
-        'mortgageAcquisitionDate': !exists(json, 'mortgageAcquisitionDate') ? undefined : (json['mortgageAcquisitionDate'] === null ? null : new Date(json['mortgageAcquisitionDate'])),
+        'paymentsReceivedForQualifiedTuitionAndRelatedExpenses': !exists(json, 'paymentsReceivedForQualifiedTuitionAndRelatedExpenses') ? undefined : json['paymentsReceivedForQualifiedTuitionAndRelatedExpenses'],
+        'adjustmentsMadeForPriorYear': !exists(json, 'adjustmentsMadeForPriorYear') ? undefined : json['adjustmentsMadeForPriorYear'],
+        'scholarshipsOrGrants': !exists(json, 'scholarshipsOrGrants') ? undefined : json['scholarshipsOrGrants'],
+        'adjustmentsToScholarshipsOrGrantsForPriorYear': !exists(json, 'adjustmentsToScholarshipsOrGrantsForPriorYear') ? undefined : json['adjustmentsToScholarshipsOrGrantsForPriorYear'],
+        'includesAmountsForAcademicPeriodBeginningNextYearIndicator': !exists(json, 'includesAmountsForAcademicPeriodBeginningNextYearIndicator') ? undefined : json['includesAmountsForAcademicPeriodBeginningNextYearIndicator'],
+        'atLeastHalfTimeStudentIndicator': !exists(json, 'atLeastHalfTimeStudentIndicator') ? undefined : json['atLeastHalfTimeStudentIndicator'],
+        'graduateStudentIndicator': !exists(json, 'graduateStudentIndicator') ? undefined : json['graduateStudentIndicator'],
+        'insuranceContractReimbursementsOrRefunds': !exists(json, 'insuranceContractReimbursementsOrRefunds') ? undefined : json['insuranceContractReimbursementsOrRefunds'],
         'type': json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
@@ -576,7 +553,7 @@ export function Form1098FromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function Form1098ToJSON(value?: Form1098 | null): any {
+export function Form1098TToJSON(value?: Form1098T | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -586,17 +563,14 @@ export function Form1098ToJSON(value?: Form1098 | null): any {
     return {
         
             ...value,
-        'mortgageInterestReceived': value.mortgageInterestReceived,
-        'outstandingMortgagePrincipal': value.outstandingMortgagePrincipal,
-        'mortgageOriginationDate': value.mortgageOriginationDate === undefined ? undefined : (value.mortgageOriginationDate === null ? null : value.mortgageOriginationDate.toISOString().substr(0,10)),
-        'refundOfOverpaidInterest': value.refundOfOverpaidInterest,
-        'mortgageInsurancePremiums': value.mortgageInsurancePremiums,
-        'pointsPaidOnPurchaseOfPrincipalResidence': value.pointsPaidOnPurchaseOfPrincipalResidence,
-        'propertyAddressSameAsBorrowerIndicator': value.propertyAddressSameAsBorrowerIndicator,
-        'propertyAddressOrDescription': value.propertyAddressOrDescription,
-        'numberOfPropertiesSecuringMortgage': value.numberOfPropertiesSecuringMortgage,
-        'otherInformation': value.otherInformation,
-        'mortgageAcquisitionDate': value.mortgageAcquisitionDate === undefined ? undefined : (value.mortgageAcquisitionDate === null ? null : value.mortgageAcquisitionDate.toISOString().substr(0,10)),
+        'paymentsReceivedForQualifiedTuitionAndRelatedExpenses': value.paymentsReceivedForQualifiedTuitionAndRelatedExpenses,
+        'adjustmentsMadeForPriorYear': value.adjustmentsMadeForPriorYear,
+        'scholarshipsOrGrants': value.scholarshipsOrGrants,
+        'adjustmentsToScholarshipsOrGrantsForPriorYear': value.adjustmentsToScholarshipsOrGrantsForPriorYear,
+        'includesAmountsForAcademicPeriodBeginningNextYearIndicator': value.includesAmountsForAcademicPeriodBeginningNextYearIndicator,
+        'atLeastHalfTimeStudentIndicator': value.atLeastHalfTimeStudentIndicator,
+        'graduateStudentIndicator': value.graduateStudentIndicator,
+        'insuranceContractReimbursementsOrRefunds': value.insuranceContractReimbursementsOrRefunds,
         'type': value.type,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,

@@ -32,6 +32,7 @@ export interface Form1099ListRequest {
      * * `1095-B`
      * * `1095-C`
      * * `1098`
+     * * `1098-T`
      * * `1099-C`
      * * `1099-DIV`
      * * `1099-INT`
@@ -41,6 +42,7 @@ export interface Form1099ListRequest {
      * * `1099-PATR`
      * * `1099-R`
      * * `1099-S`
+     * * `1099-SA`
      * * `W-2`
      * 
      * @type {string}
@@ -64,6 +66,7 @@ export enum Form1099ListRequestTypeEnum {
     _1095B = '1095-B',
     _1095C = '1095-C',
     _1098 = '1098',
+    _1098T = '1098-T',
     _1099C = '1099-C',
     _1099Div = '1099-DIV',
     _1099Int = '1099-INT',
@@ -73,6 +76,7 @@ export enum Form1099ListRequestTypeEnum {
     _1099Patr = '1099-PATR',
     _1099R = '1099-R',
     _1099S = '1099-S',
+    _1099Sa = '1099-SA',
     W2 = 'W-2'
 }
 

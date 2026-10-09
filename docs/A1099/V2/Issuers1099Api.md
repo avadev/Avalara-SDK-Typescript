@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**deleteIssuer**](Issuers1099Api.md#deleteissuer) | **DELETE** /1099/issuers/{id} | Delete an issuer
 [**getIssuer**](Issuers1099Api.md#getissuer) | **GET** /1099/issuers/{id} | Retrieve an issuer
 [**getIssuers**](Issuers1099Api.md#getissuers) | **GET** /1099/issuers | List issuers
+[**resubmitRejectedForms**](Issuers1099Api.md#resubmitrejectedforms) | **POST** /1099/issuers/{issuerId}/$resubmit-rejected-forms | Request a replacement submission for an issuer\&#39;s rejected forms
 [**updateIssuer**](Issuers1099Api.md#updateissuer) | **PUT** /1099/issuers/{id} | Update an issuer
 
 
@@ -251,6 +252,66 @@ Name | Type | Description  | Notes
 | **404** | Not Found |  -  |
 | **500** | Server Error |  -  |
 | **401** | Authentication failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
+
+<a name="resubmitrejectedforms"></a>
+# **resubmitRejectedForms**
+> ResubmitRejectedFormsResponse resubmitRejectedForms (number issuerId, string avalaraVersion, string xCorrelationId, string xAvalaraClient)
+
+Request a replacement submission for an issuer\'s rejected forms
+
+Mirrors the UI\'s \"Resubmit Rejected Forms\" action: schedules a replacement submission for every one  of the issuer\'s forms currently in Rejected or RejectedWithErrors status, in a single action. There  is no per-form or per-submission selection. This call only schedules the resubmission — actual  transmission to the IRS remains asynchronous and batch-driven.
+
+### Example
+```typescript
+import * as AvalaraSdk from 'avalara-sdk';
+
+const configParams: AvalaraSdk.Runtime.ConfigurationParameters = {
+    appName: 'asv-sdk-test-app',
+    appVersion: '1.0',
+    environment: AvaTaxEnvironment.Sandbox,
+    machineName: 'test-machine',
+    timeout:3000,
+    bearerToken: 'YOUR_BEARER_TOKEN',
+    testBasePath: 'https://localhost:3000'
+};
+const config = new AvalaraSdk.Configuration(configParams);
+let client = new AvalaraSdk.Runtime.ApiClient(config);
+let api = new AvalaraSdk.A1099.V2.UserApi(client);
+const result = await api.createUser();
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **issuerId** | **number**| Id of the issuer whose rejected forms should be resubmitted | [default to undefined]
+ **avalaraVersion** | **string**| API version | [default to undefined]
+ **xCorrelationId** | **string**| Unique correlation Id in a GUID format | [optional] [default to undefined]
+ **xAvalaraClient** | **string**| Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] [default to undefined]
+
+### Return type
+
+[**ResubmitRejectedFormsResponse**](ResubmitRejectedFormsResponse.md)
+
+### Authorization
+
+[bearer](../../../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Rejected forms scheduled for replacement submission |  -  |
+| **401** | Authentication failed |  -  |
+| **403** | Caller does not have access to this issuer |  -  |
+| **404** | Issuer has no forms in Rejected or RejectedWithErrors status |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

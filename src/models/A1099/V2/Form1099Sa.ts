@@ -39,230 +39,210 @@ import {
 } from './ValidationError';
 
 /**
- * Form 1098: Mortgage Interest Statement
+ * Form 1099-SA: Distributions From an HSA, Archer MSA, or Medicare Advantage MSA
  *             
- * The recipient is the borrower and the issuer is the lender, with one form per mortgage.
+ * The recipient is the account holder and the issuer is the trustee (payer).
  *             
- * *Required:* Mortgage Interest Received unless Other is given (otherwise at least one amount must be above zero), and
- * exactly one of Address or Description of Property and the same-address indicator.
+ * *Required:* Gross Distribution, Distribution Code, and exactly one of the three account type indicators
+ * (HSA, Archer MSA, Medicare Advantage MSA).
  *             
- * Limits: Address or Description of Property and Other, 39 characters each; Mortgage Origination Date, at most 45 years
- * before the tax year; Mortgage Acquisition Date, within the tax year; Number of Properties, 2 to 9999 (empty for one).
- *             
- * Form 1098 has no state or local boxes, so `stateAndLocalWithholding` is discarded and reads back as `null`.
+ * Form 1099-SA has no state or local boxes, so `stateAndLocalWithholding` is discarded and reads back as `null`.
  * @export
- * @interface Form1098
+ * @interface Form1099Sa
  */
-export interface Form1098 {
+export interface Form1099Sa {
     [key: string]: any | any;
     /**
-     * Mortgage interest received from payer(s)/borrower(s)
+     * Gross distribution
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
-    mortgageInterestReceived?: number | null;
+    grossDistribution: number | null;
     /**
-     * Outstanding mortgage principal
+     * Earnings on excess contributions
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
-    outstandingMortgagePrincipal?: number | null;
+    earningsOnExcessContributions?: number | null;
     /**
-     * Mortgage origination date
-     * @type {Date}
-     * @memberof Form1098
+     * Distribution code.
+     *             
+     * * `1` - Normal distributions
+     * * `2` - Excess contributions
+     * * `3` - Disability
+     * * `4` - Death distribution other than code 6
+     * * `5` - Prohibited transaction
+     * * `6` - Death distribution after year of death to a nonspouse beneficiary
+     * @type {string}
+     * @memberof Form1099Sa
      */
-    mortgageOriginationDate?: Date | null;
+    distributionCode: Form1099SaDistributionCodeEnum;
     /**
-     * Refund of overpaid interest
+     * Fair market value (FMV) of the account on the date of death
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
-    refundOfOverpaidInterest?: number | null;
+    fairMarketValueOnDateOfDeath?: number | null;
     /**
-     * Mortgage insurance premiums
-     * @type {number}
-     * @memberof Form1098
-     */
-    mortgageInsurancePremiums?: number | null;
-    /**
-     * Points paid on purchase of principal residence
-     * @type {number}
-     * @memberof Form1098
-     */
-    pointsPaidOnPurchaseOfPrincipalResidence?: number | null;
-    /**
-     * If checked, the property securing the mortgage is at the borrower's address
+     * If checked, the account is a health savings account (HSA). Exactly one account type indicator must be checked.
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
-    propertyAddressSameAsBorrowerIndicator?: boolean | null;
+    hsaIndicator?: boolean | null;
     /**
-     * Address or description of property securing mortgage (up to 39 characters)
-     * @type {string}
-     * @memberof Form1098
+     * If checked, the account is an Archer medical savings account (MSA). Exactly one account type indicator must be checked.
+     * @type {boolean}
+     * @memberof Form1099Sa
      */
-    propertyAddressOrDescription?: string | null;
+    archerMsaIndicator?: boolean | null;
     /**
-     * Number of properties securing the mortgage, if more than one
-     * @type {number}
-     * @memberof Form1098
+     * If checked, the account is a Medicare Advantage MSA. Exactly one account type indicator must be checked.
+     * @type {boolean}
+     * @memberof Form1099Sa
      */
-    numberOfPropertiesSecuringMortgage?: number | null;
-    /**
-     * Other (up to 39 characters), such as real estate taxes or insurance paid from escrow
-     * @type {string}
-     * @memberof Form1098
-     */
-    otherInformation?: string | null;
-    /**
-     * Mortgage acquisition date, if the mortgage was acquired during the tax year
-     * @type {Date}
-     * @memberof Form1098
-     */
-    mortgageAcquisitionDate?: Date | null;
+    medicareAdvantageMsaIndicator?: boolean | null;
     /**
      * Form type.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
-    type: Form1098TypeEnum;
+    type: Form1099SaTypeEnum;
     /**
      * Form ID. Unique identifier set when the record is created.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly id?: string | null;
     /**
      * Issuer ID - only required when creating forms
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     issuerId?: string | null;
     /**
      * Issuer Reference ID - only required when creating forms via $bulk-upsert
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     issuerReferenceId?: string | null;
     /**
      * Issuer TIN - readonly
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     issuerTin?: string | null;
     /**
      * Tax Year - only required when creating forms via $bulk-upsert
      * @type {number}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     taxYear?: number | null;
     /**
      * Internal reference ID. Never shown to any agency or recipient.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     referenceId?: string | null;
     /**
      * Recipient's Federal Tax Identification Number (TIN).
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     tin?: string | null;
     /**
      * DEPRECATED: Use `businessName` for businesses; use `firstName`, `middleName`, `lastName`, and `suffixName` for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     recipientName?: string | null;
     /**
      * Address.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     address: string | null;
     /**
      * Address line 2.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     address2?: string | null;
     /**
      * City.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     city: string | null;
     /**
      * Two-letter US state or Canadian province code (required for US/CA addresses).
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     state?: string | null;
     /**
      * ZIP/postal code.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     zip?: string | null;
     /**
      * Recipient's Contact email address.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     email?: string | null;
     /**
      * Province or region for non-US/CA addresses.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     nonUsProvince?: string | null;
     /**
      * Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     countryCode: string | null;
     /**
      * Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     federalEfileDate?: Date | null;
     /**
      * Boolean indicating that postal mailing to the recipient should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     postalMail?: boolean | null;
     /**
      * Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     stateEfileDate?: Date | null;
     /**
      * Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     recipientEdeliveryDate?: Date | null;
     /**
      * Boolean indicating that TIN Matching should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     tinMatch?: boolean | null;
     /**
      * Boolean indicating that address verification should be scheduled for this form
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     addressVerification?: boolean | null;
     /**
      * State and local withholding information
      * @type {StateAndLocalWithholding}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     stateAndLocalWithholding?: StateAndLocalWithholding | null;
     /**
@@ -281,7 +261,7 @@ export interface Form1098 {
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly federalEfileStatus?: Form1099StatusDetail | null;
     /**
@@ -299,7 +279,7 @@ export interface Form1098 {
      * - corrected_rejected: Correction was rejected by the state
      * - corrected_accepted: Correction was accepted by the state
      * @type {Array<StateEfileStatusDetail>}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly stateEfileStatus?: Array<StateEfileStatusDetail> | null;
     /**
@@ -310,7 +290,7 @@ export interface Form1098 {
      * - sent: Postal mail has been sent
      * - delivered: Postal mail has been delivered
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly postalMailStatus?: Form1099StatusDetail | null;
     /**
@@ -322,7 +302,7 @@ export interface Form1098 {
      * - unknown: TIN is missing, invalid, or request contains errors
      * - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly tinMatchStatus?: Form1099StatusDetail | null;
     /**
@@ -335,7 +315,7 @@ export interface Form1098 {
      * - unchanged: User declined address changes
      * - verified: Address has been verified and accepted
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly addressVerificationStatus?: Form1099StatusDetail | null;
     /**
@@ -352,25 +332,25 @@ export interface Form1098 {
      * - second_delivery: Second e-delivery attempt
      * - undelivered: E-delivery is undelivered (temporary state allowing resend)
      * @type {Form1099StatusDetail}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly eDeliveryStatus?: Form1099StatusDetail | null;
     /**
      * Validation errors
      * @type {Array<ValidationError>}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly validationErrors?: Array<ValidationError> | null;
     /**
      * Date time when the record was created.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly createdAt?: Date | null;
     /**
      * Date time when the record was last updated.
      * @type {Date}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     readonly updatedAt?: Date | null;
     /**
@@ -387,73 +367,73 @@ export interface Form1098 {
      * - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number
      * - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
-    tinType?: Form1098TinTypeEnum;
+    tinType?: Form1099SaTinTypeEnum;
     /**
      * Business name. Required when the recipient of the form is a business; should only be used for businesses.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     businessName?: string | null;
     /**
      * Business name line 2. Should only be used for businesses.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     businessName2?: string | null;
     /**
      * First name. Required when the recipient of the form is an individual; should only be used for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     firstName?: string | null;
     /**
      * Middle name. Should only be used for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     middleName?: string | null;
     /**
      * Last name. Required when the recipient of the form is an individual; should only be used for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     lastName?: string | null;
     /**
      * Suffix name. Should only be used for individuals.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     suffixName?: string | null;
     /**
      * DEPRECATED: Use `businessName2` instead.
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     recipientSecondName?: string | null;
     /**
      * Account number
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     accountNumber?: string | null;
     /**
      * Office code
      * @type {string}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     officeCode?: string | null;
     /**
      * No TIN indicator
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     noTin?: boolean | null;
     /**
      * Second TIN notice
      * @type {boolean}
-     * @memberof Form1098
+     * @memberof Form1099Sa
      */
     secondTinNotice?: boolean | null;
 }
@@ -462,7 +442,18 @@ export interface Form1098 {
 * @export
 * @enum {string}
 */
-export enum Form1098TypeEnum {
+export enum Form1099SaDistributionCodeEnum {
+    _1 = '1',
+    _2 = '2',
+    _3 = '3',
+    _4 = '4',
+    _5 = '5',
+    _6 = '6'
+}/**
+* @export
+* @enum {string}
+*/
+export enum Form1099SaTypeEnum {
     _1042S = '1042-S',
     _1095B = '1095-B',
     _1095C = '1095-C',
@@ -483,7 +474,7 @@ export enum Form1098TypeEnum {
 * @export
 * @enum {string}
 */
-export enum Form1098TinTypeEnum {
+export enum Form1099SaTinTypeEnum {
     Ein = 'EIN',
     Ssn = 'SSN',
     Itin = 'ITIN',
@@ -494,10 +485,12 @@ export enum Form1098TinTypeEnum {
 }
 
 /**
- * Check if a given object implements the Form1098 interface.
+ * Check if a given object implements the Form1099Sa interface.
  */
-export function instanceOfForm1098(value: object): boolean {
+export function instanceOfForm1099Sa(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "grossDistribution" in value;
+    isInstance = isInstance && "distributionCode" in value;
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "address" in value;
     isInstance = isInstance && "city" in value;
@@ -506,28 +499,24 @@ export function instanceOfForm1098(value: object): boolean {
     return isInstance;
 }
 
-export function Form1098FromJSON(json: any): Form1098 {
-    return Form1098FromJSONTyped(json, false);
+export function Form1099SaFromJSON(json: any): Form1099Sa {
+    return Form1099SaFromJSONTyped(json, false);
 }
 
-export function Form1098FromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1098 {
+export function Form1099SaFromJSONTyped(json: any, ignoreDiscriminator: boolean): Form1099Sa {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
             ...json,
-        'mortgageInterestReceived': !exists(json, 'mortgageInterestReceived') ? undefined : json['mortgageInterestReceived'],
-        'outstandingMortgagePrincipal': !exists(json, 'outstandingMortgagePrincipal') ? undefined : json['outstandingMortgagePrincipal'],
-        'mortgageOriginationDate': !exists(json, 'mortgageOriginationDate') ? undefined : (json['mortgageOriginationDate'] === null ? null : new Date(json['mortgageOriginationDate'])),
-        'refundOfOverpaidInterest': !exists(json, 'refundOfOverpaidInterest') ? undefined : json['refundOfOverpaidInterest'],
-        'mortgageInsurancePremiums': !exists(json, 'mortgageInsurancePremiums') ? undefined : json['mortgageInsurancePremiums'],
-        'pointsPaidOnPurchaseOfPrincipalResidence': !exists(json, 'pointsPaidOnPurchaseOfPrincipalResidence') ? undefined : json['pointsPaidOnPurchaseOfPrincipalResidence'],
-        'propertyAddressSameAsBorrowerIndicator': !exists(json, 'propertyAddressSameAsBorrowerIndicator') ? undefined : json['propertyAddressSameAsBorrowerIndicator'],
-        'propertyAddressOrDescription': !exists(json, 'propertyAddressOrDescription') ? undefined : json['propertyAddressOrDescription'],
-        'numberOfPropertiesSecuringMortgage': !exists(json, 'numberOfPropertiesSecuringMortgage') ? undefined : json['numberOfPropertiesSecuringMortgage'],
-        'otherInformation': !exists(json, 'otherInformation') ? undefined : json['otherInformation'],
-        'mortgageAcquisitionDate': !exists(json, 'mortgageAcquisitionDate') ? undefined : (json['mortgageAcquisitionDate'] === null ? null : new Date(json['mortgageAcquisitionDate'])),
+        'grossDistribution': json['grossDistribution'],
+        'earningsOnExcessContributions': !exists(json, 'earningsOnExcessContributions') ? undefined : json['earningsOnExcessContributions'],
+        'distributionCode': json['distributionCode'],
+        'fairMarketValueOnDateOfDeath': !exists(json, 'fairMarketValueOnDateOfDeath') ? undefined : json['fairMarketValueOnDateOfDeath'],
+        'hsaIndicator': !exists(json, 'hsaIndicator') ? undefined : json['hsaIndicator'],
+        'archerMsaIndicator': !exists(json, 'archerMsaIndicator') ? undefined : json['archerMsaIndicator'],
+        'medicareAdvantageMsaIndicator': !exists(json, 'medicareAdvantageMsaIndicator') ? undefined : json['medicareAdvantageMsaIndicator'],
         'type': json['type'],
         'id': !exists(json, 'id') ? undefined : json['id'],
         'issuerId': !exists(json, 'issuerId') ? undefined : json['issuerId'],
@@ -576,7 +565,7 @@ export function Form1098FromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function Form1098ToJSON(value?: Form1098 | null): any {
+export function Form1099SaToJSON(value?: Form1099Sa | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -586,17 +575,13 @@ export function Form1098ToJSON(value?: Form1098 | null): any {
     return {
         
             ...value,
-        'mortgageInterestReceived': value.mortgageInterestReceived,
-        'outstandingMortgagePrincipal': value.outstandingMortgagePrincipal,
-        'mortgageOriginationDate': value.mortgageOriginationDate === undefined ? undefined : (value.mortgageOriginationDate === null ? null : value.mortgageOriginationDate.toISOString().substr(0,10)),
-        'refundOfOverpaidInterest': value.refundOfOverpaidInterest,
-        'mortgageInsurancePremiums': value.mortgageInsurancePremiums,
-        'pointsPaidOnPurchaseOfPrincipalResidence': value.pointsPaidOnPurchaseOfPrincipalResidence,
-        'propertyAddressSameAsBorrowerIndicator': value.propertyAddressSameAsBorrowerIndicator,
-        'propertyAddressOrDescription': value.propertyAddressOrDescription,
-        'numberOfPropertiesSecuringMortgage': value.numberOfPropertiesSecuringMortgage,
-        'otherInformation': value.otherInformation,
-        'mortgageAcquisitionDate': value.mortgageAcquisitionDate === undefined ? undefined : (value.mortgageAcquisitionDate === null ? null : value.mortgageAcquisitionDate.toISOString().substr(0,10)),
+        'grossDistribution': value.grossDistribution,
+        'earningsOnExcessContributions': value.earningsOnExcessContributions,
+        'distributionCode': value.distributionCode,
+        'fairMarketValueOnDateOfDeath': value.fairMarketValueOnDateOfDeath,
+        'hsaIndicator': value.hsaIndicator,
+        'archerMsaIndicator': value.archerMsaIndicator,
+        'medicareAdvantageMsaIndicator': value.medicareAdvantageMsaIndicator,
         'type': value.type,
         'issuerId': value.issuerId,
         'issuerReferenceId': value.issuerReferenceId,

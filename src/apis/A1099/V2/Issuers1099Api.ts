@@ -33,6 +33,9 @@ import {
     PaginatedQueryResultModelIssuerResponse,
     PaginatedQueryResultModelIssuerResponseFromJSON,
     PaginatedQueryResultModelIssuerResponseToJSON,
+    ResubmitRejectedFormsResponse,
+    ResubmitRejectedFormsResponseFromJSON,
+    ResubmitRejectedFormsResponseToJSON,
 } from '../../../packages/A1099/V2';
 
 export interface CreateIssuerInterface {
@@ -68,6 +71,13 @@ export interface GetIssuersInterface {
     xAvalaraClient?: string;
 }
 
+export interface ResubmitRejectedFormsInterface {
+    issuerId: number;
+    avalaraVersion?: string;
+    xCorrelationId?: string;
+    xAvalaraClient?: string;
+}
+
 export interface UpdateIssuerInterface {
     id: string;
     avalaraVersion?: string;
@@ -80,7 +90,7 @@ export interface UpdateIssuerInterface {
  * 
  */
 export class Issuers1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '26.9.1';
+    public sdkVersion: string = '26.10.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -313,6 +323,60 @@ export class Issuers1099Api extends runtime.ApiClient {
      */
     async getIssuers(requestParameters: GetIssuersInterface, initOverrides?: RequestInit): Promise<PaginatedQueryResultModelIssuerResponse> {
         const { response, logObject } = await this.getIssuersRaw(requestParameters, initOverrides);
+        const value = await response.value();
+        logObject.populateResponseBody(value);
+        this.createLogEntry(logObject);
+        return value;
+    }
+
+    /**
+     * Mirrors the UI\'s \"Resubmit Rejected Forms\" action: schedules a replacement submission for every one  of the issuer\'s forms currently in Rejected or RejectedWithErrors status, in a single action. There  is no per-form or per-submission selection. This call only schedules the resubmission — actual  transmission to the IRS remains asynchronous and batch-driven.
+     * Request a replacement submission for an issuer\'s rejected forms
+     */
+    async resubmitRejectedFormsRaw(requestParameters: ResubmitRejectedFormsInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<ResubmitRejectedFormsResponse>, logObject: LogObject }> {
+        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
+        if (requestParameters.issuerId === null || requestParameters.issuerId === undefined) {
+            throw new runtime.RequiredError('issuerId','Required parameter requestParameters.issuerId was null or undefined when calling resubmitRejectedForms.');
+        }
+
+        if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
+            throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling resubmitRejectedForms.');
+        }
+
+        const queryParameters: any = {};
+        const requiredScopes = "";
+        const authNames: string[] = ['http'];
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
+            headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
+        }
+
+        if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
+            headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
+        }
+
+        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
+            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
+        }
+
+        await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
+        const { response, logObject } = await this.request({
+            path: `/1099/issuers/{issuerId}/$resubmit-rejected-forms`.replace(`{${"issuerId"}}`, encodeURIComponent(String(requestParameters.issuerId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
+        logObject.populateResponseInfo(response);
+        return { response: new runtime.JSONApiResponse(response, (jsonValue) => ResubmitRejectedFormsResponseFromJSON(jsonValue)), logObject };
+    }
+
+    /**
+     * Mirrors the UI\'s \"Resubmit Rejected Forms\" action: schedules a replacement submission for every one  of the issuer\'s forms currently in Rejected or RejectedWithErrors status, in a single action. There  is no per-form or per-submission selection. This call only schedules the resubmission — actual  transmission to the IRS remains asynchronous and batch-driven.
+     * Request a replacement submission for an issuer\'s rejected forms
+     */
+    async resubmitRejectedForms(requestParameters: ResubmitRejectedFormsInterface, initOverrides?: RequestInit): Promise<ResubmitRejectedFormsResponse> {
+        const { response, logObject } = await this.resubmitRejectedFormsRaw(requestParameters, initOverrides);
         const value = await response.value();
         logObject.populateResponseBody(value);
         this.createLogEntry(logObject);

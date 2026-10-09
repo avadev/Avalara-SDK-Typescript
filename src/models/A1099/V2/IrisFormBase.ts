@@ -289,13 +289,13 @@ export interface IrisFormBase {
      * @type {Date}
      * @memberof IrisFormBase
      */
-    readonly createdAt?: Date;
+    readonly createdAt?: Date | null;
     /**
      * Date time when the record was last updated.
      * @type {Date}
      * @memberof IrisFormBase
      */
-    readonly updatedAt?: Date;
+    readonly updatedAt?: Date | null;
     /**
      * Recipient classification.
      * 
@@ -390,6 +390,7 @@ export enum IrisFormBaseTypeEnum {
     _1095B = '1095-B',
     _1095C = '1095-C',
     _1098 = '1098',
+    _1098T = '1098-T',
     _1099C = '1099-C',
     _1099Div = '1099-DIV',
     _1099Int = '1099-INT',
@@ -399,6 +400,7 @@ export enum IrisFormBaseTypeEnum {
     _1099Patr = '1099-PATR',
     _1099R = '1099-R',
     _1099S = '1099-S',
+    _1099Sa = '1099-SA',
     W2 = 'W-2'
 }/**
 * @export
@@ -468,8 +470,8 @@ export function IrisFormBaseFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'addressVerificationStatus': !exists(json, 'addressVerificationStatus') ? undefined : Form1099StatusDetailFromJSON(json['addressVerificationStatus']),
         'eDeliveryStatus': !exists(json, 'eDeliveryStatus') ? undefined : Form1099StatusDetailFromJSON(json['eDeliveryStatus']),
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
-        'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
+        'createdAt': !exists(json, 'createdAt') ? undefined : (json['createdAt'] === null ? null : new Date(json['createdAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (json['updatedAt'] === null ? null : new Date(json['updatedAt'])),
         'tinType': !exists(json, 'tinType') ? undefined : json['tinType'],
         'businessName': !exists(json, 'businessName') ? undefined : json['businessName'],
         'businessName2': !exists(json, 'businessName2') ? undefined : json['businessName2'],
