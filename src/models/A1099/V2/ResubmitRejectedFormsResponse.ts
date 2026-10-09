@@ -12,89 +12,55 @@
  * Do not edit the class manually.
  */
 
-
-import * as runtime from '../../../runtime';
-import { RequestInit } from 'node-fetch';
-import LogObject from '../../../utils/logObject';
-
-import {
-    ErrorResponse,
-    ErrorResponseFromJSON,
-    ErrorResponseToJSON,
-    JobResponse,
-    JobResponseFromJSON,
-    JobResponseToJSON,
-} from '../../../packages/A1099/V2';
-
-export interface GetJobInterface {
-    id: string;
-    avalaraVersion?: string;
-    xCorrelationId?: string;
-    xAvalaraClient?: string;
-}
-
+import { exists, mapValues } from '../../../runtime';
 /**
  * 
+ * @export
+ * @interface ResubmitRejectedFormsResponse
  */
-export class JobsApi extends runtime.ApiClient {
-    public sdkVersion: string = '26.10.0';
-
-    constructor(apiClient: runtime.ApiClient) {
-        super(apiClient.configuration);
-    }
-
+export interface ResubmitRejectedFormsResponse {
     /**
-     * Retrieves information about the job
-     * Retrieves information about the job
+     * Number of forms scheduled for replacement submission.
+     * @type {number}
+     * @memberof ResubmitRejectedFormsResponse
      */
-    async getJobRaw(requestParameters: GetJobInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<JobResponse>, logObject: LogObject }> {
-        requestParameters.avalaraVersion = requestParameters.avalaraVersion || '2.0';
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getJob.');
-        }
+    resubmittedFormsCount?: number;
+}
 
-        if (requestParameters.avalaraVersion === null || requestParameters.avalaraVersion === undefined) {
-            throw new runtime.RequiredError('avalaraVersion','Required parameter requestParameters.avalaraVersion was null or undefined when calling getJob.');
-        }
 
-        const queryParameters: any = {};
-        const requiredScopes = "";
-        const authNames: string[] = ['http'];
-        const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.avalaraVersion !== undefined && requestParameters.avalaraVersion !== null) {
-            headerParameters['avalara-version'] = String(requestParameters.avalaraVersion);
-        }
+/**
+ * Check if a given object implements the ResubmitRejectedFormsResponse interface.
+ */
+export function instanceOfResubmitRejectedFormsResponse(value: object): boolean {
+    let isInstance = true;
 
-        if (requestParameters.xCorrelationId !== undefined && requestParameters.xCorrelationId !== null) {
-            headerParameters['X-Correlation-Id'] = String(requestParameters.xCorrelationId);
-        }
+    return isInstance;
+}
 
-        if (requestParameters.xAvalaraClient !== undefined && requestParameters.xAvalaraClient !== null) {
-            headerParameters['X-Avalara-Client'] = String(requestParameters.xAvalaraClient);
-        }
+export function ResubmitRejectedFormsResponseFromJSON(json: any): ResubmitRejectedFormsResponse {
+    return ResubmitRejectedFormsResponseFromJSONTyped(json, false);
+}
 
-        await this.applyAuthToRequest(headerParameters, authNames, requiredScopes);
-        const { response, logObject } = await this.request({
-            path: `/jobs/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides, requiredScopes, false, runtime.AvalaraMicroservice.A1099);
-        logObject.populateResponseInfo(response);
-        return { response: new runtime.JSONApiResponse(response, (jsonValue) => JobResponseFromJSON(jsonValue)), logObject };
+export function ResubmitRejectedFormsResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ResubmitRejectedFormsResponse {
+    if ((json === undefined) || (json === null)) {
+        return json;
     }
+    return {
+        
+        'resubmittedFormsCount': !exists(json, 'resubmittedFormsCount') ? undefined : json['resubmittedFormsCount'],
+    };
+}
 
-    /**
-     * Retrieves information about the job
-     * Retrieves information about the job
-     */
-    async getJob(requestParameters: GetJobInterface, initOverrides?: RequestInit): Promise<JobResponse> {
-        const { response, logObject } = await this.getJobRaw(requestParameters, initOverrides);
-        const value = await response.value();
-        logObject.populateResponseBody(value);
-        this.createLogEntry(logObject);
-        return value;
+export function ResubmitRejectedFormsResponseToJSON(value?: ResubmitRejectedFormsResponse | null): any {
+    if (value === undefined) {
+        return undefined;
     }
-
+    if (value === null) {
+        return null;
+    }
+    return {
+        
+        'resubmittedFormsCount': value.resubmittedFormsCount,
+    };
 }
