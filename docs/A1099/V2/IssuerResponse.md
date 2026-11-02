@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **id** | **string** | Unique identifier set when the record is created. | [optional] [default to undefined]
 **createdAt** | **Date** | Date time when the record was created. | [optional] [default to undefined]
 **updatedAt** | **Date** | Date time when the record was last updated. | [optional] [default to undefined]
+**federalEfileErrors** | [**Array&lt;FederalEfileErrorResponse&gt;**](FederalEfileErrorResponse.md) | Issuer-level IRS/IRIS rejection errors from the federal filing submissions of the issuer\&#39;s forms that are still rejected and awaiting resubmission. | [optional] [readonly] [default to undefined]
 
 [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to README]](../../../README.md)
 

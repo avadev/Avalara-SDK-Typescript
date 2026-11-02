@@ -43,13 +43,43 @@ export interface W9FormResponse {
      * @type {string}
      * @memberof W9FormResponse
      */
-    name?: string;
+    name?: string | null;
     /**
-     * The name of the business associated with the form.
+     * Individual first name.
+     * @type {string}
+     * @memberof W9FormResponse
+     */
+    firstName?: string | null;
+    /**
+     * Individual middle name.
+     * @type {string}
+     * @memberof W9FormResponse
+     */
+    middleName?: string | null;
+    /**
+     * Individual last name.
+     * @type {string}
+     * @memberof W9FormResponse
+     */
+    lastName?: string | null;
+    /**
+     * Individual name suffix.
+     * @type {string}
+     * @memberof W9FormResponse
+     */
+    suffixName?: string | null;
+    /**
+     * DEPRECATED: The name of the business associated with the form. Use `name2` instead.
      * @type {string}
      * @memberof W9FormResponse
      */
     businessName?: string | null;
+    /**
+     * The name of the business associated with the form. Replaces the deprecated `businessName` field.
+     * @type {string}
+     * @memberof W9FormResponse
+     */
+    name2?: string | null;
     /**
      * The classification of the business.
      * @type {string}
@@ -276,7 +306,12 @@ export function W9FormResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
         
         'type': !exists(json, 'type') ? undefined : json['type'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'firstName': !exists(json, 'firstName') ? undefined : json['firstName'],
+        'middleName': !exists(json, 'middleName') ? undefined : json['middleName'],
+        'lastName': !exists(json, 'lastName') ? undefined : json['lastName'],
+        'suffixName': !exists(json, 'suffixName') ? undefined : json['suffixName'],
         'businessName': !exists(json, 'businessName') ? undefined : json['businessName'],
+        'name2': !exists(json, 'name2') ? undefined : json['name2'],
         'businessClassification': !exists(json, 'businessClassification') ? undefined : json['businessClassification'],
         'businessOther': !exists(json, 'businessOther') ? undefined : json['businessOther'],
         'foreignPartnerOwnerOrBeneficiary': !exists(json, 'foreignPartnerOwnerOrBeneficiary') ? undefined : json['foreignPartnerOwnerOrBeneficiary'],
@@ -320,7 +355,12 @@ export function W9FormResponseToJSON(value?: W9FormResponse | null): any {
     return {
         
         'name': value.name,
+        'firstName': value.firstName,
+        'middleName': value.middleName,
+        'lastName': value.lastName,
+        'suffixName': value.suffixName,
         'businessName': value.businessName,
+        'name2': value.name2,
         'businessClassification': value.businessClassification,
         'businessOther': value.businessOther,
         'foreignPartnerOwnerOrBeneficiary': value.foreignPartnerOwnerOrBeneficiary,

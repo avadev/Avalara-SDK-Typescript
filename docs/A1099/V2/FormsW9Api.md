@@ -68,6 +68,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **201** | The created W9/W4/W8 form |  -  |
 | **400** | Bad request (e.g. Unknown form type: W10\&quot;) |  -  |
 | **401** | Authentication failed |  -  |
@@ -127,6 +128,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **201** | The created W9/W4/W8 form |  -  |
 | **400** | Bad request (e.g., missing required field) |  -  |
 | **401** | Authentication failed |  -  |
@@ -186,6 +188,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **204** | Empty response |  -  |
 | **401** | Authentication failed |  -  |
 | **404** | W9/W4/W8 form not found |  -  |
@@ -245,6 +248,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | W9/W4/W8 form with id |  -  |
 | **401** | Authentication failed |  -  |
 | **404** | W9/W4/W8 form not found |  -  |
@@ -298,12 +302,13 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/pdf, application/json
+ - **Accept**: application/json, application/pdf
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | Success |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
@@ -369,6 +374,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | list |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
@@ -428,6 +434,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | Email sent using existing form (form was already in \&#39;Requested\&#39; status or descendant found) |  -  |
 | **201** | Email sent using newly created minimal form |  -  |
 | **400** | Bad request (e.g., missing vendor e-mail) |  -  |
@@ -490,6 +497,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | The updated W9/W4/W8 form |  -  |
 | **400** | Bad request (e.g., missing required field) |  -  |
 | **401** | Authentication failed |  -  |
@@ -551,6 +559,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** |  |  -  |
 | **400** | Bad request (e.g., only .pdf files are allowed.) |  -  |
 | **401** | Authentication failed |  -  |

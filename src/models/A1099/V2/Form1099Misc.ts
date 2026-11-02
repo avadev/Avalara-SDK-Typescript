@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    FederalEfileStatusDetail,
+    FederalEfileStatusDetailFromJSON,
+    FederalEfileStatusDetailFromJSONTyped,
+    FederalEfileStatusDetailToJSON,
+} from './FederalEfileStatusDetail';
+import {
     Form1099StatusDetail,
     Form1099StatusDetailFromJSON,
     Form1099StatusDetailFromJSONTyped,
@@ -124,7 +130,38 @@ export interface Form1099Misc {
      */
     section409ADeferrals?: number | null;
     /**
-     * Excess golden parachute payments - Available only for tax year 2024 and earlier
+     * Box 13a. Cash tips, including tips paid in cash or charged by customers - Available only for tax year 2026 and later.
+     * @type {number}
+     * @memberof Form1099Misc
+     */
+    cashTips?: number | null;
+    /**
+     * Box 13b. Treasury Tipped Occupation Code (TTOC) for the recipient's tipped occupation - Available only for tax year 2026 and later.
+     * A three-digit, zero-padded code from the IRS enumeration: 000 (tips received in a nonqualifying occupation), 101-110, 201-211, 301-304,
+     * 401-409, 501-508, 601-611, 701-706, or 801-809. The form accepts up to two codes - see TreasuryTippedOccupationCode2 for the second.
+     * Send the code exactly as three characters ("001", not "1"); leading zeros are not restored for you. Watch for spreadsheet software
+     * that strips leading zeros when a code is exported to CSV and re-imported.
+     * @type {string}
+     * @memberof Form1099Misc
+     */
+    treasuryTippedOccupationCode?: string | null;
+    /**
+     * Box 13b. Second Treasury Tipped Occupation Code (TTOC) - Available only for tax year 2026 and later.
+     * Same three-digit code list and formatting rules as TreasuryTippedOccupationCode, and must differ from it.
+     * @type {string}
+     * @memberof Form1099Misc
+     */
+    treasuryTippedOccupationCode2?: string | null;
+    /**
+     * Box 14. Qualified overtime compensation - Available only for tax year 2026 and later. Named "Box 14 Excess golden parachute
+     * payments" on revisions of the form before the December 2026 revision - see ExcessGoldenParachutePayments for that field.
+     * @type {number}
+     * @memberof Form1099Misc
+     */
+    overtimeCompensation?: number | null;
+    /**
+     * Excess golden parachute payments - Available only for tax year 2024 and earlier. Was "Box 14" on those earlier revisions;
+     * the December 2026 revision reassigns Box 14 to OvertimeCompensation.
      * @type {number}
      * @memberof Form1099Misc
      */
@@ -300,10 +337,11 @@ export interface Form1099Misc {
      * - rejected: Form was rejected by the IRS
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
-     * @type {Form1099StatusDetail}
+     * When the form's most recent IRIS filing was rejected or accepted with errors, `errors` lists what the IRS reported.
+     * @type {FederalEfileStatusDetail}
      * @memberof Form1099Misc
      */
-    readonly federalEfileStatus?: Form1099StatusDetail | null;
+    readonly federalEfileStatus?: FederalEfileStatusDetail | null;
     /**
      * State e-file status.
      * Available values:
@@ -487,9 +525,12 @@ export enum Form1099MiscTypeEnum {
     _1095B = '1095-B',
     _1095C = '1095-C',
     _1098 = '1098',
+    _1098E = '1098-E',
     _1098T = '1098-T',
+    _1099B = '1099-B',
     _1099C = '1099-C',
     _1099Div = '1099-DIV',
+    _1099G = '1099-G',
     _1099Int = '1099-INT',
     _1099K = '1099-K',
     _1099Misc = '1099-MISC',
@@ -498,7 +539,9 @@ export enum Form1099MiscTypeEnum {
     _1099R = '1099-R',
     _1099S = '1099-S',
     _1099Sa = '1099-SA',
-    W2 = 'W-2'
+    _5498 = '5498',
+    W2 = 'W-2',
+    W2G = 'W-2G'
 }/**
 * @export
 * @enum {string}
@@ -549,6 +592,10 @@ export function Form1099MiscFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'grossProceedsPaidToAttorney': !exists(json, 'grossProceedsPaidToAttorney') ? undefined : json['grossProceedsPaidToAttorney'],
         'fishPurchasedForResale': !exists(json, 'fishPurchasedForResale') ? undefined : json['fishPurchasedForResale'],
         'section409ADeferrals': !exists(json, 'section409ADeferrals') ? undefined : json['section409ADeferrals'],
+        'cashTips': !exists(json, 'cashTips') ? undefined : json['cashTips'],
+        'treasuryTippedOccupationCode': !exists(json, 'treasuryTippedOccupationCode') ? undefined : json['treasuryTippedOccupationCode'],
+        'treasuryTippedOccupationCode2': !exists(json, 'treasuryTippedOccupationCode2') ? undefined : json['treasuryTippedOccupationCode2'],
+        'overtimeCompensation': !exists(json, 'overtimeCompensation') ? undefined : json['overtimeCompensation'],
         'excessGoldenParachutePayments': !exists(json, 'excessGoldenParachutePayments') ? undefined : json['excessGoldenParachutePayments'],
         'nonqualifiedDeferredCompensation': !exists(json, 'nonqualifiedDeferredCompensation') ? undefined : json['nonqualifiedDeferredCompensation'],
         'fatcaFilingRequirement': !exists(json, 'fatcaFilingRequirement') ? undefined : json['fatcaFilingRequirement'],
@@ -576,7 +623,7 @@ export function Form1099MiscFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : FederalEfileStatusDetailFromJSON(json['federalEfileStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
@@ -622,6 +669,10 @@ export function Form1099MiscToJSON(value?: Form1099Misc | null): any {
         'grossProceedsPaidToAttorney': value.grossProceedsPaidToAttorney,
         'fishPurchasedForResale': value.fishPurchasedForResale,
         'section409ADeferrals': value.section409ADeferrals,
+        'cashTips': value.cashTips,
+        'treasuryTippedOccupationCode': value.treasuryTippedOccupationCode,
+        'treasuryTippedOccupationCode2': value.treasuryTippedOccupationCode2,
+        'overtimeCompensation': value.overtimeCompensation,
         'excessGoldenParachutePayments': value.excessGoldenParachutePayments,
         'nonqualifiedDeferredCompensation': value.nonqualifiedDeferredCompensation,
         'fatcaFilingRequirement': value.fatcaFilingRequirement,

@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    FederalEfileStatusDetail,
+    FederalEfileStatusDetailFromJSON,
+    FederalEfileStatusDetailFromJSONTyped,
+    FederalEfileStatusDetailToJSON,
+} from './FederalEfileStatusDetail';
+import {
     Form1099StatusDetail,
     Form1099StatusDetailFromJSON,
     Form1099StatusDetailFromJSONTyped,
@@ -260,10 +266,11 @@ export interface Form1099Sa {
      * - rejected: Form was rejected by the IRS
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
-     * @type {Form1099StatusDetail}
+     * When the form's most recent IRIS filing was rejected or accepted with errors, `errors` lists what the IRS reported.
+     * @type {FederalEfileStatusDetail}
      * @memberof Form1099Sa
      */
-    readonly federalEfileStatus?: Form1099StatusDetail | null;
+    readonly federalEfileStatus?: FederalEfileStatusDetail | null;
     /**
      * State e-file status.
      * Available values:
@@ -458,9 +465,12 @@ export enum Form1099SaTypeEnum {
     _1095B = '1095-B',
     _1095C = '1095-C',
     _1098 = '1098',
+    _1098E = '1098-E',
     _1098T = '1098-T',
+    _1099B = '1099-B',
     _1099C = '1099-C',
     _1099Div = '1099-DIV',
+    _1099G = '1099-G',
     _1099Int = '1099-INT',
     _1099K = '1099-K',
     _1099Misc = '1099-MISC',
@@ -469,7 +479,9 @@ export enum Form1099SaTypeEnum {
     _1099R = '1099-R',
     _1099S = '1099-S',
     _1099Sa = '1099-SA',
-    W2 = 'W-2'
+    _5498 = '5498',
+    W2 = 'W-2',
+    W2G = 'W-2G'
 }/**
 * @export
 * @enum {string}
@@ -541,7 +553,7 @@ export function Form1099SaFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : FederalEfileStatusDetailFromJSON(json['federalEfileStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
