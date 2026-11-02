@@ -61,6 +61,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | Bulk TIN match details |  -  |
 | **401** | Authentication failed |  -  |
 | **404** | Bulk not found |  -  |
@@ -124,6 +125,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | List of TIN match responses |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **401** | Authentication failed |  -  |
@@ -184,12 +186,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | IRS Service is not available. Client should retry later. |  -  |
 | **200** | TIN match result (matched or rejected) |  -  |
 | **400** | Bad request (e.g. invalid field values) |  -  |
 | **401** | Authentication failed |  -  |
 | **429** | Usage limit exceeded (10,000 successful calls per 24 hours) |  -  |
 | **403** | Authorization failed (lack of permissions or product not purchased) |  -  |
-| **503** | IRS Service is not available. Client should retry later. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -244,6 +246,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **202** | Accepted submission, indicating it will be processed later and where to get results from |  -  |
 | **400** | Bad request (e.g. invalid field values) |  -  |
 | **401** | Authentication failed |  -  |

@@ -26,17 +26,49 @@ export interface W9FormRequest {
      */
     readonly type?: W9FormRequestTypeEnum;
     /**
-     * The name of the individual or entity associated with the form.
+     * The name of the individual or entity associated with the form. Required when neither firstName/lastName
+     * nor businessName/name2 are provided. Up to 40 characters.
      * @type {string}
      * @memberof W9FormRequest
      */
-    name: string;
+    name?: string | null;
     /**
-     * The name of the business associated with the form.
+     * Individual first name. Must be sent together with lastName; should only be used for individuals. Up to 40 characters.
+     * @type {string}
+     * @memberof W9FormRequest
+     */
+    firstName?: string | null;
+    /**
+     * Individual middle name. Should only be used for individuals. Up to 40 characters.
+     * @type {string}
+     * @memberof W9FormRequest
+     */
+    middleName?: string | null;
+    /**
+     * Individual last name. Must be sent together with firstName; should only be used for individuals. Up to 40 characters.
+     * @type {string}
+     * @memberof W9FormRequest
+     */
+    lastName?: string | null;
+    /**
+     * Individual name suffix (e.g. Jr., Sr.). Should only be used for individuals. Up to 10 characters.
+     * @type {string}
+     * @memberof W9FormRequest
+     */
+    suffixName?: string | null;
+    /**
+     * DEPRECATED: The name of the business associated with the form. Use `name2` instead.
      * @type {string}
      * @memberof W9FormRequest
      */
     businessName?: string | null;
+    /**
+     * The name of the business associated with the form. Replaces the deprecated `businessName` field.
+     * When both `businessName` and `name2` are provided, `businessName` takes precedence.
+     * @type {string}
+     * @memberof W9FormRequest
+     */
+    name2?: string | null;
     /**
      * The classification of the business.
      * Available values:
@@ -243,7 +275,6 @@ export enum W9FormRequestBusinessClassificationEnum {
  */
 export function instanceOfW9FormRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "name" in value;
     isInstance = isInstance && "businessClassification" in value;
     isInstance = isInstance && "address" in value;
     isInstance = isInstance && "city" in value;
@@ -266,8 +297,13 @@ export function W9FormRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'name': json['name'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
+        'firstName': !exists(json, 'firstName') ? undefined : json['firstName'],
+        'middleName': !exists(json, 'middleName') ? undefined : json['middleName'],
+        'lastName': !exists(json, 'lastName') ? undefined : json['lastName'],
+        'suffixName': !exists(json, 'suffixName') ? undefined : json['suffixName'],
         'businessName': !exists(json, 'businessName') ? undefined : json['businessName'],
+        'name2': !exists(json, 'name2') ? undefined : json['name2'],
         'businessClassification': json['businessClassification'],
         'businessOther': !exists(json, 'businessOther') ? undefined : json['businessOther'],
         'foreignPartnerOwnerOrBeneficiary': !exists(json, 'foreignPartnerOwnerOrBeneficiary') ? undefined : json['foreignPartnerOwnerOrBeneficiary'],
@@ -302,7 +338,12 @@ export function W9FormRequestToJSON(value?: W9FormRequest | null): any {
     return {
         
         'name': value.name,
+        'firstName': value.firstName,
+        'middleName': value.middleName,
+        'lastName': value.lastName,
+        'suffixName': value.suffixName,
         'businessName': value.businessName,
+        'name2': value.name2,
         'businessClassification': value.businessClassification,
         'businessOther': value.businessOther,
         'foreignPartnerOwnerOrBeneficiary': value.foreignPartnerOwnerOrBeneficiary,

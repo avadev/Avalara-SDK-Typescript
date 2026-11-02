@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    FederalEfileStatusDetail,
+    FederalEfileStatusDetailFromJSON,
+    FederalEfileStatusDetailFromJSONTyped,
+    FederalEfileStatusDetailToJSON,
+} from './FederalEfileStatusDetail';
+import {
     Form1099StatusDetail,
     Form1099StatusDetailFromJSON,
     Form1099StatusDetailFromJSONTyped,
@@ -64,11 +70,26 @@ export interface Form1099K {
      */
     paymentType: Form1099KPaymentTypeEnum;
     /**
-     * Payment settlement entity name and phone number, if different from Filer's
+     * Payment settlement entity name and phone number, if different from Filer's.
+     * Deprecated: the IRS reports the name and phone number as separate fields (PSENm and PSEPhoneNum).
+     * Use Avalara1099.Application.Forms1099.Models.Form1099K.PaymentSettlementEntityName and Avalara1099.Application.Forms1099.Models.Form1099K.PaymentSettlementEntityPhoneNumber instead.
+     * Kept for backward compatibility with existing integrations.
      * @type {string}
      * @memberof Form1099K
      */
     paymentSettlementEntityNamePhoneNumber?: string | null;
+    /**
+     * Payment settlement entity name, if different from Filer's
+     * @type {string}
+     * @memberof Form1099K
+     */
+    paymentSettlementEntityName?: string | null;
+    /**
+     * Payment settlement entity phone number, if different from Filer's
+     * @type {string}
+     * @memberof Form1099K
+     */
+    paymentSettlementEntityPhoneNumber?: string | null;
     /**
      * Gross amount of payment card/third party network transactions. This value must equal the total of all monthly payment amounts (January through December).
      * @type {number}
@@ -81,6 +102,30 @@ export interface Form1099K {
      * @memberof Form1099K
      */
     cardNotPresentTransactions?: number | null;
+    /**
+     * Box 1c. Cash tips - Available only for tax year 2026 and later.
+     * This amount is already included in GrossAmountPaymentCard (Box 1a) and is not added to it, so it may not exceed GrossAmountPaymentCard.
+     * @type {number}
+     * @memberof Form1099K
+     */
+    cashTips?: number | null;
+    /**
+     * Box 1d. Treasury Tipped Occupation Code (TTOC) for the payee's tipped occupation - Available only for tax year 2026 and later.
+     * A three-digit, zero-padded code from the IRS enumeration: 000 (tips received in a nonqualifying occupation), 101-110, 201-211, 301-304,
+     * 401-409, 501-508, 601-611, 701-706, or 801-809. The form accepts up to two codes - see TreasuryTippedOccupationCode2 for the second.
+     * Send the code exactly as three characters ("001", not "1"); leading zeros are not restored for you. Watch for spreadsheet software
+     * that strips leading zeros when a code is exported to CSV and re-imported.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    treasuryTippedOccupationCode?: string | null;
+    /**
+     * Box 1d. Second Treasury Tipped Occupation Code (TTOC) - Available only for tax year 2026 and later.
+     * Same three-digit code list and formatting rules as TreasuryTippedOccupationCode, and must differ from it.
+     * @type {string}
+     * @memberof Form1099K
+     */
+    treasuryTippedOccupationCode2?: string | null;
     /**
      * Merchant category code (4 numbers)
      * @type {string}
@@ -330,10 +375,11 @@ export interface Form1099K {
      * - rejected: Form was rejected by the IRS
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
-     * @type {Form1099StatusDetail}
+     * When the form's most recent IRIS filing was rejected or accepted with errors, `errors` lists what the IRS reported.
+     * @type {FederalEfileStatusDetail}
      * @memberof Form1099K
      */
-    readonly federalEfileStatus?: Form1099StatusDetail | null;
+    readonly federalEfileStatus?: FederalEfileStatusDetail | null;
     /**
      * State e-file status.
      * Available values:
@@ -531,9 +577,12 @@ export enum Form1099KTypeEnum {
     _1095B = '1095-B',
     _1095C = '1095-C',
     _1098 = '1098',
+    _1098E = '1098-E',
     _1098T = '1098-T',
+    _1099B = '1099-B',
     _1099C = '1099-C',
     _1099Div = '1099-DIV',
+    _1099G = '1099-G',
     _1099Int = '1099-INT',
     _1099K = '1099-K',
     _1099Misc = '1099-MISC',
@@ -542,7 +591,9 @@ export enum Form1099KTypeEnum {
     _1099R = '1099-R',
     _1099S = '1099-S',
     _1099Sa = '1099-SA',
-    W2 = 'W-2'
+    _5498 = '5498',
+    W2 = 'W-2',
+    W2G = 'W-2G'
 }/**
 * @export
 * @enum {string}
@@ -588,8 +639,13 @@ export function Form1099KFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'filerType': json['filerType'],
         'paymentType': json['paymentType'],
         'paymentSettlementEntityNamePhoneNumber': !exists(json, 'paymentSettlementEntityNamePhoneNumber') ? undefined : json['paymentSettlementEntityNamePhoneNumber'],
+        'paymentSettlementEntityName': !exists(json, 'paymentSettlementEntityName') ? undefined : json['paymentSettlementEntityName'],
+        'paymentSettlementEntityPhoneNumber': !exists(json, 'paymentSettlementEntityPhoneNumber') ? undefined : json['paymentSettlementEntityPhoneNumber'],
         'grossAmountPaymentCard': json['grossAmountPaymentCard'],
         'cardNotPresentTransactions': !exists(json, 'cardNotPresentTransactions') ? undefined : json['cardNotPresentTransactions'],
+        'cashTips': !exists(json, 'cashTips') ? undefined : json['cashTips'],
+        'treasuryTippedOccupationCode': !exists(json, 'treasuryTippedOccupationCode') ? undefined : json['treasuryTippedOccupationCode'],
+        'treasuryTippedOccupationCode2': !exists(json, 'treasuryTippedOccupationCode2') ? undefined : json['treasuryTippedOccupationCode2'],
         'merchantCategoryCode': !exists(json, 'merchantCategoryCode') ? undefined : json['merchantCategoryCode'],
         'paymentTransactionNumber': json['paymentTransactionNumber'],
         'federalIncomeTaxWithheld': !exists(json, 'federalIncomeTaxWithheld') ? undefined : json['federalIncomeTaxWithheld'],
@@ -629,7 +685,7 @@ export function Form1099KFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : FederalEfileStatusDetailFromJSON(json['federalEfileStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
@@ -666,8 +722,13 @@ export function Form1099KToJSON(value?: Form1099K | null): any {
         'filerType': value.filerType,
         'paymentType': value.paymentType,
         'paymentSettlementEntityNamePhoneNumber': value.paymentSettlementEntityNamePhoneNumber,
+        'paymentSettlementEntityName': value.paymentSettlementEntityName,
+        'paymentSettlementEntityPhoneNumber': value.paymentSettlementEntityPhoneNumber,
         'grossAmountPaymentCard': value.grossAmountPaymentCard,
         'cardNotPresentTransactions': value.cardNotPresentTransactions,
+        'cashTips': value.cashTips,
+        'treasuryTippedOccupationCode': value.treasuryTippedOccupationCode,
+        'treasuryTippedOccupationCode2': value.treasuryTippedOccupationCode2,
         'merchantCategoryCode': value.merchantCategoryCode,
         'paymentTransactionNumber': value.paymentTransactionNumber,
         'federalIncomeTaxWithheld': value.federalIncomeTaxWithheld,

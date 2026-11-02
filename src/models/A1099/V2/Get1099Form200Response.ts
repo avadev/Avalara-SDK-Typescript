@@ -40,6 +40,13 @@ import {
     Form1098FromJSONTyped,
     Form1098ToJSON,
 } from './Form1098';
+import type { Form1098E } from './Form1098E';
+import {
+    instanceOfForm1098E,
+    Form1098EFromJSON,
+    Form1098EFromJSONTyped,
+    Form1098EToJSON,
+} from './Form1098E';
 import type { Form1098T } from './Form1098T';
 import {
     instanceOfForm1098T,
@@ -47,6 +54,13 @@ import {
     Form1098TFromJSONTyped,
     Form1098TToJSON,
 } from './Form1098T';
+import type { Form1099B } from './Form1099B';
+import {
+    instanceOfForm1099B,
+    Form1099BFromJSON,
+    Form1099BFromJSONTyped,
+    Form1099BToJSON,
+} from './Form1099B';
 import type { Form1099C } from './Form1099C';
 import {
     instanceOfForm1099C,
@@ -61,6 +75,13 @@ import {
     Form1099DivFromJSONTyped,
     Form1099DivToJSON,
 } from './Form1099Div';
+import type { Form1099G } from './Form1099G';
+import {
+    instanceOfForm1099G,
+    Form1099GFromJSON,
+    Form1099GFromJSONTyped,
+    Form1099GToJSON,
+} from './Form1099G';
 import type { Form1099Int } from './Form1099Int';
 import {
     instanceOfForm1099Int,
@@ -124,13 +145,27 @@ import {
     Form1099W2FromJSONTyped,
     Form1099W2ToJSON,
 } from './Form1099W2';
+import type { Form5498 } from './Form5498';
+import {
+    instanceOfForm5498,
+    Form5498FromJSON,
+    Form5498FromJSONTyped,
+    Form5498ToJSON,
+} from './Form5498';
+import type { FormW2G } from './FormW2G';
+import {
+    instanceOfFormW2G,
+    FormW2GFromJSON,
+    FormW2GFromJSONTyped,
+    FormW2GToJSON,
+} from './FormW2G';
 
 /**
  * @type Get1099Form200Response
  * 
  * @export
  */
-export type Get1099Form200Response = { type: '1042-S' } & Form1042S | { type: '1095-B' } & Form1095B | { type: '1095-C' } & Form1095C | { type: '1098' } & Form1098 | { type: '1098-T' } & Form1098T | { type: '1099-C' } & Form1099C | { type: '1099-DIV' } & Form1099Div | { type: '1099-INT' } & Form1099Int | { type: '1099-K' } & Form1099K | { type: '1099-MISC' } & Form1099Misc | { type: '1099-NEC' } & Form1099Nec | { type: '1099-PATR' } & Form1099Patr | { type: '1099-R' } & Form1099R | { type: '1099-S' } & Form1099S | { type: '1099-SA' } & Form1099Sa | { type: 'W-2' } & Form1099W2;
+export type Get1099Form200Response = { type: '1042-S' } & Form1042S | { type: '1095-B' } & Form1095B | { type: '1095-C' } & Form1095C | { type: '1098' } & Form1098 | { type: '1098-E' } & Form1098E | { type: '1098-T' } & Form1098T | { type: '1099-B' } & Form1099B | { type: '1099-C' } & Form1099C | { type: '1099-DIV' } & Form1099Div | { type: '1099-G' } & Form1099G | { type: '1099-INT' } & Form1099Int | { type: '1099-K' } & Form1099K | { type: '1099-MISC' } & Form1099Misc | { type: '1099-NEC' } & Form1099Nec | { type: '1099-PATR' } & Form1099Patr | { type: '1099-R' } & Form1099R | { type: '1099-S' } & Form1099S | { type: '1099-SA' } & Form1099Sa | { type: '5498' } & Form5498 | { type: 'W-2' } & Form1099W2 | { type: 'W-2G' } & FormW2G;
 
 export function Get1099Form200ResponseFromJSON(json: any): Get1099Form200Response {
     return Get1099Form200ResponseFromJSONTyped(json, false);
@@ -149,12 +184,18 @@ export function Get1099Form200ResponseFromJSONTyped(json: any, ignoreDiscriminat
             return Object.assign({}, Form1095CFromJSONTyped(json, true), { type: '1095-C' } as const);
         case '1098':
             return Object.assign({}, Form1098FromJSONTyped(json, true), { type: '1098' } as const);
+        case '1098-E':
+            return Object.assign({}, Form1098EFromJSONTyped(json, true), { type: '1098-E' } as const);
         case '1098-T':
             return Object.assign({}, Form1098TFromJSONTyped(json, true), { type: '1098-T' } as const);
+        case '1099-B':
+            return Object.assign({}, Form1099BFromJSONTyped(json, true), { type: '1099-B' } as const);
         case '1099-C':
             return Object.assign({}, Form1099CFromJSONTyped(json, true), { type: '1099-C' } as const);
         case '1099-DIV':
             return Object.assign({}, Form1099DivFromJSONTyped(json, true), { type: '1099-DIV' } as const);
+        case '1099-G':
+            return Object.assign({}, Form1099GFromJSONTyped(json, true), { type: '1099-G' } as const);
         case '1099-INT':
             return Object.assign({}, Form1099IntFromJSONTyped(json, true), { type: '1099-INT' } as const);
         case '1099-K':
@@ -171,8 +212,12 @@ export function Get1099Form200ResponseFromJSONTyped(json: any, ignoreDiscriminat
             return Object.assign({}, Form1099SFromJSONTyped(json, true), { type: '1099-S' } as const);
         case '1099-SA':
             return Object.assign({}, Form1099SaFromJSONTyped(json, true), { type: '1099-SA' } as const);
+        case '5498':
+            return Object.assign({}, Form5498FromJSONTyped(json, true), { type: '5498' } as const);
         case 'W-2':
             return Object.assign({}, Form1099W2FromJSONTyped(json, true), { type: 'W-2' } as const);
+        case 'W-2G':
+            return Object.assign({}, FormW2GFromJSONTyped(json, true), { type: 'W-2G' } as const);
         default:
             throw new Error(`No variant of Get1099Form200Response exists with 'type=${json['type']}'`);
     }
@@ -191,12 +236,18 @@ export function Get1099Form200ResponseToJSON(value?: Get1099Form200Response | nu
             return Form1095CToJSON(value);
         case '1098':
             return Form1098ToJSON(value);
+        case '1098-E':
+            return Form1098EToJSON(value);
         case '1098-T':
             return Form1098TToJSON(value);
+        case '1099-B':
+            return Form1099BToJSON(value);
         case '1099-C':
             return Form1099CToJSON(value);
         case '1099-DIV':
             return Form1099DivToJSON(value);
+        case '1099-G':
+            return Form1099GToJSON(value);
         case '1099-INT':
             return Form1099IntToJSON(value);
         case '1099-K':
@@ -213,8 +264,12 @@ export function Get1099Form200ResponseToJSON(value?: Get1099Form200Response | nu
             return Form1099SToJSON(value);
         case '1099-SA':
             return Form1099SaToJSON(value);
+        case '5498':
+            return Form5498ToJSON(value);
         case 'W-2':
             return Form1099W2ToJSON(value);
+        case 'W-2G':
+            return FormW2GToJSON(value);
         default:
             throw new Error(`No variant of Get1099Form200Response exists with 'type=${value['type']}'`);
     }

@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    FederalEfileStatusDetail,
+    FederalEfileStatusDetailFromJSON,
+    FederalEfileStatusDetailFromJSONTyped,
+    FederalEfileStatusDetailToJSON,
+} from './FederalEfileStatusDetail';
+import {
     Form1099StatusDetail,
     Form1099StatusDetailFromJSON,
     Form1099StatusDetailFromJSONTyped,
@@ -99,7 +105,7 @@ export interface Form1099R {
      */
     netUnrealizedAppreciationInEmployerSecurities?: number | null;
     /**
-     * Distribution code.
+     * Box 7a. Distribution code.
      * 
      * Available values:
      * - 1: Early distribution, no known exception (in most cases, under age 59½)
@@ -137,7 +143,7 @@ export interface Form1099R {
      */
     distributionCode: Form1099RDistributionCodeEnum;
     /**
-     * Second distribution code. Must be a valid combination with the first distribution code.
+     * Box 7a. Second distribution code. Must be a valid combination with the first distribution code.
      * See DistributionCode property documentation for code descriptions.
      * 
      * Valid combinations based on first distribution code:
@@ -180,11 +186,24 @@ export interface Form1099R {
      */
     secondDistributionCode?: Form1099RSecondDistributionCodeEnum;
     /**
-     * IRA/SEP/SIMPLE
+     * Box 7b. IRA/SEP/SIMPLE
      * @type {boolean}
      * @memberof Form1099R
      */
     iraSepSimple?: boolean | null;
+    /**
+     * Box 7c. Trump account checkbox - Available only for tax year 2026 and later.
+     * @type {boolean}
+     * @memberof Form1099R
+     */
+    trumpAccountIndicator?: boolean | null;
+    /**
+     * Box 7d. Earnings on excess contributions - Available only for tax year 2026 and later.
+     * Enter 0 when the excess contributions had losses.
+     * @type {number}
+     * @memberof Form1099R
+     */
+    excessContributionsEarnings?: number | null;
     /**
      * Traditional IRA/SEP/SIMPLE or Roth conversion amount
      * @type {number}
@@ -192,13 +211,13 @@ export interface Form1099R {
      */
     traditionalIraSepSimpleOrRothConversionAmount?: number | null;
     /**
-     * Other amount
+     * Box 8a. Other amount
      * @type {number}
      * @memberof Form1099R
      */
     otherAmount?: number | null;
     /**
-     * Other percentage
+     * Box 8b. Other percentage
      * @type {string}
      * @memberof Form1099R
      */
@@ -398,10 +417,11 @@ export interface Form1099R {
      * - rejected: Form was rejected by the IRS
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
-     * @type {Form1099StatusDetail}
+     * When the form's most recent IRIS filing was rejected or accepted with errors, `errors` lists what the IRS reported.
+     * @type {FederalEfileStatusDetail}
      * @memberof Form1099R
      */
-    readonly federalEfileStatus?: Form1099StatusDetail | null;
+    readonly federalEfileStatus?: FederalEfileStatusDetail | null;
     /**
      * State e-file status.
      * Available values:
@@ -654,9 +674,12 @@ export enum Form1099RTypeEnum {
     _1095B = '1095-B',
     _1095C = '1095-C',
     _1098 = '1098',
+    _1098E = '1098-E',
     _1098T = '1098-T',
+    _1099B = '1099-B',
     _1099C = '1099-C',
     _1099Div = '1099-DIV',
+    _1099G = '1099-G',
     _1099Int = '1099-INT',
     _1099K = '1099-K',
     _1099Misc = '1099-MISC',
@@ -665,7 +688,9 @@ export enum Form1099RTypeEnum {
     _1099R = '1099-R',
     _1099S = '1099-S',
     _1099Sa = '1099-SA',
-    W2 = 'W-2'
+    _5498 = '5498',
+    W2 = 'W-2',
+    W2G = 'W-2G'
 }/**
 * @export
 * @enum {string}
@@ -716,6 +741,8 @@ export function Form1099RFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'distributionCode': json['distributionCode'],
         'secondDistributionCode': !exists(json, 'secondDistributionCode') ? undefined : json['secondDistributionCode'],
         'iraSepSimple': !exists(json, 'iraSepSimple') ? undefined : json['iraSepSimple'],
+        'trumpAccountIndicator': !exists(json, 'trumpAccountIndicator') ? undefined : json['trumpAccountIndicator'],
+        'excessContributionsEarnings': !exists(json, 'excessContributionsEarnings') ? undefined : json['excessContributionsEarnings'],
         'traditionalIraSepSimpleOrRothConversionAmount': !exists(json, 'traditionalIraSepSimpleOrRothConversionAmount') ? undefined : json['traditionalIraSepSimpleOrRothConversionAmount'],
         'otherAmount': !exists(json, 'otherAmount') ? undefined : json['otherAmount'],
         'otherPercentage': !exists(json, 'otherPercentage') ? undefined : json['otherPercentage'],
@@ -749,7 +776,7 @@ export function Form1099RFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : FederalEfileStatusDetailFromJSON(json['federalEfileStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),
@@ -794,6 +821,8 @@ export function Form1099RToJSON(value?: Form1099R | null): any {
         'distributionCode': value.distributionCode,
         'secondDistributionCode': value.secondDistributionCode,
         'iraSepSimple': value.iraSepSimple,
+        'trumpAccountIndicator': value.trumpAccountIndicator,
+        'excessContributionsEarnings': value.excessContributionsEarnings,
         'traditionalIraSepSimpleOrRothConversionAmount': value.traditionalIraSepSimpleOrRothConversionAmount,
         'otherAmount': value.otherAmount,
         'otherPercentage': value.otherPercentage,

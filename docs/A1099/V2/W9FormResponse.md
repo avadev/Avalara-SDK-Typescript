@@ -6,7 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **string** | The form type (always \&quot;W9\&quot; for this model). | [optional] [readonly] [default to undefined]
 **name** | **string** | The name of the individual or entity associated with the form. | [optional] [default to undefined]
-**businessName** | **string** | The name of the business associated with the form. | [optional] [default to undefined]
+**firstName** | **string** | Individual first name. | [optional] [default to undefined]
+**middleName** | **string** | Individual middle name. | [optional] [default to undefined]
+**lastName** | **string** | Individual last name. | [optional] [default to undefined]
+**suffixName** | **string** | Individual name suffix. | [optional] [default to undefined]
+**businessName** | **string** | DEPRECATED: The name of the business associated with the form. Use &#x60;name2&#x60; instead. | [optional] [default to undefined]
+**name2** | **string** | The name of the business associated with the form. Replaces the deprecated &#x60;businessName&#x60; field. | [optional] [default to undefined]
 **businessClassification** | **string** | The classification of the business. | [optional] [default to undefined]
 **businessOther** | **string** | The classification description when \&quot;businessClassification\&quot; is \&quot;Other\&quot;. | [optional] [default to undefined]
 **foreignPartnerOwnerOrBeneficiary** | **boolean** | Indicates whether the individual is a foreign partner, owner, or beneficiary. | [optional] [default to undefined]

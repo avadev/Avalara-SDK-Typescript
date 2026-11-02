@@ -64,6 +64,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **201** | Created company |  -  |
 | **400** | Bad request (e.g., model validation failed) |  -  |
 | **401** | Authentication failed |  -  |
@@ -123,6 +124,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **204** | Company deleted |  -  |
 | **401** | Authentication failed. |  -  |
 | **404** | Company was not found or your user does not have to permission to delete it. |  -  |
@@ -137,7 +139,7 @@ void (empty response body)
 
 List companies
 
-List existing companies. Filterable/Sortable fields are: \"name\", \"referenceId\", \"group.name\", \"createdAt\" and \"updatedAt\".
+List existing companies.  Filterable/Sortable fields are: \"name\", \"referenceId\", \"group.name\", \"createdAt\" and \"updatedAt\".                \"createdAt\" and \"updatedAt\" accept ISO 8601 values and are stored in UTC. Values without an offset are treated as UTC,  and a date-only value means midnight (00:00:00) of that day.                Examples:  <ul><li>Companies updated on a given day (2026-09-03): updatedAt ge \'2026-09-03\' and updatedAt lt \'2026-09-04\'</li></ul><ul><li>Companies updated since a given moment (UTC): updatedAt ge \'2026-09-03T15:49:35Z\'</li></ul><ul><li>Companies updated within an interval, with a time zone offset:    updatedAt ge \'2026-09-03T08:00:00-05:00\' and updatedAt le \'2026-09-03T18:00:00-05:00\'</li></ul>
 
 ### Example
 ```typescript
@@ -189,6 +191,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | List of companies |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **404** | Not Found |  -  |
@@ -250,6 +253,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | Single company |  -  |
 | **400** | Bad request (e.g., invalid sort key) |  -  |
 | **404** | Company not found |  -  |
@@ -312,6 +316,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **503** | Server Error |  -  |
 | **200** | Updated company |  -  |
 | **400** | Bad request (e.g., model validation failed) |  -  |
 | **401** | Authentication failed |  -  |

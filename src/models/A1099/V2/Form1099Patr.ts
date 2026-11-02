@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    FederalEfileStatusDetail,
+    FederalEfileStatusDetailFromJSON,
+    FederalEfileStatusDetailFromJSONTyped,
+    FederalEfileStatusDetailToJSON,
+} from './FederalEfileStatusDetail';
+import {
     Form1099StatusDetail,
     Form1099StatusDetailFromJSON,
     Form1099StatusDetailFromJSONTyped,
@@ -45,6 +51,10 @@ import {
  * Patronage Dividends, Nonpatronage Distributions, Per-Unit Retain Allocations, or Redeemed Nonqualified Notices.
  *             
  * Federal Income Tax Withheld, when provided, must be less than the total of those four amounts.
+ * The Section 199A(g) deduction cannot exceed 9% of Qualified Payments.
+ * Other credits and deductions (Box 12), when greater than zero, must be itemized under the
+ * specific credit or deduction. This API does not expose those itemized fields, so a non-zero
+ * Box 12 is rejected downstream.
  *             
  * Specified Cooperative may only be set when at least one of Qualified Payments,
  * Section 199A(a) Qualified Items, or Section 199A(a) SSTB Items is provided.
@@ -124,7 +134,8 @@ export interface Form1099Patr {
      */
     workOpportunityCredit?: number | null;
     /**
-     * Other credits and deductions
+     * Other credits and deductions (Box 12). Leave at zero unless the amount is itemized
+     * downstream under the specific credit or deduction it belongs to.
      * @type {number}
      * @memberof Form1099Patr
      */
@@ -294,10 +305,11 @@ export interface Form1099Patr {
      * - rejected: Form was rejected by the IRS
      * - corrected_rejected: Correction was rejected by the IRS
      * - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
-     * @type {Form1099StatusDetail}
+     * When the form's most recent IRIS filing was rejected or accepted with errors, `errors` lists what the IRS reported.
+     * @type {FederalEfileStatusDetail}
      * @memberof Form1099Patr
      */
-    readonly federalEfileStatus?: Form1099StatusDetail | null;
+    readonly federalEfileStatus?: FederalEfileStatusDetail | null;
     /**
      * State e-file status.
      * Available values:
@@ -481,9 +493,12 @@ export enum Form1099PatrTypeEnum {
     _1095B = '1095-B',
     _1095C = '1095-C',
     _1098 = '1098',
+    _1098E = '1098-E',
     _1098T = '1098-T',
+    _1099B = '1099-B',
     _1099C = '1099-C',
     _1099Div = '1099-DIV',
+    _1099G = '1099-G',
     _1099Int = '1099-INT',
     _1099K = '1099-K',
     _1099Misc = '1099-MISC',
@@ -492,7 +507,9 @@ export enum Form1099PatrTypeEnum {
     _1099R = '1099-R',
     _1099S = '1099-S',
     _1099Sa = '1099-SA',
-    W2 = 'W-2'
+    _5498 = '5498',
+    W2 = 'W-2',
+    W2G = 'W-2G'
 }/**
 * @export
 * @enum {string}
@@ -568,7 +585,7 @@ export function Form1099PatrFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'tinMatch': !exists(json, 'tinMatch') ? undefined : json['tinMatch'],
         'addressVerification': !exists(json, 'addressVerification') ? undefined : json['addressVerification'],
         'stateAndLocalWithholding': !exists(json, 'stateAndLocalWithholding') ? undefined : StateAndLocalWithholdingFromJSON(json['stateAndLocalWithholding']),
-        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : Form1099StatusDetailFromJSON(json['federalEfileStatus']),
+        'federalEfileStatus': !exists(json, 'federalEfileStatus') ? undefined : FederalEfileStatusDetailFromJSON(json['federalEfileStatus']),
         'stateEfileStatus': !exists(json, 'stateEfileStatus') ? undefined : (json['stateEfileStatus'] === null ? null : (json['stateEfileStatus'] as Array<any>)?.map(StateEfileStatusDetailFromJSON)),
         'postalMailStatus': !exists(json, 'postalMailStatus') ? undefined : Form1099StatusDetailFromJSON(json['postalMailStatus']),
         'tinMatchStatus': !exists(json, 'tinMatchStatus') ? undefined : Form1099StatusDetailFromJSON(json['tinMatchStatus']),

@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../../../runtime';
 import {
+    FederalEfileErrorResponse,
+    FederalEfileErrorResponseFromJSON,
+    FederalEfileErrorResponseFromJSONTyped,
+    FederalEfileErrorResponseToJSON,
+} from './FederalEfileErrorResponse';
+import {
     ValidationError,
     ValidationErrorFromJSON,
     ValidationErrorFromJSONTyped,
@@ -188,6 +194,12 @@ export interface IssuerWriteResponse {
      */
     updatedAt?: Date;
     /**
+     * Issuer-level IRS/IRIS rejection errors from the federal filing submissions of the issuer's forms that are still rejected and awaiting resubmission.
+     * @type {Array<FederalEfileErrorResponse>}
+     * @memberof IssuerWriteResponse
+     */
+    readonly federalEfileErrors?: Array<FederalEfileErrorResponse>;
+    /**
      * Field-level validation errors. Populated when a POST or PUT request violated business rules
      * but the issuer was still persisted. Each entry identifies the affected field and the issue.
      * Empty array when the payload was fully valid.
@@ -260,6 +272,7 @@ export function IssuerWriteResponseFromJSONTyped(json: any, ignoreDiscriminator:
         'id': !exists(json, 'id') ? undefined : json['id'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
+        'federalEfileErrors': !exists(json, 'federalEfileErrors') ? undefined : ((json['federalEfileErrors'] as Array<any>)?.map(FederalEfileErrorResponseFromJSON)),
         'validationErrors': !exists(json, 'validationErrors') ? undefined : (json['validationErrors'] === null ? null : (json['validationErrors'] as Array<any>)?.map(ValidationErrorFromJSON)),
     };
 }

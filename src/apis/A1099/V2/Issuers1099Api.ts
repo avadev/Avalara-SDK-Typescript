@@ -90,7 +90,7 @@ export interface UpdateIssuerInterface {
  * 
  */
 export class Issuers1099Api extends runtime.ApiClient {
-    public sdkVersion: string = '26.10.0';
+    public sdkVersion: string = '26.11.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -256,7 +256,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * List issuers (also known as Payers). Filterable fields are businessName, businessName2, referenceId, taxYear, firstName, and lastName.
+     * List issuers (also known as Payers).  Filterable fields are businessName, businessName2, referenceId, taxYear, firstName, lastName, createdAt and updatedAt.                \"createdAt\" and \"updatedAt\" accept ISO 8601 values and are stored in UTC. Values without an offset are treated as UTC,  and a date-only value means midnight (00:00:00) of that day.                Examples:  <ul><li>Issuers updated on a given day (2026-09-03): updatedAt ge \'2026-09-03\' and updatedAt lt \'2026-09-04\'</li></ul><ul><li>Issuers updated since a given moment (UTC): updatedAt ge \'2026-09-03T15:49:35Z\'</li></ul><ul><li>Issuers updated within an interval, with a time zone offset:    updatedAt ge \'2026-09-03T08:00:00-05:00\' and updatedAt le \'2026-09-03T18:00:00-05:00\'</li></ul>
      * List issuers
      */
     async getIssuersRaw(requestParameters: GetIssuersInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<PaginatedQueryResultModelIssuerResponse>, logObject: LogObject }> {
@@ -318,7 +318,7 @@ export class Issuers1099Api extends runtime.ApiClient {
     }
 
     /**
-     * List issuers (also known as Payers). Filterable fields are businessName, businessName2, referenceId, taxYear, firstName, and lastName.
+     * List issuers (also known as Payers).  Filterable fields are businessName, businessName2, referenceId, taxYear, firstName, lastName, createdAt and updatedAt.                \"createdAt\" and \"updatedAt\" accept ISO 8601 values and are stored in UTC. Values without an offset are treated as UTC,  and a date-only value means midnight (00:00:00) of that day.                Examples:  <ul><li>Issuers updated on a given day (2026-09-03): updatedAt ge \'2026-09-03\' and updatedAt lt \'2026-09-04\'</li></ul><ul><li>Issuers updated since a given moment (UTC): updatedAt ge \'2026-09-03T15:49:35Z\'</li></ul><ul><li>Issuers updated within an interval, with a time zone offset:    updatedAt ge \'2026-09-03T08:00:00-05:00\' and updatedAt le \'2026-09-03T18:00:00-05:00\'</li></ul>
      * List issuers
      */
     async getIssuers(requestParameters: GetIssuersInterface, initOverrides?: RequestInit): Promise<PaginatedQueryResultModelIssuerResponse> {

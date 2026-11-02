@@ -77,7 +77,7 @@ export interface UpdateCompanyInterface {
  * 
  */
 export class CompaniesW9Api extends runtime.ApiClient {
-    public sdkVersion: string = '26.10.0';
+    public sdkVersion: string = '26.11.0';
 
     constructor(apiClient: runtime.ApiClient) {
         super(apiClient.configuration);
@@ -189,7 +189,7 @@ export class CompaniesW9Api extends runtime.ApiClient {
     }
 
     /**
-     * List existing companies. Filterable/Sortable fields are: \"name\", \"referenceId\", \"group.name\", \"createdAt\" and \"updatedAt\".
+     * List existing companies.  Filterable/Sortable fields are: \"name\", \"referenceId\", \"group.name\", \"createdAt\" and \"updatedAt\".                \"createdAt\" and \"updatedAt\" accept ISO 8601 values and are stored in UTC. Values without an offset are treated as UTC,  and a date-only value means midnight (00:00:00) of that day.                Examples:  <ul><li>Companies updated on a given day (2026-09-03): updatedAt ge \'2026-09-03\' and updatedAt lt \'2026-09-04\'</li></ul><ul><li>Companies updated since a given moment (UTC): updatedAt ge \'2026-09-03T15:49:35Z\'</li></ul><ul><li>Companies updated within an interval, with a time zone offset:    updatedAt ge \'2026-09-03T08:00:00-05:00\' and updatedAt le \'2026-09-03T18:00:00-05:00\'</li></ul>
      * List companies
      */
     async getCompaniesRaw(requestParameters: GetCompaniesInterface, initOverrides?: RequestInit): Promise<{ response: runtime.ApiResponse<PaginatedQueryResultModelCompanyResponse>, logObject: LogObject }> {
@@ -251,7 +251,7 @@ export class CompaniesW9Api extends runtime.ApiClient {
     }
 
     /**
-     * List existing companies. Filterable/Sortable fields are: \"name\", \"referenceId\", \"group.name\", \"createdAt\" and \"updatedAt\".
+     * List existing companies.  Filterable/Sortable fields are: \"name\", \"referenceId\", \"group.name\", \"createdAt\" and \"updatedAt\".                \"createdAt\" and \"updatedAt\" accept ISO 8601 values and are stored in UTC. Values without an offset are treated as UTC,  and a date-only value means midnight (00:00:00) of that day.                Examples:  <ul><li>Companies updated on a given day (2026-09-03): updatedAt ge \'2026-09-03\' and updatedAt lt \'2026-09-04\'</li></ul><ul><li>Companies updated since a given moment (UTC): updatedAt ge \'2026-09-03T15:49:35Z\'</li></ul><ul><li>Companies updated within an interval, with a time zone offset:    updatedAt ge \'2026-09-03T08:00:00-05:00\' and updatedAt le \'2026-09-03T18:00:00-05:00\'</li></ul>
      * List companies
      */
     async getCompanies(requestParameters: GetCompaniesInterface, initOverrides?: RequestInit): Promise<PaginatedQueryResultModelCompanyResponse> {

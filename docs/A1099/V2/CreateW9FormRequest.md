@@ -6,7 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **string** | The form type. | [optional] [readonly] [default to undefined]
 **name** | **string** | The name of the individual or entity associated with the form. | [default to undefined]
-**businessName** | **string** | The name of the business associated with the form. | [optional] [default to undefined]
+**firstName** | **string** | Individual first name. Must be sent together with lastName; should only be used for individuals. Up to 40 characters. | [optional] [default to undefined]
+**middleName** | **string** | Individual middle name. Should only be used for individuals. Up to 40 characters. | [optional] [default to undefined]
+**lastName** | **string** | Individual last name. Must be sent together with firstName; should only be used for individuals. Up to 40 characters. | [optional] [default to undefined]
+**suffixName** | **string** | Individual name suffix (e.g. Jr., Sr.). Should only be used for individuals. Up to 10 characters. | [optional] [default to undefined]
+**businessName** | **string** | DEPRECATED: The name of the business associated with the form. Use &#x60;name2&#x60; instead. | [optional] [default to undefined]
+**name2** | **string** | The name of the business associated with the form. Replaces the deprecated &#x60;businessName&#x60; field.  When both &#x60;businessName&#x60; and &#x60;name2&#x60; are provided, &#x60;businessName&#x60; takes precedence. | [optional] [default to undefined]
 **businessClassification** | **string** | The classification of the business.  Available values:  - Individual: Individual/sole proprietor  - C Corporation: C Corporation  - S Corporation: S Corporation  - Partnership: Partnership  - Trust/estate: Trust/estate  - LLC-C: Limited liability company (C Corporation)  - LLC-S: Limited liability company (S Corporation)  - LLC-P: Limited liability company (Partnership)  - Other: Other (requires BusinessOther field to be populated) | [default to undefined]
 **businessOther** | **string** | The classification description when \&quot;businessClassification\&quot; is \&quot;Other\&quot;. | [optional] [default to undefined]
 **foreignPartnerOwnerOrBeneficiary** | **boolean** | Indicates whether the individual is a foreign partner, owner, or beneficiary. | [optional] [default to undefined]
